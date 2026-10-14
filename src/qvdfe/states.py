@@ -18,7 +18,7 @@ def queue_speed(mu, C, vf, kj=220.0):
     """Speed of queued vehicles discharged at service rate mu (Eq. 2). Accepts arrays.
 
     The queue sits on the congested branch at (kq, mu): kq = kj - mu/omega, vq = mu/kq. Requires 0 < mu <= C (at mu = C
-    the queue speed equals vf). Returns (vq in mph, kq in veh/mi/lane, omega in mph). Same as v15_model.queue_speed.
+    the queue speed equals vf). Returns (vq in mph, kq in veh/mi/lane, omega in mph). Matches the empirical pipeline queue-speed calculation.
     """
     mu_arr = np.asarray(mu, float)
     if np.any(mu_arr <= 0) or np.any(mu_arr > np.asarray(C, float) * (1 + 1e-12)):

@@ -10,13 +10,13 @@
     "reproduce/fig01_overview.py",
     "",
     "",
-    ""
+    "Current normalized peak-delay panel using frozen daily parameter card."
   ],
   "fig:rate": [
-    "qvdfe.cubic_rate",
+    "reproduce/fig02_rates_and_gamma.py",
     "teaching/tutorials/T2_two_speeds_and_emissions.ipynb",
-    "data/frozen/calibration/cubic_rate_coefficients.csv",
-    "the figure itself is not regenerated here"
+    "data/frozen/presentation/us06/us06_operating_states.csv",
+    "Current four-panel US06 comparison; exact lookup is empirical rate representation M and cubic is the analytical approximation A. Rates are model estimates, not exhaust measurements."
   ],
   "sec:lit": [
     "",
@@ -301,22 +301,22 @@
     ""
   ],
   "sec:daily": [
-    "",
+    "src/qvdfe/pipeline/_engine/calibration.py",
     "",
     "data/frozen/calibration/daily_validation/episode_results_v2.csv",
-    "frozen output; producing code not included"
+    "Original daily/profile calibration and uncertainty workflow; external preserved preprocessing inputs required."
   ],
   "tab:daily-fit": [
-    "",
+    "src/qvdfe/pipeline/_engine/calibration.py",
     "",
     "data/frozen/calibration/daily_validation",
-    "frozen output; producing code not included"
+    "Original daily/profile calibration and uncertainty workflow; external preserved preprocessing inputs required."
   ],
   "tab:fit": [
-    "",
+    "src/qvdfe/pipeline/_engine/calibration.py",
     "",
     "data/frozen/calibration/average_weekday",
-    "frozen output; producing code not included"
+    "Original daily/profile calibration and uncertainty workflow; external preserved preprocessing inputs required."
   ],
   "fig:corridor": [
     "",
@@ -334,7 +334,7 @@
     "reproduce/fig09_fig10_fig11_fig12_evidence.py",
     "",
     "data/frozen/calibration/average_weekday/episode_results_v2.csv",
-    ""
+    "Current legend and spacing; original calibration mask and frozen episode values retained."
   ],
   "sec:emission-results": [
     "qvdfe.load_episodes",
@@ -493,34 +493,34 @@
     ""
   ],
   "sec:pigou-experiment": [
-    "reproduce/figE1_two_route.py",
+    "src/qvdfe/pipeline/pigou.py",
     "teaching/advanced/README.md",
     "data/frozen/calibration/pigou",
-    ""
+    "Rerun optimization with python -m qvdfe.pipeline pigou; retained figure entry reads archived results."
   ],
   "eq:emission-power-surrogate": [
-    "",
+    "src/qvdfe/pipeline/surrogate.py",
     "",
     "data/frozen/calibration/pigou",
-    "frozen output; producing code not included"
+    "Refits the signed smooth-rate power approximation from the included full calibration inputs."
   ],
   "eq:pigou-generalized": [
-    "",
+    "src/qvdfe/pipeline/pigou.py",
     "",
     "data/frozen/calibration/pigou",
-    "frozen output; producing code not included"
+    "Executable full and compressed routing optimization; CO2 in routing and all four pollutants reported."
   ],
   "eq:pigou-objective": [
-    "",
+    "src/qvdfe/pipeline/pigou.py",
     "",
     "data/frozen/calibration/pigou",
-    "frozen output; producing code not included"
+    "Executable full and compressed routing optimization; CO2 in routing and all four pollutants reported."
   ],
   "eq:pigou-emission-poa": [
-    "",
+    "src/qvdfe/pipeline/pigou.py",
     "",
     "data/frozen/calibration/pigou/full_surrogate_poa.csv",
-    "frozen output; producing code not included"
+    "Executable full and compressed routing optimization; CO2 in routing and all four pollutants reported."
   ],
   "tab:pigou": [
     "reproduce/figE1_two_route.py",
@@ -551,5 +551,11 @@
     "examples/03_long_episode_applicability/run.py",
     "data/frozen/applicability/cohort_admissibility_summary.json",
     "Table F2 tested in tests/test_reproduction.py"
+  ],
+  "fig:gamma-behavior": [
+    "reproduce/fig02_rates_and_gamma.py",
+    "",
+    "data/frozen/calibration/audit/table3_reference_state.json",
+    "Fixed-parameter Gamma/r(vf); unlike the empirical Gamma scatter, parameters do not vary between points."
   ]
 }

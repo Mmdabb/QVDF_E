@@ -9,16 +9,48 @@ from .paths import frozen_dir
 POLLUTANTS = ['CO2', 'NOx', 'CO', 'HC']
 
 
-def load_rates(path=None):
+def load_rates(path=None, *, representation='cubic', vehicle_type=1):
+    """Load an explicitly selected zero-acceleration emission-rate representation.
+
+    ``representation='lookup'`` returns callable rates for the empirical two-speed
+    result M. ``representation='cubic'`` returns coefficient dictionaries for the
+    smooth approximation A and its analytical derivatives. The cubic default is
+    retained for compatibility; new empirical calculations should request lookup.
+    ``path`` is an input directory for lookup, or a coefficient CSV for cubic.
+    These are two representations of the same archived MOVES-derived table, not
+    different traffic calibrations or new MOVES runs.
+    """
+    if representation == 'lookup':
+        return load_lookup_rates(path, vehicle_type=vehicle_type)
+    if representation == 'cubic':
+        return load_cubic_rates(path)
+    raise ValueError("representation must be 'lookup' or 'cubic'")
+
+
+def load_cubic_rates(path=None):
     """Cubic zero-acceleration rates fitted to the archived MOVES-derived passenger-car table.
 
     Returns {pollutant: {'coef': array(c0..c3), 'vmin': mph, 'vmax': mph}}; r in g/(veh h), v in mph.
+    This representation produces A, not the empirical lookup result M.
     The original MOVES run (version, year, settings) was not recorded; results start from this derived table.
     """
     p = path or frozen_dir() / 'calibration' / 'cubic_rate_coefficients.csv'
     df = pd.read_csv(p)
     return {r.pollutant: {'coef': np.array([r.c0, r.c1, r.c2, r.c3], float), 'vmin': float(r.speed_min_mph),
                           'vmax': float(r.speed_max_mph)} for r in df.itertuples()}
+
+
+def load_lookup_rates(path=None, *, vehicle_type=1):
+    """Return {pollutant: callable(speed_mph)} for the empirical lookup result M.
+
+    Rates have units g/(vehicle h). Vehicle age weights are normalized, rates are
+    selected by zero-acceleration VSP/operating-mode bins, and no interpolation is
+    applied. Pass these callables directly to ``gamma`` or ``episode_total``.
+    The default uses the same already-public passenger-car input tables as the experiment pipeline.
+    """
+    from .rates import lookup_rates
+    p = path if path is not None else frozen_dir() / 'calibration' / 'emission_input'
+    return lookup_rates(p, vehicle_type=vehicle_type)
 
 
 def load_reference_state():

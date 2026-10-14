@@ -1,0 +1,623 @@
+{
+  "tolerance": {
+    "rtol": 1e-08,
+    "atol": 1e-09
+  },
+  "files_compared": 61,
+  "all_common_columns_match": true,
+  "files": [
+    {
+      "track": "empirical",
+      "file": "cbi_comparison_metrics.csv",
+      "rows_old": 5,
+      "rows_new": 5,
+      "only_old_columns": [],
+      "only_new_columns": [],
+      "numeric_differences": [],
+      "text_differences": []
+    },
+    {
+      "track": "empirical",
+      "file": "cbi_comparison_summary.csv",
+      "rows_old": 10,
+      "rows_new": 10,
+      "only_old_columns": [],
+      "only_new_columns": [],
+      "numeric_differences": [],
+      "text_differences": []
+    },
+    {
+      "track": "empirical",
+      "file": "cbi_episode_matches.csv",
+      "rows_old": 263,
+      "rows_new": 263,
+      "only_old_columns": [],
+      "only_new_columns": [],
+      "numeric_differences": [],
+      "text_differences": []
+    },
+    {
+      "track": "empirical",
+      "file": "cbi_link_comparison.csv",
+      "rows_old": 347,
+      "rows_new": 347,
+      "only_old_columns": [],
+      "only_new_columns": [],
+      "numeric_differences": [],
+      "text_differences": []
+    },
+    {
+      "track": "empirical",
+      "file": "cbi_period_comparison.csv",
+      "rows_old": 1388,
+      "rows_new": 1388,
+      "only_old_columns": [],
+      "only_new_columns": [],
+      "numeric_differences": [],
+      "text_differences": []
+    },
+    {
+      "track": "empirical",
+      "file": "cubic_rate_coefficients.csv",
+      "rows_old": 4,
+      "rows_new": 4,
+      "only_old_columns": [],
+      "only_new_columns": [],
+      "numeric_differences": [],
+      "text_differences": []
+    },
+    {
+      "track": "empirical",
+      "file": "average_weekday/average_metrics_ci.csv",
+      "rows_old": 63,
+      "rows_new": 63,
+      "only_old_columns": [],
+      "only_new_columns": [],
+      "numeric_differences": [],
+      "text_differences": []
+    },
+    {
+      "track": "empirical",
+      "file": "average_weekday/cubic_rate_coefficients.csv",
+      "rows_old": 4,
+      "rows_new": 4,
+      "only_old_columns": [],
+      "only_new_columns": [],
+      "numeric_differences": [],
+      "text_differences": []
+    },
+    {
+      "track": "empirical",
+      "file": "average_weekday/detector_fd_calibration.csv",
+      "rows_old": 352,
+      "rows_new": 352,
+      "only_old_columns": [],
+      "only_new_columns": [],
+      "numeric_differences": [],
+      "text_differences": []
+    },
+    {
+      "track": "empirical",
+      "file": "average_weekday/direction_fit_metrics.csv",
+      "rows_old": 77,
+      "rows_new": 77,
+      "only_old_columns": [],
+      "only_new_columns": [],
+      "numeric_differences": [],
+      "text_differences": []
+    },
+    {
+      "track": "empirical",
+      "file": "average_weekday/emission_ladder_metrics.csv",
+      "rows_old": 180,
+      "rows_new": 180,
+      "only_old_columns": [],
+      "only_new_columns": [],
+      "numeric_differences": [],
+      "text_differences": []
+    },
+    {
+      "track": "empirical",
+      "file": "average_weekday/emission_metrics.csv",
+      "rows_old": 144,
+      "rows_new": 144,
+      "only_old_columns": [],
+      "only_new_columns": [],
+      "numeric_differences": [],
+      "text_differences": []
+    },
+    {
+      "track": "empirical",
+      "file": "average_weekday/episodes_detected.csv",
+      "rows_old": 325,
+      "rows_new": 325,
+      "only_old_columns": [],
+      "only_new_columns": [],
+      "numeric_differences": [],
+      "text_differences": []
+    },
+    {
+      "track": "empirical",
+      "file": "average_weekday/episode_results_v2.csv",
+      "rows_old": 325,
+      "rows_new": 325,
+      "only_old_columns": [],
+      "only_new_columns": [],
+      "numeric_differences": [],
+      "text_differences": []
+    },
+    {
+      "track": "empirical",
+      "file": "average_weekday/episode_timeseries.csv",
+      "rows_old": 288,
+      "rows_new": 288,
+      "only_old_columns": [],
+      "only_new_columns": [],
+      "numeric_differences": [],
+      "text_differences": []
+    },
+    {
+      "track": "empirical",
+      "file": "average_weekday/i10_monthly_day_support.csv",
+      "rows_old": 1266,
+      "rows_new": 1266,
+      "only_old_columns": [],
+      "only_new_columns": [],
+      "numeric_differences": [],
+      "text_differences": []
+    },
+    {
+      "track": "empirical",
+      "file": "average_weekday/i10_monthly_profile_support.csv",
+      "rows_old": 60,
+      "rows_new": 60,
+      "only_old_columns": [],
+      "only_new_columns": [],
+      "numeric_differences": [],
+      "text_differences": []
+    },
+    {
+      "track": "empirical",
+      "file": "average_weekday/marginal_emission_card.csv",
+      "rows_old": 176,
+      "rows_new": 176,
+      "only_old_columns": [],
+      "only_new_columns": [],
+      "numeric_differences": [],
+      "text_differences": []
+    },
+    {
+      "track": "empirical",
+      "file": "average_weekday/marginal_emission_curves.csv",
+      "rows_old": 25760,
+      "rows_new": 25760,
+      "only_old_columns": [],
+      "only_new_columns": [],
+      "numeric_differences": [],
+      "text_differences": []
+    },
+    {
+      "track": "empirical",
+      "file": "average_weekday/outlier_rule_changed_episodes.csv",
+      "rows_old": 3,
+      "rows_new": 3,
+      "only_old_columns": [],
+      "only_new_columns": [],
+      "numeric_differences": [],
+      "text_differences": []
+    },
+    {
+      "track": "empirical",
+      "file": "average_weekday/parameter_bootstrap.csv.gz",
+      "rows_old": 16000,
+      "rows_new": 16000,
+      "only_old_columns": [],
+      "only_new_columns": [],
+      "numeric_differences": [],
+      "text_differences": []
+    },
+    {
+      "track": "empirical",
+      "file": "average_weekday/parameter_card.csv",
+      "rows_old": 44,
+      "rows_new": 44,
+      "only_old_columns": [],
+      "only_new_columns": [],
+      "numeric_differences": [],
+      "text_differences": []
+    },
+    {
+      "track": "empirical",
+      "file": "average_weekday/parameter_card_v15.csv",
+      "rows_old": 44,
+      "rows_new": 44,
+      "only_old_columns": [],
+      "only_new_columns": [],
+      "numeric_differences": [],
+      "text_differences": []
+    },
+    {
+      "track": "empirical",
+      "file": "average_weekday/period_emission_metrics.csv",
+      "rows_old": 360,
+      "rows_new": 360,
+      "only_old_columns": [],
+      "only_new_columns": [],
+      "numeric_differences": [],
+      "text_differences": []
+    },
+    {
+      "track": "empirical",
+      "file": "average_weekday/period_results_v2.csv",
+      "rows_old": 1588,
+      "rows_new": 1588,
+      "only_old_columns": [],
+      "only_new_columns": [],
+      "numeric_differences": [],
+      "text_differences": []
+    },
+    {
+      "track": "empirical",
+      "file": "average_weekday/physical_audit_summary.csv",
+      "rows_old": 11,
+      "rows_new": 11,
+      "only_old_columns": [],
+      "only_new_columns": [],
+      "numeric_differences": [],
+      "text_differences": []
+    },
+    {
+      "track": "empirical",
+      "file": "average_weekday/pigou_results.csv",
+      "rows_old": 44,
+      "rows_new": 44,
+      "only_old_columns": [],
+      "only_new_columns": [],
+      "numeric_differences": [],
+      "text_differences": []
+    },
+    {
+      "track": "empirical",
+      "file": "average_weekday/pooled_fit_metrics.csv",
+      "rows_old": 63,
+      "rows_new": 63,
+      "only_old_columns": [],
+      "only_new_columns": [],
+      "numeric_differences": [],
+      "text_differences": []
+    },
+    {
+      "track": "empirical",
+      "file": "average_weekday/sensor_parameters.csv",
+      "rows_old": 352,
+      "rows_new": 352,
+      "only_old_columns": [],
+      "only_new_columns": [],
+      "numeric_differences": [],
+      "text_differences": []
+    },
+    {
+      "track": "empirical",
+      "file": "average_weekday/traffic_panel.csv.gz",
+      "rows_old": 114267,
+      "rows_new": 114267,
+      "only_old_columns": [],
+      "only_new_columns": [],
+      "numeric_differences": [],
+      "text_differences": []
+    },
+    {
+      "track": "empirical",
+      "file": "daily_validation/cubic_rate_coefficients.csv",
+      "rows_old": 4,
+      "rows_new": 4,
+      "only_old_columns": [],
+      "only_new_columns": [],
+      "numeric_differences": [],
+      "text_differences": []
+    },
+    {
+      "track": "empirical",
+      "file": "daily_validation/daily_metrics_ci.csv",
+      "rows_old": 14,
+      "rows_new": 14,
+      "only_old_columns": [],
+      "only_new_columns": [],
+      "numeric_differences": [],
+      "text_differences": []
+    },
+    {
+      "track": "empirical",
+      "file": "daily_validation/detector_fd_calibration.csv",
+      "rows_old": 5,
+      "rows_new": 5,
+      "only_old_columns": [],
+      "only_new_columns": [],
+      "numeric_differences": [],
+      "text_differences": []
+    },
+    {
+      "track": "empirical",
+      "file": "daily_validation/direction_fit_metrics.csv",
+      "rows_old": 7,
+      "rows_new": 7,
+      "only_old_columns": [],
+      "only_new_columns": [],
+      "numeric_differences": [],
+      "text_differences": []
+    },
+    {
+      "track": "empirical",
+      "file": "daily_validation/episodes_detected.csv",
+      "rows_old": 1477,
+      "rows_new": 1477,
+      "only_old_columns": [],
+      "only_new_columns": [],
+      "numeric_differences": [],
+      "text_differences": []
+    },
+    {
+      "track": "empirical",
+      "file": "daily_validation/episode_results_v2.csv",
+      "rows_old": 1477,
+      "rows_new": 1477,
+      "only_old_columns": [],
+      "only_new_columns": [],
+      "numeric_differences": [],
+      "text_differences": []
+    },
+    {
+      "track": "empirical",
+      "file": "daily_validation/outlier_rule_changed_episodes.csv",
+      "rows_old": 0,
+      "rows_new": 0,
+      "only_old_columns": [],
+      "only_new_columns": [],
+      "numeric_differences": [],
+      "text_differences": []
+    },
+    {
+      "track": "empirical",
+      "file": "daily_validation/parameter_bootstrap.csv.gz",
+      "rows_old": 1600,
+      "rows_new": 1600,
+      "only_old_columns": [],
+      "only_new_columns": [],
+      "numeric_differences": [],
+      "text_differences": []
+    },
+    {
+      "track": "empirical",
+      "file": "daily_validation/parameter_card.csv",
+      "rows_old": 4,
+      "rows_new": 4,
+      "only_old_columns": [],
+      "only_new_columns": [],
+      "numeric_differences": [],
+      "text_differences": []
+    },
+    {
+      "track": "empirical",
+      "file": "daily_validation/parameter_card_v15.csv",
+      "rows_old": 4,
+      "rows_new": 4,
+      "only_old_columns": [],
+      "only_new_columns": [],
+      "numeric_differences": [],
+      "text_differences": []
+    },
+    {
+      "track": "empirical",
+      "file": "daily_validation/physical_audit_summary.csv",
+      "rows_old": 1,
+      "rows_new": 1,
+      "only_old_columns": [],
+      "only_new_columns": [],
+      "numeric_differences": [],
+      "text_differences": []
+    },
+    {
+      "track": "empirical",
+      "file": "daily_validation/pooled_fit_metrics.csv",
+      "rows_old": 14,
+      "rows_new": 14,
+      "only_old_columns": [],
+      "only_new_columns": [],
+      "numeric_differences": [],
+      "text_differences": []
+    },
+    {
+      "track": "empirical",
+      "file": "daily_validation/sensor_parameters.csv",
+      "rows_old": 5,
+      "rows_new": 5,
+      "only_old_columns": [],
+      "only_new_columns": [],
+      "numeric_differences": [],
+      "text_differences": []
+    },
+    {
+      "track": "empirical",
+      "file": "daily_validation/traffic_panel.csv.gz",
+      "rows_old": 364608,
+      "rows_new": 364608,
+      "only_old_columns": [],
+      "only_new_columns": [],
+      "numeric_differences": [],
+      "text_differences": []
+    },
+    {
+      "track": "empirical",
+      "file": "repository_reference/episodes.csv",
+      "rows_old": 282,
+      "rows_new": 282,
+      "only_old_columns": [],
+      "only_new_columns": [],
+      "numeric_differences": [],
+      "text_differences": []
+    },
+    {
+      "track": "empirical",
+      "file": "repository_reference/link_period.csv",
+      "rows_old": 1388,
+      "rows_new": 1388,
+      "only_old_columns": [],
+      "only_new_columns": [],
+      "numeric_differences": [],
+      "text_differences": []
+    },
+    {
+      "track": "empirical",
+      "file": "average_weekday/i10_fd_fit/detector_fd_calibration.csv",
+      "rows_old": 5,
+      "rows_new": 5,
+      "only_old_columns": [],
+      "only_new_columns": [],
+      "numeric_differences": [],
+      "text_differences": []
+    },
+    {
+      "track": "empirical",
+      "file": "average_weekday/i10_fd_fit/sensor_parameters.csv",
+      "rows_old": 5,
+      "rows_new": 5,
+      "only_old_columns": [],
+      "only_new_columns": [],
+      "numeric_differences": [],
+      "text_differences": []
+    },
+    {
+      "track": "surrogate",
+      "file": "figure10_reference_states.csv",
+      "rows_old": 176,
+      "rows_new": 176,
+      "only_old_columns": [],
+      "only_new_columns": [],
+      "numeric_differences": [],
+      "text_differences": []
+    },
+    {
+      "track": "surrogate",
+      "file": "surrogate_coefficients.csv",
+      "rows_old": 188,
+      "rows_new": 188,
+      "only_old_columns": [],
+      "only_new_columns": [],
+      "numeric_differences": [],
+      "text_differences": []
+    },
+    {
+      "track": "surrogate",
+      "file": "surrogate_curves.csv",
+      "rows_old": 140140,
+      "rows_new": 140140,
+      "only_old_columns": [
+        "selected_for_main",
+        "within_pigou_domain"
+      ],
+      "only_new_columns": [],
+      "numeric_differences": [],
+      "text_differences": []
+    },
+    {
+      "track": "pigou",
+      "file": "full_surrogate_comparison.csv",
+      "rows_old": 18,
+      "rows_new": 18,
+      "only_old_columns": [],
+      "only_new_columns": [],
+      "numeric_differences": [],
+      "text_differences": []
+    },
+    {
+      "track": "pigou",
+      "file": "full_surrogate_poa.csv",
+      "rows_old": 9,
+      "rows_new": 9,
+      "only_old_columns": [],
+      "only_new_columns": [],
+      "numeric_differences": [],
+      "text_differences": []
+    },
+    {
+      "track": "pigou",
+      "file": "full/assignment_results.csv",
+      "rows_old": 18,
+      "rows_new": 18,
+      "only_old_columns": [],
+      "only_new_columns": [],
+      "numeric_differences": [],
+      "text_differences": []
+    },
+    {
+      "track": "pigou",
+      "file": "full/network_curves.csv",
+      "rows_old": 20001,
+      "rows_new": 20001,
+      "only_old_columns": [],
+      "only_new_columns": [],
+      "numeric_differences": [],
+      "text_differences": []
+    },
+    {
+      "track": "pigou",
+      "file": "full/price_of_anarchy.csv",
+      "rows_old": 9,
+      "rows_new": 9,
+      "only_old_columns": [],
+      "only_new_columns": [],
+      "numeric_differences": [],
+      "text_differences": []
+    },
+    {
+      "track": "pigou",
+      "file": "full/weight_sensitivity.csv",
+      "rows_old": 81,
+      "rows_new": 81,
+      "only_old_columns": [],
+      "only_new_columns": [],
+      "numeric_differences": [],
+      "text_differences": []
+    },
+    {
+      "track": "pigou",
+      "file": "surrogate/assignment_results.csv",
+      "rows_old": 18,
+      "rows_new": 18,
+      "only_old_columns": [],
+      "only_new_columns": [],
+      "numeric_differences": [],
+      "text_differences": []
+    },
+    {
+      "track": "pigou",
+      "file": "surrogate/network_curves.csv",
+      "rows_old": 20001,
+      "rows_new": 20001,
+      "only_old_columns": [],
+      "only_new_columns": [],
+      "numeric_differences": [],
+      "text_differences": []
+    },
+    {
+      "track": "pigou",
+      "file": "surrogate/price_of_anarchy.csv",
+      "rows_old": 9,
+      "rows_new": 9,
+      "only_old_columns": [],
+      "only_new_columns": [],
+      "numeric_differences": [],
+      "text_differences": []
+    },
+    {
+      "track": "pigou",
+      "file": "surrogate/weight_sensitivity.csv",
+      "rows_old": 81,
+      "rows_new": 81,
+      "only_old_columns": [],
+      "only_new_columns": [],
+      "numeric_differences": [],
+      "text_differences": []
+    }
+  ]
+}

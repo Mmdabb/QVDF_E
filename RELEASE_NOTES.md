@@ -1,5 +1,14 @@
 # Release notes
 
+## v1.1.0 (integration branch)
+
+- Added the portable QVDF-E empirical calibration/emission, surrogate-fit and Pigou optimization workflow. External preprocessing/data requirements are explicit; raw restricted data are not added.
+- Added the original zero-acceleration lookup-rate loader for empirical method M. The named cubic loader and backward-compatible default remain available for approximation A and derivatives.
+- Added complete downstream episode-screening diagnostics and analytic minimum-arrival checks, including the exact-parabola endpoint case.
+- Ported the current editable overview, US06 rate comparison, fixed-parameter Gamma and calibration figures, with consistent styling and export checks.
+- Added the explicit v33 reporting sample and pooled period/daytime summaries without changing the original frozen results.
+- Retained tutorials, finite-transition/corridor analyses, numerical audits, the mathematical API and original release data; added automated scientific checks.
+
 ## v1.0.0
 
 First public release:

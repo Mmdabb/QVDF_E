@@ -79,11 +79,37 @@ class NewellQueue:
 def profile_shape(theta):
     """Exponent a of the symmetric profile h(u) = [4u(1-u)]^a whose integral over [0, 1] equals theta.
 
-    Same root as v15_model.profile_shape: 4^a B(a+1, a+1) = theta. Defined for 0 < theta < 1.
+    The empirical pipeline uses the same root: 4^a B(a+1, a+1) = theta. Defined for 0 < theta < 1.
     """
     if not 0 < theta < 1:
         return float('nan')
     return brentq(lambda a: np.exp(a * np.log(4) + betaln(a + 1, a + 1)) - theta, 1e-5, 1e4)
+
+
+def profile_min_arrival_ratio(P_hat, wt2, theta, a=None):
+    """Analytic minimum of lambda/mu = 1 + (wt2/P_hat) h'(u).
+
+    Uses the same bounded-slope profile families and 1e-9 parabola tolerance as
+    the QVDF-E experiment pipeline. Checking a sampled grid alone can miss a negative arrival near the
+    recovery endpoint or between grid points. Durations and peak delays are hours.
+    This checks the reconstructed profile only, not observation QC or emissions.
+    """
+    if not np.isfinite([P_hat, wt2, theta]).all() or not 0 < theta < 1 or P_hat <= 0 or wt2 < 0:
+        raise ValueError('need finite 0 < theta < 1, P_hat > 0 and wt2 >= 0')
+    if theta > 2.0 / 3.0:
+        maximum = 2 * theta / (1 - theta)
+    else:
+        a = profile_shape(theta) if a is None else float(a)
+        if not np.isfinite(a) or a <= 0:
+            raise ValueError('profile exponent must be finite and positive')
+        if abs(a - 1) < 1e-9:
+            maximum = 4.0
+        elif a < 1:
+            maximum = float('inf')
+        else:
+            u = (1 - 1 / np.sqrt(2 * a - 1)) / 2
+            maximum = 4 * a * (1 - 2 * u) * (4 * u * (1 - u)) ** (a - 1)
+    return 1.0 if wt2 == 0 else float(1 - wt2 / P_hat * maximum)
 
 
 def delay_profile(P_hat, wt2, theta, mu, a=None, n_grid=20001):
@@ -92,11 +118,13 @@ def delay_profile(P_hat, wt2, theta, mu, a=None, n_grid=20001):
     P_hat duration (h), wt2 peak delay (h), theta = mean/peak delay, mu service rate (veh/h/lane).
     theta <= 2/3: h(u) = [4u(1-u)]^a with a = profile_shape(theta) unless given; otherwise h = 1 - |2u-1|^b with
     b = theta/(1-theta). The derivative is taken in actual time, w'(t) = (wt2/P_hat) h'(u), and the arrival rate is
-    lam(t) = mu [1 + w'(t)]. Returns dict with t (h), w (h), lam (veh/h/lane), D, lambda_min, mean delays.
-    A negative lambda_min means the reconstructed profile is not physically feasible.
+    lam(t) = mu [1 + w'(t)]. Returns dict with t (h), w (h), lam (veh/h/lane), D, mean delays,
+    analytic lambda_min, lambda_min_sampled and profile_closed_pass (arrival tolerance 1e-10 relative to mu).
+    A negative analytic minimum identifies a physically infeasible profile even if the grid misses the minimum.
     """
-    if not 0 < theta < 1 or P_hat <= 0 or wt2 < 0:
-        raise ValueError('need 0 < theta < 1, P_hat > 0 and wt2 >= 0')
+    minimum = profile_min_arrival_ratio(P_hat, wt2, theta, a)
+    if not np.isfinite(mu) or mu <= 0 or not isinstance(n_grid, (int, np.integer)) or n_grid < 2:
+        raise ValueError('need finite mu > 0 and integer n_grid >= 2')
     u = np.linspace(0.0, 1.0, n_grid)
     if theta <= 2.0 / 3.0:
         a = profile_shape(theta) if a is None else float(a)
@@ -104,6 +132,12 @@ def delay_profile(P_hat, wt2, theta, mu, a=None, n_grid=20001):
         h = base ** a
         with np.errstate(divide='ignore', invalid='ignore'):
             dh = np.where(base > 0, a * base ** (a - 1) * 4 * (1 - 2 * u), 0.0)
+        if abs(a - 1) < 1e-9:
+            # The parabola has endpoint slopes +4 and -4, not zero.
+            a = 1.0
+            h, dh = base, 4 * (1 - 2 * u)
+        elif a < 1:
+            dh[0], dh[-1] = np.inf, -np.inf
         family = 'power'
     else:
         b = theta / (1 - theta)
@@ -117,5 +151,7 @@ def delay_profile(P_hat, wt2, theta, mu, a=None, n_grid=20001):
     lam = mu * (1 + (wt2 / P_hat) * dh)
     D = float(np.trapezoid(lam, t))
     return {'t': t, 'u': u, 'w': w, 'lam': lam, 'D': D, 'shape': a, 'family': family,
-            'lambda_min': float(lam.min()), 'mean_delay_time': float(np.trapezoid(w, t) / P_hat),
+            'lambda_min': float(mu * minimum), 'lambda_min_sampled': float(lam.min()),
+            'profile_closed_pass': bool(minimum >= -1e-10),
+            'mean_delay_time': float(np.trapezoid(w, t) / P_hat),
             'mean_delay_vehicle': float(np.trapezoid(lam * w, t) / D)}

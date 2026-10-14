@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "qvdfe"
-version = "1.0.1"
+version = "1.1.0"
 description = "Bottleneck episodes, two-speed emissions, demand-dependent response and finite transitions (Abbasi and Zhou, 2026)"
 readme = "README.md"
 requires-python = ">=3.10"
@@ -20,7 +20,7 @@ Repository = "https://github.com/asu-trans-ai-lab/QVDF_E"
 [project.optional-dependencies]
 teaching = ["nbformat>=5.9", "nbclient>=0.9", "ipykernel>=6.25", "jupyterlab>=4"]
 dev = ["pytest>=7", "sympy>=1.12"]
-reproduce = ["pypdfium2>=4"]
+reproduce = ["pypdfium2>=4", "pdfplumber>=0.11", "pypdf>=5", "Pillow>=10"]
 
 [tool.setuptools.packages.find]
 where = ["src"]

@@ -1,6 +1,6 @@
 # Data dictionary
 
-All paths are relative to `data/`. The frozen outputs (`frozen/calibration`, `frozen/transitions`, `frozen/applicability`) are the files behind the paper's reported numbers and are never modified by the code in this repository. SHA-256 hashes are in `MANIFEST_SHA256.json` at the repository root.
+All paths are relative to `data/`. The original release outputs (`frozen/calibration`, `frozen/transitions`, `frozen/applicability`) remain immutable. Their SHA-256 hashes are in the original `MANIFEST_SHA256.json` at the repository root. Current manuscript reporting is stored separately under `reporting/v33/`; it uses an explicit profile-support table and does not refit or overwrite the original results.
 
 ## Units used throughout
 
@@ -31,6 +31,8 @@ All paths are relative to `data/`. The frozen outputs (`frozen/calibration`, `fr
 | --- | --- | --- |
 | `frozen/calibration/cubic_rate_coefficients.csv` | Cubic zero-acceleration rate r(v) = c0 + c1 v + c2 v² + c3 v³ per pollutant | `pollutant`, `c0..c3` in g/(veh·h) with v in mph; `speed_min_mph`, `speed_max_mph` (validity 5–75 mph); fit `rate_r2`, `rate_rmse_gph` |
 | `frozen/calibration/emission_input/` | Archived MOVES-derived lookup rates by operating mode and the vehicle parameters for VSP | `input_vehicle_emission_rate.csv`, `input_vehicle_type.csv` |
+| `reporting/v33/arizona_episode_profile_scope.csv` | Explicit Arizona sensor-month support for current episode-based reporting | `sensor_uid`, `month`, `complete_weekdays`; 41 profiles |
+| `reporting/v33/period_emission_metrics.csv` | Checked v33 planning-period and daytime pooled metrics | `window`, `sample`, `method`, `pollutant`, `N`, `R2`, `bias_pct`, `WAPE_pct`; daytime N225 |
 | `frozen/calibration/average_weekday/parameter_card.csv` | Calibrated QVDF per corridor and period | `fd`, `n`, `fp`, `s`, `theta`, `alpha`, `beta` (= n s); `x_min_h`, `x_median_h`, `x_max_h`; `calibration_scope`; bootstrap intervals `*_lo`, `*_hi` |
 | `frozen/calibration/average_weekday/sensor_parameters.csv` | Fundamental diagram and link of each detector | `C_vphpl`, `vf_mph`, `L_mi`, `kj`, `kc`, `omega_mph`, `lanes` |
 | `frozen/calibration/average_weekday/episode_results_v2.csv` | One row per average-weekday episode (325) | Observed `P_h`, `D_veh`, `x_h`, `wt2_h`, `wbar_h`. Fitted `P_hat_h`, `mu_hat_vphpl`, `vq_hat_mph`, `wt2_hat_h`, `wbar_hat_h`, `theta`, `profile_shape_a`, `profile_family`. Flags `calibration_eligible`, `physical_predicted_pass` (Eq. 9), `matched_ladder_pass` (the 137 admitted episodes). Emissions `O_*` (recorded speeds), `M_*` (two-speed), `S_*` (single episode speed). `Gamma_cubic_*` |

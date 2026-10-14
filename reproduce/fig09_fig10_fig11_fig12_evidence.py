@@ -122,7 +122,7 @@ def fig8(data):
     vq = frame.loc[vq_mask].copy()
     discharge = episodes.loc[finite(episodes, ['mu_vphpl', 'mu_hat_vphpl'])].copy()
     figure, axes = plt.subplots(2, 3, figsize=(7.07, 6.20))
-    figure.subplots_adjust(left=.085, right=.98, top=.94, bottom=.14, wspace=.49, hspace=.47)
+    figure.subplots_adjust(left=.085, right=.98, top=.94, bottom=.19, wspace=.49, hspace=.47)
     a, b, c, d, e, f = axes.flat
     a.scatter(episodes.x_h, episodes.P_h, s=12, color=BLUE, alpha=.52, label='Observed duration')
     a.scatter(episodes.x_h, episodes.P_hat_h, s=17, marker='o', facecolors='none', edgecolors=ORANGE, alpha=.65,
@@ -153,8 +153,12 @@ def fig8(data):
         clean(axis)
         axis.set_box_aspect(1)
     cohort_handles, cohort_labels = b.get_legend_handles_labels()
-    figure.legend(cohort_handles, cohort_labels, loc='lower center', bbox_to_anchor=(.54,.015),
+    figure.legend(cohort_handles, cohort_labels, loc='lower center', bbox_to_anchor=(.54,.018),
                   ncol=2, frameon=False)
+    handles, labels = a.get_legend_handles_labels()
+    labels = ['From observed episode', 'From fitted duration']
+    figure.legend(handles, labels, loc='lower center', bbox_to_anchor=(.54,.080), ncol=2,
+                  title='Panels (a) and (d)', title_fontsize=7.5, frameon=False)
     paths = save_figure(figure, 'fig8_calibration', DEST)
     report = source_audit(data)
     report.update({'calibrated_eligible': len(episodes), 'minimum_speed_pairs': len(speed_pairs),

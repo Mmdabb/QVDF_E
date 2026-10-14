@@ -40,7 +40,7 @@ for _d in (Path(__file__).resolve().parent,):
 import polish_style as _P          # shared figure style (figure_polish/polish_style.py)
 INK, GRAY, LIGHT, BLUE = _P.INK, _P.MID, _P.LIGHT, _P.ACCENT
 STYLE = _P.RC
-plt.rcParams.update(STYLE)
+_P.apply()
 
 
 def _line_points(ax, ln, step=1.5):

@@ -19,6 +19,8 @@ reduced to its neutrals plus its anchor blue as the single accent.
 Sizes are for the printed figure: every figure is drawn at the text width (7.07 in, cas-sc) and
 included at \\linewidth, so the text sizes below are the printed sizes.
 """
+import os
+import warnings
 import matplotlib as mpl
 from matplotlib import font_manager
 
@@ -56,5 +58,23 @@ RC = {
 
 
 def apply():
-    font_manager.fontManager.findfont("Times New Roman", fallback_to_default=False)   # fail loudly if missing
+    # The manuscript uses Times New Roman. A public checkout must also render on
+    # systems where that proprietary font is unavailable. An explicit override
+    # is validated rather than silently substituted.
+    requested = os.environ.get("QVDFE_FIGURE_FONT")
+    candidates = [requested] if requested else SERIF
+    chosen = None
+    for candidate in candidates:
+        try:
+            font_manager.fontManager.findfont(candidate, fallback_to_default=False)
+            chosen = candidate
+            break
+        except ValueError:
+            continue
+    if chosen is None:
+        raise ValueError("Requested figure font is unavailable: " + str(requested))
+    if not requested and chosen != "Times New Roman":
+        warnings.warn("Times New Roman is unavailable; figures use " + chosen +
+                      ". Numerical values are unchanged; exact paper layout may differ.", stacklevel=2)
     mpl.rcParams.update(RC)
+    mpl.rcParams["font.serif"] = [chosen] + [name for name in SERIF if name != chosen]

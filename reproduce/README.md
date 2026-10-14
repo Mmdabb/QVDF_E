@@ -1,40 +1,49 @@
-# Reproducing the paper's results from the frozen data
+# Reproducing results and editable figures
+
+Run from the repository root after installing the package and reproduction dependencies:
 
 ```bash
-python reproduce/run_all.py                 # every entry below, about one minute
-python reproduce/run_all.py --skip-figures  # calculations and audit only
-python reproduce/run_all.py --strict        # also fail when a figure differs from a published copy
+python reproduce/run_all.py                 # figures, calculations and audits
+python reproduce/run_all.py --skip-figures  # calculations and audits only
+python reproduce/verify_current_figures.py # export and layout checks after rendering
 ```
 
-Each entry reads the frozen inputs in `data/frozen/` through `qvdfe.paths` and writes only to `reproduce/output/`. `run_all.py` runs every entry and then compares each calculation and audit file it writes with the frozen file, value by value. When a copy of the published figures is available, set `QVDFE_PAPER_FIGS` to that folder and the regenerated figures are compared with it by rendering both.
+These entries read saved inputs through `qvdfe.paths` and write only to `reproduce/output/`. They do not detect new episodes or refit calibration parameters. The integrated upstream experiment workflow is separate; see the repository README for its commands. Archived calculations remain comparable with their original frozen files. `current_reporting.py` writes the current supported reporting scope separately to `output/current_reporting/`.
 
-The test suite (`pytest`) separately checks the mathematical identities and the published values (Tables 8, F1 and F2, the Appendix F reference values and the episode counts) with the core package `qvdfe`.
+`run_all.py` compares each historical calculation/audit file with its frozen counterpart, value by value. To compare figures with a local manuscript asset folder, set `QVDFE_PAPER_FIGS` to that folder. Use `--strict` to count figure differences as failures. Font and renderer versions can change pixels; the queue and scheduling generators retain an earlier layout. A figure comparison is not a new empirical validation.
 
-## Supported here
+## Available entries
 
-| Entry | Paper item | Comparison with the frozen data |
+Figure numbers below follow the revised manuscript (v33). Historical script and asset names are retained so existing commands and manuscript references to asset filenames continue to work.
+
+| Entry | Current paper item | What is reproduced |
 | --- | --- | --- |
-| `fig01_overview.py` | Fig. 1 | regenerated |
-| `fig03_shockwave.py` | Fig. 3 (shock waves at the bottleneck) | regenerated |
-| `fig04_figD1_queue_and_scheduling.py` | Fig. 4 (closed fluid queue) and Fig. D1 (scheduling) | regenerated with an earlier layout; geometry checks pass (see the to-do in the main README) |
-| `fig05_transition.py` | Fig. 5 (finite transition) | regenerated |
-| `fig07_paired_episode.py` | Fig. 7 and its audit (12 weekdays reproduce the monthly profile bin by bin) | audit identical |
-| `fig09_fig10_fig11_fig12_evidence.py` | Figs. 9 (calibration), 10 (emission comparison), 11 (Γ at calibrated states), 12 (elasticity) | regenerated |
-| `figE1_two_route.py` | Fig. E1 (two-route illustration) | regenerated |
-| `calc_cohort_admissibility.py` | Cohort transition admissibility; Appendix F, Table F2 | all outputs identical |
-| `calc_corridor_admissibility.py` | Corridor-scale geometric admissibility | all outputs identical |
-| `calc_daytime_period.py` | One daytime accounting window | all outputs identical |
-| `audit_numerics.py` | Table F1 at full precision, exclusion ledger, Table 8 metrics, recorded-speed recalculation, later-date diagnostic with a null benchmark | all outputs identical |
+| `fig01_overview.py` | Fig. 1 | Queue schematic, normalized duration–delay curves from the frozen daily fits, and vehicle transition; current layout |
+| `fig02_rates_and_gamma.py` | Figs. 2 and 5 | Four-panel US06 operating-mode/zero-acceleration/cubic comparison, and fixed-parameter Gamma behavior; current layouts, plotted values and numerical checks |
+| `fig03_shockwave.py` | Fig. 3 | Bottleneck shock waves |
+| `fig04_figD1_queue_and_scheduling.py` | Figs. 4 and D1 | Closed fluid queue and scheduling; analytical geometry checks, earlier layout |
+| `fig05_transition.py` | Fig. 6 | Finite transition |
+| `fig07_paired_episode.py` | Fig. 8 | Individual weekdays and their monthly profile; bin-by-bin audit |
+| `fig09_fig10_fig11_fig12_evidence.py` | Figs. 10–13 | Calibration (current legends/layout), emission comparison, Gamma at calibrated states, and elasticity; original frozen values and masks |
+| `figE1_two_route.py` | Fig. E1 | Frozen Pigou experiment, with full and power-approximation results |
+| `calc_cohort_admissibility.py` | Appendix F, Table F2 | Finite-transition admissibility across the common episode sample |
+| `calc_corridor_admissibility.py` | Corridor applicability | Corridor-scale geometric admissibility |
+| `calc_daytime_period.py` | Archived daytime analysis | Historical daytime-window results, retained for comparison |
+| `current_reporting.py` | Current period/daytime reporting | Supported reporting windows and current summaries, kept separate from historical outputs |
+| `audit_numerics.py` | Tables 8, F1 and diagnostics | Full-precision reference, exclusion ledger, emission metrics, recorded-speed recalculation and later-date sensitivity including a null benchmark |
 
-Matplotlib and font versions change pixels slightly; `requirements.txt` lists the versions the figures were checked with.
+The core test suite separately checks mathematical identities and frozen values. See [PRESENTATION_PROVENANCE.md](PRESENTATION_PROVENANCE.md) for the figure-source mapping and limits.
 
-## Not supported here (original data needed)
+## Emission-rate interpretation
 
-| Item | Needs |
-| --- | --- |
-| Episode detection, QVDF calibration and the emission ladder O/M/S behind `data/frozen/calibration` | The original ADOT and PeMS panels and the authors' experiment pipeline |
-| Fig. 2 (emission rate and operating states) | The original MOVES lookup run |
-| Fig. 6 (study map) | Map layers and the upstream sensor inventory |
-| Fig. 13 (measured platoon transitions) | Raw platoon trajectories (not redistributed) |
-| Fig. 8 (corridor delay) | The corridor time-space series; the derived records are in `data/frozen/transitions/corridor/` |
-| Emission rates | Results start from the supplied MOVES-derived rate tables; the original MOVES run settings were not recorded |
+The empirical two-speed estimate **M** uses the archived zero-acceleration operating-mode lookup. The cubic **A** approximates the same rates and supports smooth analytical functions. Figure 2 shows both representations; its operating-mode rates also include acceleration. All three are model-assigned rates, not measured tailpipe emissions. The original MOVES run settings were not recorded, so the supplied rate tables are the reproducible starting point.
+
+## Style and editable output
+
+`reproduce/lib/polish_style.py` controls the shared blue/grey palette, white background, text and axes. The manuscript font is Times New Roman. When unavailable, rendering uses an installed serif fallback with a warning. Set `QVDFE_FIGURE_FONT` to an installed font name to choose explicitly; an unavailable explicit choice fails. Exact manuscript layout comparisons require the manuscript font.
+
+The updated figure entries export vector PDF/SVG, 600-dpi PNG, curve CSVs and layout audit JSON. `verify_current_figures.py` checks the four current-layout exports for width, editable text, font types, image resolution, clipped text and text/line intersections. Its collision candidates supplement visual inspection; they do not prove that a figure is readable.
+
+## Retained source limitations
+
+The study map (Fig. 7), corridor time–space figure (Fig. 9), and measured platoon figure (Fig. 14) are not redrawn by these entries: complete original map/plotting or trajectory sources are not included here. Their available derived records remain in `data/frozen/`. The original MOVES configuration cannot be reconstructed from the rate tables alone. The queue/scheduling generator is retained with verified equations and editable outputs, but its final manuscript layout is not reproduced exactly.
