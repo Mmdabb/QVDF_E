@@ -177,7 +177,7 @@ def fit_branch(low, high, ctx, coeff, pollutant):
 
 def run(data,out):
     out.mkdir(parents=True,exist_ok=True)
-    parameter_path = next((data/name for name in ['parameter_card_v15.csv', 'parameter_card_full.csv', 'parameter_card.csv'] if (data/name).is_file()), None)
+    parameter_path = next((data/name for name in ['parameter_card_full.csv', 'parameter_card.csv'] if (data/name).is_file()), None)
     if parameter_path is None:
         raise FileNotFoundError('Full parameter card not found in ' + str(data))
     params=pd.read_csv(parameter_path)

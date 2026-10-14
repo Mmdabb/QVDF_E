@@ -46,7 +46,7 @@ def load_lookup_rates(path=None, *, vehicle_type=1):
     Rates have units g/(vehicle h). Vehicle age weights are normalized, rates are
     selected by zero-acceleration VSP/operating-mode bins, and no interpolation is
     applied. Pass these callables directly to ``gamma`` or ``episode_total``.
-    The default uses the same already-public passenger-car input tables as v19.
+    The default uses the same already-public passenger-car input tables as the experiment pipeline.
     """
     from .rates import lookup_rates
     p = path if path is not None else frozen_dir() / 'calibration' / 'emission_input'

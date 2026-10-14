@@ -58,7 +58,7 @@ def choose_specification(source, data, corridor, period):
     return out
 
 
-class V19Network(PigouNetwork):
+class EmissionNetwork(PigouNetwork):
     def __init__(self,spec,mode):
         self.spec,self.mode=spec,mode
         self.ctx=spec['context'];self.params=self.ctx.copy()
@@ -156,7 +156,7 @@ def solve(network,out):
 def run(source,data,out,corridor,period):
     out.mkdir(parents=True,exist_ok=True)
     spec=choose_specification(source,data,corridor,period)
-    full=V19Network(spec,'full');surrogate=V19Network(spec,'surrogate')
+    full=EmissionNetwork(spec,'full');surrogate=EmissionNetwork(spec,'surrogate')
     spec.update(background_veh_lane=full.B,flexible_veh_lane=full.N,bypass_time_h=full.T2,bypass_length_mi=full.L2,
                 bypass_speed_mph=full.v2,bypass_emission_g_veh=full.e2,time_emission_scale=full.emission_scale,
                 source_hashes={path.name:hashlib.sha256(path.read_bytes()).hexdigest() for path in [source/'surrogate_coefficients.csv',source/'surrogate_specification.json']})

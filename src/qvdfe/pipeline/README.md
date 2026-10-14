@@ -1,6 +1,6 @@
-# v19 empirical workflow
+# QVDF-E experiment pipeline
 
-This package supplies the calibration and emission workflow that produced the original v19 experiments. The reusable `qvdfe` package and the repository's later analyses remain separate. Existing frozen results are inputs for comparison, not files to overwrite.
+This package supplies the calibration and emission workflow that produced the verified QVDF-E experiments. The pipeline is part of the `qvdfe` package, alongside reusable formulas and the repository's later analyses. Existing frozen results are inputs for comparison, not files to overwrite.
 
 ## What can be run
 
@@ -12,20 +12,20 @@ This package supplies the calibration and emission workflow that produced the or
 | `surrogate` | Full average-profile parameter cards, detector cards, episode results, cubic coefficients | Compress admitted full-model curves into signed power functions |
 | `pigou` | Surrogate outputs plus average-profile episodes | Solve full and compressed two-route assignments, weight sensitivity and price of anarchy |
 
-The surrogate and Pigou commands work with the compact data already in this repository. The empirical command requires the external recorded baseline and original source files. **This is the exact baseline-reuse entry point used by v19, not an unattended raw-data bootstrap.** A new raw-data source requires explicit adaptation and reconstruction of that baseline; it must not be mislabeled as the paper replication.
+The surrogate and Pigou commands work with the compact data already in this repository. The empirical command requires the external recorded baseline and original source files. **This is the verified baseline-reuse entry point, not an unattended raw-data bootstrap.** A new raw-data source requires explicit adaptation and reconstruction of that baseline; it must not be mislabeled as the paper replication.
 
 From the repository root, after installing its Python dependencies:
 
 ```bash
-python -m pipeline.v19 surrogate --data data/frozen/calibration/average_weekday --output build/v19_surrogate
-python -m pipeline.v19 pigou --data data/frozen/calibration/average_weekday --surrogate build/v19_surrogate --output build/v19_pigou
+python -m qvdfe.pipeline surrogate --data data/frozen/calibration/average_weekday --output build/qvdfe_surrogate
+python -m qvdfe.pipeline pigou --data data/frozen/calibration/average_weekday --surrogate build/qvdfe_surrogate --output build/qvdfe_pigou
 ```
 
 For a complete empirical rerun, supply your own paths:
 
 ```bash
-python -m pipeline.v19 check-inputs --data-root /external/project --baseline /external/v16-baseline --emission-input /external/emission_input
-python -m pipeline.v19 empirical --data-root /external/project --baseline /external/v16-baseline --emission-input /external/emission_input --output build/v19_empirical --bootstrap 400
+python -m qvdfe.pipeline check-inputs --data-root /external/project --baseline /external/preprocessed-baseline --emission-input /external/emission_input
+python -m qvdfe.pipeline empirical --data-root /external/project --baseline /external/preprocessed-baseline --emission-input /external/emission_input --output build/qvdfe_empirical --bootstrap 400
 ```
 
 Use the same output directory to resume an empirical stage. New output directories are initialized with a workflow marker; the command refuses to take ownership of an unrelated nonempty directory. Inputs and frozen data are protected against nested or ancestor output destinations. Original data and rate files are never uploaded or copied into the public repository by this workflow.
@@ -45,7 +45,7 @@ The baseline must contain:
 
 The separate emission-input directory must contain `input_vehicle_type.csv` and `input_vehicle_emission_rate.csv`, following the original MOVES-derived table schema. Vehicle type 1 and normalized age shares are retained. The rerun records SHA-256 values for both rate files as well as the baseline and original source files.
 
-The public calibration folder has no full original traffic panel. Its `parameter_card.csv` is accepted as an alias for the original `parameter_card_v15.csv` (`parameter_card_full.csv` is also recognized). A display-only parameter table without the full calibration fields is insufficient.
+The public calibration folder has no full original traffic panel. Full calibration fields are read from `parameter_card.csv` or `parameter_card_full.csv`. A display-only parameter table without the full calibration fields is insufficient.
 
 ## Scientific conventions retained
 
@@ -65,7 +65,7 @@ The public calibration folder has no full original traffic panel. Its `parameter
 
 The daily Arizona track fits training dates and evaluates later dates. The average-weekday track independently fits Arizona monthly profiles and the released California average profiles. Directions remain separate during estimation and are pooled only for reporting.
 
-Replication preserves the recorded v19 analysis cohort. Constructed-profile counts are not automatically episode-analysis counts: use the saved detector/episode support and audit tables for the actual sample. The original period aggregation is retained here for numerical replication; use the repository's separately labeled current-reporting support correction when reporting revised period totals. That reporting correction does not refit traffic parameters or change the matched episode cohort.
+Replication preserves the recorded analysis cohort. Constructed-profile counts are not automatically episode-analysis counts: use the saved detector/episode support and audit tables for the actual sample. The original period aggregation is retained here for numerical replication; use the repository's separately labeled current-reporting support correction when reporting revised period totals. That reporting correction does not refit traffic parameters or change the matched episode cohort.
 
 ## Emission and validity meanings
 
@@ -90,8 +90,8 @@ Surrogate and Pigou analyses use the explicitly labeled smooth cubic-rate branch
 
 ## Outputs and provenance
 
-The empirical command writes `daily_validation/`, `average_weekday/`, `input_contract_verified.json`, `input_reuse_provenance.json`, and `v19_audit.json`. Intermediate flags remain in episode tables so sample attrition is inspectable. The main original average-profile reference has 325 detected, 293 eligible, 286 fitted and 137 matched episodes; those are reference counts, not constraints imposed on new inputs.
+The empirical command writes `daily_validation/`, `average_weekday/`, `input_contract_verified.json`, `input_reuse_provenance.json`, and `workflow_audit.json`. Intermediate flags remain in episode tables so sample attrition is inspectable. The main original average-profile reference has 325 detected, 293 eligible, 286 fitted and 137 matched episodes; those are reference counts, not constraints imposed on new inputs.
 
 Surrogate results include branch coefficients, curves, contexts, rate coefficients and hashes. Pigou results include assignments, objectives, weight sensitivities and independent solver checks. Its selected-curve overlay is written as `selected_surrogate_curves.csv` in the Pigou output; the source surrogate curves stay unchanged.
 
-`SOURCE_PROVENANCE.json` records original file hashes, retained function hashes and portability edits. Earlier-version module names identify the actual dependencies used by v19; they do not select different experiment versions. Historical manuscript builders, unrelated runners and raw-data adapters were excluded. Formula implementations were retained; changes concern imports, explicit paths, source labels, output isolation and concise generated reporting.
+`SOURCE_PROVENANCE.json` records original file hashes, retained function hashes and portability edits. Historical filenames appear only in provenance and archived validation records. Active module names describe their functions; manuscript revision numbers do not name software components. Historical manuscript builders, unrelated runners and raw-data adapters were excluded. Formula implementations were retained; changes concern imports, explicit paths, source labels, output isolation and concise generated reporting.

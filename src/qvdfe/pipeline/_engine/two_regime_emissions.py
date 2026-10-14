@@ -1,4 +1,4 @@
-"""Exact lookup and cubic emission-rate kernels used by v19."""
+"""Exact lookup and cubic emission-rate kernels for QVDF-E."""
 from __future__ import annotations
 from typing import Callable
 import numpy as np

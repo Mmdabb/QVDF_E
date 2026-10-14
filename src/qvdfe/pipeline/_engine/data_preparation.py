@@ -8,10 +8,10 @@ import shutil
 import numpy as np
 import pandas as pd
 
-from . import v15_data as base
-from . import v16_data
+from . import profile_data as base
+from . import detector_calibration
 
-LOG = logging.getLogger('qvdfe_cbi')
+LOG = logging.getLogger('qvdfe.pipeline')
 MIN_MONTH_DAYS = 5
 
 
@@ -86,7 +86,7 @@ def run(root, out, baseline):
     az_cards['capacity_source']='monthly_average_profile_q995'
     az_cards['vf_source']='monthly_average_profile_speed_q95'
     fd_dir=avg_dir/'i10_fd_fit';fd_dir.mkdir(exist_ok=True)
-    fitted_az=v16_data.fit_detector_cards(avg,az_cards,fd_dir)
+    fitted_az=detector_calibration.fit_detector_cards(avg,az_cards,fd_dir)
     az_fd=pd.read_csv(fd_dir/'detector_fd_calibration.csv')
     az_fd['fit_scope']='constructed_monthly_average_weekday'
     new_cards=pd.concat([fitted_az,cards[~cards.corridor.eq('AZ_I10_W')]],ignore_index=True)
@@ -126,4 +126,4 @@ def run(root, out, baseline):
         shutil.copy2(baseline/name,out/name)
     for source in baseline.glob('cbi_*.csv'):shutil.copy2(source,out/source.name)
     shutil.copytree(baseline/'repository_reference',out/'repository_reference',dirs_exist_ok=True)
-    LOG.info('V19 data support: %s',summary)
+    LOG.info('QVDF-E data support: %s',summary)

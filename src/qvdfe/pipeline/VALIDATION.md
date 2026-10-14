@@ -5,12 +5,12 @@ Verified on 2026-10-14. Generated outputs are kept under ignored `build/validati
 | Check | Outcome |
 |---|---|
 | Full empirical rerun from the original preprocessed baseline | Completed with 400 bootstrap replicates |
-| Original v19 built-in audit | All 33 checks passed |
+| Original experiment audit | All 33 checks passed |
 | Daily track support | 1,477 detected, 1,098 eligible/fitted |
 | Average-profile support | 325 detected, 293 eligible, 286 fitted, 137 emission-matched |
 | Surrogate rerun from public frozen calibration files | Completed: 44 parameter cards, 188 branch rows, 139 fitted branches |
 | Full and surrogate Pigou optimization | Both completed; derivative, Wardrop, doubled-grid and independent optimizer checks passed |
-| Regression against original v19 | 61 CSV/gzip tables: all shared numeric and text columns match; numeric tolerance `rtol=1e-8, atol=1e-9` |
+| Regression against original experiment outputs | 61 CSV/gzip tables: all shared numeric and text columns match; numeric tolerance `rtol=1e-8, atol=1e-9` |
 | Pipeline regression tests | 7 passed |
 | Independent direct-rate comparison | Same direct lookup rates at 9,001 speeds over 0–90 mph for all four pollutants |
 

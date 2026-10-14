@@ -7,7 +7,7 @@ from .emission import gamma_cubic, cubic_rate
 
 def qvdf(x, fd, n, fp, s, theta):
     """Calibrated QVDF. x = D/C (h). Returns (P in h, fp P^s, theta fp P^s); multiply the last two by Tf for the
-    peak and mean delay in hours. P = max(fd x^n, x) (Eq. 13). Same as v15_model.qvdf."""
+    peak and mean delay in hours. P = max(fd x^n, x) (Eq. 13). Matches the empirical pipeline model."""
     x = np.asarray(x, float)
     P = np.maximum(fd * x ** n, x)
     return P, fp * P ** s, theta * fp * P ** s
@@ -17,15 +17,15 @@ def response(card, x, coef, kj=None):
     """Response of one calibrated card at loading x (h) for one pollutant's cubic rate ``coef``.
 
     ``card`` needs fd, n, fp, s, theta, C (veh/h/lane), vf (mph), L (mi) and optionally kj (veh/mi/lane, default 220).
-    Follows v15_model.cost_values: mu = C x / P, vq from the FD, peak delay Tf fp P^s, mean delay Tf theta fp P^s,
+    Follows the empirical response calculation: mu = C x / P, vq from the FD, peak delay Tf fp P^s, mean delay Tf theta fp P^s,
     Gamma at vq, beta = n s, eps_Gamma = x Gamma'(x)/Gamma (defined only where Gamma != 0),
     increment elasticity beta + eps_Gamma, emission increment wbar Gamma (g/veh), marginal emission
     dE/dD = e + x e'(x) (g per added vehicle, capacity and calibration held fixed). Scalars only.
     ``valid`` checks the admissible power branch: fd x^n > x, 5 <= vq < vf <= 75 mph (the rate table's range) and
     the peak delay within the finite-link allowance (Eq. 9). It does not check the nonnegative-arrival condition of
     the reconstructed profile (``qvdfe.delay_profile`` reports analytic lambda_min for that), observation QC,
-    outliers or positive totals. Use ``qvdfe.screen_episode`` for the complete v19 matched-comparison mask.
-    This limited response flag is the same check as v19 cost_values.valid. Derivatives returned with valid=False
+    outliers or positive totals. Use ``qvdfe.screen_episode`` for the complete experimental matched-comparison mask.
+    This limited response flag is the same check as the empirical cost-response validity flag. Derivatives returned with valid=False
     must not be interpreted on the capacity branch; the derivative formulas assume the power branch.
     """
     if x <= 0:

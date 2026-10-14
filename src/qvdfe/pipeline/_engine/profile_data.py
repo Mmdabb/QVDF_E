@@ -1,4 +1,4 @@
-"""V15 measured-data adapters and state-transition episode inventory.
+"""Measured-data adapters and state-transition episode inventory.
 
 Recorded lane observations are retained in the input files. Aggregation requires
 every declared mainline lane's count and speed; absent lanes are missing, never
@@ -33,7 +33,7 @@ PERIODS={'AM':(6,10),'MD':(10,16),'PM':(16,20),'NT':(20,30)}
 DT=1/12
 
 
-LOG=logging.getLogger('qvdfe_cbi')
+LOG=logging.getLogger('qvdfe.pipeline')
 
 
 def period_of(hour):

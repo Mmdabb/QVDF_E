@@ -7,6 +7,8 @@ import json
 import logging
 from pathlib import Path
 
+from qvdfe.paths import repo_root
+
 BASELINE_FILES = (
     "traffic_panel.csv.gz", "sensor_parameters.csv", "episodes_detected.csv",
     "detector_fd_calibration.csv", "cubic_rate_coefficients.csv",
@@ -67,14 +69,14 @@ def check_inputs(data_root: Path, baseline: Path, emission_input: Path) -> dict:
         "baseline_sha256": {name: sha256(baseline / name) for name in BASELINE_FILES},
         "emission_input_sha256": {name: sha256(emission_input / name) for name in RATE_FILES},
         "raw_reconstruction": False,
-        "entry_level": "Recorded preprocessed v16 baseline, exactly as reused by v19",
+        "entry_level": "Recorded preprocessed traffic baseline with verified source hashes",
     }
 
 
 def protect_output(output: Path, inputs) -> None:
     """Reject nested/ancestor input destinations and the repository's frozen data."""
     output = output.resolve()
-    frozen = Path(__file__).resolve().parents[2] / "data" / "frozen"
+    frozen = repo_root() / "data" / "frozen"
     for path in [*inputs, frozen]:
         path = path.resolve()
         if output == path or output.is_relative_to(path) or path.is_relative_to(output):
@@ -83,7 +85,7 @@ def protect_output(output: Path, inputs) -> None:
 
 def prepare_output(output: Path, kind: str) -> None:
     """Avoid silently taking ownership of an unrelated existing directory."""
-    marker = output / ".qvdfe-v19-run.json"
+    marker = output / ".qvdfe-pipeline-run.json"
     if output.exists() and any(output.iterdir()) and not marker.is_file():
         raise ValueError("Output is not a workflow-owned directory; choose a new output directory")
     output.mkdir(parents=True, exist_ok=True)
@@ -91,16 +93,16 @@ def prepare_output(output: Path, kind: str) -> None:
         prior = json.loads(marker.read_text(encoding="utf-8"))
         if prior["kind"] != kind:
             raise ValueError("Output belongs to a different workflow command")
-    marker.write_text(json.dumps({"kind": kind, "workflow": "v19"}, indent=2) + "\n", encoding="utf-8")
+    marker.write_text(json.dumps({"kind": kind, "workflow": "qvdfe.pipeline"}, indent=2) + "\n", encoding="utf-8")
 
 
 def parser() -> argparse.ArgumentParser:
-    ap = argparse.ArgumentParser(description=__doc__)
+    ap = argparse.ArgumentParser(prog="python -m qvdfe.pipeline", description=__doc__)
     commands = ap.add_subparsers(dest="command", required=True)
     for name in ("empirical", "check-inputs"):
         sub = commands.add_parser(name)
         sub.add_argument("--data-root", type=Path, required=True, help="Root resolving relative paths in the baseline input_sha256.json")
-        sub.add_argument("--baseline", type=Path, required=True, help="External recorded v16 preprocessed baseline")
+        sub.add_argument("--baseline", type=Path, required=True, help="External recorded preprocessed traffic baseline")
         sub.add_argument("--emission-input", type=Path, required=True, help="Directory containing the two MOVES-derived input CSV files")
         if name == "empirical":
             sub.add_argument("--stage", choices=["data", "daily", "average", "metrics", "audit", "all"], default="all")
@@ -147,17 +149,17 @@ def main(argv=None) -> None:
                             handlers=[logging.StreamHandler(), logging.FileHandler(args.output / "run.log", encoding="utf-8")])
         if args.stage in ("data", "all"):
             (args.output / "input_contract_verified.json").write_text(json.dumps(verified, indent=2) + "\n", encoding="utf-8")
-            from ._engine import v19_data
-            v19_data.run(args.data_root, args.output, args.baseline)
-        from ._engine import v19_model
+            from ._engine import data_preparation
+            data_preparation.run(args.data_root, args.output, args.baseline)
+        from ._engine import calibration
         if args.stage in ("daily", "all"):
-            v19_model.run_daily(args.data_root, args.output, args.bootstrap)
+            calibration.run_daily(args.data_root, args.output, args.bootstrap)
         if args.stage in ("average", "all"):
-            v19_model.run_average(args.data_root, args.output, args.bootstrap, args.emission_input)
+            calibration.run_average(args.data_root, args.output, args.bootstrap, args.emission_input)
         if args.stage in ("audit", "all"):
-            v19_model.audit(args.data_root, args.output, args.baseline)
+            calibration.audit(args.data_root, args.output, args.baseline)
         if args.stage == "metrics":
-            v19_model.refresh_metrics(args.output, args.bootstrap)
+            calibration.refresh_metrics(args.output, args.bootstrap)
     elif args.command == "surrogate":
         require_files(args.data, MODEL_FILES)
         prepare_output(args.output, "surrogate")

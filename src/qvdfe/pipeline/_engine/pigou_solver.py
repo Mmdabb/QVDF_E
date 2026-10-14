@@ -1,4 +1,4 @@
-"""Wardrop and system-optimum solver methods retained from the v18 base class."""
+"""Wardrop and system-optimum solver methods for parallel-route assignment."""
 import numpy as np
 from scipy.optimize import brentq, minimize_scalar
 

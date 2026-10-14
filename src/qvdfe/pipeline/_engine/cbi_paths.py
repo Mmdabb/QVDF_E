@@ -4,10 +4,12 @@ from __future__ import annotations
 
 from pathlib import Path
 
+from qvdfe.paths import repo_root
+
 
 def package_root() -> Path:
-    """Return the project root that contains ``codes`` and ``datasets``."""
-    return Path(__file__).resolve().parents[2]
+    """Return the QVDF-E repository root independently of package depth."""
+    return repo_root()
 
 
 def project_root_from_cwd(cwd: Path | None = None) -> Path:

@@ -79,7 +79,7 @@ class NewellQueue:
 def profile_shape(theta):
     """Exponent a of the symmetric profile h(u) = [4u(1-u)]^a whose integral over [0, 1] equals theta.
 
-    Same root as v15_model.profile_shape: 4^a B(a+1, a+1) = theta. Defined for 0 < theta < 1.
+    The empirical pipeline uses the same root: 4^a B(a+1, a+1) = theta. Defined for 0 < theta < 1.
     """
     if not 0 < theta < 1:
         return float('nan')
@@ -90,7 +90,7 @@ def profile_min_arrival_ratio(P_hat, wt2, theta, a=None):
     """Analytic minimum of lambda/mu = 1 + (wt2/P_hat) h'(u).
 
     Uses the same bounded-slope profile families and 1e-9 parabola tolerance as
-    v19. Checking a sampled grid alone can miss a negative arrival near the
+    the QVDF-E experiment pipeline. Checking a sampled grid alone can miss a negative arrival near the
     recovery endpoint or between grid points. Durations and peak delays are hours.
     This checks the reconstructed profile only, not observation QC or emissions.
     """

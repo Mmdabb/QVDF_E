@@ -1,7 +1,7 @@
-"""Independent profile calibration and strictly held-out daily validation for v19.
+"""Independent profile calibration and strictly held-out daily validation.
 
-All physical formulas and fitting bounds come from the retained v15 model. The
-only change to episode outlier QC is P -> (wt2/Tf), replacing P -> wt2.
+Physical formulas and fitting bounds are shared with the empirical model.
+Episode outlier screening uses dimensionless peak delay, wt2/Tf.
 """
 import hashlib
 import json
@@ -11,9 +11,9 @@ from pathlib import Path
 import numpy as np
 import pandas as pd
 
-from . import v15_model as model
+from . import model
 
-LOG = logging.getLogger('qvdfe_cbi')
+LOG = logging.getLogger('qvdfe.pipeline')
 POLS = model.POLS
 TARGETS = [('P_h','P_hat_h'),('vt2_obs_mph','vt2_hat_mph'),
            ('wt2_h','wt2_hat_h'),('wt2_h','wt2_conditional_hat_h'),
@@ -87,7 +87,6 @@ def calibration(ep,cards,folder,bootstrap,average):
         'sensor-month average-weekday profile' if average else 'sensor-day', 'released link profile')
     params['bootstrap_replicates'] = bootstrap
     params['parameter_CI_scope'] = 'conditional on preprocessed input, FD, episode detection and QC; no refit of those stages'
-    params.to_csv(folder/'parameter_card_v15.csv',index=False)
     params.to_csv(folder/'parameter_card.csv',index=False)
     ep = model.predictions(ep,params)
     ep['wt2_hat_normalized'] = ep.wt2_hat_h/ep.Tf_h
@@ -339,7 +338,7 @@ def audit(root,out,baseline):
     for name,ep in [('daily',daily),('average',average)]:
         checks[name+'_x_equals_episode_volume_over_capacity'] = bool(np.allclose(ep.x_h,ep.D_veh/ep.C_vphpl,equal_nan=True))
         checks[name+'_mu_equals_episode_volume_over_duration'] = bool(np.allclose(ep.mu_vphpl,ep.D_veh/ep.P_h,equal_nan=True))
-        p = pd.read_csv(out/('daily_validation' if name=='daily' else 'average_weekday')/'parameter_card_v15.csv')
+        p = pd.read_csv(out/('daily_validation' if name=='daily' else 'average_weekday')/'parameter_card.csv')
         source_train = ep[ep.calibration_eligible & ~ep.holdout]
         support = []
         for r in p.itertuples():
@@ -374,15 +373,15 @@ def audit(root,out,baseline):
     result = dict(passed=all(checks.values()),checks=checks,
         data=summary_data,daily=json.loads((out/'daily_validation/model_summary.json').read_text()),
         average=json.loads((out/'average_weekday/model_summary.json').read_text()))
-    (out/'v19_audit.json').write_text(json.dumps(result,indent=2),encoding='utf-8')
+    (out/'workflow_audit.json').write_text(json.dumps(result,indent=2),encoding='utf-8')
     if not result['passed']: raise AssertionError({k:v for k,v in checks.items() if not v})
     write_notes(out,result)
-    LOG.info('V19 independent-track audit: all %s checks passed',len(checks))
+    LOG.info('QVDF-E independent-track audit: all %s checks passed',len(checks))
 
 
 def write_notes(out, result):
     """Report actual support; do not embed historical manuscript prose."""
-    lines = ["# Empirical workflow audit", "", "The full run audit is in v19_audit.json.", "",
+    lines = ["# Empirical workflow audit", "", "The full run audit is in workflow_audit.json.", "",
              "| Track | Detected | Eligible | Fitted | Emission matched |",
              "|---|---:|---:|---:|---:|"]
     for key in ["daily", "average"]:
@@ -390,6 +389,6 @@ def write_notes(out, result):
         lines.append(f"| {key} | {row['detected']} | {row['eligible']} | {row['fitted']} | {row['matched']} |")
     lines.extend(["", "M uses the direct MOVES-derived lookup; A uses its cubic approximation.",
                   "Daily validation and average-profile calibration are separate tracks.",
-                  "The workflow preserves the recorded v19 cohort and all original screening rules.",
-                  "See pipeline/v19/README.md for input contracts and interpretation."])
+                  "The workflow preserves the recorded empirical cohort and its screening rules.",
+                  "See src/qvdfe/pipeline/README.md for input contracts and interpretation."])
     (out / "RESULTS_SUMMARY.md").write_text("\n".join(lines) + "\n", encoding="utf-8")

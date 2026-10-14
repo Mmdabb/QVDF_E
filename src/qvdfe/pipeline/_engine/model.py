@@ -13,9 +13,9 @@ from scipy.special import betaln
 from numpy.polynomial.legendre import leggauss
 from .emissions import load_moves_rates, fit_cubic_surrogates
 from .two_regime_emissions import exact_rate_for_speed, gamma_from_rate, gamma_from_cubic, cubic_rate
-from .v15_data import DT, PERIODS, period_of
+from .profile_data import DT, PERIODS, period_of
 
-LOG=logging.getLogger('qvdfe_cbi')
+LOG=logging.getLogger('qvdfe.pipeline')
 POLS=['CO2','NOx','CO','HC']
 PARAMS=['fd','n','fp','s','theta','alpha','beta']
 
@@ -171,7 +171,7 @@ def calibrate(ep,cards,out,bootstrap):
                 row[k+'_lo'],row[k+'_hi']=np.quantile(bdf[k],[.025,.975])
             rows.append(row)
         LOG.info('Calibrated %s with %s bootstrap replicates per supported period',corridor,bootstrap)
-    result=pd.DataFrame(rows);result.to_csv(out/'parameter_card_v15.csv',index=False)
+    result=pd.DataFrame(rows);result.to_csv(out/'parameter_card.csv',index=False)
     draws=pd.DataFrame(draws);draws.to_csv(out/'parameter_bootstrap.csv.gz',index=False)
     return result,draws
 

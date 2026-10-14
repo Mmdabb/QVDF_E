@@ -1,4 +1,4 @@
-"""Detector-specific FD revision, preserving the recorded V15 traffic panel.
+"""Detector-specific fundamental-diagram calibration using recorded traffic profiles.
 
 The FD acceptance rule is fixed before downstream outcome calculation. S3 is
 the empirical observation fit; the manuscript's triangular queue-state closure
@@ -30,10 +30,10 @@ import pandas as pd
 from .fd import fit_measured_s3, s3_flow, s3_speed
 
 
-from . import v15_data as base
+from . import profile_data as base
 
 
-LOG = logging.getLogger('qvdfe_cbi')
+LOG = logging.getLogger('qvdfe.pipeline')
 
 
 POLICY = dict(

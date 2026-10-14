@@ -1,8 +1,8 @@
-"""The v19 age-weighted, zero-acceleration MOVES-derived lookup rate.
+"""The QVDF-E age-weighted, zero-acceleration MOVES-derived lookup rate.
 
 The archived input tables are the starting point; this module does not run MOVES
 or infer its original version/year/settings. Speeds are in mph and rates are in
-g/(vehicle h). Operating-mode boundaries deliberately match the v19 workflow.
+g/(vehicle h). Operating-mode boundaries deliberately match the QVDF-E experiment workflow.
 """
 from dataclasses import dataclass
 from pathlib import Path

@@ -1,12 +1,14 @@
 # Integrated QVDF-E workflow
 
-This integration starts from public release commit `b79cde22f70907280acaec6ea0391883e4c5f7b0` and the verified original v19 experiment implementation. It adds the executable experiment workflow while retaining the public mathematical API, teaching materials, frozen outputs and later applicability analyses.
+This integration starts from public release commit `b79cde22f70907280acaec6ea0391883e4c5f7b0` and the verified QVDF-E experiment implementation. It adds the executable experiment workflow while retaining the public mathematical API, teaching materials, frozen outputs and later applicability analyses.
+
+The software is **QVDF-E** and its executable experiment workflow is `qvdfe.pipeline`. Module names describe their functions. Manuscript revision labels identify reporting snapshots and historical provenance, rather than separate software packages.
 
 ## Organization
 
 | Location | Purpose |
 | --- | --- |
-| `pipeline/v19/` | Empirical calibration/emissions, power-surrogate fitting and Pigou optimization; explicit inputs and separate outputs |
+| `src/qvdfe/pipeline/` | Empirical calibration/emissions, power-surrogate fitting and Pigou optimization; explicit inputs and separate outputs |
 | `src/qvdfe/` | Reusable equations, exact lookup and cubic rate loaders, profile/episode screening and transitions |
 | `reproduce/` | Editable figures, historical calculation reproduction and current reporting |
 | `data/frozen/` | Original released results and derived inputs, plus separately documented figure inputs |
@@ -14,7 +16,7 @@ This integration starts from public release commit `b79cde22f70907280acaec6ea039
 | `tests/` | Identity, scientific regression, sample selection, reporting and output-protection checks |
 | `docs/validation/` | Integration's numerical comparison record; no raw observations |
 
-The retained engine uses earlier module names where v19 actually depended on them. Its scientific functions were preserved, with source/function hashes and portability adaptations in `pipeline/v19/SOURCE_PROVENANCE.json`. A large refactor into the public API would make historical reproducibility harder to assess; regression tests instead establish their agreement.
+The empirical engine uses functional module names for data preparation, detector calibration, model equations and calibration. Its scientific functions were preserved, with source/function hashes and portability adaptations in `src/qvdfe/pipeline/SOURCE_PROVENANCE.json`. A large refactor into the public API would make historical reproducibility harder to assess; regression tests instead establish their agreement.
 
 ## Choices made explicit
 
@@ -28,9 +30,9 @@ $$E[r]=D\left[\frac{L}{v_f}r(v_f)+\bar w\frac{v_f r(v_q)-v_qr(v_f)}{v_f-v_q}\rig
 
 **Screening.** `response.valid` checks the response's mathematical/physical domain. `screen_episode(row)` also requires upstream calibration eligibility, admissible reconstructed arrivals, rate support and finite positive O/R/M/A/S totals for all pollutants. It returns each component and failure reasons. It does not infer observation quality from a valid formula. The complete experiment workflow performs its original upstream quality checks.
 
-**Arrival feasibility.** The reusable profile now checks the analytic minimum arrival rate, using the retained v19 slope calculation. This fixes the exact-parabola endpoint case that a sampled grid can miss. The returned `lambda_min` is analytic; `lambda_min_sampled` preserves the diagnostic meaning of the old grid value. No archived matched-episode flag changes.
+**Arrival feasibility.** The reusable profile now checks the analytic minimum arrival rate, using the retained QVDF-E slope calculation. This fixes the exact-parabola endpoint case that a sampled grid can miss. The returned `lambda_min` is analytic; `lambda_min_sampled` preserves the diagnostic meaning of the old grid value. No archived matched-episode flag changes.
 
-**Representative detectors.** Empirical episode predictions use their own detector properties. Surrogate fitting retains v19's participating detector nearest median capacity in each corridor-period. `load_cards()` retains the public tutorial convenience selection; use an explicit episode/reference detector for substantive comparisons rather than treating that convenience choice as a refit.
+**Representative detectors.** Empirical episode predictions use their own detector properties. Surrogate fitting retains the participating detector nearest median capacity in each corridor-period. `load_cards()` retains the public tutorial convenience selection; use an explicit episode/reference detector for substantive comparisons rather than treating that convenience choice as a refit.
 
 **Reporting and figures.** Original frozen results remain the historical comparison reference. Current period/daytime reporting applies the explicit v33 episode-analysis support and reproduces 225 supported daytime windows without recalibration. Four current figure layouts are ported from editable sources. Transition/corridor applicability, later-date robustness diagnostics and the original teaching examples remain available. Figure source limitations are listed in `reproduce/README.md`.
 
@@ -54,7 +56,7 @@ Verified on 14 October 2026:
 | Four updated figure layouts | Rendered images match v33 locally; curve tables match; no clipping/overlap candidates in export checks |
 | Tutorials and instructor notebook | All five executed successfully in memory; committed notebook sources unchanged |
 
-The 61-table comparison is recorded in [`validation/v19_numerical_regression.json`](validation/v19_numerical_regression.json). One intentional schema relocation protects inputs: Pigou's selection flags now go to its own `selected_surrogate_curves.csv`, rather than modifying the input surrogate curve table. The comparison records those columns separately.
+The 61-table comparison is recorded in [`validation/numerical_regression.json`](validation/numerical_regression.json). One intentional schema relocation protects inputs: Pigou's selection flags now go to its own `selected_surrogate_curves.csv`, rather than modifying the input surrogate curve table. The comparison records those columns separately.
 
 The full empirical check used the authors' external baseline and source files locally. They are not added to the public repository. CI runs the public-data regression tests and downstream reproductions; it cannot perform the complete empirical rerun without those external inputs. Repository tests and notebook checks supplement the results above.
 
@@ -67,8 +69,8 @@ python tools/verify_frozen_inputs.py
 python reproduce/run_all.py
 python reproduce/verify_current_figures.py
 python tools/make_formula_code_map.py
-python -m pipeline.v19 surrogate --data data/frozen/calibration/average_weekday --output build/surrogate
-python -m pipeline.v19 pigou --data data/frozen/calibration/average_weekday --surrogate build/surrogate --output build/pigou
+python -m qvdfe.pipeline surrogate --data data/frozen/calibration/average_weekday --output build/surrogate
+python -m qvdfe.pipeline pigou --data data/frozen/calibration/average_weekday --surrogate build/surrogate --output build/pigou
 ```
 
-For empirical input requirements and the 400-bootstrap command, see [`pipeline/v19/README.md`](../pipeline/v19/README.md). A new dataset or expanded analysis sample requires a separate scientifically reviewed run; the frozen reference tables are never silently updated.
+For empirical input requirements and the 400-bootstrap command, see [`src/qvdfe/pipeline/README.md`](../src/qvdfe/pipeline/README.md). A new dataset or expanded analysis sample requires a separate scientifically reviewed run; the frozen reference tables are never silently updated.

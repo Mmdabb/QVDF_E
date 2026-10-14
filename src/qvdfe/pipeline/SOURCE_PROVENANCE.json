@@ -3,11 +3,12 @@
   "files": [
     {
       "source": "src/v19_data.py",
-      "destination": "_engine/v19_data.py",
+      "destination": "_engine/data_preparation.py",
       "source_file_sha256": "845d3321dfa9fc50fe6adbd07d50418f0af8538d13368698a8363bf8639a88b4",
       "adaptations": [
         "Local imports made package-relative.",
-        "Provenance uses baseline directory label, permitting external baseline paths without publishing absolute paths."
+        "Provenance uses baseline directory label, permitting external baseline paths without publishing absolute paths.",
+        "Installed under qvdfe.pipeline with descriptive module names; historical source filenames are retained only in this provenance record."
       ],
       "retained_definitions": [
         {
@@ -19,18 +20,20 @@
         {
           "name": "run",
           "source_sha256": "e9c937235501e4b456f3ef1bdb6d274faa30f722c8e63aba4c88146887b6d096",
-          "integrated_sha256": "8e2565448c68b22d83883bf688763f0e71dcc5efa812859878983613712582ee",
+          "integrated_sha256": "bfb0bd5560bb888fb631956c6f504b5e1005aa87309c806628211bd0688c2e44",
           "unchanged": false
         }
       ]
     },
     {
       "source": "src/v19_model.py",
-      "destination": "_engine/v19_model.py",
+      "destination": "_engine/calibration.py",
       "source_file_sha256": "e958a24dc3c0a1625e07bf9f2279f88a4e85eab5af394968ca709062c8499020",
       "adaptations": [
         "Local imports made package-relative.",
-        "Emission-input directory is explicit; generated summary uses actual support counts instead of historical manuscript prose."
+        "Emission-input directory is explicit; generated summary uses actual support counts instead of historical manuscript prose.",
+        "Installed under qvdfe.pipeline with descriptive module names; historical source filenames are retained only in this provenance record.",
+        "Generated parameter cards use parameter_card.csv; surrogate inputs also accept the full frozen card parameter_card_full.csv."
       ],
       "retained_definitions": [
         {
@@ -54,8 +57,8 @@
         {
           "name": "calibration",
           "source_sha256": "064ad2f336624ecc3b716f150e4e4ed96da7d93020ad25e8964b286b64df6c0b",
-          "integrated_sha256": "064ad2f336624ecc3b716f150e4e4ed96da7d93020ad25e8964b286b64df6c0b",
-          "unchanged": true
+          "integrated_sha256": "b185874e84a16b68656b956151880a7fc8c61fd44d5359d5b68c3c01afe362b3",
+          "unchanged": false
         },
         {
           "name": "score_ci",
@@ -102,24 +105,25 @@
         {
           "name": "audit",
           "source_sha256": "de9d9d36cdef29cd0a8485fb55eb90be7b57ea9afc07b30b97254abd5adb4f0a",
-          "integrated_sha256": "de9d9d36cdef29cd0a8485fb55eb90be7b57ea9afc07b30b97254abd5adb4f0a",
-          "unchanged": true
+          "integrated_sha256": "ab7782378437c8abd658f36c2e7477ade50c9e7cf7b57c5515822e61de95af9d",
+          "unchanged": false
         },
         {
           "name": "write_notes",
           "source_sha256": "ca0fc924e4e4f2439464423cdf82fa55a907de2153db2ec18e1cd61b11a710e3",
-          "integrated_sha256": "c41d3bf755cbb2e433cc2e85d254bc928d574a3beceb3df088ae48db7c8ede47",
+          "integrated_sha256": "02243953e166cc92a309da02e9f15ac845117627ad00a7fab02bb3c985257e64",
           "unchanged": false
         }
       ]
     },
     {
       "source": "src/v15_data.py",
-      "destination": "_engine/v15_data.py",
+      "destination": "_engine/profile_data.py",
       "source_file_sha256": "183968b741fdc083f828f81300bf1a3d2f6ccc1eb38825242904aac9e362299e",
       "adaptations": [
         "Local imports made package-relative.",
-        "Retained only shared period, panel-QC, and detector adapters; raw historical runners excluded."
+        "Retained only shared period, panel-QC, and detector adapters; raw historical runners excluded.",
+        "Installed under qvdfe.pipeline with descriptive module names; historical source filenames are retained only in this provenance record."
       ],
       "retained_definitions": [
         {
@@ -144,11 +148,12 @@
     },
     {
       "source": "src/v16_data.py",
-      "destination": "_engine/v16_data.py",
+      "destination": "_engine/detector_calibration.py",
       "source_file_sha256": "eb68bd041ed9b2c20ac35d5b6e9dbb87652167a176a1e415f0c533da41c8097a",
       "adaptations": [
         "Local imports made package-relative.",
-        "Retained detector-FD calibration and declared policy; historical runners excluded."
+        "Retained detector-FD calibration and declared policy; historical runners excluded.",
+        "Installed under qvdfe.pipeline with descriptive module names; historical source filenames are retained only in this provenance record."
       ],
       "retained_definitions": [
         {
@@ -161,11 +166,13 @@
     },
     {
       "source": "src/v15_model.py",
-      "destination": "_engine/v15_model.py",
+      "destination": "_engine/model.py",
       "source_file_sha256": "909c5381379dc7c989ea74a82951266488a6737a1236d1495adb2530271c2e49",
       "adaptations": [
         "Local imports made package-relative.",
-        "Retained common equations/calibration/emission/period/cost functions; old experiment runners excluded."
+        "Retained common equations/calibration/emission/period/cost functions; old experiment runners excluded.",
+        "Installed under qvdfe.pipeline with descriptive module names; historical source filenames are retained only in this provenance record.",
+        "Generated parameter cards use parameter_card.csv; surrogate inputs also accept the full frozen card parameter_card_full.csv."
       ],
       "retained_definitions": [
         {
@@ -237,8 +244,8 @@
         {
           "name": "calibrate",
           "source_sha256": "cca3aab83ff45678f3ad37b686de5e1b91f57dd78ee2cdc0f7fb4beb2727c065",
-          "integrated_sha256": "cca3aab83ff45678f3ad37b686de5e1b91f57dd78ee2cdc0f7fb4beb2727c065",
-          "unchanged": true
+          "integrated_sha256": "c1ca10f3d2e624b0faada934a0f8468705f62f1f831c059752f08c39aead601c",
+          "unchanged": false
         },
         {
           "name": "predictions",
@@ -277,7 +284,8 @@
       "destination": "_engine/episodes.py",
       "source_file_sha256": "a5615fd60c27b3fcfadc4d2ebebfb46c899011317d91f5c0c150c0a8e69fa33e",
       "adaptations": [
-        "Local imports made package-relative."
+        "Local imports made package-relative.",
+        "Installed under qvdfe.pipeline with descriptive module names; historical source filenames are retained only in this provenance record."
       ],
       "retained_definitions": [
         {
@@ -329,7 +337,8 @@
       "destination": "_engine/cbi_state_transition.py",
       "source_file_sha256": "f813cf54c6c4f09d44ce48302bde722c450e2b1de55c6bce66bd46116b2214b2",
       "adaptations": [
-        "Local imports made package-relative."
+        "Local imports made package-relative.",
+        "Installed under qvdfe.pipeline with descriptive module names; historical source filenames are retained only in this provenance record."
       ],
       "retained_definitions": [
         {
@@ -603,7 +612,8 @@
       "destination": "_engine/cbi_stage1_qc.py",
       "source_file_sha256": "4f970c5712a988fc276df60075e520541fff61aa9610625f0e68afa9a5e54921",
       "adaptations": [
-        "Local imports made package-relative."
+        "Local imports made package-relative.",
+        "Installed under qvdfe.pipeline with descriptive module names; historical source filenames are retained only in this provenance record."
       ],
       "retained_definitions": [
         {
@@ -673,7 +683,8 @@
       "destination": "_engine/cbi_panels.py",
       "source_file_sha256": "1aa84d0233a1f19a913429aa3ff4e84095acb3be0d1bb7158faab6945bc6b225",
       "adaptations": [
-        "Local imports made package-relative."
+        "Local imports made package-relative.",
+        "Installed under qvdfe.pipeline with descriptive module names; historical source filenames are retained only in this provenance record."
       ],
       "retained_definitions": [
         {
@@ -689,7 +700,8 @@
       "destination": "_engine/cbi_schemas.py",
       "source_file_sha256": "e6e95c925f449171f122a9c6c912e3685c3f44d959cae861724c102fc4a6beb9",
       "adaptations": [
-        "Local imports made package-relative."
+        "Local imports made package-relative.",
+        "Installed under qvdfe.pipeline with descriptive module names; historical source filenames are retained only in this provenance record."
       ],
       "retained_definitions": [
         {
@@ -705,14 +717,16 @@
       "destination": "_engine/cbi_paths.py",
       "source_file_sha256": "e1eb707fc7e5e14640ecd963ade6d9bb408de1f8d83787ad238e9c9870300038",
       "adaptations": [
-        "Local imports made package-relative."
+        "Local imports made package-relative.",
+        "Installed under qvdfe.pipeline with descriptive module names; historical source filenames are retained only in this provenance record.",
+        "Repository root uses the shared qvdfe.paths.repo_root helper after package relocation."
       ],
       "retained_definitions": [
         {
           "name": "package_root",
           "source_sha256": "8c41ef72d8295a85bad307adeca0fb3f7bde98d50340646985c047e96925a631",
-          "integrated_sha256": "8c41ef72d8295a85bad307adeca0fb3f7bde98d50340646985c047e96925a631",
-          "unchanged": true
+          "integrated_sha256": "6c80663421d09538dcabd9cfc43708292d234ea2babad024a3f8f76fc784d54e",
+          "unchanged": false
         },
         {
           "name": "project_root_from_cwd",
@@ -757,7 +771,8 @@
       "destination": "_engine/boundary_recovery.py",
       "source_file_sha256": "ba1842f5cc308f338a1304cb5ceec7cf838071e48e72c55530ffd2293eee4a20",
       "adaptations": [
-        "Local imports made package-relative."
+        "Local imports made package-relative.",
+        "Installed under qvdfe.pipeline with descriptive module names; historical source filenames are retained only in this provenance record."
       ],
       "retained_definitions": [
         {
@@ -804,7 +819,8 @@
       "source_file_sha256": "253b6f008facaeb7285fb522bdd69d2d4302f4b98459321086cb930b82841712",
       "adaptations": [
         "Local imports made package-relative.",
-        "Retained measured S3 fit and its helpers; synthetic-data runners excluded."
+        "Retained measured S3 fit and its helpers; synthetic-data runners excluded.",
+        "Installed under qvdfe.pipeline with descriptive module names; historical source filenames are retained only in this provenance record."
       ],
       "retained_definitions": [
         {
@@ -845,7 +861,8 @@
       "source_file_sha256": "0e2c046e0342bcc0a8f63cd810800202e55489438ffacff5e7bb7c1753f07db5",
       "adaptations": [
         "Local imports made package-relative.",
-        "Retained MOVES loader and rate functions; old benchmark runner excluded."
+        "Retained MOVES loader and rate functions; old benchmark runner excluded.",
+        "Installed under qvdfe.pipeline with descriptive module names; historical source filenames are retained only in this provenance record."
       ],
       "retained_definitions": [
         {
@@ -892,7 +909,8 @@
       "source_file_sha256": "d150510884a3efa593fd40eec8315cf3c758eccd2ee13412fb0a569e576c6540",
       "adaptations": [
         "Local imports made package-relative.",
-        "Removed unused paper_state import and obsolete module description."
+        "Removed unused paper_state import and obsolete module description.",
+        "Installed under qvdfe.pipeline with descriptive module names; historical source filenames are retained only in this provenance record."
       ],
       "retained_definitions": [
         {
@@ -939,7 +957,8 @@
       "source_file_sha256": "f18ceaa1359a3cd2f701455bbbe337d011a870b136ed8997814d9893816f589e",
       "adaptations": [
         "Local imports made package-relative.",
-        "Only PERIODS is required by this dependency closure."
+        "Only PERIODS is required by this dependency closure.",
+        "Installed under qvdfe.pipeline with descriptive module names; historical source filenames are retained only in this provenance record."
       ],
       "retained_definitions": []
     },
@@ -951,7 +970,9 @@
         "Package-relative imports and shared CLI.",
         "Source labels omit absolute paths.",
         "Parameter-card filename aliases accepted (surrogate).",
-        "Selection overlay written to own output, never to input curves (Pigou)."
+        "Selection overlay written to own output, never to input curves (Pigou).",
+        "Installed under qvdfe.pipeline with descriptive module names; historical source filenames are retained only in this provenance record.",
+        "Generated parameter cards use parameter_card.csv; surrogate inputs also accept the full frozen card parameter_card_full.csv."
       ]
     },
     {
@@ -962,7 +983,8 @@
         "Package-relative imports and shared CLI.",
         "Source labels omit absolute paths.",
         "Parameter-card filename aliases accepted (surrogate).",
-        "Selection overlay written to own output, never to input curves (Pigou)."
+        "Selection overlay written to own output, never to input curves (Pigou).",
+        "Installed under qvdfe.pipeline with descriptive module names; historical source filenames are retained only in this provenance record."
       ]
     },
     {
@@ -970,7 +992,8 @@
       "destination": "_engine/pigou_solver.py",
       "source_file_sha256": "7f8d297e369b1a8fd419152e06b4745463f03370a62213a8504845c5e3c553b7",
       "adaptations": [
-        "Retained only solver methods inherited by V19Network; old initialization/state/runner excluded."
+        "Retained only solver methods inherited by EmissionNetwork; old initialization/state/runner excluded.",
+        "Installed under qvdfe.pipeline with descriptive module names; historical source filenames are retained only in this provenance record."
       ]
     }
   ]

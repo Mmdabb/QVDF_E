@@ -1,4 +1,4 @@
-"""Explicit admission checks for the v19 matched episode-emission comparison."""
+"""Explicit admission checks for the QVDF-E matched episode-emission comparison."""
 import numpy as np
 
 from .data import POLLUTANTS
@@ -6,7 +6,7 @@ from .episode import profile_min_arrival_ratio
 
 
 def screen_episode(row):
-    """Recompute the complete downstream matched mask for one v19-format episode.
+    """Recompute the complete downstream matched mask for one QVDF-E experiment episode.
 
     ``row`` is a mapping/Series with P_hat_h, wt2_hat_h, theta, D_veh, L_mi,
     vf_mph and vq_hat_mph, the upstream calibration_eligible flag, and positive

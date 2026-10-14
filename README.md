@@ -50,17 +50,17 @@ Python 3.10 or later. Install **editable from a clone** (`-e`): the package read
 
 ## Integrated experiment workflow
 
-The repository now includes the original v19 calibration and emission workflow alongside the reusable formulas, tutorials and later applicability analyses. The archived empirical results remain unchanged. The original workflow and the public formulas are checked against the same saved episodes; this integration does not replace the paper's results with a new experiment.
+The repository now includes the QVDF-E calibration and emission workflow alongside the reusable formulas, tutorials and later applicability analyses. The archived empirical results remain unchanged. The original workflow and the public formulas are checked against the same saved episodes; this integration does not replace the paper's results with a new experiment.
 
 | Task | Entry point | Inputs |
 | --- | --- | --- |
-| Refit the daily and average-weekday models and calculate emissions | `python -m pipeline.v19 empirical --help` | The preserved preprocessing baseline and external source data; see [`pipeline/v19/README.md`](pipeline/v19/README.md) |
-| Refit the smooth emission surrogate | `python -m pipeline.v19 surrogate --help` | Included frozen calibration inputs |
-| Rerun the Pigou routing comparison and price of anarchy | `python -m pipeline.v19 pigou --help` | Included calibration and surrogate inputs |
+| Refit the daily and average-weekday models and calculate emissions | `python -m qvdfe.pipeline empirical --help` | The preserved preprocessing baseline and external source data; see [`src/qvdfe/pipeline/README.md`](src/qvdfe/pipeline/README.md) |
+| Refit the smooth emission surrogate | `python -m qvdfe.pipeline surrogate --help` | Included frozen calibration inputs |
+| Rerun the Pigou routing comparison and price of anarchy | `python -m qvdfe.pipeline pigou --help` | Included calibration and surrogate inputs |
 | Reproduce figures and later applicability analyses | `python reproduce/run_all.py` | Included frozen inputs and current figure sources |
 | Reproduce the current reporting sample | `python reproduce/current_reporting.py` | Retained period results and explicit v33 profile support |
 
-Run the pipeline module from the repository root. It writes to a separate output directory and preserves its inputs. Raw Arizona and platoon data are not redistributed. The empirical path starts with the same preserved preprocessing baseline used by v19; it is not a new raw-data acquisition workflow. [`docs/INTEGRATION.md`](docs/INTEGRATION.md) explains the scientific choices and validation.
+After the editable installation, run the QVDF-E pipeline with `python -m qvdfe.pipeline`. It writes to a separate output directory and preserves its inputs. Raw Arizona and platoon data are not redistributed. The empirical path starts with the preserved preprocessing baseline used for the verified experiments; it is not a new raw-data acquisition workflow. [`docs/INTEGRATION.md`](docs/INTEGRATION.md) explains the scientific choices and validation.
 
 ## Choose the emission-rate representation explicitly
 
@@ -107,7 +107,7 @@ Here ω is the backward-wave speed and k_q the queued density. The script also w
 | I want to … | Go to |
 | --- | --- |
 | learn the theory step by step | [`teaching/`](teaching/): four tutorials (bottleneck and closed episode; two speeds and emissions; demand-dependent response; finite transitions), exercises, instructor solutions, advanced readings |
-| run the original empirical calibration, surrogate fitting or routing optimization | [`pipeline/v19/`](pipeline/v19/) |
+| run the original empirical calibration, surrogate fitting or routing optimization | [`src/qvdfe/pipeline/`](src/qvdfe/pipeline/) |
 | run small examples | [`examples/`](examples/): synthetic episode; weekdays versus the average weekday (Fig. 7); long-episode applicability (Appendix F) |
 | use the functions in my own code | [`src/qvdfe/`](src/qvdfe/): `queue_speed`, `closed_queue`, `link_emission`, `gamma`, `episode_total`, `vmt_vht_form`, `qvdf`, `response`, `transition_band`, `cohort_shares`, `subset_total`, … |
 | reproduce the paper's figures, tables and applicability calculations from the frozen data | [`reproduce/`](reproduce/): `python reproduce/run_all.py` |

@@ -1,4 +1,4 @@
-"""Regression against the unchanged empirical v19 results and screening boundaries."""
+"""Regression against the unchanged empirical QVDF-E results and screening boundaries."""
 import numpy as np
 import pytest
 
