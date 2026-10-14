@@ -1,2 +1,4 @@
 # Store and check out every file byte for byte, so MANIFEST_SHA256.json can be verified on any platform.
 * -text
+# CRLF is intentional in archived inputs and retained Windows source files.
+* whitespace=trailing-space,space-before-tab,cr-at-eol

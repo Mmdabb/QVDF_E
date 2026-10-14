@@ -1,0 +1,30 @@
+{
+  "source": "Author-supplied US06 figure bundle used for the revised manuscript (v33)",
+  "scope": "Model-assigned rates and derived plotting values; not measured exhaust emissions; no experiment recalibration.",
+  "files": {
+    "us06_operating_states.csv": {
+      "sha256": "79bc12e993f4a4898fca5fdd7a07de225a87820613f33716f404b4b90f784cd3",
+      "bytes": 38583
+    },
+    "figS_rates_plotted_values.csv": {
+      "sha256": "5e449dc8ea3bb4c5c11e7ab0dfd66691af454a4dfbfb4600d5d2f7e17d08e7b7",
+      "bytes": 111498
+    },
+    "US06_emission_rate_comparison_by_second.csv": {
+      "sha256": "114725cb02c39b3da0e5315bd82ed6eb6023b4518c3ff1f67baec6691e537b1d",
+      "bytes": 89066
+    },
+    "US06_driving_mode_summary.csv": {
+      "sha256": "5f25f220800281305075371f69a64dadda4e0807fff1c5dac0ebf2fa2e15900a",
+      "bytes": 882
+    }
+  },
+  "reused_inputs": [
+    "calibration/emission_input/input_vehicle_type.csv",
+    "calibration/emission_input/input_vehicle_emission_rate.csv",
+    "calibration/cubic_rate_coefficients.csv",
+    "calibration/audit/table3_reference_state.json",
+    "calibration/daily_validation/parameter_card.csv",
+    "calibration/average_weekday/episode_results_v2.csv"
+  ]
+}

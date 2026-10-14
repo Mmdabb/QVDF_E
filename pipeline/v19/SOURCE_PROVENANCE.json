@@ -1,0 +1,977 @@
+{
+  "source": "qvdfe-experiments/codes/qvdfe_cbi",
+  "files": [
+    {
+      "source": "src/v19_data.py",
+      "destination": "_engine/v19_data.py",
+      "source_file_sha256": "845d3321dfa9fc50fe6adbd07d50418f0af8538d13368698a8363bf8639a88b4",
+      "adaptations": [
+        "Local imports made package-relative.",
+        "Provenance uses baseline directory label, permitting external baseline paths without publishing absolute paths."
+      ],
+      "retained_definitions": [
+        {
+          "name": "digest",
+          "source_sha256": "54a64936a4cb8b99d56a6f2639b6092899c54b5133f80e087d530988d91602aa",
+          "integrated_sha256": "54a64936a4cb8b99d56a6f2639b6092899c54b5133f80e087d530988d91602aa",
+          "unchanged": true
+        },
+        {
+          "name": "run",
+          "source_sha256": "e9c937235501e4b456f3ef1bdb6d274faa30f722c8e63aba4c88146887b6d096",
+          "integrated_sha256": "8e2565448c68b22d83883bf688763f0e71dcc5efa812859878983613712582ee",
+          "unchanged": false
+        }
+      ]
+    },
+    {
+      "source": "src/v19_model.py",
+      "destination": "_engine/v19_model.py",
+      "source_file_sha256": "e958a24dc3c0a1625e07bf9f2279f88a4e85eab5af394968ca709062c8499020",
+      "adaptations": [
+        "Local imports made package-relative.",
+        "Emission-input directory is explicit; generated summary uses actual support counts instead of historical manuscript prose."
+      ],
+      "retained_definitions": [
+        {
+          "name": "paper_corridor",
+          "source_sha256": "2fbc82e9be7f1dc216fe6d0c43f4d4981efe32acf59eb10446d2502bd31051e0",
+          "integrated_sha256": "2fbc82e9be7f1dc216fe6d0c43f4d4981efe32acf59eb10446d2502bd31051e0",
+          "unchanged": true
+        },
+        {
+          "name": "add_outlier_flags",
+          "source_sha256": "bd2437f38f8ab7a7d1ec3e53c1738be5269e01605dc6dbc86184f286971b56a4",
+          "integrated_sha256": "bd2437f38f8ab7a7d1ec3e53c1738be5269e01605dc6dbc86184f286971b56a4",
+          "unchanged": true
+        },
+        {
+          "name": "load_inputs",
+          "source_sha256": "a2cd96c1f5b9ca01a2c6ea0a13616c5b6e327c6fa5c3a4ce057451e27fa3e5b1",
+          "integrated_sha256": "a2cd96c1f5b9ca01a2c6ea0a13616c5b6e327c6fa5c3a4ce057451e27fa3e5b1",
+          "unchanged": true
+        },
+        {
+          "name": "calibration",
+          "source_sha256": "064ad2f336624ecc3b716f150e4e4ed96da7d93020ad25e8964b286b64df6c0b",
+          "integrated_sha256": "064ad2f336624ecc3b716f150e4e4ed96da7d93020ad25e8964b286b64df6c0b",
+          "unchanged": true
+        },
+        {
+          "name": "score_ci",
+          "source_sha256": "a66bac0434110f4d4274595c32196e116a50e03d622ccdeb128917164f5324d7",
+          "integrated_sha256": "a66bac0434110f4d4274595c32196e116a50e03d622ccdeb128917164f5324d7",
+          "unchanged": true
+        },
+        {
+          "name": "mobility_metrics",
+          "source_sha256": "276c05645f38cedd12a5b37c8eaeb79c5998ad6ebd46fcdfc2553275c2acf3e1",
+          "integrated_sha256": "276c05645f38cedd12a5b37c8eaeb79c5998ad6ebd46fcdfc2553275c2acf3e1",
+          "unchanged": true
+        },
+        {
+          "name": "emission_metrics",
+          "source_sha256": "1ab9101b4973dcf0527aa268ca09ca7320500dd25e2c2e54a92c5cc40b28cb91",
+          "integrated_sha256": "1ab9101b4973dcf0527aa268ca09ca7320500dd25e2c2e54a92c5cc40b28cb91",
+          "unchanged": true
+        },
+        {
+          "name": "summary",
+          "source_sha256": "b17782629008713dd5861b59c7f58d948cf49ef07c1a35631942e239e73b4936",
+          "integrated_sha256": "b17782629008713dd5861b59c7f58d948cf49ef07c1a35631942e239e73b4936",
+          "unchanged": true
+        },
+        {
+          "name": "run_daily",
+          "source_sha256": "b3781d7982f5b917767a9c4218aca78bb013c0c475f079b5bdd7c3c94a79bc84",
+          "integrated_sha256": "b3781d7982f5b917767a9c4218aca78bb013c0c475f079b5bdd7c3c94a79bc84",
+          "unchanged": true
+        },
+        {
+          "name": "refresh_metrics",
+          "source_sha256": "a0346a5be098ae15440e95680b68db07a2849ef7fd3c08a054b16be4e2b2f906",
+          "integrated_sha256": "a0346a5be098ae15440e95680b68db07a2849ef7fd3c08a054b16be4e2b2f906",
+          "unchanged": true
+        },
+        {
+          "name": "run_average",
+          "source_sha256": "57405b35c2f1808c9cae6ac1edb4aa7e63e8e1d4ff9784db9ea8e7fe75bed43d",
+          "integrated_sha256": "6d58c5d1029b36dce4139f74b5d2f124747fd13614a2872ead7a20940297af2c",
+          "unchanged": false
+        },
+        {
+          "name": "audit",
+          "source_sha256": "de9d9d36cdef29cd0a8485fb55eb90be7b57ea9afc07b30b97254abd5adb4f0a",
+          "integrated_sha256": "de9d9d36cdef29cd0a8485fb55eb90be7b57ea9afc07b30b97254abd5adb4f0a",
+          "unchanged": true
+        },
+        {
+          "name": "write_notes",
+          "source_sha256": "ca0fc924e4e4f2439464423cdf82fa55a907de2153db2ec18e1cd61b11a710e3",
+          "integrated_sha256": "c41d3bf755cbb2e433cc2e85d254bc928d574a3beceb3df088ae48db7c8ede47",
+          "unchanged": false
+        }
+      ]
+    },
+    {
+      "source": "src/v15_data.py",
+      "destination": "_engine/v15_data.py",
+      "source_file_sha256": "183968b741fdc083f828f81300bf1a3d2f6ccc1eb38825242904aac9e362299e",
+      "adaptations": [
+        "Local imports made package-relative.",
+        "Retained only shared period, panel-QC, and detector adapters; raw historical runners excluded."
+      ],
+      "retained_definitions": [
+        {
+          "name": "period_of",
+          "source_sha256": "70928b5878dd6744f14ab60f74e9760593e8abcc81ae14086b7cb48edde44422",
+          "integrated_sha256": "70928b5878dd6744f14ab60f74e9760593e8abcc81ae14086b7cb48edde44422",
+          "unchanged": true
+        },
+        {
+          "name": "prepare_panel",
+          "source_sha256": "d18b09303661f81d24c87bef11d350339aba507f499e0369a4e4c82bbbb7fa39",
+          "integrated_sha256": "d18b09303661f81d24c87bef11d350339aba507f499e0369a4e4c82bbbb7fa39",
+          "unchanged": true
+        },
+        {
+          "name": "detect",
+          "source_sha256": "cab83a026ba4afa6a52e2d801debde4a5260ef87c73bf38e2db242829c2b6a16",
+          "integrated_sha256": "cab83a026ba4afa6a52e2d801debde4a5260ef87c73bf38e2db242829c2b6a16",
+          "unchanged": true
+        }
+      ]
+    },
+    {
+      "source": "src/v16_data.py",
+      "destination": "_engine/v16_data.py",
+      "source_file_sha256": "eb68bd041ed9b2c20ac35d5b6e9dbb87652167a176a1e415f0c533da41c8097a",
+      "adaptations": [
+        "Local imports made package-relative.",
+        "Retained detector-FD calibration and declared policy; historical runners excluded."
+      ],
+      "retained_definitions": [
+        {
+          "name": "fit_detector_cards",
+          "source_sha256": "1f70fde0b53172ba61e13a9e2c6653a63d092b3935547fc797cce14deac2f167",
+          "integrated_sha256": "1f70fde0b53172ba61e13a9e2c6653a63d092b3935547fc797cce14deac2f167",
+          "unchanged": true
+        }
+      ]
+    },
+    {
+      "source": "src/v15_model.py",
+      "destination": "_engine/v15_model.py",
+      "source_file_sha256": "909c5381379dc7c989ea74a82951266488a6737a1236d1495adb2530271c2e49",
+      "adaptations": [
+        "Local imports made package-relative.",
+        "Retained common equations/calibration/emission/period/cost functions; old experiment runners excluded."
+      ],
+      "retained_definitions": [
+        {
+          "name": "rate",
+          "source_sha256": "0b8f15077fd81c1df5eece11a1e380d13fa27fb8478b2d4d67d916d1a022624d",
+          "integrated_sha256": "0b8f15077fd81c1df5eece11a1e380d13fa27fb8478b2d4d67d916d1a022624d",
+          "unchanged": true
+        },
+        {
+          "name": "scores",
+          "source_sha256": "cf0ac10bd07be68f39b8206507d5951df5183433c4dc11bac142fed8555ddf3b",
+          "integrated_sha256": "cf0ac10bd07be68f39b8206507d5951df5183433c4dc11bac142fed8555ddf3b",
+          "unchanged": true
+        },
+        {
+          "name": "qvdf",
+          "source_sha256": "061ca3805f98188a9af0f900e90c7939717ada3fffbd1ad0af7d1eecfcaa42fc",
+          "integrated_sha256": "061ca3805f98188a9af0f900e90c7939717ada3fffbd1ad0af7d1eecfcaa42fc",
+          "unchanged": true
+        },
+        {
+          "name": "queue_speed",
+          "source_sha256": "b244cb57b791b487eebe90c75e4fa9a3c46b50a73dfa29d2372047c87c6f8d72",
+          "integrated_sha256": "b244cb57b791b487eebe90c75e4fa9a3c46b50a73dfa29d2372047c87c6f8d72",
+          "unchanged": true
+        },
+        {
+          "name": "profile_shape",
+          "source_sha256": "27afe3cd3ccb63faa2a35eb6f28e4107e560d19a158b90eb1c5ed4c90ce6da05",
+          "integrated_sha256": "27afe3cd3ccb63faa2a35eb6f28e4107e560d19a158b90eb1c5ed4c90ce6da05",
+          "unchanged": true
+        },
+        {
+          "name": "quadrature",
+          "source_sha256": "66d107b8eaaea4ec34b04a3f1cf70bcdfa6671802dec96e86ff7abd893dc5e09",
+          "integrated_sha256": "66d107b8eaaea4ec34b04a3f1cf70bcdfa6671802dec96e86ff7abd893dc5e09",
+          "unchanged": true
+        },
+        {
+          "name": "profile_grid",
+          "source_sha256": "e8d02630c097d9e661106b562872c542479433130768114ca6b40c901f285352",
+          "integrated_sha256": "e8d02630c097d9e661106b562872c542479433130768114ca6b40c901f285352",
+          "unchanged": true
+        },
+        {
+          "name": "observed_targets",
+          "source_sha256": "0c41d53bf698b377f07bb25a924142a03dbd9228790875120fd5a266c5098ded",
+          "integrated_sha256": "0c41d53bf698b377f07bb25a924142a03dbd9228790875120fd5a266c5098ded",
+          "unchanged": true
+        },
+        {
+          "name": "robust_line",
+          "source_sha256": "feaf4c8539d3e8e1b05339aac61c2a4ea1eb6c824ff842afa3e8ce786b796e23",
+          "integrated_sha256": "feaf4c8539d3e8e1b05339aac61c2a4ea1eb6c824ff842afa3e8ce786b796e23",
+          "unchanged": true
+        },
+        {
+          "name": "add_outlier_flags",
+          "source_sha256": "dd95d88de795937521a43cb5c61f0623384fb1e4e909b42a557085e169a3a950",
+          "integrated_sha256": "dd95d88de795937521a43cb5c61f0623384fb1e4e909b42a557085e169a3a950",
+          "unchanged": true
+        },
+        {
+          "name": "fit_parameters",
+          "source_sha256": "6f23f3b31e2a47152778f286247d9dec836b7c4f8bc96eb70d1e850528d79b11",
+          "integrated_sha256": "6f23f3b31e2a47152778f286247d9dec836b7c4f8bc96eb70d1e850528d79b11",
+          "unchanged": true
+        },
+        {
+          "name": "calibrate",
+          "source_sha256": "cca3aab83ff45678f3ad37b686de5e1b91f57dd78ee2cdc0f7fb4beb2727c065",
+          "integrated_sha256": "cca3aab83ff45678f3ad37b686de5e1b91f57dd78ee2cdc0f7fb4beb2727c065",
+          "unchanged": true
+        },
+        {
+          "name": "predictions",
+          "source_sha256": "93972dcdfb4f7fc73e06b3cefa2c33b263ec78eafeb9b571b092591e81265542",
+          "integrated_sha256": "93972dcdfb4f7fc73e06b3cefa2c33b263ec78eafeb9b571b092591e81265542",
+          "unchanged": true
+        },
+        {
+          "name": "emission_ladder",
+          "source_sha256": "8c7a709cf9d7f2135c9d8d8a1c0093974faf1cc0d5068aac56fb4823aa1ee558",
+          "integrated_sha256": "8c7a709cf9d7f2135c9d8d8a1c0093974faf1cc0d5068aac56fb4823aa1ee558",
+          "unchanged": true
+        },
+        {
+          "name": "period_table",
+          "source_sha256": "f550245d2fbdfcf21d1b9203f3df0063632e207ca03e2374685ba386705a69c8",
+          "integrated_sha256": "f550245d2fbdfcf21d1b9203f3df0063632e207ca03e2374685ba386705a69c8",
+          "unchanged": true
+        },
+        {
+          "name": "cost_values",
+          "source_sha256": "01f92d474862a10bf8f162f643a0db6fbdeb329d470842335b5c7fb03cffb6b4",
+          "integrated_sha256": "01f92d474862a10bf8f162f643a0db6fbdeb329d470842335b5c7fb03cffb6b4",
+          "unchanged": true
+        },
+        {
+          "name": "cost_tables",
+          "source_sha256": "535f5ba183973e5c8e90cb4c9dfdbab63f7e88484fbb1eed9c76043f45dfe2ec",
+          "integrated_sha256": "535f5ba183973e5c8e90cb4c9dfdbab63f7e88484fbb1eed9c76043f45dfe2ec",
+          "unchanged": true
+        }
+      ]
+    },
+    {
+      "source": "src/episodes.py",
+      "destination": "_engine/episodes.py",
+      "source_file_sha256": "a5615fd60c27b3fcfadc4d2ebebfb46c899011317d91f5c0c150c0a8e69fa33e",
+      "adaptations": [
+        "Local imports made package-relative."
+      ],
+      "retained_definitions": [
+        {
+          "name": "period_for_timestamp",
+          "source_sha256": "f4dd66665184fb15ffe12744c755d6a5a750c3f3b403a765a4ddac70872067e6",
+          "integrated_sha256": "f4dd66665184fb15ffe12744c755d6a5a750c3f3b403a765a4ddac70872067e6",
+          "unchanged": true
+        },
+        {
+          "name": "span_periods",
+          "source_sha256": "70faa343467263157b2e40eb82c16e1078e5652e3f492a301afaf7ab2267541b",
+          "integrated_sha256": "70faa343467263157b2e40eb82c16e1078e5652e3f492a301afaf7ab2267541b",
+          "unchanged": true
+        },
+        {
+          "name": "_base_frame",
+          "source_sha256": "6ef6aef1a81be81b4542a65d86833a3c0f68183da43a921852cc332ebd54add9",
+          "integrated_sha256": "6ef6aef1a81be81b4542a65d86833a3c0f68183da43a921852cc332ebd54add9",
+          "unchanged": true
+        },
+        {
+          "name": "_config",
+          "source_sha256": "70def76ea424b97a5b77511a341ef3d962f52b4c500df4d14374e6d2d13eae71",
+          "integrated_sha256": "70def76ea424b97a5b77511a341ef3d962f52b4c500df4d14374e6d2d13eae71",
+          "unchanged": true
+        },
+        {
+          "name": "_deepest_bounds",
+          "source_sha256": "f1038290bdf97e345d47b8941456c05c2e1726deca1cfcfc5aafb7755769a2f6",
+          "integrated_sha256": "f1038290bdf97e345d47b8941456c05c2e1726deca1cfcfc5aafb7755769a2f6",
+          "unchanged": true
+        },
+        {
+          "name": "_episode_from_bounds",
+          "source_sha256": "adb3bb5a8f4a7c915dc506c50095ac4f296e4c097ccff60c8e2196b5875009d7",
+          "integrated_sha256": "adb3bb5a8f4a7c915dc506c50095ac4f296e4c097ccff60c8e2196b5875009d7",
+          "unchanged": true
+        },
+        {
+          "name": "run_detectors",
+          "source_sha256": "c3fe4a38498c9518d4adeb885a8cd3fa6362b35c8158c0684afec37c048ca9c6",
+          "integrated_sha256": "c3fe4a38498c9518d4adeb885a8cd3fa6362b35c8158c0684afec37c048ca9c6",
+          "unchanged": true
+        }
+      ]
+    },
+    {
+      "source": "src/cbi_state_transition.py",
+      "destination": "_engine/cbi_state_transition.py",
+      "source_file_sha256": "f813cf54c6c4f09d44ce48302bde722c450e2b1de55c6bce66bd46116b2214b2",
+      "adaptations": [
+        "Local imports made package-relative."
+      ],
+      "retained_definitions": [
+        {
+          "name": "StateTransitionConfig",
+          "source_sha256": "5f8623c56669f69eb183889b7c85a8bfd8f61403998a379580cb0c6a81c8ec7c",
+          "integrated_sha256": "5f8623c56669f69eb183889b7c85a8bfd8f61403998a379580cb0c6a81c8ec7c",
+          "unchanged": true
+        },
+        {
+          "name": "_configure_logging",
+          "source_sha256": "4820444608bec6376308869ba09660624bccd99de418d412ac2cf656bd76d17a",
+          "integrated_sha256": "4820444608bec6376308869ba09660624bccd99de418d412ac2cf656bd76d17a",
+          "unchanged": true
+        },
+        {
+          "name": "_safe_id",
+          "source_sha256": "d6be2218228a6c6f1399f8d6a14ddf79c09fda8e06611da3d65f2406683bd51f",
+          "integrated_sha256": "d6be2218228a6c6f1399f8d6a14ddf79c09fda8e06611da3d65f2406683bd51f",
+          "unchanged": true
+        },
+        {
+          "name": "_period_for_hour",
+          "source_sha256": "63a2bfb2859b3cc7758c17516577c96a27298feef234db519475f1addcdd8ebd",
+          "integrated_sha256": "63a2bfb2859b3cc7758c17516577c96a27298feef234db519475f1addcdd8ebd",
+          "unchanged": true
+        },
+        {
+          "name": "episode_time_period_tag",
+          "source_sha256": "69b3b2008f3ae9a459b66373764e506ae71eeacf0bd246b042dbcb7de8ba70e9",
+          "integrated_sha256": "69b3b2008f3ae9a459b66373764e506ae71eeacf0bd246b042dbcb7de8ba70e9",
+          "unchanged": true
+        },
+        {
+          "name": "_read_stage1_output",
+          "source_sha256": "a5cadd9c50c4cc2178f338effbd0bf6e42ae31597ca3ea50a499baa81e3531e0",
+          "integrated_sha256": "a5cadd9c50c4cc2178f338effbd0bf6e42ae31597ca3ea50a499baa81e3531e0",
+          "unchanged": true
+        },
+        {
+          "name": "load_experiment_input",
+          "source_sha256": "507ca5db49078e23bea57c5d9a4bdf94a8ca0e5bd3484b50f70071c338d63ca3",
+          "integrated_sha256": "507ca5db49078e23bea57c5d9a4bdf94a8ca0e5bd3484b50f70071c338d63ca3",
+          "unchanged": true
+        },
+        {
+          "name": "make_entity_frames",
+          "source_sha256": "4d2391f5bddb4c63434b592524be20826ebe29839a37e96fbb181d18b40ea90b",
+          "integrated_sha256": "4d2391f5bddb4c63434b592524be20826ebe29839a37e96fbb181d18b40ea90b",
+          "unchanged": true
+        },
+        {
+          "name": "estimate_interval_minutes",
+          "source_sha256": "953486ada833e41ad46556b8ba4b2793d10f585c0341f30f23d0f76ebafc7a0d",
+          "integrated_sha256": "953486ada833e41ad46556b8ba4b2793d10f585c0341f30f23d0f76ebafc7a0d",
+          "unchanged": true
+        },
+        {
+          "name": "detection_speed_series",
+          "source_sha256": "7ab9e408190d111f09545a31c7884b1a546610d6c58d14f9e3d5e8a5d37ea567",
+          "integrated_sha256": "7ab9e408190d111f09545a31c7884b1a546610d6c58d14f9e3d5e8a5d37ea567",
+          "unchanged": true
+        },
+        {
+          "name": "estimate_freeflow_speed",
+          "source_sha256": "9834ba9ec550ab79af15a57361784c7bc344197a20d80e1743469619eb248b03",
+          "integrated_sha256": "9834ba9ec550ab79af15a57361784c7bc344197a20d80e1743469619eb248b03",
+          "unchanged": true
+        },
+        {
+          "name": "freeflow_source_for_entity",
+          "source_sha256": "eba0995f431241d79bae56458ac660a3b18576790dd5c0973c54ed0c2e1a4d76",
+          "integrated_sha256": "eba0995f431241d79bae56458ac660a3b18576790dd5c0973c54ed0c2e1a4d76",
+          "unchanged": true
+        },
+        {
+          "name": "congested_threshold_from_freeflow",
+          "source_sha256": "5e669081d7a0b750f7840e908d78a112c911c8ac8d9133ec92c8949135091823",
+          "integrated_sha256": "5e669081d7a0b750f7840e908d78a112c911c8ac8d9133ec92c8949135091823",
+          "unchanged": true
+        },
+        {
+          "name": "classify_regime",
+          "source_sha256": "fe2daa74a7f18228c41e4c0145d86a7754a23e59b743336cb9d19dd06f6e58c0",
+          "integrated_sha256": "fe2daa74a7f18228c41e4c0145d86a7754a23e59b743336cb9d19dd06f6e58c0",
+          "unchanged": true
+        },
+        {
+          "name": "identify_discharge_window",
+          "source_sha256": "311c5278a063bcf8ced480d53478e013ebbbd869cddc31874b5a6110e27a56bf",
+          "integrated_sha256": "311c5278a063bcf8ced480d53478e013ebbbd869cddc31874b5a6110e27a56bf",
+          "unchanged": true
+        },
+        {
+          "name": "score_measured_outlier_flags",
+          "source_sha256": "0fa2c82fb2f71ed10be8dbf745f995937ff43925a3f9e480e2d34887d9a46e0e",
+          "integrated_sha256": "0fa2c82fb2f71ed10be8dbf745f995937ff43925a3f9e480e2d34887d9a46e0e",
+          "unchanged": true
+        },
+        {
+          "name": "_robust_mad_zscore",
+          "source_sha256": "f621b687381f8f49e55a241e5f337f26f0beabaa7651448185a5af32b77b0db9",
+          "integrated_sha256": "f621b687381f8f49e55a241e5f337f26f0beabaa7651448185a5af32b77b0db9",
+          "unchanged": true
+        },
+        {
+          "name": "_append_reason",
+          "source_sha256": "c344c15d17cbddf14ef890abf8318c437c01c4974a6477d0419cc4add005d34d",
+          "integrated_sha256": "c344c15d17cbddf14ef890abf8318c437c01c4974a6477d0419cc4add005d34d",
+          "unchanged": true
+        },
+        {
+          "name": "_apply_mad_outlier_flags",
+          "source_sha256": "de0fe279df46d10a1d712d8f67a1e7eb8af8b1161792a827f19dabbc861e56c0",
+          "integrated_sha256": "de0fe279df46d10a1d712d8f67a1e7eb8af8b1161792a827f19dabbc861e56c0",
+          "unchanged": true
+        },
+        {
+          "name": "_apply_event_regime_override",
+          "source_sha256": "3964dcc6592af40da3bc64823b4c385e038efb82d7af167502a7f5195c866fd9",
+          "integrated_sha256": "3964dcc6592af40da3bc64823b4c385e038efb82d7af167502a7f5195c866fd9",
+          "unchanged": true
+        },
+        {
+          "name": "_post_process_episodes",
+          "source_sha256": "e4475d154d0461b57f3d1e73974e59521c2ca8f69bcfa54cbc03f6fcd3cb52b8",
+          "integrated_sha256": "e4475d154d0461b57f3d1e73974e59521c2ca8f69bcfa54cbc03f6fcd3cb52b8",
+          "unchanged": true
+        },
+        {
+          "name": "merge_episode_bounds",
+          "source_sha256": "05e6cf43fb1070ae64e540429916fca55c90ddea9a696155718631c4b4edd234",
+          "integrated_sha256": "05e6cf43fb1070ae64e540429916fca55c90ddea9a696155718631c4b4edd234",
+          "unchanged": true
+        },
+        {
+          "name": "_group_key",
+          "source_sha256": "2e2cde1039de538ef965fa070d5586a42048b4277595de4711e708cb6cb6cda2",
+          "integrated_sha256": "2e2cde1039de538ef965fa070d5586a42048b4277595de4711e708cb6cb6cda2",
+          "unchanged": true
+        },
+        {
+          "name": "_episode_from_bounds",
+          "source_sha256": "14d62061523f571a134062f5ca95b20f7abe807cc05f5df4f1fb96583e4675c4",
+          "integrated_sha256": "14d62061523f571a134062f5ca95b20f7abe807cc05f5df4f1fb96583e4675c4",
+          "unchanged": true
+        },
+        {
+          "name": "_episodes_from_bounds",
+          "source_sha256": "c248d1ad943fd57d899d994dd62b3d66eb07638edcb97e3af58a2e958059d404",
+          "integrated_sha256": "c248d1ad943fd57d899d994dd62b3d66eb07638edcb97e3af58a2e958059d404",
+          "unchanged": true
+        },
+        {
+          "name": "classify_state_transition_states",
+          "source_sha256": "be1450333e9a29a58f89722642eca40f2c494c380734fefd0604b8bffce62a30",
+          "integrated_sha256": "be1450333e9a29a58f89722642eca40f2c494c380734fefd0604b8bffce62a30",
+          "unchanged": true
+        },
+        {
+          "name": "_next_speed_below_threshold",
+          "source_sha256": "83f5f02ac4270403eec34c217c2d7e48d32ed973394bf6566d83ae9a126acb78",
+          "integrated_sha256": "83f5f02ac4270403eec34c217c2d7e48d32ed973394bf6566d83ae9a126acb78",
+          "unchanged": true
+        },
+        {
+          "name": "_is_exit_inactive",
+          "source_sha256": "ce759600030d8366785af33210b05458351f9d1480ba54dd79ca5881bf2da495",
+          "integrated_sha256": "ce759600030d8366785af33210b05458351f9d1480ba54dd79ca5881bf2da495",
+          "unchanged": true
+        },
+        {
+          "name": "_allow_rolling_mean_extension",
+          "source_sha256": "94f53a59ea84951bd7b8a5f238305e7dcec8833cb9bc735d4a5d1371fc0cd2a1",
+          "integrated_sha256": "94f53a59ea84951bd7b8a5f238305e7dcec8833cb9bc735d4a5d1371fc0cd2a1",
+          "unchanged": true
+        },
+        {
+          "name": "detect_state_transition",
+          "source_sha256": "65f3f55f1b0c614612356a2e9a7b9ea234684cf9a7d6885c094be66834dc28fc",
+          "integrated_sha256": "65f3f55f1b0c614612356a2e9a7b9ea234684cf9a7d6885c094be66834dc28fc",
+          "unchanged": true
+        },
+        {
+          "name": "run_detector",
+          "source_sha256": "c2703ff1d02755c68b0da5558f0741eba22857c1b70b83e2e7b6f9e59773be5c",
+          "integrated_sha256": "c2703ff1d02755c68b0da5558f0741eba22857c1b70b83e2e7b6f9e59773be5c",
+          "unchanged": true
+        },
+        {
+          "name": "detector_summary",
+          "source_sha256": "07dd0bad9a5f70243077b7c29e8ad1db28402d8dcb61bde6472f50ee3033acbd",
+          "integrated_sha256": "07dd0bad9a5f70243077b7c29e8ad1db28402d8dcb61bde6472f50ee3033acbd",
+          "unchanged": true
+        },
+        {
+          "name": "_selected_plot_groups",
+          "source_sha256": "b1f87fd5253832f36465c9b244954ed669a823672a0cc8279077e725a48d675a",
+          "integrated_sha256": "b1f87fd5253832f36465c9b244954ed669a823672a0cc8279077e725a48d675a",
+          "unchanged": true
+        },
+        {
+          "name": "plot_state_transition_samples",
+          "source_sha256": "8e7840b2c1078490672a6b0e543ccafa94fef3db20a5c178e552bd142fb54cd0",
+          "integrated_sha256": "8e7840b2c1078490672a6b0e543ccafa94fef3db20a5c178e552bd142fb54cd0",
+          "unchanged": true
+        },
+        {
+          "name": "plot_valid_episode_windows",
+          "source_sha256": "17903fa91ba862d3480f8da6ed86d7643afe576e57ea3c92fd9c911afaa6fb9b",
+          "integrated_sha256": "17903fa91ba862d3480f8da6ed86d7643afe576e57ea3c92fd9c911afaa6fb9b",
+          "unchanged": true
+        },
+        {
+          "name": "plot_episode_diagnostics",
+          "source_sha256": "cee2f9dea50ba85f2b78f9b98a38d1d62537e4bacfe1dd737d89d1ec206e0bd8",
+          "integrated_sha256": "cee2f9dea50ba85f2b78f9b98a38d1d62537e4bacfe1dd737d89d1ec206e0bd8",
+          "unchanged": true
+        },
+        {
+          "name": "_valid_episode_mask",
+          "source_sha256": "55b31d94a294fc1b3063c1d9a30e249fe7202d9bd4d963bbb750ae1cdb119c5b",
+          "integrated_sha256": "55b31d94a294fc1b3063c1d9a30e249fe7202d9bd4d963bbb750ae1cdb119c5b",
+          "unchanged": true
+        },
+        {
+          "name": "build_episode_time_series",
+          "source_sha256": "0b3a3da71fe6115776daf432349d994df763808836ad102d83325f7727274995",
+          "integrated_sha256": "0b3a3da71fe6115776daf432349d994df763808836ad102d83325f7727274995",
+          "unchanged": true
+        },
+        {
+          "name": "write_outputs",
+          "source_sha256": "13691455e73d6385fa1c7237fc5926766372e230746fae878ba5c67587d967f5",
+          "integrated_sha256": "13691455e73d6385fa1c7237fc5926766372e230746fae878ba5c67587d967f5",
+          "unchanged": true
+        },
+        {
+          "name": "_log_config",
+          "source_sha256": "2caf0902567242744adac3fd24108255935554e368897d65515649cb22f0d27d",
+          "integrated_sha256": "2caf0902567242744adac3fd24108255935554e368897d65515649cb22f0d27d",
+          "unchanged": true
+        },
+        {
+          "name": "_log_input_summary",
+          "source_sha256": "de851646beb0065407dba0d7ca88a1f217f32d6ec3da3cf977039206728ce7ad",
+          "integrated_sha256": "de851646beb0065407dba0d7ca88a1f217f32d6ec3da3cf977039206728ce7ad",
+          "unchanged": true
+        },
+        {
+          "name": "_log_detector_summary",
+          "source_sha256": "9a739b81cbb0efab50c79384822317bfb9a0ec1a02d4e5a3d20dc648db0c1f43",
+          "integrated_sha256": "9a739b81cbb0efab50c79384822317bfb9a0ec1a02d4e5a3d20dc648db0c1f43",
+          "unchanged": true
+        },
+        {
+          "name": "run_state_transition",
+          "source_sha256": "eb06dc3ed94eef27cb922f1625aaebaeb88673ff14773a0c533133e0e94c7432",
+          "integrated_sha256": "eb06dc3ed94eef27cb922f1625aaebaeb88673ff14773a0c533133e0e94c7432",
+          "unchanged": true
+        },
+        {
+          "name": "main",
+          "source_sha256": "e36758cb3503136ebad9a87137943f823253fc83d82d1894ce9429d422ed4ff8",
+          "integrated_sha256": "e36758cb3503136ebad9a87137943f823253fc83d82d1894ce9429d422ed4ff8",
+          "unchanged": true
+        }
+      ]
+    },
+    {
+      "source": "src/cbi_stage1_qc.py",
+      "destination": "_engine/cbi_stage1_qc.py",
+      "source_file_sha256": "4f970c5712a988fc276df60075e520541fff61aa9610625f0e68afa9a5e54921",
+      "adaptations": [
+        "Local imports made package-relative."
+      ],
+      "retained_definitions": [
+        {
+          "name": "hard_physical_range",
+          "source_sha256": "502f03162aa7988aef80143c64cc25276134a91fce2b2894b07284f502548c70",
+          "integrated_sha256": "502f03162aa7988aef80143c64cc25276134a91fce2b2894b07284f502548c70",
+          "unchanged": true
+        },
+        {
+          "name": "hampel_detector",
+          "source_sha256": "1cea2b3bb2672682c03933ed5352dcf43932b89b2d70762568c0c619abb52a6a",
+          "integrated_sha256": "1cea2b3bb2672682c03933ed5352dcf43932b89b2d70762568c0c619abb52a6a",
+          "unchanged": true
+        },
+        {
+          "name": "temporal_jump_check",
+          "source_sha256": "7498f674f6f3ad93077417b3eee71428ebd30ba2ad74914e01d30362100e32cc",
+          "integrated_sha256": "7498f674f6f3ad93077417b3eee71428ebd30ba2ad74914e01d30362100e32cc",
+          "unchanged": true
+        },
+        {
+          "name": "spatial_lag_consistency",
+          "source_sha256": "5f8456378970c1b2d6ddb9240ee3dd38ab82671a682cd3b272808a826cd7633e",
+          "integrated_sha256": "5f8456378970c1b2d6ddb9240ee3dd38ab82671a682cd3b272808a826cd7633e",
+          "unchanged": true
+        },
+        {
+          "name": "_interpolation_weight",
+          "source_sha256": "da47474e244c74cbceea66ee019b9d51eb540fcb042b6a0919a88c8248bfa5f6",
+          "integrated_sha256": "da47474e244c74cbceea66ee019b9d51eb540fcb042b6a0919a88c8248bfa5f6",
+          "unchanged": true
+        },
+        {
+          "name": "_repair_isolated_failures",
+          "source_sha256": "352a825c2b14fe8d28b77d4407ecd9ab13ac26aa1c0ffe58bc562bb5a42a01e6",
+          "integrated_sha256": "352a825c2b14fe8d28b77d4407ecd9ab13ac26aa1c0ffe58bc562bb5a42a01e6",
+          "unchanged": true
+        },
+        {
+          "name": "_spatial_lag_mask_long",
+          "source_sha256": "f634bbc1f5a0b25205b00dea159df583480c7557547b07afd3a900a637ad18a0",
+          "integrated_sha256": "f634bbc1f5a0b25205b00dea159df583480c7557547b07afd3a900a637ad18a0",
+          "unchanged": true
+        },
+        {
+          "name": "run_qc",
+          "source_sha256": "1189937a01184463e02d9b64ec9fb88238c2438ca7401ddd2f4c671c99529ca6",
+          "integrated_sha256": "1189937a01184463e02d9b64ec9fb88238c2438ca7401ddd2f4c671c99529ca6",
+          "unchanged": true
+        },
+        {
+          "name": "_summarize_stage1",
+          "source_sha256": "49fca282f697a9a59ad6daa6e7f6713ce8a27de0db9ecf18f7ab9958cee557e5",
+          "integrated_sha256": "49fca282f697a9a59ad6daa6e7f6713ce8a27de0db9ecf18f7ab9958cee557e5",
+          "unchanged": true
+        },
+        {
+          "name": "write_stage1",
+          "source_sha256": "631a490dda34dad928befc37d04e0f92f2071770d780236ca21c5b48461b2a39",
+          "integrated_sha256": "631a490dda34dad928befc37d04e0f92f2071770d780236ca21c5b48461b2a39",
+          "unchanged": true
+        }
+      ]
+    },
+    {
+      "source": "src/cbi_panels.py",
+      "destination": "_engine/cbi_panels.py",
+      "source_file_sha256": "1aa84d0233a1f19a913429aa3ff4e84095acb3be0d1bb7158faab6945bc6b225",
+      "adaptations": [
+        "Local imports made package-relative."
+      ],
+      "retained_definitions": [
+        {
+          "name": "build_corridor_panel",
+          "source_sha256": "283261049d9e558b2514e9f94801d697a682596baec82ce91cfe51cb32abedc1",
+          "integrated_sha256": "283261049d9e558b2514e9f94801d697a682596baec82ce91cfe51cb32abedc1",
+          "unchanged": true
+        }
+      ]
+    },
+    {
+      "source": "src/cbi_schemas.py",
+      "destination": "_engine/cbi_schemas.py",
+      "source_file_sha256": "e6e95c925f449171f122a9c6c912e3685c3f44d959cae861724c102fc4a6beb9",
+      "adaptations": [
+        "Local imports made package-relative."
+      ],
+      "retained_definitions": [
+        {
+          "name": "resolve_s3_prior",
+          "source_sha256": "75b4fe35cddfca2ac95b36c2257c02622b89c26d5b90698e7298bdc72082d086",
+          "integrated_sha256": "75b4fe35cddfca2ac95b36c2257c02622b89c26d5b90698e7298bdc72082d086",
+          "unchanged": true
+        }
+      ]
+    },
+    {
+      "source": "src/cbi_paths.py",
+      "destination": "_engine/cbi_paths.py",
+      "source_file_sha256": "e1eb707fc7e5e14640ecd963ade6d9bb408de1f8d83787ad238e9c9870300038",
+      "adaptations": [
+        "Local imports made package-relative."
+      ],
+      "retained_definitions": [
+        {
+          "name": "package_root",
+          "source_sha256": "8c41ef72d8295a85bad307adeca0fb3f7bde98d50340646985c047e96925a631",
+          "integrated_sha256": "8c41ef72d8295a85bad307adeca0fb3f7bde98d50340646985c047e96925a631",
+          "unchanged": true
+        },
+        {
+          "name": "project_root_from_cwd",
+          "source_sha256": "7280a199caf2da276db242d319d3f0dec62b6b52e7298e7b880167a1f2a26670",
+          "integrated_sha256": "7280a199caf2da276db242d319d3f0dec62b6b52e7298e7b880167a1f2a26670",
+          "unchanged": true
+        },
+        {
+          "name": "project_path",
+          "source_sha256": "8aa336d9208c915a032cfc882968cd590f5abc09fc99a8ba1997a4923df38ec7",
+          "integrated_sha256": "8aa336d9208c915a032cfc882968cd590f5abc09fc99a8ba1997a4923df38ec7",
+          "unchanged": true
+        },
+        {
+          "name": "safe_path_name",
+          "source_sha256": "b010fa657dc157fa62e36c15eebb33826b9e7c26e99b07688945b7ee8ade8ac6",
+          "integrated_sha256": "b010fa657dc157fa62e36c15eebb33826b9e7c26e99b07688945b7ee8ade8ac6",
+          "unchanged": true
+        },
+        {
+          "name": "dataset_name_from_path",
+          "source_sha256": "0108e29ae560204ab2f3b373f379b88bcd14d6401b3017d026ce8f25cf8f8670",
+          "integrated_sha256": "0108e29ae560204ab2f3b373f379b88bcd14d6401b3017d026ce8f25cf8f8670",
+          "unchanged": true
+        },
+        {
+          "name": "default_output_root",
+          "source_sha256": "a5c254073e9a9baf91d7f131bf99e5417aa2a28c5387c6e1584428cd88449921",
+          "integrated_sha256": "a5c254073e9a9baf91d7f131bf99e5417aa2a28c5387c6e1584428cd88449921",
+          "unchanged": true
+        },
+        {
+          "name": "stage_output_dir",
+          "source_sha256": "b0b246866b51f820975259115f21022b9a59bf8d92d0c2a9ac4c3d5b01871e32",
+          "integrated_sha256": "b0b246866b51f820975259115f21022b9a59bf8d92d0c2a9ac4c3d5b01871e32",
+          "unchanged": true
+        }
+      ]
+    },
+    {
+      "source": "src/boundary_recovery.py",
+      "destination": "_engine/boundary_recovery.py",
+      "source_file_sha256": "ba1842f5cc308f338a1304cb5ceec7cf838071e48e72c55530ffd2293eee4a20",
+      "adaptations": [
+        "Local imports made package-relative."
+      ],
+      "retained_definitions": [
+        {
+          "name": "StateTransitionConfig",
+          "source_sha256": "346c8577f4d6bb0b79da911d4fdf2228045dbcdafcf28d0a7186127a1ae85724",
+          "integrated_sha256": "346c8577f4d6bb0b79da911d4fdf2228045dbcdafcf28d0a7186127a1ae85724",
+          "unchanged": true
+        },
+        {
+          "name": "_is_physical_boundary_speed",
+          "source_sha256": "490cbc74a7a53037d25f59907348f0edd2b58eb2d374f4ebdaa0b2d7b792fc93",
+          "integrated_sha256": "490cbc74a7a53037d25f59907348f0edd2b58eb2d374f4ebdaa0b2d7b792fc93",
+          "unchanged": true
+        },
+        {
+          "name": "_directional_speed_fallback",
+          "source_sha256": "d1143631ab233433168a51fa87916c5715e027f24666b25d3b00080f6f3cf7ac",
+          "integrated_sha256": "d1143631ab233433168a51fa87916c5715e027f24666b25d3b00080f6f3cf7ac",
+          "unchanged": true
+        },
+        {
+          "name": "_speed_arrays",
+          "source_sha256": "a6b43e471aa8ebaac5203ce65140aaa50fbe1bd440615f5377624873a0036237",
+          "integrated_sha256": "a6b43e471aa8ebaac5203ce65140aaa50fbe1bd440615f5377624873a0036237",
+          "unchanged": true
+        },
+        {
+          "name": "_resolve_t0_boundary",
+          "source_sha256": "7c11314bd78c7b67cc942722d393f872839bc07bb4117f3bc64dbf5cda3762ff",
+          "integrated_sha256": "7c11314bd78c7b67cc942722d393f872839bc07bb4117f3bc64dbf5cda3762ff",
+          "unchanged": true
+        },
+        {
+          "name": "_resolve_t3_boundary",
+          "source_sha256": "865195fafc1ac097cc42d4b0c5214e2d21de2c0e2ecab3e7b063e63f7908f926",
+          "integrated_sha256": "865195fafc1ac097cc42d4b0c5214e2d21de2c0e2ecab3e7b063e63f7908f926",
+          "unchanged": true
+        }
+      ]
+    },
+    {
+      "source": "src/fd.py",
+      "destination": "_engine/fd.py",
+      "source_file_sha256": "253b6f008facaeb7285fb522bdd69d2d4302f4b98459321086cb930b82841712",
+      "adaptations": [
+        "Local imports made package-relative.",
+        "Retained measured S3 fit and its helpers; synthetic-data runners excluded."
+      ],
+      "retained_definitions": [
+        {
+          "name": "s3_speed",
+          "source_sha256": "8c47f4136aa546a4ba6db7131b2c42dba07eef1f486787f67539734373408e6b",
+          "integrated_sha256": "8c47f4136aa546a4ba6db7131b2c42dba07eef1f486787f67539734373408e6b",
+          "unchanged": true
+        },
+        {
+          "name": "s3_flow",
+          "source_sha256": "233ca595ac2cd7e55a58ca6cbcdf3f2741966048e48c219b03adadfc384f8956",
+          "integrated_sha256": "233ca595ac2cd7e55a58ca6cbcdf3f2741966048e48c219b03adadfc384f8956",
+          "unchanged": true
+        },
+        {
+          "name": "inverse_s3_flow",
+          "source_sha256": "c7357c52806574081529ec17fa128ba3eb3d3b4ca90eec2611480ad4678d6085",
+          "integrated_sha256": "c7357c52806574081529ec17fa128ba3eb3d3b4ca90eec2611480ad4678d6085",
+          "unchanged": true
+        },
+        {
+          "name": "_diagnostics",
+          "source_sha256": "2302403f234a85c8343f184bf47981d89962df4845de20abedabc1c890c67532",
+          "integrated_sha256": "2302403f234a85c8343f184bf47981d89962df4845de20abedabc1c890c67532",
+          "unchanged": true
+        },
+        {
+          "name": "fit_measured_s3",
+          "source_sha256": "c01f456906c1106fe4f2a6fed939ed7dcd935f928201541fee7a29eaf6a3c907",
+          "integrated_sha256": "c01f456906c1106fe4f2a6fed939ed7dcd935f928201541fee7a29eaf6a3c907",
+          "unchanged": true
+        }
+      ]
+    },
+    {
+      "source": "src/emissions.py",
+      "destination": "_engine/emissions.py",
+      "source_file_sha256": "0e2c046e0342bcc0a8f63cd810800202e55489438ffacff5e7bb7c1753f07db5",
+      "adaptations": [
+        "Local imports made package-relative.",
+        "Retained MOVES loader and rate functions; old benchmark runner excluded."
+      ],
+      "retained_definitions": [
+        {
+          "name": "compute_vsp",
+          "source_sha256": "3520bc9e6ccd460512cf24e88c8015490ce589d0e17d311965281ce731708c7c",
+          "integrated_sha256": "3520bc9e6ccd460512cf24e88c8015490ce589d0e17d311965281ce731708c7c",
+          "unchanged": true
+        },
+        {
+          "name": "get_op_mode_bin",
+          "source_sha256": "132806f0a19f4c735029bb9fb3730a8bbe97828d1023e587b240ea55daaa0146",
+          "integrated_sha256": "132806f0a19f4c735029bb9fb3730a8bbe97828d1023e587b240ea55daaa0146",
+          "unchanged": true
+        },
+        {
+          "name": "MovesRates",
+          "source_sha256": "784c73ec43ed29eddbcb83591c34f26892f3a0fe308f1f07e81253aad3132221",
+          "integrated_sha256": "784c73ec43ed29eddbcb83591c34f26892f3a0fe308f1f07e81253aad3132221",
+          "unchanged": true
+        },
+        {
+          "name": "load_moves_rates",
+          "source_sha256": "85c40ad0ef740d9acf9cf75f11bad45a6ede165c7f1ed94ecf3a889bbc5ce22c",
+          "integrated_sha256": "85c40ad0ef740d9acf9cf75f11bad45a6ede165c7f1ed94ecf3a889bbc5ce22c",
+          "unchanged": true
+        },
+        {
+          "name": "fit_cubic_surrogates",
+          "source_sha256": "d30111a99dc5bced3a470b77df7c7b7741cda75b434ea53aa6f35c32e08e49e1",
+          "integrated_sha256": "d30111a99dc5bced3a470b77df7c7b7741cda75b434ea53aa6f35c32e08e49e1",
+          "unchanged": true
+        },
+        {
+          "name": "build_rate_speed_curve",
+          "source_sha256": "171e3a92052425318e9868b418c867b5fc9b72b5a3164e7409d51bf575c79611",
+          "integrated_sha256": "171e3a92052425318e9868b418c867b5fc9b72b5a3164e7409d51bf575c79611",
+          "unchanged": true
+        }
+      ]
+    },
+    {
+      "source": "src/two_regime_emissions.py",
+      "destination": "_engine/two_regime_emissions.py",
+      "source_file_sha256": "d150510884a3efa593fd40eec8315cf3c758eccd2ee13412fb0a569e576c6540",
+      "adaptations": [
+        "Local imports made package-relative.",
+        "Removed unused paper_state import and obsolete module description."
+      ],
+      "retained_definitions": [
+        {
+          "name": "_array",
+          "source_sha256": "96325a4f095e6eba48cc7bec29505a074bbfcff45ef34d4b430cc61a61e48964",
+          "integrated_sha256": "96325a4f095e6eba48cc7bec29505a074bbfcff45ef34d4b430cc61a61e48964",
+          "unchanged": true
+        },
+        {
+          "name": "_safe_ratio",
+          "source_sha256": "201995853b9dcf7714b250b50c42fc99e61c3761800971893f5718a95f27974f",
+          "integrated_sha256": "201995853b9dcf7714b250b50c42fc99e61c3761800971893f5718a95f27974f",
+          "unchanged": true
+        },
+        {
+          "name": "cubic_rate",
+          "source_sha256": "49f1e022d2d1010cec6de11e119848d75730958a104dba32efce4fc4d1ed5fd6",
+          "integrated_sha256": "49f1e022d2d1010cec6de11e119848d75730958a104dba32efce4fc4d1ed5fd6",
+          "unchanged": true
+        },
+        {
+          "name": "gamma_from_rate",
+          "source_sha256": "9cdf3241c6251276726975bb9115e8e2fa848b57355366cd44ee515abb2e8d58",
+          "integrated_sha256": "9cdf3241c6251276726975bb9115e8e2fa848b57355366cd44ee515abb2e8d58",
+          "unchanged": true
+        },
+        {
+          "name": "gamma_from_cubic",
+          "source_sha256": "9f7532b4b3d102119b20aa15dcf4e4d0bfdccbccc0cad3840e741c5f6b5ce28c",
+          "integrated_sha256": "9f7532b4b3d102119b20aa15dcf4e4d0bfdccbccc0cad3840e741c5f6b5ce28c",
+          "unchanged": true
+        },
+        {
+          "name": "exact_rate_for_speed",
+          "source_sha256": "13b69c0ddb94075e52af603113c30605f91fe7e5cc466bd72b0720e85483ea28",
+          "integrated_sha256": "13b69c0ddb94075e52af603113c30605f91fe7e5cc466bd72b0720e85483ea28",
+          "unchanged": true
+        }
+      ]
+    },
+    {
+      "source": "src/config.py",
+      "destination": "_engine/config.py",
+      "source_file_sha256": "f18ceaa1359a3cd2f701455bbbe337d011a870b136ed8997814d9893816f589e",
+      "adaptations": [
+        "Local imports made package-relative.",
+        "Only PERIODS is required by this dependency closure."
+      ],
+      "retained_definitions": []
+    },
+    {
+      "source": "run_v19_surrogate.py",
+      "destination": "surrogate.py",
+      "source_file_sha256": "035fb03eb820841fd9a05ae51016f5746f944462d7250ca5bcbd50aa93239e59",
+      "adaptations": [
+        "Package-relative imports and shared CLI.",
+        "Source labels omit absolute paths.",
+        "Parameter-card filename aliases accepted (surrogate).",
+        "Selection overlay written to own output, never to input curves (Pigou)."
+      ]
+    },
+    {
+      "source": "run_v19_pigou.py",
+      "destination": "pigou.py",
+      "source_file_sha256": "7e186919784b28b596b01cf125db360aa44b211ddf47719deb23ad60450c8b43",
+      "adaptations": [
+        "Package-relative imports and shared CLI.",
+        "Source labels omit absolute paths.",
+        "Parameter-card filename aliases accepted (surrogate).",
+        "Selection overlay written to own output, never to input curves (Pigou)."
+      ]
+    },
+    {
+      "source": "run_v18_pigou.py",
+      "destination": "_engine/pigou_solver.py",
+      "source_file_sha256": "7f8d297e369b1a8fd419152e06b4745463f03370a62213a8504845c5e3c553b7",
+      "adaptations": [
+        "Retained only solver methods inherited by V19Network; old initialization/state/runner excluded."
+      ]
+    }
+  ]
+}

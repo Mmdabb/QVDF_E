@@ -37,17 +37,19 @@ PAPER_FIGS = Path(os.environ.get('QVDFE_PAPER_FIGS', ROOT / 'published_figures')
 
 ENTRIES = [   # (script, [(figure file stem, paper item)])
     ('fig01_overview.py', [('fig1_overview', 'Fig. 1')]),
+    ('fig02_rates_and_gamma.py', [('fig1_emission_rate', 'Fig. 2'), ('fig_gamma_behavior', 'Fig. 5')]),
     ('fig03_shockwave.py', [('fig2_shockwave_bottleneck', 'Fig. 3')]),
     ('fig04_figD1_queue_and_scheduling.py', [('fig3_fluid_queue', 'Fig. 4'), ('fig4_scheduling', 'Fig. D1')]),
-    ('fig05_transition.py', [('fig13_transition', 'Fig. 5')]),
-    ('fig07_paired_episode.py', [('fig7_paired_episode', 'Fig. 7')]),
-    ('fig09_fig10_fig11_fig12_evidence.py', [('fig8_calibration', 'Fig. 9'), ('fig9_emission_comparison', 'Fig. 10'),
-                                             ('fig5_gamma_progression', 'Fig. 11'), ('fig10_emission_elasticity', 'Fig. 12')]),
+    ('fig05_transition.py', [('fig13_transition', 'Fig. 6')]),
+    ('fig07_paired_episode.py', [('fig7_paired_episode', 'Fig. 8')]),
+    ('fig09_fig10_fig11_fig12_evidence.py', [('fig8_calibration', 'Fig. 10'), ('fig9_emission_comparison', 'Fig. 11'),
+                                             ('fig5_gamma_progression', 'Fig. 12'), ('fig10_emission_elasticity', 'Fig. 13')]),
     ('figE1_two_route.py', [('fig12_pigou_network', 'Fig. E1')]),
     ('calc_cohort_admissibility.py', []),
     ('calc_corridor_admissibility.py', []),
     ('calc_daytime_period.py', []),
     ('audit_numerics.py', []),
+    ('current_reporting.py', []),
 ]
 # frozen counterparts of the calculation and audit outputs
 COMPARE_DIRS = [(OUT / 'calculations', [FROZEN / 'applicability']), (OUT / 'audit', [FROZEN / 'calibration' / 'audit'])]

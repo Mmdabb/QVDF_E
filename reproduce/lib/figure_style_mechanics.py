@@ -17,7 +17,7 @@ def save_figure(fig, stem, output):
     output = Path(output)
     output.mkdir(parents=True, exist_ok=True)
     paths = []
-    for ext in ('pdf', 'png'):
+    for ext in ('pdf', 'svg', 'png'):
         path = output / f'{stem}.{ext}'
         fig.savefig(path, dpi=600, bbox_inches=None, pad_inches=0, facecolor=WHITE)
         paths.append(str(path))

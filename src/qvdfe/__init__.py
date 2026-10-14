@@ -7,21 +7,24 @@ g/(veh h) and emissions in g. Accelerations are in m/s^2.
 """
 from .paths import repo_root, data_dir, frozen_dir
 from .states import fd_triangular, queue_speed
-from .episode import closed_queue, NewellQueue, profile_shape, delay_profile
+from .episode import closed_queue, NewellQueue, profile_shape, delay_profile, profile_min_arrival_ratio
 from .emission import (cubic_rate, cubic_rate_second_derivative, gamma, gamma_cubic, link_emission,
                        episode_total, vmt_vht_form, finite_link_allowance, finite_link_ok, subset_total)
 from .qvdf import qvdf, response
 from .transitions import (kernel, kernel_prime, transition_time_s, speed_only_correction, transition_band,
                           cohort_shares)
-from .data import load_rates, load_cards, load_episodes, load_reference_state, POLLUTANTS
+from .data import load_rates, load_cubic_rates, load_lookup_rates, load_cards, load_episodes, load_reference_state, POLLUTANTS
+from .screening import screen_episode
 from . import report
 
 PAPER = 'Abbasi, M., Zhou, X. (2026). From Bottleneck Episodes to Travel and Emission Costs: A Cross-Resolution Framework with Empirical Evaluation.'
 __version__ = "1.0.1"
 
 __all__ = ['repo_root', 'data_dir', 'frozen_dir', 'fd_triangular', 'queue_speed', 'closed_queue', 'NewellQueue',
-           'profile_shape', 'delay_profile', 'cubic_rate', 'cubic_rate_second_derivative', 'gamma', 'gamma_cubic',
+           'profile_shape', 'delay_profile', 'profile_min_arrival_ratio', 'screen_episode',
+           'cubic_rate', 'cubic_rate_second_derivative', 'gamma', 'gamma_cubic',
            'link_emission', 'episode_total', 'vmt_vht_form', 'finite_link_allowance', 'finite_link_ok', 'subset_total',
            'qvdf', 'response', 'kernel', 'kernel_prime', 'transition_time_s', 'speed_only_correction',
-           'transition_band', 'cohort_shares', 'load_rates', 'load_cards', 'load_episodes', 'load_reference_state',
+           'transition_band', 'cohort_shares', 'load_rates', 'load_cubic_rates', 'load_lookup_rates',
+           'load_cards', 'load_episodes', 'load_reference_state',
            'POLLUTANTS', 'report', 'PAPER', '__version__']

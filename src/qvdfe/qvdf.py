@@ -23,7 +23,10 @@ def response(card, x, coef, kj=None):
     dE/dD = e + x e'(x) (g per added vehicle, capacity and calibration held fixed). Scalars only.
     ``valid`` checks the admissible power branch: fd x^n > x, 5 <= vq < vf <= 75 mph (the rate table's range) and
     the peak delay within the finite-link allowance (Eq. 9). It does not check the nonnegative-arrival condition of
-    the reconstructed profile (``qvdfe.delay_profile`` reports lambda_min for that).
+    the reconstructed profile (``qvdfe.delay_profile`` reports analytic lambda_min for that), observation QC,
+    outliers or positive totals. Use ``qvdfe.screen_episode`` for the complete v19 matched-comparison mask.
+    This limited response flag is the same check as v19 cost_values.valid. Derivatives returned with valid=False
+    must not be interpreted on the capacity branch; the derivative formulas assume the power branch.
     """
     if x <= 0:
         raise ValueError('loading x = D/C must be positive')

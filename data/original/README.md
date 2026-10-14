@@ -15,5 +15,5 @@ Notes
 - The Arizona records are legacy ADOT loop-detector data that were cleaned, synchronized and post-processed for Zhou, Cheng, Wu, Li, Belezamo, Lu and Abbasi (2022), *Multimodal Transportation* 1, 100017. They are used for research purposes; do not describe them as an official or current ADOT dataset.
 
 - The paper discloses that the original MOVES version, analysis year and environmental settings were not recorded with the supplied rate tables. Adding the RunSpec here resolves that disclosure.
-- Processing from raw to frozen used the authors' experiment pipeline (daily split, detector fits, episode detection, QVDF calibration, emission calculations, corridor delay and transition analysis), which is not part of this repository.
+- The retained daily/profile calibration and emission workflow is now in `pipeline/v19/`. Its empirical entry reuses the original preprocessing baseline and external source inputs. Read its exact input contract before arranging files; the descriptive folders above are not an automatic loader specification. The raw corridor and platoon processing are not part of that workflow.
 - Do not commit personal identifiers. The platoon records contain vehicle positions only; the detector records are aggregate counts and speeds.

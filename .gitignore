@@ -19,3 +19,10 @@ examples/*/results.json
 .ipynb_checkpoints/
 *.egg-info/
 examples/*/figure.png
+# Local experiment inputs and regenerated outputs must never enter a release.
+pipeline/output/
+data/original/*/
+!data/original/README.md
+.pytest_cache/
+pytest-cache-files-*/
+.venv/
