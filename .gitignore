@@ -19,7 +19,7 @@ examples/*/results.json
 .ipynb_checkpoints/
 *.egg-info/
 examples/*/figure.png
-# Local experiment inputs and regenerated outputs must never enter a release.
+# Regenerated output and unreviewed local sources; reviewed inputs live in data/inputs/.
 pipeline/output/
 data/original/*/
 !data/original/README.md

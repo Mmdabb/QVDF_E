@@ -54,13 +54,22 @@ The repository now includes the QVDF-E calibration and emission workflow alongsi
 
 | Task | Entry point | Inputs |
 | --- | --- | --- |
-| Refit the daily and average-weekday models and calculate emissions | `python -m qvdfe.pipeline empirical --help` | The preserved preprocessing baseline and external source data; see [`src/qvdfe/pipeline/README.md`](src/qvdfe/pipeline/README.md) |
+| Refit the daily and average-weekday models and calculate emissions | `python -m qvdfe.pipeline empirical --help` | Included preprocessing baseline, original traffic inputs and emission tables; see [`data/inputs/README.md`](data/inputs/README.md) |
 | Refit the smooth emission surrogate | `python -m qvdfe.pipeline surrogate --help` | Included frozen calibration inputs |
 | Rerun the Pigou routing comparison and price of anarchy | `python -m qvdfe.pipeline pigou --help` | Included calibration and surrogate inputs |
 | Reproduce figures and later applicability analyses | `python reproduce/run_all.py` | Included frozen inputs and current figure sources |
 | Reproduce the current reporting sample | `python reproduce/current_reporting.py` | Retained period results and explicit v33 profile support |
 
-After the editable installation, run the QVDF-E pipeline with `python -m qvdfe.pipeline`. It writes to a separate output directory and preserves its inputs. Raw Arizona and platoon data are not redistributed. The empirical path starts with the preserved preprocessing baseline used for the verified experiments; it is not a new raw-data acquisition workflow. [`docs/INTEGRATION.md`](docs/INTEGRATION.md) explains the scientific choices and validation.
+After the editable installation, run the QVDF-E pipeline with `python -m qvdfe.pipeline`. It writes to a separate output directory and preserves its inputs. The empirical path starts with the included preprocessing baseline used for the verified experiments and verifies the hashes of the included Arizona and PeMS source files. It does not reconstruct that baseline from raw observations. [`docs/INTEGRATION.md`](docs/INTEGRATION.md) explains the scientific choices and validation.
+
+From the repository root:
+
+```bash
+python -m qvdfe.pipeline check-inputs --data-root data/inputs/empirical/source_files --baseline data/inputs/empirical/baseline --emission-input data/frozen/calibration/emission_input
+python -m qvdfe.pipeline empirical --data-root data/inputs/empirical/source_files --baseline data/inputs/empirical/baseline --emission-input data/frozen/calibration/emission_input --output build/qvdfe_empirical --bootstrap 400
+```
+
+The input inventory and provenance are in [`data/inputs/`](data/inputs/). This also contains the separate detector-78 calculation inputs; its walkthrough is documented there. Original release results remain unchanged.
 
 ## Choose the emission-rate representation explicitly
 
@@ -133,8 +142,8 @@ The tests come in two groups:
 
 ## Data and reproduction limits
 
-- **Arizona I-10** data are legacy Arizona Department of Transportation (ADOT) loop-detector records. They were cleaned, synchronized and post-processed for Zhou et al. (2022), *Multimodal Transportation* 1, 100017, and are used for research purposes. The raw files are not redistributed, and no official ADOT release is implied.
-- **California** profiles come from the PeMS CBI-DV release at [jacky850/pems-cbi-dv](https://github.com/jacky850/pems-cbi-dv).
+- **Arizona I-10** data are legacy Arizona Department of Transportation (ADOT) loop-detector records. They were cleaned, synchronized and post-processed for Zhou et al. (2022), *Multimodal Transportation* 1, 100017, and are used for research purposes. The supplied lane-speed and lane-volume input files are included under `data/inputs/empirical/source_files/arizona_i10/`; no official ADOT release is implied.
+- **California** profiles come from the PeMS CBI-DV release at [jacky850/pems-cbi-dv](https://github.com/jacky850/pems-cbi-dv). The exact released profile and metadata files used here are included under `data/inputs/empirical/source_files/pems/`.
 - **Platoon transitions**: derived records only. The raw trajectories were provided by Prof. Rui Jiang's group and are not redistributed.
 - **Emission rates** come from archived MOVES-derived passenger-car tables. The original MOVES version, analysis year and settings were not recorded, so emission results can only be reproduced starting from the supplied derived rate tables.
 

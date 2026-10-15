@@ -1,6 +1,6 @@
 # Data dictionary
 
-All paths are relative to `data/`. The original release outputs (`frozen/calibration`, `frozen/transitions`, `frozen/applicability`) remain immutable. Their SHA-256 hashes are in the original `MANIFEST_SHA256.json` at the repository root. Current manuscript reporting is stored separately under `reporting/v33/`; it uses an explicit profile-support table and does not refit or overwrite the original results.
+All paths are relative to `data/`. The original release outputs (`frozen/calibration`, `frozen/transitions`, `frozen/applicability`) remain immutable. Their SHA-256 hashes are in the original `MANIFEST_SHA256.json` at the repository root. Added experiment inputs have separate checksums and provenance under `inputs/`. Current manuscript reporting is stored separately under `reporting/v33/`; it uses an explicit profile-support table and does not refit or overwrite the original results.
 
 ## Units used throughout
 
@@ -20,7 +20,7 @@ All paths are relative to `data/`. The original release outputs (`frozen/calibra
 
 | Source | Used for | Terms |
 | --- | --- | --- |
-| Arizona I-10 westbound detectors | Daily validation and Arizona average-weekday profiles | Legacy Arizona Department of Transportation (ADOT) loop-detector data, cleaned, synchronized and post-processed for Zhou et al. (2022), *Multimodal Transportation* 1, 100017. Used for research purposes. The raw ADOT files are not redistributed, and no official ADOT release is implied |
+| Arizona I-10 westbound detectors | Daily validation and Arizona average-weekday profiles | Legacy Arizona Department of Transportation (ADOT) loop-detector data, cleaned, synchronized and post-processed for Zhou et al. (2022), *Multimodal Transportation* 1, 100017. The supplied lane-speed and lane-volume input files are included for research reproducibility; no official ADOT release is implied |
 | California PeMS average-weekday profiles | Average-weekday calibration on ten directional corridors (District 12: I-405 N/S, I-5 N/S; District 7: I-10 E/W, I-210 E/W, I-405 N/S) | Released profiles and CBI implementation at [jacky850/pems-cbi-dv](https://github.com/jacky850/pems-cbi-dv) |
 | Platoon car-following experiment | Measured transitions (Section 6.6) | Provided by Prof. Rui Jiang's group, Beijing Jiaotong University. Raw trajectories are not redistributed. Derived transition records are in `frozen/transitions` |
 | MOVES-derived passenger-car rates | All emission calculations | Archived lookup tables in `frozen/calibration/emission_input` and their cubic fit. The original MOVES version, analysis year and settings were not recorded, so emission results can only be reproduced starting from these derived tables |
@@ -29,6 +29,11 @@ All paths are relative to `data/`. The original release outputs (`frozen/calibra
 
 | File | Content | Key fields |
 | --- | --- | --- |
+| `inputs/empirical/source_files/arizona_i10/` | Exact supplied lane-speed and lane-volume source files for the Arizona empirical sample | `I10-mph.csv`, `I10-vol.csv`; original layout retained, source hashes checked before reuse of the baseline |
+| `inputs/empirical/source_files/pems/` | Exact released California average-weekday profiles and link metadata used by the empirical sample | `pems_average_weekday_5min.csv.gz`, `pems_link_meta.csv`; source hashes checked before reuse of the baseline |
+| `inputs/empirical/baseline/` | Preserved prepared traffic panel, detector cards, detected episodes, baseline results for audit, FD protocol, cubic coefficients, and CBI reference comparisons | See the [pipeline input contract](../src/qvdfe/pipeline/README.md#input-contract); `input_sha256.json` paths resolve under `inputs/empirical/source_files/` |
+| `inputs/provenance.json` | Source mappings and original manifest for the added inputs | Records the relocation of source paths without changing traffic observations or original source hashes |
+| `inputs/detector78/` | Inputs for the separate detector-78 emission-calculation walkthrough | See its local README for schemas, calibrated parameters and calculation scope |
 | `frozen/calibration/cubic_rate_coefficients.csv` | Cubic zero-acceleration rate r(v) = c0 + c1 v + c2 v² + c3 v³ per pollutant | `pollutant`, `c0..c3` in g/(veh·h) with v in mph; `speed_min_mph`, `speed_max_mph` (validity 5–75 mph); fit `rate_r2`, `rate_rmse_gph` |
 | `frozen/calibration/emission_input/` | Archived MOVES-derived lookup rates by operating mode and the vehicle parameters for VSP | `input_vehicle_emission_rate.csv`, `input_vehicle_type.csv` |
 | `reporting/v33/arizona_episode_profile_scope.csv` | Explicit Arizona sensor-month support for current episode-based reporting | `sensor_uid`, `month`, `complete_weekdays`; 41 profiles |

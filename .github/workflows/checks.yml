@@ -15,6 +15,9 @@ jobs:
           cache: pip
       - run: python -m pip install -e '.[dev,teaching,reproduce]'
       - run: python tools/verify_frozen_inputs.py
+      - run: python tools/verify_input_data.py
+      - run: python -m qvdfe.pipeline check-inputs --data-root data/inputs/empirical/source_files --baseline data/inputs/empirical/baseline --emission-input data/frozen/calibration/emission_input
+      - run: python reproduce/episode_error_audit.py
       - run: python -m pytest -q
       - run: python reproduce/run_all.py --skip-figures
       - run: python tools/make_formula_code_map.py

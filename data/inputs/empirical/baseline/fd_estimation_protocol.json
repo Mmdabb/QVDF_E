@@ -1,0 +1,26 @@
+{
+  "minimum_positive_qv_pairs": 50,
+  "minimum_pairs_each_branch": 12,
+  "free_branch_density_max_ratio": 0.9,
+  "congested_branch_density_min_ratio": 1.1,
+  "accepted_capacity_range_vphpl": [
+    500,
+    3500
+  ],
+  "accepted_free_speed_range_mph": [
+    40,
+    90
+  ],
+  "acceptance_requires_solver_success": true,
+  "acceptance_requires_no_active_bound": true,
+  "objective": "joint normalized q(k) and v(k) residuals; soft_l1, f_scale=0.20",
+  "density": "recorded per-lane q/v; derived, not independent occupancy density",
+  "initialization": "vf0=clip(speed q95,45,85); kc0=clip(flow q99/(.70 vf0),10,100); m0=4",
+  "bounds": "vf:[max(40,.90 vf0),min(90,1.10 vf0)], kc:[5,150], m:[.5,15]",
+  "fallback": "original training/profile q995 capacity and q95 free speed; m=4",
+  "fit_speed_filter": "finite 0<v<=90, finite q>0; all other raw readings retained for detector and QC",
+  "az_fit_support": "training dates only; existing later-date split unchanged",
+  "pems_fit_support": "released average-weekday profile only; not a daily holdout",
+  "detection_cutoff": "0.70 times accepted vf, independent of fitted S3 critical speed",
+  "outcome_selection": "No acceptance rule uses QVDF fit, emissions, or downstream physical pass"
+}
