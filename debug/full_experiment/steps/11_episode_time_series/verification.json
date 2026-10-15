@@ -1,0 +1,31 @@
+{
+  "episodes": 137,
+  "observed_bins": 4800,
+  "traffic_rows": 24000,
+  "emission_rows": 96000,
+  "method_pollutant_totals": 2740,
+  "max_relative_difference_from_archived": 1.5718239812868557e-10,
+  "max_aligned_minus_native_g": 9.313225746154785e-10,
+  "max_count_residual_veh": 1.2363443602225743e-11,
+  "max_distance_residual_mi": 6.88338275267597e-14,
+  "max_time_residual_h": 1.1102230246251565e-16,
+  "max_average_speed_residual_mph": 2.781064267765032e-11,
+  "all_checks_passed": true,
+  "alignment": "Cumulative-count overlap onto observed five-minute bin starts/ends; model duration retained as metadata, not forced equal.",
+  "figures_generated": true,
+  "input_sha256": {
+    "debug/full_experiment/steps/07_observed_and_single_speed/observed_speed_vsp.csv": "0755f08d61c50b971d158067a9a75b5ce708dda0492dc610097b3694865b0b53",
+    "debug/full_experiment/steps/07_observed_and_single_speed/observed_emission_terms.csv": "e2750952db3b99fd0f42354beedd1698c8288a80b3b7ca3840277cab9147dd72",
+    "debug/full_experiment/steps/07_observed_and_single_speed/single_speed_vsp.csv": "da6e31c8852ff5fd40dd008566cf4c879ee98c9e4f882c05b8a274283fad6b02",
+    "debug/full_experiment/steps/07_observed_and_single_speed/single_speed_emission_terms.csv": "05de8fdbb0e477908bc90ac67914c241ecd47f8780595340e2011095957f4b96",
+    "debug/full_experiment/steps/08_reconstruction_and_two_speed/reconstructed_speed_vsp.csv.gz": "944aa9cc5995c2b67d250faf80856717778a09c1d882aca1c7acd6a1a02c9a33",
+    "debug/full_experiment/steps/08_reconstruction_and_two_speed/node_emission_terms.csv.gz": "14df8853a288016e50e1fcc82afd95ec7e040d3f87ba31bfa91f7f11f376df29",
+    "debug/full_experiment/steps/08_reconstruction_and_two_speed/two_speed_state_vsp.csv": "56d72d8f6672833fd55890ae1e86bfd1d4296b50e18c599db6b4eb7782c4bf34",
+    "debug/full_experiment/steps/09_totals_and_comparison/episode_pollutant_calculation_steps.csv": "83f4968f6dcd07378cbb2d4f6c903916de4aee9b8d9102a6a2837889750e04d5",
+    "debug/full_experiment/steps/06_rate_construction/vsp_input_parameters.csv": "9a6f0d15fbeb25c3f5ad0210d6b105962e4776a58fa1c82b49f54264b954539b",
+    "data/frozen/calibration/average_weekday/episode_results_v2.csv": "8bd71e71cc4fe201a073c7e65aa61b7366a92ee7689445106fb7762e7955a201"
+  },
+  "figure_panels": 685,
+  "figure_files": 1370,
+  "figure_files_verified": true
+}

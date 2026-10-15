@@ -1,0 +1,19 @@
+key,value,unit,formula_or_source,note
+sensor,78.0,ID,data/inputs/detector78/calculation_inputs.json:traffic_inputs,Worked example; AZ I-10 westbound detector 78.
+length_mi,1.0400000000000205,mi,data/inputs/detector78/calculation_inputs.json:traffic_inputs,Upstream detector spacing.
+capacity_veh_h_lane,1501.6157386990858,veh/h/lane,data/inputs/detector78/calculation_inputs.json:traffic_inputs,Retained detector calibration.
+free_speed_mph,64.16137486955441,mph,data/inputs/detector78/calculation_inputs.json:traffic_inputs,Retained detector calibration.
+jam_density_veh_mi_lane,220.0,veh/mi/lane,data/inputs/detector78/calculation_inputs.json:traffic_inputs,Fixed traffic assumption.
+fd,1.6931765723791028,h^(1-n),data/inputs/detector78/calculation_inputs.json:traffic_inputs,PM corridor-direction calibration.
+n,0.8330311856451446,dimensionless,data/inputs/detector78/calculation_inputs.json:traffic_inputs,PM corridor-direction calibration.
+fp,0.30807047291159995,h^(-s),data/inputs/detector78/calculation_inputs.json:traffic_inputs,PM corridor-direction calibration.
+s,1.6350981000172307,dimensionless,data/inputs/detector78/calculation_inputs.json:traffic_inputs,PM corridor-direction calibration.
+theta,0.4348293681532922,dimensionless,data/inputs/detector78/calculation_inputs.json:traffic_inputs,Mean delay divided by peak delay.
+bin_minutes,5.0,min,data/inputs/detector78/calculation_inputs.json:traffic_inputs,Fixed input time step.
+profile_start_hour,14.75,h,data/inputs/detector78/calculation_inputs.json:traffic_inputs,"Fixed selected episode start, inclusive."
+profile_end_hour,19.5,h,data/inputs/detector78/calculation_inputs.json:traffic_inputs,"Fixed selected episode end, exclusive."
+volume_multiplier,1.0,dimensionless,data/inputs/detector78/calculation_inputs.json:traffic_inputs,Input counts assumed per represented lane; do not divide by five.
+cubic_min_speed_mph,5.0,mph,data/inputs/detector78/calculation_inputs.json:traffic_inputs,Lower fitted cubic-rate limit.
+cubic_max_speed_mph,75.0,mph,data/inputs/detector78/calculation_inputs.json:traffic_inputs,Upper fitted cubic-rate limit.
+N_source_PM_calibration,38.0,source episodes,calibration_inputs.json:tracks.average_weekday.calibration_by_period,"Existing AZ_I10_W PM corridor-direction calibration, reused without refitting."
+shape_bisection_iterations,60.0,iterations,Maintained detector-78 Python analysis,The Excel helper uses 50; this ledger follows the current Python calculations (60).

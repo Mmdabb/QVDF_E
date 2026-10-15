@@ -1,0 +1,39 @@
+# ep008: AZ_I10_W, 2016-02-01, PM
+
+[All episodes](../../EPISODES.md) · [Calculation guide](../../README.md) · [Interactive local page](index.html)
+
+Original ID: `state_transition__AZ_I10_W::141__2016-02-01__016`. Observed duration 3.750 h; predicted duration 3.754 h; 2464.9 vehicles/lane.
+
+Model vehicle groups are aligned to recorded five-minute bins by cumulative count. This preserves totals and is a diagnostic comparison, not measured trajectories. R/M/A share travel time, delay and equivalent speed; M/A share operating-state VSP.
+
+[Traffic CSV](traffic_timeseries.csv) · [All-pollutant emission CSV](emissions_timeseries.csv) · [Allocation CSV](node_to_bin_allocation.csv)
+
+## Traffic
+
+![Traffic and operating-state profiles](traffic_profiles.png)
+
+[Editable SVG](traffic_profiles.svg)
+
+## CO2
+
+![CO2 rate, bin emissions and cumulative emissions](emissions_CO2.png)
+
+[Editable SVG](emissions_CO2.svg)
+
+## NOx
+
+![NOx rate, bin emissions and cumulative emissions](emissions_NOx.png)
+
+[Editable SVG](emissions_NOx.svg)
+
+## CO
+
+![CO rate, bin emissions and cumulative emissions](emissions_CO.png)
+
+[Editable SVG](emissions_CO.svg)
+
+## HC
+
+![HC rate, bin emissions and cumulative emissions](emissions_HC.png)
+
+[Editable SVG](emissions_HC.svg)

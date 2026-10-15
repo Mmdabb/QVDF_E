@@ -2,6 +2,8 @@
 
 Start with the [seven-page report](reports/QVDFE_137_Episode_Error_Analysis.pdf), then use the [short episode table](results/episode_review_137.csv) to investigate individual cases. This bundle preserves the current results and the reorganized report. It does not recalibrate the model or change the paper's sample.
 
+The [whole-experiment calculation guide](../full_experiment/README.md) now traces the preceding profile construction, screening and calibration, followed by separate VSP, lookup-rate, emission-contribution and comparison tables for all 137 retained episodes.
+
 ## Navigate by question
 
 | Question | Start here |

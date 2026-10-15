@@ -1,0 +1,21 @@
+{
+  "source_sha256": {
+    "data/frozen/calibration/average_weekday/episode_results_v2.csv": "8bd71e71cc4fe201a073c7e65aa61b7366a92ee7689445106fb7762e7955a201",
+    "data/frozen/calibration/average_weekday/traffic_panel.csv.gz": "e4653f592461f223dada3d1f0e78d45b981df5570f16c91f8216d896ccce02f0",
+    "data/frozen/calibration/average_weekday/cubic_rate_coefficients.csv": "c8b0802937793c93c832c63da3894ab91b13d4777a9ce86a275cad94d5fdc089",
+    "data/frozen/calibration/average_weekday/parameter_card.csv": "eff10f4e51c2d3c56302b110bcbbd52afd7e3ba546a279ee651a3d1d61fd7724",
+    "data/inputs/detector78/calculation_inputs.json": "9e737201772ecfdb126b4b0d3ae910a2aedbfb600b69d1ae85132185d97733ee",
+    "data/inputs/detector78/calibration_inputs.json": "35cca7f9c9406f5a85ea651224defd9f4b114b918e4fffcd242f2317125b29f8",
+    "debug/episodes_137/results/episode_calculations_137.csv": "ec0b6acfccdc0e77530146aaa32beb4e382ca2760710b67b368bb98b4b0fc891"
+  },
+  "selected_case": "state_transition__AZ_I10_W::141__2016-11-01__022",
+  "selection_eligible": 4,
+  "all_20_saved_emission_totals_match": true,
+  "all_20_common_clock_totals_conserved": true,
+  "all_observed_speeds_one_lookup_band": false,
+  "quadrature_count_relative_error": -2.220446049250313e-16,
+  "quadrature_VHT_relative_error": 6.8833827526759706e-15,
+  "maximum_speed_identity_error_mph": 2.842170943040401e-14,
+  "minimum_free_time_h": 0.011723130278040521,
+  "minimum_queue_time_h": 4.204737017034384e-17
+}

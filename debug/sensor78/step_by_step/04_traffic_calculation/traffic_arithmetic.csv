@@ -1,0 +1,20 @@
+key,value,unit,formula_or_source,note
+D,4789.25,veh/lane,sum_i d_i,Calculated from preserved inputs; no new calibration.
+Tf,0.01620912896761377,h,L/vf,Calculated from preserved inputs; no new calibration.
+x,3.189397844317437,h,D/C,Calculated from preserved inputs; no new calibration.
+P_power,4.449459963098162,h,fd*x^n,Calculated from preserved inputs; no new calibration.
+P,4.449459963098162,h,"max(P_power,x)",Calculated from preserved inputs; no new calibration.
+w_peak,0.05733974969594981,h,Tf*fp*P^s,Calculated from preserved inputs; no new calibration.
+w_mean,0.024933007130357784,h,theta*w_peak,Calculated from preserved inputs; no new calibration.
+mu,1076.3665792522925,veh/h/lane,D/P,Calculated from preserved inputs; no new calibration.
+omega,7.638068452895794,mph,C/(kj-C/vf),Calculated from preserved inputs; no new calibration.
+vq,13.611334740699164,mph,mu/(kj-mu/omega),Calculated from preserved inputs; no new calibration.
+tq_mean,0.03164658253560889,h,vf*w_mean/(vf-vq),Calculated from preserved inputs; no new calibration.
+tf_mean,0.009495553562362667,h,Tf-vq*w_mean/(vf-vq),Calculated from preserved inputs; no new calibration.
+H_observed,211.43395641130195,veh h/lane,sum_i d_i*L/v_i,Calculated from preserved inputs; no new calibration.
+H_predicted,197.03997530721028,veh h/lane,D*(Tf+w_mean),Calculated from preserved inputs; no new calibration.
+v_observed_mean,23.557332438650114,mph,D*L/H_observed,Calculated from preserved inputs; no new calibration.
+v_predicted_mean,25.27822078862103,mph,D*L/H_predicted,Calculated from preserved inputs; no new calibration.
+delay_allowance,0.06019777893762812,h,L*(1/vq-1/vf),Calculated from preserved inputs; no new calibration.
+peak_free_time,0.0007695660103934146,h,Tf-vq*w_peak/(vf-vq),Calculated from preserved inputs; no new calibration.
+shape_a,3.396385934418568,dimensionless,"4^a*Beta(a+1,a+1)=theta; 60 bisection steps",Calculated from preserved inputs; no new calibration.

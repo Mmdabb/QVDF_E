@@ -1,0 +1,263 @@
+file,column,unit,definition
+01_raw_day_screening/raw_record_decisions.csv,raw_row_id,index,"One-based supplied raw record order, stable join key."
+01_raw_day_screening/raw_record_decisions.csv,date,YYYY-MM-DD,Supplied January 2016 date.
+01_raw_day_screening/raw_record_decisions.csv,clock_time,HH:MM:SS,Start of the five-minute detector bin.
+01_raw_day_screening/raw_record_decisions.csv,sensor,ID,"Detector ID, 78."
+01_raw_day_screening/raw_record_decisions.csv,volume_veh_5min,veh/lane/bin,"Supplied or averaged count; multiplier 1, no division by five lanes."
+01_raw_day_screening/raw_record_decisions.csv,speed_mph,mph,"Speed specified for the row; raw, harmonic mean or reconstructed as documented by its step."
+01_raw_day_screening/raw_record_decisions.csv,length_mi,mi,Supplied link length.
+01_raw_day_screening/raw_record_decisions.csv,source_retained_date,flag,"Original source flag, preserved for comparison, not used in retention."
+01_raw_day_screening/raw_record_decisions.csv,source_travel_time_h,h,"Original source time, preserved; not used because calculations use L/v."
+01_raw_day_screening/raw_record_decisions.csv,weekday,Boolean,Named condition: weekday; 0<v<=90; count>=0; all three; or complete retained day.
+01_raw_day_screening/raw_record_decisions.csv,valid_speed,Boolean,Named condition: weekday; 0<v<=90; count>=0; all three; or complete retained day.
+01_raw_day_screening/raw_record_decisions.csv,valid_count,Boolean,Named condition: weekday; 0<v<=90; count>=0; all three; or complete retained day.
+01_raw_day_screening/raw_record_decisions.csv,valid_record,Boolean,Named condition: weekday; 0<v<=90; count>=0; all three; or complete retained day.
+01_raw_day_screening/raw_record_decisions.csv,retained_day,Boolean,Named condition: weekday; 0<v<=90; count>=0; all three; or complete retained day.
+01_raw_day_screening/raw_record_decisions.csv,count_over_speed,veh h/(mi lane),Count/speed; denominator contribution to the count-weighted harmonic speed.
+01_raw_day_screening/day_decisions.csv,date,YYYY-MM-DD,Supplied January 2016 date.
+01_raw_day_screening/day_decisions.csv,row_count,count,"Named count of records, distinct timestamps, valid records or retained days contributing."
+01_raw_day_screening/day_decisions.csv,unique_times,count,"Named count of records, distinct timestamps, valid records or retained days contributing."
+01_raw_day_screening/day_decisions.csv,valid_rows,count,"Named count of records, distinct timestamps, valid records or retained days contributing."
+01_raw_day_screening/day_decisions.csv,retained_day,Boolean,Named condition: weekday; 0<v<=90; count>=0; all three; or complete retained day.
+01_raw_day_screening/day_decisions.csv,retention_reason,text,Retained or explicit failed day-level rule(s).
+02_average_weekday/average_weekday_arithmetic.csv,clock_time,HH:MM:SS,Start of the five-minute detector bin.
+02_average_weekday/average_weekday_arithmetic.csv,contributing_days,count,"Named count of records, distinct timestamps, valid records or retained days contributing."
+02_average_weekday/average_weekday_arithmetic.csv,sum_count,veh/lane,Sum of counts across the 16 retained days at this time of day.
+02_average_weekday/average_weekday_arithmetic.csv,sum_count_over_speed,veh h/(mi lane),Sum of count/speed over retained days at this time of day.
+02_average_weekday/average_weekday_arithmetic.csv,count_veh_5min,veh/lane/bin,"Supplied or averaged count; multiplier 1, no division by five lanes."
+02_average_weekday/average_weekday_arithmetic.csv,speed_mph,mph,"Speed specified for the row; raw, harmonic mean or reconstructed as documented by its step."
+02_average_weekday/average_weekday_arithmetic.csv,clock_h,h after midnight,Clock time converted to decimal hours.
+03_selected_window/selected_window_arithmetic.csv,bin_id,index,One-based chronological bin or quadrature-node join key.
+03_selected_window/selected_window_arithmetic.csv,clock_time,HH:MM:SS,Start of the five-minute detector bin.
+03_selected_window/selected_window_arithmetic.csv,clock_h,h after midnight,Clock time converted to decimal hours.
+03_selected_window/selected_window_arithmetic.csv,count_veh_5min,veh/lane/bin,"Supplied or averaged count; multiplier 1, no division by five lanes."
+03_selected_window/selected_window_arithmetic.csv,speed_mph,mph,"Speed specified for the row; raw, harmonic mean or reconstructed as documented by its step."
+03_selected_window/selected_window_arithmetic.csv,trip_time_h,h/veh,Whole-link travel time L/v = Tf+w for reconstructed groups.
+03_selected_window/selected_window_arithmetic.csv,vehicle_hours,veh h/lane,Vehicle count times whole-link travel time.
+03_selected_window/selected_window_arithmetic.csv,cum_count_end,veh/lane,Start/end cumulative count boundary for this observed bin or modeled group.
+03_selected_window/selected_window_arithmetic.csv,cum_count_start,veh/lane,Start/end cumulative count boundary for this observed bin or modeled group.
+03_selected_window/selected_window_arithmetic.csv,cum_vehicle_hours,veh h/lane,Cumulative whole-link vehicle-hours through this row.
+04_traffic_calculation/input_parameters.csv,key,see row,"Named input or result, numeric value, unit, formula/source and interpretation."
+04_traffic_calculation/input_parameters.csv,value,see row,"Named input or result, numeric value, unit, formula/source and interpretation."
+04_traffic_calculation/input_parameters.csv,unit,see row,"Named input or result, numeric value, unit, formula/source and interpretation."
+04_traffic_calculation/input_parameters.csv,formula_or_source,see row,"Named input or result, numeric value, unit, formula/source and interpretation."
+04_traffic_calculation/input_parameters.csv,note,see row,"Named input or result, numeric value, unit, formula/source and interpretation."
+04_traffic_calculation/traffic_arithmetic.csv,key,see row,"Named input or result, numeric value, unit, formula/source and interpretation."
+04_traffic_calculation/traffic_arithmetic.csv,value,see row,"Named input or result, numeric value, unit, formula/source and interpretation."
+04_traffic_calculation/traffic_arithmetic.csv,unit,see row,"Named input or result, numeric value, unit, formula/source and interpretation."
+04_traffic_calculation/traffic_arithmetic.csv,formula_or_source,see row,"Named input or result, numeric value, unit, formula/source and interpretation."
+04_traffic_calculation/traffic_arithmetic.csv,note,see row,"Named input or result, numeric value, unit, formula/source and interpretation."
+04_traffic_calculation/shape_bisection.csv,key,see row,"Named input or result, numeric value, unit, formula/source and interpretation."
+04_traffic_calculation/shape_bisection.csv,value,see row,"Named input or result, numeric value, unit, formula/source and interpretation."
+04_traffic_calculation/shape_bisection.csv,unit,see row,"Named input or result, numeric value, unit, formula/source and interpretation."
+04_traffic_calculation/shape_bisection.csv,formula_or_source,see row,"Named input or result, numeric value, unit, formula/source and interpretation."
+04_traffic_calculation/shape_bisection.csv,note,see row,"Named input or result, numeric value, unit, formula/source and interpretation."
+04_traffic_calculation/quadrature_traffic_arithmetic.csv,node_id,index,One-based chronological bin or quadrature-node join key.
+04_traffic_calculation/quadrature_traffic_arithmetic.csv,u,dimensionless,"Respectively quadrature position, integration weight, normalized delay shape, shape derivative, and 1+(w_peak/P)*dh/du."
+04_traffic_calculation/quadrature_traffic_arithmetic.csv,gauss_weight,dimensionless,"Respectively quadrature position, integration weight, normalized delay shape, shape derivative, and 1+(w_peak/P)*dh/du."
+04_traffic_calculation/quadrature_traffic_arithmetic.csv,h,dimensionless,"Respectively quadrature position, integration weight, normalized delay shape, shape derivative, and 1+(w_peak/P)*dh/du."
+04_traffic_calculation/quadrature_traffic_arithmetic.csv,dh_du,dimensionless,"Respectively quadrature position, integration weight, normalized delay shape, shape derivative, and 1+(w_peak/P)*dh/du."
+04_traffic_calculation/quadrature_traffic_arithmetic.csv,entry_elapsed_h,h/veh,"Elapsed entry-time coordinate, fitted delay, free-flow time or queue time."
+04_traffic_calculation/quadrature_traffic_arithmetic.csv,arrival_factor,dimensionless,"Respectively quadrature position, integration weight, normalized delay shape, shape derivative, and 1+(w_peak/P)*dh/du."
+04_traffic_calculation/quadrature_traffic_arithmetic.csv,arrival_rate_veh_h_lane,veh/h/lane,mu times arrival factor.
+04_traffic_calculation/quadrature_traffic_arithmetic.csv,vehicle_weight,veh/lane,"D times Gauss weight times arrival factor; integration group count, not a raw observed count."
+04_traffic_calculation/quadrature_traffic_arithmetic.csv,delay_h,h/veh,"Elapsed entry-time coordinate, fitted delay, free-flow time or queue time."
+04_traffic_calculation/quadrature_traffic_arithmetic.csv,trip_time_h,h/veh,Whole-link travel time L/v = Tf+w for reconstructed groups.
+04_traffic_calculation/quadrature_traffic_arithmetic.csv,speed_mph,mph,"Speed specified for the row; raw, harmonic mean or reconstructed as documented by its step."
+04_traffic_calculation/quadrature_traffic_arithmetic.csv,free_time_h,h/veh,"Elapsed entry-time coordinate, fitted delay, free-flow time or queue time."
+04_traffic_calculation/quadrature_traffic_arithmetic.csv,queue_time_h,h/veh,"Elapsed entry-time coordinate, fitted delay, free-flow time or queue time."
+04_traffic_calculation/quadrature_traffic_arithmetic.csv,free_distance_mi,mi,"vf*tf, vq*tq, or their sum minus L."
+04_traffic_calculation/quadrature_traffic_arithmetic.csv,queue_distance_mi,mi,"vf*tf, vq*tq, or their sum minus L."
+04_traffic_calculation/quadrature_traffic_arithmetic.csv,distance_residual_mi,mi,"vf*tf, vq*tq, or their sum minus L."
+04_traffic_calculation/quadrature_traffic_arithmetic.csv,time_residual_h,h,tf+tq-(Tf+w); zero within floating-point precision.
+04_traffic_calculation/quadrature_traffic_arithmetic.csv,cum_count_end,veh/lane,Start/end cumulative count boundary for this observed bin or modeled group.
+04_traffic_calculation/quadrature_traffic_arithmetic.csv,cum_count_start,veh/lane,Start/end cumulative count boundary for this observed bin or modeled group.
+05_emission_rates/normalized_age_weights.csv,age,years,Vehicle age in the supplied passenger-car age mixture.
+05_emission_rates/normalized_age_weights.csv,raw_weight,weight,Supplied age weight or raw weight divided by the sum of all age weights.
+05_emission_rates/normalized_age_weights.csv,normalized_weight,weight,Supplied age weight or raw weight divided by the sum of all age weights.
+05_emission_rates/age_rate_contributions.csv,age,years,Vehicle age in the supplied passenger-car age mixture.
+05_emission_rates/age_rate_contributions.csv,operating_mode,ID,MOVES operating-mode lookup selected from speed and VSP bands.
+05_emission_rates/age_rate_contributions.csv,pollutant,name,"CO2, NOx, CO or HC."
+05_emission_rates/age_rate_contributions.csv,normalized_weight,weight,Supplied age weight or raw weight divided by the sum of all age weights.
+05_emission_rates/age_rate_contributions.csv,raw_rate_g_veh_h,g/(veh h),"Named raw, age-weighted contribution, selected, lookup or cubic emission rate."
+05_emission_rates/age_rate_contributions.csv,weighted_rate_g_veh_h,g/(veh h),"Named raw, age-weighted contribution, selected, lookup or cubic emission rate."
+05_emission_rates/age_weighted_mode_rates.csv,operating_mode,ID,MOVES operating-mode lookup selected from speed and VSP bands.
+05_emission_rates/age_weighted_mode_rates.csv,pollutant,name,"CO2, NOx, CO or HC."
+05_emission_rates/age_weighted_mode_rates.csv,rate_g_veh_h,g/(veh h),"Named raw, age-weighted contribution, selected, lookup or cubic emission rate."
+05_emission_rates/positive_speed_rate_bands.csv,speed_lower_mph,mph,Positive-speed lookup interval; blank final upper bound means unbounded.
+05_emission_rates/positive_speed_rate_bands.csv,speed_upper_mph,mph,Positive-speed lookup interval; blank final upper bound means unbounded.
+05_emission_rates/positive_speed_rate_bands.csv,lower_inclusive,Boolean,Whether the lookup interval includes the named endpoint.
+05_emission_rates/positive_speed_rate_bands.csv,upper_inclusive,Boolean,Whether the lookup interval includes the named endpoint.
+05_emission_rates/positive_speed_rate_bands.csv,operating_mode,ID,MOVES operating-mode lookup selected from speed and VSP bands.
+05_emission_rates/positive_speed_rate_bands.csv,pollutant,name,"CO2, NOx, CO or HC."
+05_emission_rates/positive_speed_rate_bands.csv,rate_g_veh_h,g/(veh h),"Named raw, age-weighted contribution, selected, lookup or cubic emission rate."
+05_emission_rates/cubic_coefficients.csv,pollutant,name,"CO2, NOx, CO or HC."
+05_emission_rates/cubic_coefficients.csv,speed_min_mph,mph,"Supplied cubic fit domain endpoint, 5 and 75 mph."
+05_emission_rates/cubic_coefficients.csv,speed_max_mph,mph,"Supplied cubic fit domain endpoint, 5 and 75 mph."
+05_emission_rates/cubic_coefficients.csv,c0,g/(veh h),Constant term in cubic rate c0+c1*v+c2*v^2+c3*v^3.
+05_emission_rates/cubic_coefficients.csv,c1,g/(veh h mph),Linear-speed coefficient.
+05_emission_rates/cubic_coefficients.csv,c2,g/(veh h mph^2),Quadratic-speed coefficient.
+05_emission_rates/cubic_coefficients.csv,c3,g/(veh h mph^3),Cubic-speed coefficient.
+05_emission_rates/vehicle_vsp_inputs.csv,key,see row,"Named input or result, numeric value, unit, formula/source and interpretation."
+05_emission_rates/vehicle_vsp_inputs.csv,value,see row,"Named input or result, numeric value, unit, formula/source and interpretation."
+05_emission_rates/vehicle_vsp_inputs.csv,unit,see row,"Named input or result, numeric value, unit, formula/source and interpretation."
+05_emission_rates/vehicle_vsp_inputs.csv,formula_or_source,see row,"Named input or result, numeric value, unit, formula/source and interpretation."
+05_emission_rates/vehicle_vsp_inputs.csv,note,see row,"Named input or result, numeric value, unit, formula/source and interpretation."
+05_emission_rates/method_vsp_arithmetic.csv,vsp_record_id,index,Stable one-based key joining separate operating-speed VSP arithmetic to rate selection.
+05_emission_rates/method_vsp_arithmetic.csv,method,code,O recorded proxy; S single mean; R reconstructed; M two-speed lookup; A two-speed cubic; S_pred is a diagnostic intermediate.
+05_emission_rates/method_vsp_arithmetic.csv,operating_state,name,"Whole-link speed, or free/queue operating speed. Missing bin/node IDs mean a whole-episode aggregate."
+05_emission_rates/method_vsp_arithmetic.csv,bin_id,index,One-based chronological bin or quadrature-node join key.
+05_emission_rates/method_vsp_arithmetic.csv,node_id,index,One-based chronological bin or quadrature-node join key.
+05_emission_rates/method_vsp_arithmetic.csv,speed_mph,mph,"Speed specified for the row; raw, harmonic mean or reconstructed as documented by its step."
+05_emission_rates/method_vsp_arithmetic.csv,speed_mps,m/s,speed_mph times 0.44704.
+05_emission_rates/method_vsp_arithmetic.csv,rolling_power_kw,kW,"A*s, B*s^2, Cd*s^3, or their sum, for speed s in m/s."
+05_emission_rates/method_vsp_arithmetic.csv,rotating_power_kw,kW,"A*s, B*s^2, Cd*s^3, or their sum, for speed s in m/s."
+05_emission_rates/method_vsp_arithmetic.csv,drag_power_kw,kW,"A*s, B*s^2, Cd*s^3, or their sum, for speed s in m/s."
+05_emission_rates/method_vsp_arithmetic.csv,total_power_kw,kW,"A*s, B*s^2, Cd*s^3, or their sum, for speed s in m/s."
+05_emission_rates/method_vsp_arithmetic.csv,mass_tonne,tonne,Supplied passenger-car mass; total road-load power divided by this gives VSP.
+05_emission_rates/method_vsp_arithmetic.csv,vsp_kw_tonne,kW/tonne,"Steady-speed, level-road VSP using supplied vehicle coefficients and mph-to-m/s conversion."
+05_emission_rates/method_vsp_arithmetic.csv,vehicle_hours,veh h/lane,Vehicle count times whole-link travel time.
+05_emission_rates/method_lookup_decisions.csv,vsp_record_id,index,Stable one-based key joining separate operating-speed VSP arithmetic to rate selection.
+05_emission_rates/method_lookup_decisions.csv,method,code,O recorded proxy; S single mean; R reconstructed; M two-speed lookup; A two-speed cubic; S_pred is a diagnostic intermediate.
+05_emission_rates/method_lookup_decisions.csv,operating_state,name,"Whole-link speed, or free/queue operating speed. Missing bin/node IDs mean a whole-episode aggregate."
+05_emission_rates/method_lookup_decisions.csv,speed_mph,mph,"Speed specified for the row; raw, harmonic mean or reconstructed as documented by its step."
+05_emission_rates/method_lookup_decisions.csv,vsp_kw_tonne,kW/tonne,"Steady-speed, level-road VSP using supplied vehicle coefficients and mph-to-m/s conversion."
+05_emission_rates/method_lookup_decisions.csv,speed_band,mph interval,"MOVES speed class: (0,25), [25,50), or [50,infinity); used with VSP to select the operating mode."
+05_emission_rates/method_lookup_decisions.csv,operating_mode,ID,MOVES operating-mode lookup selected from speed and VSP bands.
+05_emission_rates/method_lookup_decisions.csv,rate_use,text,Whether the selected lookup rate is an actual input or an M-versus-A diagnostic comparison; A uses the cubic rate.
+05_emission_rates/method_lookup_decisions.csv,lookup_CO2_g_veh_h,g/(veh h),"Age-weighted CO2 rate at the selected operating mode; supplied to O/S/R/M, compared with A cubic evaluation."
+05_emission_rates/method_lookup_decisions.csv,lookup_NOx_g_veh_h,g/(veh h),"Age-weighted NOx rate at the selected operating mode; supplied to O/S/R/M, compared with A cubic evaluation."
+05_emission_rates/method_lookup_decisions.csv,lookup_CO_g_veh_h,g/(veh h),"Age-weighted CO rate at the selected operating mode; supplied to O/S/R/M, compared with A cubic evaluation."
+05_emission_rates/method_lookup_decisions.csv,lookup_HC_g_veh_h,g/(veh h),"Age-weighted HC rate at the selected operating mode; supplied to O/S/R/M, compared with A cubic evaluation."
+05_emission_rates/state_rate_arithmetic.csv,state,name,"One of free speed, queue speed, observed mean speed or fitted mean speed."
+05_emission_rates/state_rate_arithmetic.csv,speed_mph,mph,"Speed specified for the row; raw, harmonic mean or reconstructed as documented by its step."
+05_emission_rates/state_rate_arithmetic.csv,vsp_kw_tonne,kW/tonne,"Steady-speed, level-road VSP using supplied vehicle coefficients and mph-to-m/s conversion."
+05_emission_rates/state_rate_arithmetic.csv,operating_mode,ID,MOVES operating-mode lookup selected from speed and VSP bands.
+05_emission_rates/state_rate_arithmetic.csv,pollutant,name,"CO2, NOx, CO or HC."
+05_emission_rates/state_rate_arithmetic.csv,lookup_rate_g_veh_h,g/(veh h),"Named raw, age-weighted contribution, selected, lookup or cubic emission rate."
+05_emission_rates/state_rate_arithmetic.csv,cubic_constant_g_veh_h,g/(veh h),"Separate c0, c1*v, c2*v^2 or c3*v^3 terms before summation."
+05_emission_rates/state_rate_arithmetic.csv,cubic_linear_g_veh_h,g/(veh h),"Separate c0, c1*v, c2*v^2 or c3*v^3 terms before summation."
+05_emission_rates/state_rate_arithmetic.csv,cubic_quadratic_g_veh_h,g/(veh h),"Separate c0, c1*v, c2*v^2 or c3*v^3 terms before summation."
+05_emission_rates/state_rate_arithmetic.csv,cubic_cubic_g_veh_h,g/(veh h),"Separate c0, c1*v, c2*v^2 or c3*v^3 terms before summation."
+05_emission_rates/state_rate_arithmetic.csv,cubic_rate_g_veh_h,g/(veh h),"Named raw, age-weighted contribution, selected, lookup or cubic emission rate."
+06_method_calculations/O_calculation_rows.csv,bin_id,index,One-based chronological bin or quadrature-node join key.
+06_method_calculations/O_calculation_rows.csv,clock_time,HH:MM:SS,Start of the five-minute detector bin.
+06_method_calculations/O_calculation_rows.csv,pollutant,name,"CO2, NOx, CO or HC."
+06_method_calculations/O_calculation_rows.csv,count_veh_5min,veh/lane/bin,"Supplied or averaged count; multiplier 1, no division by five lanes."
+06_method_calculations/O_calculation_rows.csv,speed_mph,mph,"Speed specified for the row; raw, harmonic mean or reconstructed as documented by its step."
+06_method_calculations/O_calculation_rows.csv,trip_time_h,h/veh,Whole-link travel time L/v = Tf+w for reconstructed groups.
+06_method_calculations/O_calculation_rows.csv,vehicle_hours,veh h/lane,Vehicle count times whole-link travel time.
+06_method_calculations/O_calculation_rows.csv,vsp_kw_tonne,kW/tonne,"Steady-speed, level-road VSP using supplied vehicle coefficients and mph-to-m/s conversion."
+06_method_calculations/O_calculation_rows.csv,operating_mode,ID,MOVES operating-mode lookup selected from speed and VSP bands.
+06_method_calculations/O_calculation_rows.csv,rate_g_veh_h,g/(veh h),"Named raw, age-weighted contribution, selected, lookup or cubic emission rate."
+06_method_calculations/O_calculation_rows.csv,emission_g,g/lane,"Free contribution, queue contribution or total complete-link emissions for the row."
+06_method_calculations/S_calculation_rows.csv,pollutant,name,"CO2, NOx, CO or HC."
+06_method_calculations/S_calculation_rows.csv,vehicle_weight,veh/lane,"D times Gauss weight times arrival factor; integration group count, not a raw observed count."
+06_method_calculations/S_calculation_rows.csv,speed_mph,mph,"Speed specified for the row; raw, harmonic mean or reconstructed as documented by its step."
+06_method_calculations/S_calculation_rows.csv,trip_time_h,h/veh,Whole-link travel time L/v = Tf+w for reconstructed groups.
+06_method_calculations/S_calculation_rows.csv,vehicle_hours,veh h/lane,Vehicle count times whole-link travel time.
+06_method_calculations/S_calculation_rows.csv,vsp_kw_tonne,kW/tonne,"Steady-speed, level-road VSP using supplied vehicle coefficients and mph-to-m/s conversion."
+06_method_calculations/S_calculation_rows.csv,operating_mode,ID,MOVES operating-mode lookup selected from speed and VSP bands.
+06_method_calculations/S_calculation_rows.csv,rate_g_veh_h,g/(veh h),"Named raw, age-weighted contribution, selected, lookup or cubic emission rate."
+06_method_calculations/S_calculation_rows.csv,emission_g,g/lane,"Free contribution, queue contribution or total complete-link emissions for the row."
+06_method_calculations/R_calculation_rows.csv,node_id,index,One-based chronological bin or quadrature-node join key.
+06_method_calculations/R_calculation_rows.csv,pollutant,name,"CO2, NOx, CO or HC."
+06_method_calculations/R_calculation_rows.csv,vehicle_weight,veh/lane,"D times Gauss weight times arrival factor; integration group count, not a raw observed count."
+06_method_calculations/R_calculation_rows.csv,delay_h,h/veh,"Elapsed entry-time coordinate, fitted delay, free-flow time or queue time."
+06_method_calculations/R_calculation_rows.csv,trip_time_h,h/veh,Whole-link travel time L/v = Tf+w for reconstructed groups.
+06_method_calculations/R_calculation_rows.csv,speed_mph,mph,"Speed specified for the row; raw, harmonic mean or reconstructed as documented by its step."
+06_method_calculations/R_calculation_rows.csv,vehicle_hours,veh h/lane,Vehicle count times whole-link travel time.
+06_method_calculations/R_calculation_rows.csv,vsp_kw_tonne,kW/tonne,"Steady-speed, level-road VSP using supplied vehicle coefficients and mph-to-m/s conversion."
+06_method_calculations/R_calculation_rows.csv,operating_mode,ID,MOVES operating-mode lookup selected from speed and VSP bands.
+06_method_calculations/R_calculation_rows.csv,rate_g_veh_h,g/(veh h),"Named raw, age-weighted contribution, selected, lookup or cubic emission rate."
+06_method_calculations/R_calculation_rows.csv,emission_g,g/lane,"Free contribution, queue contribution or total complete-link emissions for the row."
+06_method_calculations/M_calculation_rows.csv,node_id,index,One-based chronological bin or quadrature-node join key.
+06_method_calculations/M_calculation_rows.csv,pollutant,name,"CO2, NOx, CO or HC."
+06_method_calculations/M_calculation_rows.csv,vehicle_weight,veh/lane,"D times Gauss weight times arrival factor; integration group count, not a raw observed count."
+06_method_calculations/M_calculation_rows.csv,free_speed_mph,mph,"Operating speeds vf and vq, common to modeled groups."
+06_method_calculations/M_calculation_rows.csv,queue_speed_mph,mph,"Operating speeds vf and vq, common to modeled groups."
+06_method_calculations/M_calculation_rows.csv,delay_h,h/veh,"Elapsed entry-time coordinate, fitted delay, free-flow time or queue time."
+06_method_calculations/M_calculation_rows.csv,free_time_h,h/veh,"Elapsed entry-time coordinate, fitted delay, free-flow time or queue time."
+06_method_calculations/M_calculation_rows.csv,queue_time_h,h/veh,"Elapsed entry-time coordinate, fitted delay, free-flow time or queue time."
+06_method_calculations/M_calculation_rows.csv,free_vehicle_hours,veh h/lane,Group count times free-flow or queue time.
+06_method_calculations/M_calculation_rows.csv,queue_vehicle_hours,veh h/lane,Group count times free-flow or queue time.
+06_method_calculations/M_calculation_rows.csv,free_rate_g_veh_h,g/(veh h),"Rate evaluated at vf or vq, lookup for M and cubic for A."
+06_method_calculations/M_calculation_rows.csv,queue_rate_g_veh_h,g/(veh h),"Rate evaluated at vf or vq, lookup for M and cubic for A."
+06_method_calculations/M_calculation_rows.csv,free_emission_g,g/lane,"Free contribution, queue contribution or total complete-link emissions for the row."
+06_method_calculations/M_calculation_rows.csv,queue_emission_g,g/lane,"Free contribution, queue contribution or total complete-link emissions for the row."
+06_method_calculations/M_calculation_rows.csv,emission_g,g/lane,"Free contribution, queue contribution or total complete-link emissions for the row."
+06_method_calculations/A_calculation_rows.csv,node_id,index,One-based chronological bin or quadrature-node join key.
+06_method_calculations/A_calculation_rows.csv,pollutant,name,"CO2, NOx, CO or HC."
+06_method_calculations/A_calculation_rows.csv,vehicle_weight,veh/lane,"D times Gauss weight times arrival factor; integration group count, not a raw observed count."
+06_method_calculations/A_calculation_rows.csv,free_speed_mph,mph,"Operating speeds vf and vq, common to modeled groups."
+06_method_calculations/A_calculation_rows.csv,queue_speed_mph,mph,"Operating speeds vf and vq, common to modeled groups."
+06_method_calculations/A_calculation_rows.csv,delay_h,h/veh,"Elapsed entry-time coordinate, fitted delay, free-flow time or queue time."
+06_method_calculations/A_calculation_rows.csv,free_time_h,h/veh,"Elapsed entry-time coordinate, fitted delay, free-flow time or queue time."
+06_method_calculations/A_calculation_rows.csv,queue_time_h,h/veh,"Elapsed entry-time coordinate, fitted delay, free-flow time or queue time."
+06_method_calculations/A_calculation_rows.csv,free_vehicle_hours,veh h/lane,Group count times free-flow or queue time.
+06_method_calculations/A_calculation_rows.csv,queue_vehicle_hours,veh h/lane,Group count times free-flow or queue time.
+06_method_calculations/A_calculation_rows.csv,free_rate_g_veh_h,g/(veh h),"Rate evaluated at vf or vq, lookup for M and cubic for A."
+06_method_calculations/A_calculation_rows.csv,queue_rate_g_veh_h,g/(veh h),"Rate evaluated at vf or vq, lookup for M and cubic for A."
+06_method_calculations/A_calculation_rows.csv,free_emission_g,g/lane,"Free contribution, queue contribution or total complete-link emissions for the row."
+06_method_calculations/A_calculation_rows.csv,queue_emission_g,g/lane,"Free contribution, queue contribution or total complete-link emissions for the row."
+06_method_calculations/A_calculation_rows.csv,emission_g,g/lane,"Free contribution, queue contribution or total complete-link emissions for the row."
+07_common_clock/node_to_bin_allocation.csv,bin_id,index,One-based chronological bin or quadrature-node join key.
+07_common_clock/node_to_bin_allocation.csv,node_id,index,One-based chronological bin or quadrature-node join key.
+07_common_clock/node_to_bin_allocation.csv,overlap_count,veh/lane,Intersection length of observed-bin and modeled-node cumulative-count intervals.
+07_common_clock/node_to_bin_allocation.csv,node_fraction,fraction,Overlap count divided by node vehicle weight; allocates node time/emissions conservatively.
+07_common_clock/common_clock_calculations.csv,bin_id,index,One-based chronological bin or quadrature-node join key.
+07_common_clock/common_clock_calculations.csv,clock_time,HH:MM:SS,Start of the five-minute detector bin.
+07_common_clock/common_clock_calculations.csv,clock_h,h after midnight,Clock time converted to decimal hours.
+07_common_clock/common_clock_calculations.csv,method,code,O recorded proxy; S single mean; R reconstructed; M two-speed lookup; A two-speed cubic; S_pred is a diagnostic intermediate.
+07_common_clock/common_clock_calculations.csv,pollutant,name,"CO2, NOx, CO or HC."
+07_common_clock/common_clock_calculations.csv,count_veh_5min,veh/lane/bin,"Supplied or averaged count; multiplier 1, no division by five lanes."
+07_common_clock/common_clock_calculations.csv,vehicle_hours,veh h/lane,Vehicle count times whole-link travel time.
+07_common_clock/common_clock_calculations.csv,effective_speed_mph,mph,Bin count*L/bin vehicle-hours; common to R/M/A.
+07_common_clock/common_clock_calculations.csv,effective_rate_g_veh_h,g/(veh h),Bin emission/bin vehicle-hours; not generally lookup at effective speed.
+07_common_clock/common_clock_calculations.csv,emission_g,g/lane,"Free contribution, queue contribution or total complete-link emissions for the row."
+07_common_clock/common_clock_calculations.csv,cumulative_emission_g,g/lane,Sum of assigned bin emissions through this clock bin.
+07_common_clock/common_clock_vsp.csv,bin_id,index,One-based chronological bin or quadrature-node join key.
+07_common_clock/common_clock_vsp.csv,clock_time,HH:MM:SS,Start of the five-minute detector bin.
+07_common_clock/common_clock_vsp.csv,clock_h,h after midnight,Clock time converted to decimal hours.
+07_common_clock/common_clock_vsp.csv,method,code,O recorded proxy; S single mean; R reconstructed; M two-speed lookup; A two-speed cubic; S_pred is a diagnostic intermediate.
+07_common_clock/common_clock_vsp.csv,vehicle_hours,veh h/lane,Vehicle count times whole-link travel time.
+07_common_clock/common_clock_vsp.csv,effective_speed_mph,mph,Bin count*L/bin vehicle-hours; common to R/M/A.
+07_common_clock/common_clock_vsp.csv,exposure_weighted_vsp_kw_tonne,kW/tonne,"Within-bin time-weighted operating VSP, VSP evaluated at the whole-link equivalent bin speed, or the first quantity minus O's bin VSP."
+07_common_clock/common_clock_vsp.csv,vsp_at_effective_speed_kw_tonne,kW/tonne,"Within-bin time-weighted operating VSP, VSP evaluated at the whole-link equivalent bin speed, or the first quantity minus O's bin VSP."
+07_common_clock/common_clock_vsp.csv,difference_from_O_vsp_kw_tonne,kW/tonne,"Within-bin time-weighted operating VSP, VSP evaluated at the whole-link equivalent bin speed, or the first quantity minus O's bin VSP."
+08_totals_and_errors/method_totals.csv,method,code,O recorded proxy; S single mean; R reconstructed; M two-speed lookup; A two-speed cubic; S_pred is a diagnostic intermediate.
+08_totals_and_errors/method_totals.csv,pollutant,name,"CO2, NOx, CO or HC."
+08_totals_and_errors/method_totals.csv,emission_g,g/lane,"Free contribution, queue contribution or total complete-link emissions for the row."
+08_totals_and_errors/method_totals.csv,O_reference_g,g/lane,"O episode total, method-minus-O difference, or its absolute value."
+08_totals_and_errors/method_totals.csv,signed_error_g,g/lane,"O episode total, method-minus-O difference, or its absolute value."
+08_totals_and_errors/method_totals.csv,absolute_error_g,g/lane,"O episode total, method-minus-O difference, or its absolute value."
+08_totals_and_errors/method_totals.csv,signed_error_pct,%,"100*(method/O-1), or its absolute value; one-case WAPE equals the latter."
+08_totals_and_errors/method_totals.csv,absolute_error_pct,%,"100*(method/O-1), or its absolute value; one-case WAPE equals the latter."
+08_totals_and_errors/signed_error_components.csv,pollutant,name,"CO2, NOx, CO or HC."
+08_totals_and_errors/signed_error_components.csv,stage,index,"Ordered signed-accounting stage, 1 through 5."
+08_totals_and_errors/signed_error_components.csv,component,text,Meaning of a sequential change between emission representations.
+08_totals_and_errors/signed_error_components.csv,from_g,g/lane,Emission before/after one accounting step and after-minus-before change.
+08_totals_and_errors/signed_error_components.csv,to_g,g/lane,Emission before/after one accounting step and after-minus-before change.
+08_totals_and_errors/signed_error_components.csv,delta_g,g/lane,Emission before/after one accounting step and after-minus-before change.
+08_totals_and_errors/signed_error_components.csv,delta_pct_of_O,% of O,100*delta_g/O; signed components add to a signed discrepancy.
+08_totals_and_errors/fitted_mean_symmetric_split.csv,pollutant,name,"CO2, NOx, CO or HC."
+08_totals_and_errors/fitted_mean_symmetric_split.csv,H_observed,veh h/lane,Observed-proxy or fitted complete-link vehicle-hours.
+08_totals_and_errors/fitted_mean_symmetric_split.csv,H_predicted,veh h/lane,Observed-proxy or fitted complete-link vehicle-hours.
+08_totals_and_errors/fitted_mean_symmetric_split.csv,rate_observed_mean_g_veh_h,g/(veh h),Lookup at DL/H_observed or DL/H_predicted.
+08_totals_and_errors/fitted_mean_symmetric_split.csv,rate_predicted_mean_g_veh_h,g/(veh h),Lookup at DL/H_observed or DL/H_predicted.
+08_totals_and_errors/fitted_mean_symmetric_split.csv,exposure_component_g,g/lane,Exact symmetric decomposition of S_pred-S into vehicle-hours and induced mean-speed/rate terms.
+08_totals_and_errors/fitted_mean_symmetric_split.csv,rate_component_g,g/lane,Exact symmetric decomposition of S_pred-S into vehicle-hours and induced mean-speed/rate terms.
+08_totals_and_errors/fitted_mean_symmetric_split.csv,net_component_g,g/lane,Exact symmetric decomposition of S_pred-S into vehicle-hours and induced mean-speed/rate terms.
+08_totals_and_errors/published_total_reconciliation.csv,method,code,O recorded proxy; S single mean; R reconstructed; M two-speed lookup; A two-speed cubic; S_pred is a diagnostic intermediate.
+08_totals_and_errors/published_total_reconciliation.csv,pollutant,name,"CO2, NOx, CO or HC."
+08_totals_and_errors/published_total_reconciliation.csv,emission_g,g/lane,"Free contribution, queue contribution or total complete-link emissions for the row."
+08_totals_and_errors/published_total_reconciliation.csv,published_emission_g,see name,"Published current total (g), recalculated minus published total (g), and difference/published."
+08_totals_and_errors/published_total_reconciliation.csv,difference_g,see name,"Published current total (g), recalculated minus published total (g), and difference/published."
+08_totals_and_errors/published_total_reconciliation.csv,relative_difference,see name,"Published current total (g), recalculated minus published total (g), and difference/published."
+08_totals_and_errors/vsp_comparison.csv,method,code,O recorded proxy; S single mean; R reconstructed; M two-speed lookup; A two-speed cubic; S_pred is a diagnostic intermediate.
+08_totals_and_errors/vsp_comparison.csv,vehicle_hours,veh h/lane,Vehicle count times whole-link travel time.
+08_totals_and_errors/vsp_comparison.csv,mean_vsp_kw_tonne,kW/tonne,"Operating-VSP exposure mean/standard deviation, or common-bin VSP difference bias/MAE/RMSE weighted by O vehicle-hours; descriptive differences from the proxy, not validation against measured VSP."
+08_totals_and_errors/vsp_comparison.csv,vsp_sd_kw_tonne,kW/tonne,"Operating-VSP exposure mean/standard deviation, or common-bin VSP difference bias/MAE/RMSE weighted by O vehicle-hours; descriptive differences from the proxy, not validation against measured VSP."
+08_totals_and_errors/vsp_comparison.csv,vsp_mean_bias_vs_O_kw_tonne,kW/tonne,"Operating-VSP exposure mean/standard deviation, or common-bin VSP difference bias/MAE/RMSE weighted by O vehicle-hours; descriptive differences from the proxy, not validation against measured VSP."
+08_totals_and_errors/vsp_comparison.csv,vsp_MAE_vs_O_kw_tonne,kW/tonne,"Operating-VSP exposure mean/standard deviation, or common-bin VSP difference bias/MAE/RMSE weighted by O vehicle-hours; descriptive differences from the proxy, not validation against measured VSP."
+08_totals_and_errors/vsp_comparison.csv,vsp_RMSE_vs_O_kw_tonne,kW/tonne,"Operating-VSP exposure mean/standard deviation, or common-bin VSP difference bias/MAE/RMSE weighted by O vehicle-hours; descriptive differences from the proxy, not validation against measured VSP."

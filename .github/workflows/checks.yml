@@ -17,6 +17,13 @@ jobs:
       - run: python tools/verify_frozen_inputs.py
       - run: python tools/verify_input_data.py
       - run: python debug/verify_package.py
+      - run: python debug/verify_calculation_steps.py
+      - run: python debug/full_experiment/scripts/build_precalibration_trace.py
+      - run: python debug/full_experiment/scripts/build_emission_steps.py
+      - run: python debug/full_experiment/scripts/build_other_experiment_trace.py
+      - run: python debug/full_experiment/scripts/build_episode_time_series.py --skip-figures
+      - run: python debug/sensor78/step_by_step/build_steps.py
+      - run: python debug/case_studies/az_i10_detector141_november/scripts/build_case_study.py
       - run: python -m qvdfe.pipeline check-inputs --data-root data/inputs/empirical/source_files --baseline data/inputs/empirical/baseline --emission-input data/frozen/calibration/emission_input
       - run: python debug/episodes_137/scripts/analyze_episodes.py
       - run: python debug/episodes_137/scripts/review_calibration.py

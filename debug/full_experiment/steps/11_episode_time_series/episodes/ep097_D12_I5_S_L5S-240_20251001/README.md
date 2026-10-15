@@ -1,0 +1,39 @@
+# ep097: D12_I5_S, 2025-10-01, AM
+
+[All episodes](../../EPISODES.md) · [Calculation guide](../../README.md) · [Interactive local page](index.html)
+
+Original ID: `state_transition__PeMS::D12_I5_S::L5S-240__2025-10-01__161`. Observed duration 2.167 h; predicted duration 2.030 h; 1832.1 vehicles/lane.
+
+Model vehicle groups are aligned to recorded five-minute bins by cumulative count. This preserves totals and is a diagnostic comparison, not measured trajectories. R/M/A share travel time, delay and equivalent speed; M/A share operating-state VSP.
+
+[Traffic CSV](traffic_timeseries.csv) · [All-pollutant emission CSV](emissions_timeseries.csv) · [Allocation CSV](node_to_bin_allocation.csv)
+
+## Traffic
+
+![Traffic and operating-state profiles](traffic_profiles.png)
+
+[Editable SVG](traffic_profiles.svg)
+
+## CO2
+
+![CO2 rate, bin emissions and cumulative emissions](emissions_CO2.png)
+
+[Editable SVG](emissions_CO2.svg)
+
+## NOx
+
+![NOx rate, bin emissions and cumulative emissions](emissions_NOx.png)
+
+[Editable SVG](emissions_NOx.svg)
+
+## CO
+
+![CO rate, bin emissions and cumulative emissions](emissions_CO.png)
+
+[Editable SVG](emissions_CO.svg)
+
+## HC
+
+![HC rate, bin emissions and cumulative emissions](emissions_HC.png)
+
+[Editable SVG](emissions_HC.svg)

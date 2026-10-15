@@ -1,0 +1,22 @@
+date,row_count,unique_times,valid_rows,retained_day,retention_reason
+2016-01-01,288,288,288,True,retained
+2016-01-04,267,267,267,False,row count != 288; unique times != 288
+2016-01-05,288,288,288,True,retained
+2016-01-06,288,288,288,True,retained
+2016-01-07,288,288,288,True,retained
+2016-01-08,288,288,288,True,retained
+2016-01-11,277,277,277,False,row count != 288; unique times != 288
+2016-01-12,288,288,288,True,retained
+2016-01-13,288,288,288,True,retained
+2016-01-14,288,288,288,True,retained
+2016-01-15,273,273,273,False,row count != 288; unique times != 288
+2016-01-18,288,288,288,True,retained
+2016-01-19,288,288,288,True,retained
+2016-01-20,288,288,288,True,retained
+2016-01-21,288,288,288,True,retained
+2016-01-22,288,288,288,True,retained
+2016-01-25,288,288,288,True,retained
+2016-01-26,287,287,287,False,row count != 288; unique times != 288
+2016-01-27,288,288,288,True,retained
+2016-01-28,288,288,288,True,retained
+2016-01-29,287,287,287,False,row count != 288; unique times != 288

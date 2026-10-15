@@ -2,3 +2,6 @@
 * -text
 # CRLF is intentional in archived inputs and retained Windows source files.
 * whitespace=trailing-space,space-before-tab,cr-at-eol
+
+# Preserve Matplotlib's generated SVG path formatting without prose whitespace checks.
+debug/**/*.svg -whitespace

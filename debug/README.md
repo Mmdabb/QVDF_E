@@ -4,6 +4,10 @@ Start with the reports below. The supporting tables, editable figures, calculati
 
 | What you want to check | Open |
 | --- | --- |
+| Follow the whole experiment from inputs through calibration, VSP, lookup and emissions | [Step-by-step experiment results](full_experiment/README.md) |
+| Inspect five-minute speed, travel time, delay, VSP and emissions for each of the 137 episodes | [Individual episode time series](full_experiment/steps/11_episode_time_series/README.md) |
+| Follow every calculation for detector 78, including separate VSP and lookup tables | [Detector 78 calculation steps](sensor78/step_by_step/README.md) |
+| Inspect a case with close traffic estimates but much larger two-speed emission error | [Detector 141 November case](case_studies/az_i10_detector141_november/README.md) |
 | Why the emission methods differ across 137 episodes | [137-episode analysis guide](episodes_137/README.md) |
 | Delay calibration, equal-travel-time emission differences and error decomposition | [137-episode report](episodes_137/reports/QVDFE_137_Episode_Error_Analysis.pdf) |
 | Individual episode calculations and the average-speed identity check | [137-episode results](episodes_137/results/) |
@@ -16,6 +20,8 @@ Start with the reports below. The supporting tables, editable figures, calculati
 
 ```text
 debug/
+  full_experiment/   Eleven calculation stages, including all 137 individual time series
+  case_studies/     Additional worked examples, reports, plots and calculation sources
   episodes_137/
     README.md       Reading order, file descriptions and rerun commands
     reports/        Current report and editable report source
@@ -29,6 +35,7 @@ debug/
     results/        Profiles, five-minute contributions, totals and diagnostics
     scripts/        Calculation, figure and report-generation code
     workbook/       Standalone Excel workbook, source and validation
+    step_by_step/   Eight numbered calculation stages, VSP/lookup tables and diagnostics
   MANIFEST_SHA256.json
   verify_package.py
   output/           Local regenerated files; excluded from Git
@@ -50,6 +57,7 @@ From the repository root:
 
 ```bash
 python debug/verify_package.py
+python debug/verify_calculation_steps.py
 python tools/verify_input_data.py
 python tools/verify_frozen_inputs.py
 ```

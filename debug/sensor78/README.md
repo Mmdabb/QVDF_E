@@ -2,6 +2,8 @@
 
 Start with the [six-page report](reports/QVDFE_Emission_Methods_and_Results.pdf), then the [standalone Excel workbook](workbook/Sensor78_Emission_Comparison_Simple.xlsx). The report explains the five calculations, compares their speeds and emission rates, shows cumulative emissions, and accounts for their differences. All current plotted values and editable figure sources are included here.
 
+For the complete numerical sequence, open the [eight-step calculation guide](step_by_step/README.md). It separates speed-to-VSP arithmetic, operating-mode lookup and emission multiplication, with a diagnostic figure at each step.
+
 This example uses the separately supplied **Arizona I-10 westbound detector-78 measurements**. It averages 16 complete weekdays in January 2016 and selects 57 five-minute bins, **14:45 inclusive to 19:30 exclusive**. It is not a reproduction of an episode in the retained 137-episode sample. The report's first two pages summarize that sample for context; the detector-78 example starts on page 3.
 
 ## Navigation

@@ -1,0 +1,42 @@
+{
+  "passed": true,
+  "raw_records": 5999,
+  "supplied_dates": 21,
+  "retained_dates": 16,
+  "average_weekday_bins": 288,
+  "selected_bins": 57,
+  "quadrature_nodes": 384,
+  "method_pollutant_totals": 20,
+  "common_clock_rows": 1140,
+  "positive_node_bin_overlaps": 440,
+  "all_20_totals_match_published": true,
+  "max_total_absolute_difference_g": 5.587935447692871e-09,
+  "max_total_relative_difference": 5.31708325688644e-15,
+  "max_common_clock_difference_g": 6.875779945403337e-10,
+  "max_distance_identity_residual_mi": 2.220446049250313e-16,
+  "max_time_identity_residual_h": 1.3877787807814457e-17,
+  "minimum_free_time_h": 0.0007704411700052444,
+  "minimum_arrival_factor": 0.9538087239558566,
+  "vehicle_count_difference": 0.0,
+  "vehicle_hours_difference": 1.6484591469634324e-12,
+  "source_sha256": {
+    "data/inputs/detector78/raw_source.json": "723167ea9e8a5d6da03f8656556bb141b366f3ca1ac209be2b1d2df4ff77b10f",
+    "data/inputs/detector78/calibration_inputs.json": "35cca7f9c9406f5a85ea651224defd9f4b114b918e4fffcd242f2317125b29f8",
+    "data/inputs/detector78/calculation_inputs.json": "9e737201772ecfdb126b4b0d3ae910a2aedbfb600b69d1ae85132185d97733ee",
+    "debug/sensor78/results/emission_totals.csv": "b7f3880bee028da738a15ec232db3361a73a9ba2f5ccc5e693d87a6c62d07f8e",
+    "debug/sensor78/results/common_time_series.csv": "1f890707154a8db09ec297005d1a186f8cd8ce5af3c7c720dc5b549652dc957c"
+  },
+  "vsp_operating_rows": 1978,
+  "vsp_lookup_decisions_match_compact_mapping": true,
+  "vsp_native_and_common_clock_exposure_means_match": true,
+  "M_A_vsp_identical": true,
+  "common_clock_vsp_rows": 285,
+  "diagnostic_figures": {
+    "count": 8,
+    "formats": [
+      "png",
+      "svg"
+    ],
+    "object_based": true
+  }
+}

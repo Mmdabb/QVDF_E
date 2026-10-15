@@ -1,0 +1,95 @@
+{
+  "purpose": "Arithmetic re-evaluation of frozen additional experiment branches; no new calibration or optimizer run",
+  "all_checks_passed": true,
+  "check_count": 11369,
+  "checks_by_branch": {
+    "daily": {
+      "checks": 70,
+      "compared_values": 70,
+      "all_passed": true,
+      "maximum_absolute_difference": 1.4210854715202004e-14,
+      "largest_difference_check": "daily AZ later date mu_vphpl mu_hat_vphpl RMSE"
+    },
+    "period": {
+      "checks": 6352,
+      "compared_values": 6352,
+      "all_passed": true,
+      "maximum_absolute_difference": 2.2351741790771484e-08,
+      "largest_difference_check": "period M ('PeMS::D12_I405_S::L405S-110', '2025-10-01', 'MD') CO2"
+    },
+    "current": {
+      "checks": 192,
+      "compared_values": 192,
+      "all_passed": true,
+      "maximum_absolute_difference": 4.446443213623752e-14,
+      "largest_difference_check": "current report ('daytime', 'PeMS', 'HC', 'S', 'bias_pct')"
+    },
+    "power": {
+      "checks": 2100,
+      "compared_values": 2100,
+      "all_passed": true,
+      "maximum_absolute_difference": 8.474244066013683e-13,
+      "largest_difference_check": "power k ('AZ_I10_W', 'PM', 'NOx', '1.1', 1000)"
+    },
+    "Pigou": {
+      "checks": 396,
+      "compared_values": 396,
+      "all_passed": true,
+      "maximum_absolute_difference": 2.3283064365386963e-10,
+      "largest_difference_check": "Pigou components ('full', 'CO_SO', 'CO2')"
+    },
+    "CBI": {
+      "checks": 3,
+      "compared_values": 30,
+      "all_passed": true,
+      "maximum_absolute_difference": 1.1102230246251565e-16,
+      "largest_difference_check": "CBI temporal IoU"
+    },
+    "transition": {
+      "checks": 2256,
+      "compared_values": 2256,
+      "all_passed": true,
+      "maximum_absolute_difference": 1.4210854715202004e-14,
+      "largest_difference_check": "transition combined (4, 12, 5999, 'CO2')"
+    }
+  },
+  "source_sha256": {
+    "data/frozen/calibration/daily_validation/episode_results_v2.csv": "6be98285060bf65bf9377f1699edb09ef03343c05b3b9a09d7d808528697520d",
+    "data/frozen/calibration/daily_validation/daily_metrics_ci.csv": "5e37446362db3fa1890b7edca007d21c77d20949d8c2ce4758aa9382331e0775",
+    "data/frozen/calibration/average_weekday/episode_results_v2.csv": "8bd71e71cc4fe201a073c7e65aa61b7366a92ee7689445106fb7762e7955a201",
+    "data/frozen/calibration/average_weekday/traffic_panel.csv.gz": "e4653f592461f223dada3d1f0e78d45b981df5570f16c91f8216d896ccce02f0",
+    "data/frozen/calibration/average_weekday/period_results_v2.csv": "b8191bd7e40fad41c9a09c73906bdabe987a5365d89f38046b4b4809c43e81c0",
+    "data/reporting/v33/arizona_episode_profile_scope.csv": "03d3f0a459bdd66c998b00bd1f7cc84167f0165a8e8958760d84c09e9eaea287",
+    "data/reporting/v33/period_emission_metrics.csv": "f0a1f6c0e544f838c610444a93d8cf8908e2e206863d99ce1e6498c6aaace0d8",
+    "data/inputs/detector78/emission_rate_bands.csv": "2e2dfe4fbb557678a709afb46efd315484840d2b2622b7c25a05afcbb43847a6",
+    "data/frozen/calibration/average_weekday/sensor_parameters.csv": "65369db0761c6bb8c841a0b34065fb6ac1cbb52b1b57a4e1acde84041496fc28",
+    "data/frozen/calibration/surrogate/surrogate_specification.json": "d25294455a1f0c6989b775d2dc687aecaa4481487f80577779c2de894dd0a6de",
+    "data/frozen/calibration/surrogate/surrogate_coefficients.csv": "99e44483c641893ad1825693ea7686de88d333ae2ceb545635d45f9509766340",
+    "data/frozen/calibration/surrogate/surrogate_curves.csv": "5e7cbd67c6f8b99a83f27e2049f864f00be97d7fa70164b315c2ec56fb5c5795",
+    "data/frozen/calibration/pigou/pigou_selection.json": "126b79c2492851073c2e1bfc0db74daf075e0a9ebc97c9c1cba84de13164e3e8",
+    "data/frozen/calibration/pigou/full/assignment_results.csv": "8ff64bdb0d3ea17ca3d09dde4fdcddd7ad1388c89e139ab399cd4878872674ae",
+    "data/frozen/calibration/pigou/full/price_of_anarchy.csv": "d48c27f17ba82f20840aa7f0705ffc5314a5593c4b771e59a42aa1a7e9188741",
+    "data/frozen/calibration/pigou/full/weight_sensitivity.csv": "77bfb3240f40b8b9bfeda24af549f16548f0ed71048cb9fb7fee7c4ae07b2b23",
+    "data/frozen/calibration/pigou/surrogate/assignment_results.csv": "805e42a877c54f5e37250e8f47b5ddb6f1acbdba486f02c50ee5db1b82edba06",
+    "data/frozen/calibration/pigou/surrogate/price_of_anarchy.csv": "4b590b5744548f060a2b54b2b170cb4e13cf0614403ed32e09e30edcf9f800db",
+    "data/frozen/calibration/pigou/surrogate/weight_sensitivity.csv": "9a8f909c5b4ff6f35d0f976e1c66f8a11b4ea6260e9e8ea2e0a58c95b52a4ef7",
+    "data/frozen/calibration/cbi_comparison_summary.csv": "534b5dcfe3a88f9bfe2501e34d89cd78296342c5d64eebd655f191552d5fb503",
+    "data/frozen/transitions/ks1_vsp_transitions.csv": "141dfd77375380d7ea9fb643c892d120e220aa7dcd961813da29333ffc70824c",
+    "data/frozen/calibration/cbi_episode_matches.csv": "0d7af022e392eeff1091f723683c9074e284ecb5c59c5e7826d31d0ddbc77a3c"
+  },
+  "output_rows": {
+    "cbi_inventory_arithmetic.csv": 10,
+    "current_daytime_addition.csv": 1552,
+    "current_period_score_arithmetic.csv": 48,
+    "daily_validation_score_arithmetic.csv": 14,
+    "fixed_parameter_gamma_and_power_samples.csv": 700,
+    "gamma_plot_values.csv": 804,
+    "period_emission_components.csv": 6352,
+    "period_episode_allocations.csv": 2196,
+    "pigou_generalized_cost_arithmetic.csv": 162,
+    "pigou_poa_arithmetic.csv": 18,
+    "pigou_route_component_arithmetic.csv": 180,
+    "power_branch_status.csv": 188,
+    "transition_component_arithmetic.csv": 1128
+  }
+}

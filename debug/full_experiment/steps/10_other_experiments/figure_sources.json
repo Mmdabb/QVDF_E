@@ -1,0 +1,46 @@
+[
+  {
+    "figure": "01_daily_validation",
+    "caption": "Eligible Arizona daily episodes; finite-link failures remain. Emissions are not evaluated on this daily sample.",
+    "sources": [
+      "data/frozen/calibration/daily_validation/episode_results_v2.csv"
+    ]
+  },
+  {
+    "figure": "02_period_emissions",
+    "caption": "Current reporting scope: 1,210 admitted planning periods. The comparison reference is a model-assigned proxy.",
+    "sources": [
+      "period_emission_components.csv"
+    ]
+  },
+  {
+    "figure": "03_fixed_parameter_gamma",
+    "caption": "One detector FD and one parameter set throughout; cubic-rate branch over the selected Pigou loading interval.",
+    "sources": [
+      "data/frozen/calibration/pigou/pigou_selection.json",
+      "gamma_plot_values.csv"
+    ]
+  },
+  {
+    "figure": "04_pigou",
+    "caption": "Saved equilibrium and optimal flows; all background vehicles included. Full and power-model curves nearly overlap.",
+    "sources": [
+      "pigou_generalized_cost_arithmetic.csv"
+    ]
+  },
+  {
+    "figure": "05_transition",
+    "caption": "281 replacement-admissible transitions. Both axes use assigned rates; neither represents measured exhaust.",
+    "sources": [
+      "transition_component_arithmetic.csv"
+    ]
+  },
+  {
+    "figure": "06_cbi",
+    "caption": "Detection comparison precedes emission admission. Matched boundaries are the retained original pairing.",
+    "sources": [
+      "data/frozen/calibration/cbi_episode_matches.csv",
+      "cbi_inventory_arithmetic.csv"
+    ]
+  }
+]

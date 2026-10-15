@@ -1,0 +1,24 @@
+setting,value,unit,meaning
+time_step,0.08333333333333333,hour,five-minute observations
+daily_expected_bins,288,bins,a complete 24-hour day
+minimum_complete_weekdays,5,days per detector-month,Arizona monthly profile support
+observation_valid_speed_max,90,mph,"FD fitting, averaging support and episode hard QC; raw records retained"
+jam_density,220,vehicles/mile/lane,triangular queue-state closure
+minimum_fit_episodes,8,episodes,"local period fit, otherwise same direction all periods"
+outlier_MAD_multiplier,1.4826,dimensionless,robust scale
+outlier_z_threshold,3.5,robust scale units,strictly greater than
+outlier_votes_to_fail,2,votes,among three relationships and marginal log-duration
+relationship_scale_floor,0.1,log units,MAD scale minimum
+duration_scale_floor,0.2,log units,marginal duration MAD scale minimum
+bootstrap_replicates,400,draws,preserved parameter and metric uncertainty
+bootstrap_lower_quantile,0.025,probability,95% interval
+bootstrap_upper_quantile,0.975,probability,95% interval
+parameter_bootstrap_seed,15020910,integer,stored model calibrate routine
+duration_log_fd_bounds,"[-6,6]",log coefficient,soft_l1 fit
+duration_n_bounds,"[0.15,4]",exponent,soft_l1 fit
+severity_s_bounds,"[0.05,6]",exponent,robust log-linear fit
+duration_soft_l1_scale,0.2,log residual,maximum 80 function evaluations
+AM,06:00–10:00,clock time,episode assigned by minimum-speed time t2
+MD,10:00–16:00,clock time,whole episodes retained
+PM,16:00–20:00,clock time,whole episodes retained
+NT,20:00–06:00,clock time,cross-midnight period; calendar-censored episodes excluded from fit

@@ -2,6 +2,7 @@
 from pathlib import Path
 import csv
 import hashlib
+import html
 import json
 import re
 from urllib.parse import unquote
@@ -37,6 +38,11 @@ def main():
         'episodes_137/results/average_speed_identity_check_137.csv': 137,
         'sensor78/results/common_time_series.csv': 57,
         'sensor78/results/average_weekday_profile.csv': 288,
+        'full_experiment/steps/11_episode_time_series/episode_index.csv': 137,
+        'full_experiment/steps/11_episode_time_series/total_reconciliation.csv': 2740,
+        'case_studies/az_i10_detector141_november/results/selection_all_137.csv': 137,
+        'case_studies/az_i10_detector141_november/results/selection_eligible_4.csv': 4,
+        'case_studies/az_i10_detector141_november/results/emission_totals.csv': 20,
     }
     for name, expected in expected_rows.items():
         with (DEBUG / name).open(encoding='utf-8-sig', newline='') as stream:
@@ -55,6 +61,25 @@ def main():
                     errors.append(f'{name}: broken link {target}')
         elif path.suffix == '.pdf' and not path.read_bytes().startswith(b'%PDF-'):
             errors.append(f'{name}: invalid PDF signature')
+        elif path.suffix == '.html':
+            for target in re.findall(r'(?:href|src)=[\"\']([^\"\']+)[\"\']', path.read_text(encoding='utf-8')):
+                target = html.unescape(target).split('#', 1)[0]
+                if not target or re.match(r'^[a-z]+:', target, re.I):
+                    continue
+                if not (path.parent / unquote(target)).exists():
+                    errors.append(f'{name}: broken HTML link {target}')
+
+    episode_root = DEBUG / 'full_experiment/steps/11_episode_time_series'
+    with (episode_root / 'episode_index.csv').open(encoding='utf-8', newline='') as stream:
+        for row in csv.DictReader(stream):
+            folder = (episode_root / row['folder']).resolve()
+            if not folder.is_relative_to(episode_root.resolve()):
+                errors.append(f'{row["case_id"]}: episode path outside its package')
+                continue
+            for chart in ['traffic_profiles', 'emissions_CO2', 'emissions_NOx', 'emissions_CO', 'emissions_HC']:
+                for extension in ['.png', '.svg']:
+                    if not (folder / (chart+extension)).is_file():
+                        errors.append(f'{row["case_id"]}: missing {chart+extension}')
 
     books = sorted((DEBUG / 'sensor78/workbook').glob('*.xlsx'))
     if len(books) != 1:

@@ -1,0 +1,21 @@
+{
+  "scope": "Recomputed arithmetic from frozen parameters and unchanged matched sample; no calibration rerun.",
+  "all_average_episode_records": 325,
+  "matched_episodes": 137,
+  "observed_bins": 4800,
+  "reconstruction_nodes": 52608,
+  "node_pollutant_records": 210432,
+  "reconciled_method_totals": 2740,
+  "maximum_relative_total_difference": 3.0648124187892804e-13,
+  "matched_pooled_metrics_checked": 20,
+  "rate_age_weight_checks_passed": true,
+  "all_checks_passed": true,
+  "vsp_interpretation": "Differences to the recorded-speed zero-acceleration proxy, not measured trajectory VSP errors.",
+  "inputs": {
+    "data/frozen/calibration/average_weekday/episode_results_v2.csv": "8bd71e71cc4fe201a073c7e65aa61b7366a92ee7689445106fb7762e7955a201",
+    "data/frozen/calibration/average_weekday/traffic_panel.csv.gz": "e4653f592461f223dada3d1f0e78d45b981df5570f16c91f8216d896ccce02f0",
+    "data/frozen/calibration/average_weekday/cubic_rate_coefficients.csv": "c8b0802937793c93c832c63da3894ab91b13d4777a9ce86a275cad94d5fdc089",
+    "data/frozen/calibration/emission_input/input_vehicle_type.csv": "175a4acc0a774c89b1da9a287b725ec3818e1bc72b634bee52db6c99333aa378",
+    "data/frozen/calibration/emission_input/input_vehicle_emission_rate.csv": "60516669d4d02ed1c3867c2fa20ef3a372cb1e22cb4c597f2392387108fe12cc"
+  }
+}
