@@ -81,6 +81,38 @@ def main():
     for m in METHODS:
         series['v_'+m]=series.count_veh_5min*L/series['H_'+m]
         series['vsp_at_equivalent_speed_'+m]=vsp(series['v_'+m])
+    # Average VSP over operating-state vehicle-hours, not at equivalent speed.
+    vsp_numerators={
+        'O':g.H.to_numpy()*vsp(g.speed_mph.to_numpy()),
+        'S':series.H_S.to_numpy()*vsp(vm),
+        'R':rebin(N*T*vsp(vr)),
+        'M':rebin(N*(tf*vsp(vf)+tq*vsp(vq))),
+    }
+    vsp_numerators['A']=vsp_numerators['M'].copy()
+    vsp_native={
+        'O':float((g.H.to_numpy()*vsp(g.speed_mph.to_numpy())).sum()),
+        'S':float(H*vsp(vm)),
+        'R':float((N*T*vsp(vr)).sum()),
+        'M':float((N*(tf*vsp(vf)+tq*vsp(vq))).sum()),
+    }
+    vsp_native['A']=vsp_native['M']
+    vsp_rows=[];vsp_checks=[]
+    for m in METHODS:
+        series['vsp_exposure_weighted_'+m]=vsp_numerators[m]/series['H_'+m]
+        aligned=float((series['H_'+m]*series['vsp_exposure_weighted_'+m]).sum())
+        np.testing.assert_allclose(aligned,vsp_native[m],rtol=1e-11,atol=1e-10)
+        vsp_checks.append(dict(method=m,native_vsp_times_vehicle_hours=vsp_native[m],aligned_vsp_times_vehicle_hours=aligned,residual=aligned-vsp_native[m]))
+        for i,row in series.iterrows():
+            vsp_rows.append(dict(method=m,bin_index=i+1,clock_time=row.clock_time,clock_h=row.clock_h,
+                bin_start=str(g.datetime.iloc[i]),bin_end=str(g.datetime.iloc[i]+pd.Timedelta(minutes=5)),
+                count_veh_per_lane=row.count_veh_5min,vehicle_hours_per_lane=row['H_'+m],
+                equivalent_speed_mph=row['v_'+m],vsp_exposure_weighted_kw_t=row['vsp_exposure_weighted_'+m],
+                vsp_at_equivalent_speed_kw_t=row['vsp_at_equivalent_speed_'+m],
+                free_state_vsp_kw_t=float(vsp(vf)) if m in ['M','A'] else np.nan,
+                queue_state_vsp_kw_t=float(vsp(vq)) if m in ['M','A'] else np.nan))
+    pd.DataFrame(vsp_rows).to_csv(data/'vsp_time_series.csv',index=False)
+    pd.DataFrame(vsp_checks).to_csv(data/'vsp_exposure_reconciliation.csv',index=False)
+    np.testing.assert_allclose(series.vsp_exposure_weighted_M,series.vsp_exposure_weighted_A,rtol=0,atol=0)
     totals=[];decomposition=[];sensitivity=[];occupancy=[];cumulative=[]
     for p in POLS:
         O=(g.H*rate(g.speed_mph,p)).sum();S=H*rate(vm,p);R=(N*T*rate(vr,p)).sum();M=D*(Tfree*rate(vf,p)+Tq*rate(vq,p));A=D*(Tfree*cubic(vf,p)+Tq*cubic(vq,p));Sp=Hp*rate(vp,p)
@@ -112,7 +144,8 @@ def main():
     state=dict(episode_id=EPISODE,bins=len(g),D_veh=D,L_mi=L,vf_mph=vf,C_vphpl=C,Tf_h=Tf,x_h=x,P_observed_h=e.P_h,P_predicted_h=P,peak_delay_observed_h=e.wt2_h,peak_delay_predicted_h=peak,mean_delay_observed_h=H/D-Tf,mean_delay_predicted_h=mean,vq_observed_fd_mph=e.vq_mph,vq_predicted_mph=vq,H_observed_veh_h=H,H_predicted_veh_h=Hp,observed_mean_speed_mph=vm,predicted_mean_speed_mph=vp,free_mean_time_h=Tfree,queue_mean_time_h=Tq,observed_speed_min_mph=g.speed_mph.min(),observed_speed_max_mph=g.speed_mph.max(),calibration_N_source=int(par.N_source.iloc[0]),calibration_scope=e.calibration_scope,physical_observed_pass=bool(e.physical_observed_pass),physical_predicted_pass=bool(e.physical_predicted_pass),observed_lookup_band_count=int(len(np.unique(index(g.speed_mph)))),free_flow_lookup_mode=int(bands.iloc[index(vf)].source_operating_mode),queue_lookup_mode=int(bands.iloc[index(vq)].source_operating_mode))
     (data/'calculated_state.json').write_text(json.dumps(state,indent=2))
     audit=dict(source_sha256=hashes,selected_case=EPISODE,selection_eligible=4,all_20_saved_emission_totals_match=True,all_20_common_clock_totals_conserved=True,all_observed_speeds_one_lookup_band=state['observed_lookup_band_count']==1,
-        quadrature_count_relative_error=float(N.sum()/D-1),quadrature_VHT_relative_error=float((N*T).sum()/Hp-1),maximum_speed_identity_error_mph=float(np.max(abs((vf*tf+vq*tq)/(tf+tq)-vr))),minimum_free_time_h=float(tf.min()),minimum_queue_time_h=float(tq.min()))
+        quadrature_count_relative_error=float(N.sum()/D-1),quadrature_VHT_relative_error=float((N*T).sum()/Hp-1),maximum_speed_identity_error_mph=float(np.max(abs((vf*tf+vq*tq)/(tf+tq)-vr))),minimum_free_time_h=float(tf.min()),minimum_queue_time_h=float(tq.min()),
+        all_5_vsp_exposure_totals_conserved=True,maximum_vsp_exposure_residual=float(max(abs(z['residual']) for z in vsp_checks)),vsp_definition='Operating-state VSP weighted by vehicle-hours; equivalent-speed VSP retained separately')
     assert abs(audit['quadrature_count_relative_error'])<1e-10 and abs(audit['quadrature_VHT_relative_error'])<1e-10
     (data/'audit.json').write_text(json.dumps(audit,indent=2))
     plt.rcParams.update({'font.family':'DejaVu Sans','font.size':9,'axes.labelcolor':'#17324D','text.color':'#17324D','axes.edgecolor':'#17324D','grid.color':'#E2E8F0','svg.fonttype':'none','pdf.fonttype':42,'figure.facecolor':'white','axes.facecolor':'white'})
@@ -132,12 +165,14 @@ def main():
     axes[1].step(np.r_[clock,end],np.r_[g.d,g.d.iloc[-1]],where='post',color=COL['O']);clock_axis(axes[1]);axes[1].set_ylabel('Vehicles per lane / 5 min')
     finish(fig,'traffic_profiles')
     vg=np.linspace(5,75,1401);curve=pd.DataFrame(dict(speed_mph=vg,zero_acceleration_vsp=vsp(vg),CO2_lookup_g_h=rate(vg,'CO2'),CO2_cubic_g_h=cubic(vg,'CO2')));curve.to_csv(data/'speed_vsp_rate_curves.csv',index=False)
-    fig,axes=plt.subplots(3,1,figsize=(7,6.8))
-    axes[0].plot(vg,vsp(vg),color=COL['R']);axes[0].set_ylabel('Zero-acceleration VSP (kW/t)');axes[0].set_xlabel('Operating speed (mph)')
-    axes[1].plot(vg,rate(vg,'CO2')/1000,color=COL['O'],label='Lookup');axes[1].plot(vg,cubic(vg,'CO2')/1000,color=COL['A'],ls='--',label='Cubic');axes[1].set_ylabel('COâ‚‚ rate (kg/veh h)');axes[1].set_xlabel('Operating speed (mph)');axes[1].legend(frameon=False)
-    for ax in axes[:2]:
-        ax.axvspan(g.speed_mph.min(),g.speed_mph.max(),color=COL['S'],alpha=.15)
-        ax.axvline(vq,color=COL['M'],lw=1,ls=':');ax.axvline(vf,color=COL['A'],lw=1,ls=':')
+    fig,axes=plt.subplots(3,1,figsize=(7,6.3))
+    for m in ['O','S','R','M']:
+        z=series['vsp_exposure_weighted_'+m].to_numpy()
+        axes[0].step(np.r_[clock,end],np.r_[z,z[-1]],where='post',color=COL[m],ls=STYLE[m],lw=1.6,label='M = A' if m=='M' else m)
+    axes[0].set_ylabel('Exposure-weighted VSP (kW/t)');clock_axis(axes[0]);axes[0].legend(frameon=False,ncol=4,fontsize=8,loc='upper center')
+    axes[1].plot(vg,rate(vg,'CO2')/1000,color=COL['O'],label='Lookup');axes[1].plot(vg,cubic(vg,'CO2')/1000,color=COL['A'],ls='--',label='Cubic');axes[1].set_ylabel(r'CO$_2$ rate (kg/veh h)');axes[1].set_xlabel('Operating speed (mph)');axes[1].legend(frameon=False,loc='upper center',ncol=2)
+    axes[1].axvspan(g.speed_mph.min(),g.speed_mph.max(),color=COL['S'],alpha=.15)
+    axes[1].axvline(vq,color=COL['M'],lw=1,ls=':');axes[1].axvline(vf,color=COL['A'],lw=1,ls=':')
     modes=sorted(occ.loc[occ.time_share>1e-8,'source_operating_mode'].unique());xx=np.arange(len(modes))
     for j,m in enumerate(['O','S','R','M']):
         z=occ[occ.method.eq(m)].set_index('source_operating_mode');axes[2].bar(xx+(j-1.5)*.18,[100*z.loc[b,'time_share'] for b in modes],width=.18,color=COL[m],label=m)
@@ -213,15 +248,20 @@ R, M and A overlap because they have identical allocated vehicle-hours and dista
 \notebox{The common clock is a display allocation: modeled vehicle groups are split into the observed five-minute count groups in cumulative-count order. It preserves every method's total. It does not infer when exhaust was physically released on the roadway.}
 
 \newpage
-{\fontsize{19}{23}\selectfont\bfseries\color{navy}Keep VSP and emission lookup separate}\par
-{\color{muted}All five calculations use zero acceleration and level road in their emission mapping.}\par
+{\fontsize{19}{23}\selectfont\bfseries\color{navy}VSP profiles over the episode}\par
+{\color{muted}Same count-aligned clock as the speed profiles; zero acceleration and level road.}\par
+\vspace{4pt}Let $z(v)=\operatorname{VSP}_0(v)$ in kW/t and $a_{ij}$ be the model-node count assigned to observed bin $i$. The plotted VSP is weighted by vehicle-hours:
 \[
-s_v=0.44704v,\qquad \operatorname{VSP}_0(v)=\frac{a s_v+b s_v^2+c s_v^3}{m}.
+\bar z_{R,i}=\frac{\sum_j a_{ij}T_j z(v_{R,j})}{H_{R,i}},\qquad
+\bar z_{M,i}=\bar z_{A,i}=\frac{\sum_j a_{ij}[t_{f,j}z(v_f)+t_{q,j}z(v_q)]}{H_{R,i}}.
 \]
-Here $a=0.156461$, $b=0.00200193$, $c=0.000492646$ and $m=1.4788$ are the supplied passenger-car coefficients. The lookup selects an operating-mode band from speed and VSP, then assigns its age-weighted rate. VSP itself is not an emission rate.
-\begin{center}\includegraphics[width=.91\linewidth]{../../figures/vsp_and_rate_mapping.pdf}\end{center}
-The blue band marks the recorded speed range. Dotted lines mark fitted queue speed (green) and free-flow speed (orange). O and R distribute exposure over several bands; S evaluates one band at the observed harmonic mean speed. M allocates its exposure to modes QMODE and FMODE. A uses the same two operating speeds and times with cubic rates. The bar chart shows why equal trip time need not imply equal emissions.
-\notebox{The recorded speed range is VMIN--VMAX mph, while M uses queue speed VQ and free-flow speed VF mph. Its queue state is substantially slower than every recorded whole-link speed. The two-speed model can therefore place more time at a high-emission free-flow state while preserving the same link distance and fitted trip time. These operating-state and whole-link-average representations are different assumptions.}
+O uses $z(v_i)$; S uses the constant $z(\bar v_{\rm obs})$. M and A overlap because their operating speeds and exposure are identical. A changes only the emission-rate approximation.
+The supplied mapping is $z(v)=(0.156461s_v+0.00200193s_v^2+0.000492646s_v^3)/1.4788$, with $s_v=0.44704v$ for speed $v$ in mph.
+\begin{center}\includegraphics[width=.95\linewidth]{../../figures/vsp_and_rate_mapping.pdf}\end{center}
+\textbf{Top: VSP over time.} Each step spans one observed five-minute bin. This exposure-weighted quantity generally differs from $z(v_i^{\rm eff})$, which is supplied separately in the CSV. It is not an emission rate or a measured trajectory VSP.\par
+\textbf{Middle: rate assignment.} Shading marks observed speeds; dotted lines mark $v_q$ (green) and $v_f$ (orange). The lookup and cubic functions map the operating conditions to rates.\par
+\textbf{Bottom: total exposure by lookup band.} O and R span several bands; S uses one band. M allocates exposure to modes QMODE and FMODE. A uses those same two speeds with cubic rates.
+\notebox{Equal equivalent speed does not imply equal operating-state VSP. R, M and A share fitted vehicle-hours, but M/A can place substantial exposure at free-flow speed while compensating with a slow queue state. The VSP profile is a diagnostic average of those states, not a new rate input. The emission calculations and all 20 episode totals are unchanged.}
 
 \newpage
 {\fontsize{19}{23}\selectfont\bfseries\color{navy}Rates and five-minute contributions}\par

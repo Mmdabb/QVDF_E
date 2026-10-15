@@ -15,10 +15,12 @@ Dates in the index identify the source average profiles; Arizona dates are month
 | `episodes/<case>/traffic_timeseries.csv` | Every observed five-minute bin × O/S/R/M/A: count, travel time, delay, equivalent speed, exposure-weighted VSP, VSP at equivalent speed, and M/A free/queue times and distances. |
 | `episodes/<case>/emissions_timeseries.csv` | Every bin × five methods × four pollutants: vehicle-hours, effective rate, assigned bin emission, cumulative emission and cumulative count. |
 | `episodes/<case>/node_to_bin_allocation.csv` | Positive overlaps between each observed count interval and modeled integration-node count interval; the explicit allocation weights. |
+| `episodes/<case>/error_metrics.csv` | 90 comparisons with O: scalar APE; five-minute WAPE, signed bias, MAE and RMSE; units and reference denominators. |
 | `episodes/<case>/traffic_profiles.png` and `.svg` | Speed, travel time, delay, VSP, two-speed time allocation and two-speed distance allocation. |
 | `episodes/<case>/emissions_<pollutant>.png` and `.svg` | Rate, five-minute emissions, cumulative emissions versus time, and the **same cumulative series** versus cumulative vehicles. |
 | [all_traffic_timeseries.csv.gz](all_traffic_timeseries.csv.gz) | All 24,000 bin-method traffic rows in one compressed CSV. |
 | [all_emissions_timeseries.csv.gz](all_emissions_timeseries.csv.gz) | All 96,000 bin-method-pollutant rows in one compressed CSV. |
+| [all_error_metrics.csv](all_error_metrics.csv) | All 12,330 per-episode error records. No averaging of episode percentage errors is used. |
 | [total_reconciliation.csv](total_reconciliation.csv) | 2,740 method-pollutant totals: common-clock sum, native discrete calculation and preserved episode total. |
 | [verification.json](verification.json) | Numerical conservation/identity checks and source hashes. |
 
@@ -78,6 +80,32 @@ It is an exposure-weighted effective rate, not generally the lookup rate evaluat
 `cumulative_emission_g_per_lane` is $\sum_{k\le i}E_{mk}$ and `cumulative_count_veh_per_lane` is $B_i$. Both cumulative panels begin at **zero emission and zero vehicles at the first bin's start**. One uses bin-end clock time as $x$; the other uses cumulative observed vehicles as $x$. They display the same cumulative emission values at the same bin boundaries. Joining those endpoints with lines is a display choice, not a claim about within-bin trajectories.
 
 ## Interpretation and checks
+
+### Error columns and tables
+
+The HTML index can be filtered and sorted. Its six error columns compare the fitted traffic quantities shared by R/M/A with O: duration $P$, calibrated minimum speed $v_{t_2}$, five-minute equivalent speed, episode average speed, five-minute travel time and five-minute delay. Every episode page places a traffic error table and four pollutant error tables beside the corresponding figures (stacked below on narrow screens).
+
+For equal five-minute bins, with reference $y_{Oi}$ and estimate $y_{mi}$:
+
+$$\mathrm{WAPE}=100\frac{\sum_i|y_{mi}-y_{Oi}|}{\sum_i|y_{Oi}|},\qquad
+\mathrm{Bias}=100\frac{\sum_i(y_{mi}-y_{Oi})}{\sum_i|y_{Oi}|}.$$
+
+These sums have **no additional count weighting**. Signed observed delay is retained; its denominator is $\sum_i|w_{Oi}|$, not $|\sum_iw_{Oi}|$. A zero denominator produces an undefined percentage, shown as a dash. The CSV also supplies $\mathrm{MAE}=\mathrm{mean}(|y_m-y_O|)$ and $\mathrm{RMSE}=\sqrt{\mathrm{mean}((y_m-y_O)^2)}$ in the stated units; travel time and delay errors use minutes.
+
+For one episode-level quantity, $\mathrm{APE}=100|y_m-y_O|/|y_O|$. The scalar quantities are:
+
+| Quantity | Reference and estimate |
+|---|---|
+| $P$ | Archived observed whole-episode duration and calibrated duration; no independent S duration calibration. |
+| $v_{t_2}$ | Minimum recorded speed over the observed episode versus $L/(T_f+\widehat w_{t_2})$. The fitted target is **not** replaced by the minimum of a bin-averaged profile and is **not** FD queue speed $\widehat v_q$. |
+| Episode average speed | $DL/\sum_i H_{mi}$, a count-weighted harmonic speed. S equals O by construction. |
+| Pollutant total | $\sum_i E_{mi}$ versus $\sum_i E_{Oi}$. Signed total bias indicates over- or underestimation. |
+
+VSP errors use **exposure-weighted operating-state VSP**, matching the plotted profiles. No error is assigned to free/queue state times and distances because O does not supply independently observed state allocations.
+
+Cumulative-path WAPE uses cumulative values at the observed bin ends. Both horizontal axes (clock time and cumulative vehicles) display exactly those same values and therefore have one common error measure. These cumulative discrepancies are correlated; they are descriptive path comparisons, not independent emission observations. Final-total APE can be smaller than five-minute emission WAPE because positive and negative bin errors can cancel.
+
+### Reference limitations
 
 The reference O uses five-minute point speed as a proxy for whole-link travel speed. All VSP calculations assume zero acceleration and zero grade. Thus differences in these profiles are comparisons under a common diagnostic alignment, **not pointwise errors against measured trajectory VSP or tailpipe emissions**.
 

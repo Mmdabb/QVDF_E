@@ -106,7 +106,6 @@ r_c(v)=c_0+c_1v+c_2v^2+c_3v^3,\qquad
 Absolute errors are calculated before pooling episodes. O is a detector-speed-based calculation,
 not measured emissions or observed vehicle trajectories. All five calculations omit acceleration effects.}
 
-
 \newpage\fontsize{10}{13}\selectfont
 {\fontsize{19}{23}\selectfont\bfseries\color{navy}Arizona detector 141: selected comparison}\par
 {\color{muted}I-10 westbound. Constructed November 2016 average-weekday profile.}\par
@@ -158,15 +157,20 @@ R, M and A overlap because they have identical allocated vehicle-hours and dista
 \notebox{The common clock is a display allocation: modeled vehicle groups are split into the observed five-minute count groups in cumulative-count order. It preserves every method's total. It does not infer when exhaust was physically released on the roadway.}
 
 \newpage
-{\fontsize{19}{23}\selectfont\bfseries\color{navy}Keep VSP and emission lookup separate}\par
-{\color{muted}All five calculations use zero acceleration and level road in their emission mapping.}\par
+{\fontsize{19}{23}\selectfont\bfseries\color{navy}VSP profiles over the episode}\par
+{\color{muted}Same count-aligned clock as the speed profiles; zero acceleration and level road.}\par
+\vspace{4pt}Let $z(v)=\operatorname{VSP}_0(v)$ in kW/t and $a_{ij}$ be the model-node count assigned to observed bin $i$. The plotted VSP is weighted by vehicle-hours:
 \[
-s_v=0.44704v,\qquad \operatorname{VSP}_0(v)=\frac{a s_v+b s_v^2+c s_v^3}{m}.
+\bar z_{R,i}=\frac{\sum_j a_{ij}T_j z(v_{R,j})}{H_{R,i}},\qquad
+\bar z_{M,i}=\bar z_{A,i}=\frac{\sum_j a_{ij}[t_{f,j}z(v_f)+t_{q,j}z(v_q)]}{H_{R,i}}.
 \]
-Here $a=0.156461$, $b=0.00200193$, $c=0.000492646$ and $m=1.4788$ are the supplied passenger-car coefficients. The lookup selects an operating-mode band from speed and VSP, then assigns its age-weighted rate. VSP itself is not an emission rate.
-\begin{center}\includegraphics[width=.91\linewidth]{../../figures/vsp_and_rate_mapping.pdf}\end{center}
-The blue band marks the recorded speed range. Dotted lines mark fitted queue speed (green) and free-flow speed (orange). O and R distribute exposure over several bands; S evaluates one band at the observed harmonic mean speed. M allocates its exposure to modes 12 and 37. A uses the same two operating speeds and times with cubic rates. The bar chart shows why equal trip time need not imply equal emissions.
-\notebox{The recorded speed range is 22.628--67.273 mph, while M uses queue speed 7.882 and free-flow speed 68.642 mph. Its queue state is substantially slower than every recorded whole-link speed. The two-speed model can therefore place more time at a high-emission free-flow state while preserving the same link distance and fitted trip time. These operating-state and whole-link-average representations are different assumptions.}
+O uses $z(v_i)$; S uses the constant $z(\bar v_{\rm obs})$. M and A overlap because their operating speeds and exposure are identical. A changes only the emission-rate approximation.
+The supplied mapping is $z(v)=(0.156461s_v+0.00200193s_v^2+0.000492646s_v^3)/1.4788$, with $s_v=0.44704v$ for speed $v$ in mph.
+\begin{center}\includegraphics[width=.95\linewidth]{../../figures/vsp_and_rate_mapping.pdf}\end{center}
+\textbf{Top: VSP over time.} Each step spans one observed five-minute bin. This exposure-weighted quantity generally differs from $z(v_i^{\rm eff})$, which is supplied separately in the CSV. It is not an emission rate or a measured trajectory VSP.\par
+\textbf{Middle: rate assignment.} Shading marks observed speeds; dotted lines mark $v_q$ (green) and $v_f$ (orange). The lookup and cubic functions map the operating conditions to rates.\par
+\textbf{Bottom: total exposure by lookup band.} O and R span several bands; S uses one band. M allocates exposure to modes 12 and 37. A uses those same two speeds with cubic rates.
+\notebox{Equal equivalent speed does not imply equal operating-state VSP. R, M and A share fitted vehicle-hours, but M/A can place substantial exposure at free-flow speed while compensating with a slow queue state. The VSP profile is a diagnostic average of those states, not a new rate input. The emission calculations and all 20 episode totals are unchanged.}
 
 \newpage
 {\fontsize{19}{23}\selectfont\bfseries\color{navy}Rates and five-minute contributions}\par

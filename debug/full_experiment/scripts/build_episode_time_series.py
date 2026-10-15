@@ -9,7 +9,6 @@ import argparse
 from concurrent.futures import ProcessPoolExecutor
 import gzip
 import hashlib
-import html
 import io
 import json
 from pathlib import Path
@@ -17,6 +16,8 @@ import re
 
 import numpy as np
 import pandas as pd
+
+from episode_dashboard import calculate_metrics, index_html, page_html
 
 ROOT = Path(__file__).resolve().parents[3]
 STEPS = ROOT / "debug/full_experiment/steps"
@@ -57,25 +58,13 @@ def load(name):
     return pd.read_csv(STEPS / name, low_memory=False)
 
 
-def page_html(meta):
-    title = f"{meta['case_id']} · {meta['corridor']} · {meta['date']} · {meta['period']}"
-    esc = html.escape
-    return """<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>"""+esc(title)+"""</title><style>body{max-width:1150px;margin:30px auto;padding:0 20px;font:17px/1.5 system-ui;color:#17324d;background:white}img{width:100%;height:auto}a{color:#2563eb}section{margin:35px 0}code{overflow-wrap:anywhere}.note{background:#f1f5f9;padding:15px;border-left:4px solid #168c69}nav a{margin-right:18px}h1{font-size:25px}table{border-collapse:collapse}td,th{padding:7px 14px;border-bottom:1px solid #cbd5e1;text-align:left}</style>
-<p><a href="../../index.html">← All episodes</a></p><h1>"""+esc(title)+"""</h1><p><code>"""+esc(meta["episode_id"])+"""</code></p>
-<p class="note">Common-clock diagnostic: model vehicle groups are assigned to recorded five-minute bins by cumulative-count overlap. The model duration may differ from the observed episode duration. These plots are not measured vehicle trajectories. All counts, vehicle-hours and emissions are per lane.</p>
-<table><tr><th>Observed duration</th><th>Predicted duration</th><th>Volume</th><th>Length</th></tr><tr><td>"""+f"{meta['observed_duration_h']:.3f} h</td><td>{meta['predicted_duration_h']:.3f} h</td><td>{meta['D_veh_per_lane']:.1f} veh/lane</td><td>{meta['L_mi']:.3f} mi</td></tr></table>"+"""
-<nav><a href="traffic_timeseries.csv">Traffic CSV</a><a href="emissions_timeseries.csv">All-pollutant emissions CSV</a><a href="node_to_bin_allocation.csv">Count allocation CSV</a></nav>
-<section><h2>Traffic and operating conditions</h2><p>R, M and A share travel time, delay and equivalent speed. M and A share state VSP. The equivalent speed is total distance divided by total travel time.</p><a href="traffic_profiles.svg">Editable SVG</a><img src="traffic_profiles.png" alt="Traffic, VSP and two-speed time and distance allocation"></section>
-"""+"".join(f'<section><h2>{p}</h2><p>Both cumulative panels use the same cumulative emissions, with clock time or cumulative vehicles on the horizontal axis. Rates are total assigned emissions divided by assigned vehicle-hours.</p><a href="emissions_{p}.svg">Editable SVG</a><img loading="lazy" src="emissions_{p}.png" alt="{p} rate, five-minute assigned emissions and cumulative comparisons"></section>' for p in POLS)+"</html>\n"
-
-
 def page_markdown(meta):
     text=f"# {meta['case_id']}: {meta['corridor']}, {meta['date']}, {meta['period']}\n\n"
     text+="[All episodes](../../EPISODES.md) · [Calculation guide](../../README.md) · [Interactive local page](index.html)\n\n"
     text+=f"Original ID: `{meta['episode_id']}`. Observed duration {meta['observed_duration_h']:.3f} h; predicted duration {meta['predicted_duration_h']:.3f} h; {meta['D_veh_per_lane']:.1f} vehicles/lane.\n\n"
     text+="Model vehicle groups are aligned to recorded five-minute bins by cumulative count. This preserves totals and is a diagnostic comparison, not measured trajectories. R/M/A share travel time, delay and equivalent speed; M/A share operating-state VSP.\n\n"
-    text+="[Traffic CSV](traffic_timeseries.csv) · [All-pollutant emission CSV](emissions_timeseries.csv) · [Allocation CSV](node_to_bin_allocation.csv)\n\n"
+    text+="[Traffic CSV](traffic_timeseries.csv) · [All-pollutant emission CSV](emissions_timeseries.csv) · [Error metrics CSV](error_metrics.csv) · [Allocation CSV](node_to_bin_allocation.csv)\n\n"
+    text+="The HTML page places error tables beside each figure group. Scalar episode targets use APE; five-minute profiles use WAPE against O. Full bias, MAE and RMSE are in the error metrics CSV.\n\n"
     text+="## Traffic\n\n![Traffic and operating-state profiles](traffic_profiles.png)\n\n[Editable SVG](traffic_profiles.svg)\n\n"
     for p in POLS:text+=f"## {p}\n\n![{p} rate, bin emissions and cumulative emissions](emissions_{p}.png)\n\n[Editable SVG](emissions_{p}.svg)\n\n"
     return text.rstrip()+"\n"
@@ -210,6 +199,7 @@ def main():
     parser.add_argument("--verify-figures",action="store_true",help="Verify all 685 PNG/SVG pairs and update figure-completion status; no numerical regeneration")
     parser.add_argument("--workers",type=int,default=2,help="Concurrent plotting processes; default 2")
     args=parser.parse_args();out=safe_output(args.output)
+    (out/"README.md").write_text((STEPS/"11_episode_time_series/README.md").read_text(encoding="utf-8"),encoding="utf-8")
     if args.verify_figures:
         verify_figures(out)
         return
@@ -232,7 +222,7 @@ def main():
     params=dict(zip(parameters.quantity,parameters.value))
     sources=["07_observed_and_single_speed/observed_speed_vsp.csv","07_observed_and_single_speed/observed_emission_terms.csv","07_observed_and_single_speed/single_speed_vsp.csv","07_observed_and_single_speed/single_speed_emission_terms.csv","08_reconstruction_and_two_speed/reconstructed_speed_vsp.csv.gz","08_reconstruction_and_two_speed/node_emission_terms.csv.gz","08_reconstruction_and_two_speed/two_speed_state_vsp.csv","09_totals_and_comparison/episode_pollutant_calculation_steps.csv","06_rate_construction/vsp_input_parameters.csv"]
     grouped=[{k:g for k,g in frame.groupby("episode_id",sort=False)} for frame in [observed,observed_emission,single,single_emission,nodes,node_emission,states,totals]]
-    all_traffic=[];all_emissions=[];all_checks=[];index=[];jobs=[]
+    all_traffic=[];all_emissions=[];all_checks=[];all_metrics=[];index=[];jobs=[]
     for position,r in enumerate(ep.itertuples(index=False),1):
         oid=r.episode_id; obs,oe,ss,se,nd,ne,st,tt=[groups[oid].copy() for groups in grouped]
         obs=obs.sort_values("bin_index");nd=nd.sort_values("node_index")
@@ -294,19 +284,22 @@ def main():
         ij=np.argwhere(overlap>0)
         save_csv(pd.DataFrame({"bin_index":ij[:,0]+1,"node_index":ij[:,1]+1,"overlap_count_veh_per_lane":overlap[ij[:,0],ij[:,1]],"fraction_of_node":overlap[ij[:,0],ij[:,1]]/N[ij[:,1]]}),folder/"node_to_bin_allocation.csv")
         record=dict(case_id=case_id,folder=f"episodes/{name}",episode_id=oid,corridor=r.corridor,paper_corridor=r.paper_corridor,sensor_uid=r.sensor_uid,date=r.date,period=r.period,bin_start=str(dates.iloc[0]),bin_end=str(dates.iloc[-1]+pd.Timedelta(minutes=5)),observed_bins=len(obs),model_nodes=len(nd),observed_duration_h=float(r.P_h),predicted_duration_h=float(r.P_hat_h),D_veh_per_lane=float(D),L_mi=L,vf_mph=vf,vq_hat_mph=vq,Tf_h=Tf,observed_vehicle_hours_per_lane=float(Hobs.sum()),predicted_vehicle_hours_per_lane=float(Hmodel.sum()),minimum_aligned_free_time_s=float(fmean.min()*3600),maximum_count_residual_veh=float(np.max(abs(overlap.sum(axis=1)-count))),maximum_distance_residual_mi=float(np.max(abs(vf*fmean+vq*qmean-L))),maximum_time_residual_h=float(np.max(abs(fmean+qmean-trip_model))),maximum_average_speed_residual_mph=float(np.max(abs((vf*fmean+vq*qmean)/(fmean+qmean)-L/trip_model))))
-        index.append(record);(folder/"index.html").write_text(page_html(record),encoding="utf-8")
+        metrics=calculate_metrics(record,traffic,emission,r)
+        save_csv(metrics,folder/"error_metrics.csv");all_metrics.append(metrics)
+        index.append(record);(folder/"index.html").write_text(page_html(record,metrics),encoding="utf-8")
         (folder/"README.md").write_text(page_markdown(record),encoding="utf-8")
         all_traffic.append(traffic);all_emissions.append(emission);jobs.append((str(folder),record))
     save_csv(pd.concat(all_traffic,ignore_index=True),out/"all_traffic_timeseries.csv.gz")
     save_csv(pd.concat(all_emissions,ignore_index=True),out/"all_emissions_timeseries.csv.gz")
+    save_csv(pd.concat(all_metrics,ignore_index=True),out/"all_error_metrics.csv")
     checks=pd.DataFrame(all_checks);catalog=pd.DataFrame(index)
     save_csv(checks,out/"total_reconciliation.csv");save_csv(catalog,out/"episode_index.csv")
     audit=dict(episodes=len(catalog),observed_bins=int(catalog.observed_bins.sum()),traffic_rows=sum(len(f) for f in all_traffic),emission_rows=sum(len(f) for f in all_emissions),method_pollutant_totals=len(checks),max_relative_difference_from_archived=float(checks.relative_difference_from_archived.abs().max()),max_aligned_minus_native_g=float(checks.aligned_minus_native_g.abs().max()),max_count_residual_veh=float(catalog.maximum_count_residual_veh.max()),max_distance_residual_mi=float(catalog.maximum_distance_residual_mi.max()),max_time_residual_h=float(catalog.maximum_time_residual_h.max()),max_average_speed_residual_mph=float(catalog.maximum_average_speed_residual_mph.max()),all_checks_passed=True,alignment="Cumulative-count overlap onto observed five-minute bin starts/ends; model duration retained as metadata, not forced equal.",figures_generated=False,input_sha256={str((STEPS/name).relative_to(ROOT)).replace('\\','/'):hashlib.sha256((STEPS/name).read_bytes()).hexdigest() for name in sources})
     audit["input_sha256"][str(source.relative_to(ROOT)).replace('\\','/')]=hashlib.sha256(source.read_bytes()).hexdigest()
+    audit["error_metric_rows"]=sum(len(f) for f in all_metrics)
+    audit["error_metric_reference"]="O; equal-bin WAPE with sum(abs(O)) denominator; episode-scalar APE; L/vf delay baseline"
     (out/"verification.json").write_text(json.dumps(audit,indent=2)+"\n",encoding="utf-8")
-    links="".join(f'<tr><td><a href="{html.escape(r["folder"])}/index.html">{r["case_id"]}</a></td><td>{html.escape(r["corridor"])}</td><td>{html.escape(r["sensor_uid"])}</td><td>{r["date"]}</td><td>{r["period"]}</td><td>{r["observed_duration_h"]:.2f}</td><td>{r["predicted_duration_h"]:.2f}</td><td>{r["D_veh_per_lane"]:.1f}</td></tr>' for r in index)
-    doc='<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>137 episode time-series comparisons</title><style>body{max-width:1150px;margin:30px auto;padding:0 20px;font:16px/1.5 system-ui;color:#17324d}table{width:100%;border-collapse:collapse}th,td{padding:7px;border-bottom:1px solid #cbd5e1;text-align:left}th{position:sticky;top:0;background:#f1f5f9}a{color:#2563eb}input{padding:10px;width:95%;margin:12px 0}.note{padding:15px;background:#f1f5f9}</style><h1>137 episode time-series comparisons</h1><p class="note">Each case contains five-method traffic and emission CSVs, a traffic dashboard and four pollutant dashboards. Model groups are aligned to the observation clock by cumulative vehicle count; this is a diagnostic comparison, not measured trajectories. All quantities are per lane. P is episode duration in hours.</p><p><a href="README.md">Equations and interpretation</a> · <a href="episode_index.csv">Episode index CSV</a> · <a href="all_traffic_timeseries.csv.gz">All traffic CSV (gzip)</a> · <a href="all_emissions_timeseries.csv.gz">All emissions CSV (gzip)</a> · <a href="total_reconciliation.csv">Total reconciliation</a></p><input id="search" aria-label="Filter episodes" placeholder="Filter by corridor, detector, date, period or case ID"><table><thead><tr><th>Case</th><th>Direction</th><th>Detector/link</th><th>Date</th><th>Period</th><th>Observed P</th><th>Model P</th><th>Vehicles</th></tr></thead><tbody>'+links+'</tbody></table><script>document.getElementById("search").addEventListener("input",e=>{let q=e.target.value.toLowerCase();document.querySelectorAll("tbody tr").forEach(r=>r.hidden=!r.textContent.toLowerCase().includes(q))})</script></html>\n'
-    (out/"index.html").write_text(doc,encoding="utf-8")
+    (out/"index.html").write_text(index_html(index),encoding="utf-8")
     md="# All 137 episode comparisons\n\nSelect a case to view its figures and calculation CSVs directly in GitHub. For filtering, open [the HTML browser](index.html) locally. See the [calculation guide](README.md) for equations and alignment assumptions. Durations are hours; counts are vehicles per lane.\n\n| Case | Direction | Detector/link | Date | Period | Observed P | Predicted P | Vehicles |\n|---|---|---|---|---|---:|---:|---:|\n"
     for r in index:md+=f"| [{r['case_id']}]({r['folder']}/README.md) | {r['corridor']} | {r['sensor_uid']} | {r['date']} | {r['period']} | {r['observed_duration_h']:.2f} | {r['predicted_duration_h']:.2f} | {r['D_veh_per_lane']:.1f} |\n"
     (out/"EPISODES.md").write_text(md,encoding="utf-8")

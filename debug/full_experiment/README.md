@@ -16,7 +16,7 @@ Every numbered folder contains numerical results, a short explanation of the equ
 | 8 | [Reconstructed and two-speed calculations](steps/08_reconstruction_and_two_speed/README.md) | 52,608 modeled groups, separate VSP/rate tables, free/queue contributions and VSP differences |
 | 9 | [Episode totals and comparison](steps/09_totals_and_comparison/README.md) | 548 episode–pollutant calculations, all 2,740 method totals, and pooled error numerators/denominators |
 | 10 | [Other experiment branches](steps/10_other_experiments/README.md) | Daily validation, period/day totals, CBI, Gamma/power approximation, Pigou and transitions |
-| 11 | [Every episode at five-minute resolution](steps/11_episode_time_series/README.md) | Individual traffic, VSP, rate, emission and cumulative comparison tables and plots for all 137 episodes |
+| 11 | [Every episode at five-minute resolution](steps/11_episode_time_series/README.md) | Traffic, VSP, rate, emission and cumulative plots; sortable traffic errors and per-figure error tables for all 137 episodes |
 
 ## How the emission sample is formed
 

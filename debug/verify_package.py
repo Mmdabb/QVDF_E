@@ -40,6 +40,7 @@ def main():
         'sensor78/results/average_weekday_profile.csv': 288,
         'full_experiment/steps/11_episode_time_series/episode_index.csv': 137,
         'full_experiment/steps/11_episode_time_series/total_reconciliation.csv': 2740,
+        'full_experiment/steps/11_episode_time_series/all_error_metrics.csv': 12330,
         'case_studies/az_i10_detector141_november/results/selection_all_137.csv': 137,
         'case_studies/az_i10_detector141_november/results/selection_eligible_4.csv': 4,
         'case_studies/az_i10_detector141_november/results/emission_totals.csv': 20,
@@ -76,6 +77,9 @@ def main():
             if not folder.is_relative_to(episode_root.resolve()):
                 errors.append(f'{row["case_id"]}: episode path outside its package')
                 continue
+            with (folder / 'error_metrics.csv').open(encoding='utf-8', newline='') as metrics:
+                if sum(1 for _ in csv.DictReader(metrics)) != 90:
+                    errors.append(f'{row["case_id"]}: expected 90 error metrics')
             for chart in ['traffic_profiles', 'emissions_CO2', 'emissions_NOx', 'emissions_CO', 'emissions_HC']:
                 for extension in ['.png', '.svg']:
                     if not (folder / (chart+extension)).is_file():
