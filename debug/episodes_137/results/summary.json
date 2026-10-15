@@ -1,0 +1,500 @@
+{
+  "N_episodes": 137,
+  "N_profile_blocks": 118,
+  "N_bins": 4800,
+  "sample_by_corridor": {
+    "D12_I5": 79,
+    "AZ_I10": 20,
+    "D7_I10": 15,
+    "D7_I210": 13,
+    "D7_I405": 6,
+    "D12_I405": 4
+  },
+  "max_reproduction_relative_error": 6.434947761079021e-13,
+  "traffic_metrics": [
+    {
+      "observed": "P_h",
+      "predicted": "P_hat_h",
+      "unit": "h",
+      "N": 137,
+      "WAPE_pct": 6.169929085899545,
+      "bias_pct": 0.11020901875926636,
+      "RMSE": 0.2502393169455706,
+      "R2": 0.9831916293257426
+    },
+    {
+      "observed": "wt2_h",
+      "predicted": "wt2_hat_h",
+      "unit": "h",
+      "N": 137,
+      "WAPE_pct": 33.83434801309422,
+      "bias_pct": -0.6597557196638681,
+      "RMSE": 0.0074051841953372,
+      "R2": 0.8162950402207684
+    },
+    {
+      "observed": "wt2_h",
+      "predicted": "conditional_peak_delay_h",
+      "unit": "h",
+      "N": 137,
+      "WAPE_pct": 32.314549129605744,
+      "bias_pct": -1.2837925900750835,
+      "RMSE": 0.007284322039211477,
+      "R2": 0.8222427077832178
+    },
+    {
+      "observed": "wbar_h",
+      "predicted": "wbar_hat_h",
+      "unit": "h",
+      "N": 137,
+      "WAPE_pct": 28.605100865021694,
+      "bias_pct": -3.7964430366914104,
+      "RMSE": 0.0028594451797477865,
+      "R2": 0.8584365242062383
+    },
+    {
+      "observed": "total_vehicle_delay_observed_veh_h",
+      "predicted": "total_vehicle_delay_predicted_veh_h",
+      "unit": "veh h",
+      "N": 137,
+      "WAPE_pct": 28.24317476143559,
+      "bias_pct": -3.5421011484989995,
+      "RMSE": 11.35023047681893,
+      "R2": 0.881560995241566
+    },
+    {
+      "observed": "H_observed_veh_h",
+      "predicted": "H_predicted_veh_h",
+      "unit": "veh h",
+      "N": 137,
+      "WAPE_pct": 14.767244402234725,
+      "bias_pct": -1.8520252697916684,
+      "RMSE": 11.350230476818929,
+      "R2": 0.9502845950474629
+    },
+    {
+      "observed": "mean_speed_observed_mph",
+      "predicted": "mean_speed_predicted_mph",
+      "unit": "mph",
+      "N": 137,
+      "WAPE_pct": 11.470786862979942,
+      "bias_pct": 2.3784650164144328,
+      "RMSE": 5.932825290389948,
+      "R2": 0.38902153841232423
+    }
+  ],
+  "emission_metrics": [
+    {
+      "sample": "All 137",
+      "pollutant": "CO2",
+      "method": "S",
+      "N": 137,
+      "WAPE_pct": 5.942097178379664,
+      "bias_pct": -4.601598414288355,
+      "RMSE": 38598.13397922441,
+      "R2": 0.9911597589239194
+    },
+    {
+      "sample": "All 137",
+      "pollutant": "CO2",
+      "method": "S_pred",
+      "N": 137,
+      "WAPE_pct": 9.718261982613448,
+      "bias_pct": -3.567380419654642,
+      "RMSE": 65274.29504516805,
+      "R2": 0.974717741333922
+    },
+    {
+      "sample": "All 137",
+      "pollutant": "CO2",
+      "method": "R",
+      "N": 137,
+      "WAPE_pct": 10.128946905774425,
+      "bias_pct": 4.214832980449845,
+      "RMSE": 59962.80834831291,
+      "R2": 0.9786648638090367
+    },
+    {
+      "sample": "All 137",
+      "pollutant": "CO2",
+      "method": "M",
+      "N": 137,
+      "WAPE_pct": 22.38166778244673,
+      "bias_pct": 20.748097390274477,
+      "RMSE": 125953.90488077157,
+      "R2": 0.9058642119891284
+    },
+    {
+      "sample": "All 137",
+      "pollutant": "CO2",
+      "method": "A",
+      "N": 137,
+      "WAPE_pct": 20.31988442882905,
+      "bias_pct": 18.761223195780975,
+      "RMSE": 122998.26117989366,
+      "R2": 0.9102303702990452
+    },
+    {
+      "sample": "All 137",
+      "pollutant": "NOx",
+      "method": "S",
+      "N": 137,
+      "WAPE_pct": 12.42615086827804,
+      "bias_pct": -9.556745924706911,
+      "RMSE": 70.87241985418733,
+      "R2": 0.9529503360010587
+    },
+    {
+      "sample": "All 137",
+      "pollutant": "NOx",
+      "method": "S_pred",
+      "N": 137,
+      "WAPE_pct": 14.84182387467162,
+      "bias_pct": -5.075279469859684,
+      "RMSE": 81.82522790803898,
+      "R2": 0.9372842745003696
+    },
+    {
+      "sample": "All 137",
+      "pollutant": "NOx",
+      "method": "R",
+      "N": 137,
+      "WAPE_pct": 13.054942362791381,
+      "bias_pct": 10.91395153833561,
+      "RMSE": 63.96270530402726,
+      "R2": 0.9616773395461321
+    },
+    {
+      "sample": "All 137",
+      "pollutant": "NOx",
+      "method": "M",
+      "N": 137,
+      "WAPE_pct": 47.73402132938469,
+      "bias_pct": 46.540208203612046,
+      "RMSE": 229.85244651533515,
+      "R2": 0.505119587465116
+    },
+    {
+      "sample": "All 137",
+      "pollutant": "NOx",
+      "method": "A",
+      "N": 137,
+      "WAPE_pct": 42.70618936712119,
+      "bias_pct": 42.15497210563597,
+      "RMSE": 215.84135269629064,
+      "R2": 0.563613495290139
+    },
+    {
+      "sample": "All 137",
+      "pollutant": "CO",
+      "method": "S",
+      "N": 137,
+      "WAPE_pct": 6.121722417844697,
+      "bias_pct": -2.858992317750375,
+      "RMSE": 318.31101691516704,
+      "R2": 0.9924465461307852
+    },
+    {
+      "sample": "All 137",
+      "pollutant": "CO",
+      "method": "S_pred",
+      "N": 137,
+      "WAPE_pct": 9.906964260533144,
+      "bias_pct": -4.077964652906141,
+      "RMSE": 581.4281680097394,
+      "R2": 0.9747980365791157
+    },
+    {
+      "sample": "All 137",
+      "pollutant": "CO",
+      "method": "R",
+      "N": 137,
+      "WAPE_pct": 8.266713582840591,
+      "bias_pct": -1.7988665860537156,
+      "RMSE": 511.6877581424491,
+      "R2": 0.9804812368221585
+    },
+    {
+      "sample": "All 137",
+      "pollutant": "CO",
+      "method": "M",
+      "N": 137,
+      "WAPE_pct": 11.188178330512038,
+      "bias_pct": 2.1014817324812363,
+      "RMSE": 659.3108730787044,
+      "R2": 0.9675942022529104
+    },
+    {
+      "sample": "All 137",
+      "pollutant": "CO",
+      "method": "A",
+      "N": 137,
+      "WAPE_pct": 9.82259083030509,
+      "bias_pct": 1.1330412628012265,
+      "RMSE": 590.8644764765577,
+      "R2": 0.97397336617201
+    },
+    {
+      "sample": "All 137",
+      "pollutant": "HC",
+      "method": "S",
+      "N": 137,
+      "WAPE_pct": 4.23852114653969,
+      "bias_pct": -2.510101911030438,
+      "RMSE": 9.440612592238777,
+      "R2": 0.9963343908861834
+    },
+    {
+      "sample": "All 137",
+      "pollutant": "HC",
+      "method": "S_pred",
+      "N": 137,
+      "WAPE_pct": 9.569115782678429,
+      "bias_pct": -2.9573627134078295,
+      "RMSE": 24.89509896983938,
+      "R2": 0.9745097841193242
+    },
+    {
+      "sample": "All 137",
+      "pollutant": "HC",
+      "method": "R",
+      "N": 137,
+      "WAPE_pct": 9.52335869709719,
+      "bias_pct": -0.08859736325658174,
+      "RMSE": 24.0348750646484,
+      "R2": 0.9762409245197132
+    },
+    {
+      "sample": "All 137",
+      "pollutant": "HC",
+      "method": "M",
+      "N": 137,
+      "WAPE_pct": 12.611576175698987,
+      "bias_pct": 4.993803690805088,
+      "RMSE": 29.483985398165135,
+      "R2": 0.9642465319584512
+    },
+    {
+      "sample": "All 137",
+      "pollutant": "HC",
+      "method": "A",
+      "N": 137,
+      "WAPE_pct": 11.645508316267366,
+      "bias_pct": 4.175829570110445,
+      "RMSE": 28.30576481645665,
+      "R2": 0.967046952286796
+    }
+  ],
+  "threshold_definitions": {
+    "flat": "count-weighted speed CV <= 0.10",
+    "shallow": "observed mean delay/free time <= 0.25",
+    "short": "observed episode duration <=1h",
+    "large_trip_time_error": "absolute predicted total travel-time error >10%",
+    "small_absolute_delay": "observed mean delay <=10 seconds"
+  },
+  "flags": {
+    "flag_flat_profile_cv_le_010": 81,
+    "flag_shallow_mean_delay_ratio_le_025": 0,
+    "flag_short_duration_le_1h": 26,
+    "flag_large_trip_time_error_gt_10pct": 62,
+    "mean_speed_crosses_rate_band": 59,
+    "flag_small_mean_delay_le_10s": 79
+  },
+  "counterfactual_mean_admissible": 133,
+  "counterfactual_full_profile_admissible": 110,
+  "source_sha256": {
+    "episode_results_v2.csv": "8bd71e71cc4fe201a073c7e65aa61b7366a92ee7689445106fb7762e7955a201",
+    "traffic_panel.csv.gz": "e4653f592461f223dada3d1f0e78d45b981df5570f16c91f8216d896ccce02f0",
+    "cubic_rate_coefficients.csv": "c8b0802937793c93c832c63da3894ab91b13d4777a9ce86a275cad94d5fdc089"
+  },
+  "pollutants": {
+    "CO2": {
+      "M_worse_than_S": 121,
+      "A_worse_than_S": 121,
+      "M_worse_than_S_pred": 99,
+      "A_worse_than_S_pred": 95,
+      "total_O_g": 41123553.66184861,
+      "M_signed_error_pct": 20.748097390274477,
+      "sum_signed_components_pct_O": {
+        "observed_mean_rate": -4.601598414288352,
+        "fitted_mean_delay_speed": 1.0342179946337189,
+        "reconstructed_speed_distribution": 7.7822134001044905,
+        "two_speed_allocation": 16.53326440982465,
+        "cubic_rates": -1.9868741944935457
+      },
+      "absolute_components_normalized_by_O_pct": {
+        "observed_mean_rate": 5.942097178379664,
+        "fitted_mean_delay_speed": 10.322220593554773,
+        "reconstructed_speed_distribution": 10.59522216521958,
+        "two_speed_allocation": 16.852561792683115,
+        "cubic_rates": 3.618466157225432
+      },
+      "M_VHT_component_pct_O": -1.4018536754938056,
+      "M_effective_rate_component_pct_O": 22.149951065768317,
+      "M_observed_delay_all_algebraic": {
+        "N": 137,
+        "WAPE_pct": 21.66161452912112,
+        "bias_pct": 19.90131847177905,
+        "RMSE": 115872.52714911252,
+        "R2": 0.9203304346537406
+      },
+      "M_observed_delay_valid_mean": {
+        "N": 133,
+        "WAPE_pct": 21.81723345250992,
+        "bias_pct": 20.688722344821354,
+        "RMSE": 117376.77651620882,
+        "R2": 0.9202766322091295
+      },
+      "largest_M_component_counts": {
+        "two_speed_allocation": 74,
+        "fitted_mean_delay_speed": 44,
+        "reconstructed_speed_distribution": 15,
+        "observed_mean_rate": 4
+      },
+      "M_free_emission_share_pooled": 0.5396396701179961,
+      "observed_effective_rate_pooled": 9063.084340106087,
+      "M_effective_rate_pooled": 11150.002774520606
+    },
+    "NOx": {
+      "M_worse_than_S": 122,
+      "A_worse_than_S": 121,
+      "M_worse_than_S_pred": 108,
+      "A_worse_than_S_pred": 105,
+      "total_O_g": 37062.14195071079,
+      "M_signed_error_pct": 46.540208203612046,
+      "sum_signed_components_pct_O": {
+        "observed_mean_rate": -9.556745924706897,
+        "fitted_mean_delay_speed": 4.481466454847212,
+        "reconstructed_speed_distribution": 15.989231008195278,
+        "two_speed_allocation": 35.62625666527645,
+        "cubic_rates": -4.385236097976074
+      },
+      "absolute_components_normalized_by_O_pct": {
+        "observed_mean_rate": 12.42615086827804,
+        "fitted_mean_delay_speed": 13.977882607172528,
+        "reconstructed_speed_distribution": 21.806994280772038,
+        "two_speed_allocation": 36.37361530786317,
+        "cubic_rates": 8.101076432654425
+      },
+      "M_VHT_component_pct_O": -0.9028910737733785,
+      "M_effective_rate_component_pct_O": 47.44309927738543,
+      "M_observed_delay_all_algebraic": {
+        "N": 137,
+        "WAPE_pct": 46.62368623007013,
+        "bias_pct": 42.60244960826416,
+        "RMSE": 223.4173111332483,
+        "R2": 0.5324418358430726
+      },
+      "M_observed_delay_valid_mean": {
+        "N": 133,
+        "WAPE_pct": 46.77812121476729,
+        "bias_pct": 44.07017733052862,
+        "RMSE": 226.32849451162477,
+        "R2": 0.5314578271837707
+      },
+      "largest_M_component_counts": {
+        "two_speed_allocation": 85,
+        "fitted_mean_delay_speed": 30,
+        "reconstructed_speed_distribution": 19,
+        "observed_mean_rate": 3
+      },
+      "M_free_emission_share_pooled": 0.7254193392793241,
+      "observed_effective_rate_pooled": 8.168003210186976,
+      "M_effective_rate_pooled": 12.19526836207016
+    },
+    "CO": {
+      "M_worse_than_S": 64,
+      "A_worse_than_S": 70,
+      "M_worse_than_S_pred": 52,
+      "A_worse_than_S_pred": 42,
+      "total_O_g": 374633.42710264225,
+      "M_signed_error_pct": 2.1014817324812363,
+      "sum_signed_components_pct_O": {
+        "observed_mean_rate": -2.8589923177503893,
+        "fitted_mean_delay_speed": -1.2189723351557644,
+        "reconstructed_speed_distribution": 2.2790980668524408,
+        "two_speed_allocation": 3.9003483185349443,
+        "cubic_rates": -0.9684404696800123
+      },
+      "absolute_components_normalized_by_O_pct": {
+        "observed_mean_rate": 6.121722417844697,
+        "fitted_mean_delay_speed": 10.68711343378104,
+        "reconstructed_speed_distribution": 7.405112433517953,
+        "two_speed_allocation": 7.050371474760889,
+        "cubic_rates": 3.3319521525612568
+      },
+      "M_VHT_component_pct_O": -1.2099981266986528,
+      "M_effective_rate_component_pct_O": 3.3114798591798826,
+      "M_observed_delay_all_algebraic": {
+        "N": 137,
+        "WAPE_pct": 7.572566361379738,
+        "bias_pct": 2.2829761856434594,
+        "RMSE": 417.17392362694187,
+        "R2": 0.9870259206650184
+      },
+      "M_observed_delay_valid_mean": {
+        "N": 133,
+        "WAPE_pct": 7.496177500377391,
+        "bias_pct": 2.582041035863636,
+        "RMSE": 420.0622864102956,
+        "R2": 0.9871694381787792
+      },
+      "largest_M_component_counts": {
+        "fitted_mean_delay_speed": 63,
+        "reconstructed_speed_distribution": 28,
+        "two_speed_allocation": 23,
+        "observed_mean_rate": 23
+      },
+      "M_free_emission_share_pooled": 0.4589716491966661,
+      "observed_effective_rate_pooled": 82.56422522171697,
+      "M_effective_rate_pooled": 85.8900018711951
+    },
+    "HC": {
+      "M_worse_than_S": 94,
+      "A_worse_than_S": 89,
+      "M_worse_than_S_pred": 72,
+      "A_worse_than_S_pred": 67,
+      "total_O_g": 15347.589271815741,
+      "M_signed_error_pct": 4.993803690805088,
+      "sum_signed_components_pct_O": {
+        "observed_mean_rate": -2.510101911030425,
+        "fitted_mean_delay_speed": -0.4472608023774057,
+        "reconstructed_speed_distribution": 2.868765350151261,
+        "two_speed_allocation": 5.082401054061673,
+        "cubic_rates": -0.8179741206946505
+      },
+      "absolute_components_normalized_by_O_pct": {
+        "observed_mean_rate": 4.23852114653969,
+        "fitted_mean_delay_speed": 10.231871500044694,
+        "reconstructed_speed_distribution": 5.635954279427574,
+        "two_speed_allocation": 6.11984930887027,
+        "cubic_rates": 2.206706857893189
+      },
+      "M_VHT_component_pct_O": -1.3924944204673184,
+      "M_effective_rate_component_pct_O": 6.386298111272422,
+      "M_observed_delay_all_algebraic": {
+        "N": 137,
+        "WAPE_pct": 7.630026782856688,
+        "bias_pct": 5.312893177304301,
+        "RMSE": 17.127432999346503,
+        "R2": 0.987934915890075
+      },
+      "M_observed_delay_valid_mean": {
+        "N": 133,
+        "WAPE_pct": 7.6133511667980995,
+        "bias_pct": 5.6343677925413616,
+        "RMSE": 17.293945242856132,
+        "R2": 0.9880047216483339
+      },
+      "largest_M_component_counts": {
+        "fitted_mean_delay_speed": 76,
+        "reconstructed_speed_distribution": 27,
+        "two_speed_allocation": 20,
+        "observed_mean_rate": 14
+      },
+      "M_free_emission_share_pooled": 0.4415724745473674,
+      "observed_effective_rate_pooled": 3.3824045735818027,
+      "M_effective_rate_pooled": 3.6183275587471235
+    }
+  }
+}

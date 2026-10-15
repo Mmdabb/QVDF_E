@@ -1,0 +1,97 @@
+
+\newpage
+{\fontsize{18}{21}\selectfont\bfseries\color{navy}All five methods on the same clock}\par
+{\color{muted}Detector 78. The modeled groups are aligned to the recorded cumulative vehicle counts.}\par
+\legendkey{methodO}{O: recorded}\quad\legendkey{methodS}{S: mean speed}\quad\legendkey{methodR}{R: reconstructed}\quad\legendkey{methodM}{M: two-speed}\quad\legendkey{methodA}{A: cubic}
+\begin{center}\resizebox{\linewidth}{!}{\input{detector78/common_clock_profiles.tex}}\end{center}
+\textbf{Speed overlap is expected.} R, M and A have identical bin vehicle-hours and distance;
+their equivalent speeds coincide. For M/A, $v_i^{eff}=L/(\bar T_{{free},i}+\bar T_{q,i})$.
+The colors distinguish emission calculations, not three different equivalent-speed predictions.
+\notebox{For every method, $v_i^{eff}=d_iL/H_i$, $r_i^{eff}=E_i/H_i$ and $E_i=H_i r_i^{eff}$.
+R's effective rate is the time-weighted rate of its reconstructed groups, not the lookup at its bin-average speed.
+The displayed emissions are complete-link emissions assigned to vehicles counted in each bin;
+they are not emissions physically released during that clock interval. The alignment preserves all previous totals.}
+
+\newpage
+{\fontsize{18}{21}\selectfont\bfseries\color{navy}Cumulative emissions: vehicle share and time}\par
+{\color{muted}The left panels retain the vehicle-order view; the right panels use the common five-minute clock.}\par
+\legendkey{methodO}{O: recorded}\quad\legendkey{methodS}{S: mean speed}\quad\legendkey{methodR}{R: reconstructed}\quad\legendkey{methodM}{M: two-speed}\quad\legendkey{methodA}{A: cubic}
+\begin{center}\resizebox{\linewidth}{!}{\input{detector78/common_cumulative.tex}}\end{center}
+\textbf{Left: cumulative counted-vehicle share.} O follows observed bin order. R, M and A follow modeled group order.
+S uses a constant emission per vehicle. The same reconstructed group delays supply M/A's free/queue allocation.
+\textbf{Right: detector clock time.} Each boundary is the sum of all preceding five-minute emission contributions.
+Within-bin lines interpolate the bin contribution for display; no sub-bin release timing is inferred.
+Every endpoint equals the corresponding total on page 3.
+\notebox{\textbf{Alignment rule.} Split each positive quadrature vehicle weight across observed bins in cumulative-count order.
+For node $j$ and bin $i$, the overlap count is
+\[
+n_{ij}=\max\{0,\min(B_i,N_j)-\max(B_{i-1},N_{j-1})\},
+\]
+where $B_i$ and $N_j$ are cumulative observed-bin and modeled-node counts.
+Use $H_i=\sum_j n_{ij}T_j$ and $E_i=\sum_j n_{ij}e_j$.
+Thus all five methods use exactly the same bin count $d_i$ while keeping their original episode totals.
+This is a transparent display attribution, not an independently reconstructed queue clock.}
+
+\newpage
+{\fontsize{18}{21}\selectfont\bfseries\color{navy}Where the emission differences enter}\par
+{\color{muted}An exact signed decomposition for detector 78, conditional on the stated sequence.}
+\vspace{8pt}
+Define a single-speed calculation using the same fitted mean travel time as R/M/A:
+\[
+E_{S,pred}=H_{pred}r_0(DL/H_{pred}).
+\]
+Here $H_{obs}=211.434$ and $H_{pred}=197.040$ veh h/lane, a $-6.81$\% change.
+Mean trip time changes from 2.649 to 2.469 min and mean speed from 23.557 to 25.278 mph.
+The latter crosses a lookup-rate boundary; the fitted-mean CO$_2$ total is 1,547.64 kg/lane.
+For step 2, an exact symmetric split is
+\[
+\Delta E_H=(H_p-H_o)(r_p+r_o)/2,\qquad
+\Delta E_r=(r_p-r_o)(H_p+H_o)/2.
+\]
+Here $r_o=r_0(DL/H_o)$ and $r_p=r_0(DL/H_p)$.
+For CO$_2$, the vehicle-hours term is $-106.42$ kg and the mean-speed/rate term is $+188.43$ kg,
+giving a net $+82.01$ kg. These are mathematical components of the fitted-mean comparison.
+
+\vspace{8pt}\textbf{Sequential CO$_2$ contributions}\par
+\renewcommand{\arraystretch}{1.45}\setlength{\tabcolsep}{6pt}
+\begin{tabular*}{\linewidth}{@{\extracolsep{\fill}}lrr@{}}\toprule
+Change & CO$_2$ difference (kg/lane) & \% of O\\\midrule
+1. Observed mean-rate aggregation & -278.16 & -15.95 \\
+2. Fitted mean delay and speed & +82.01 & +4.70 \\
+3. Reconstructed trip-speed variation & +110.00 & +6.31 \\
+4. Two operating-speed allocation & +330.50 & +18.95 \\
+5. Cubic rate approximation & -149.20 & -8.56 \\
+\bottomrule\end{tabular*}
+
+\vspace{8pt}\textbf{What each step measures}
+\begin{enumerate}\setlength{\itemsep}{3pt}
+\item $E_S-E_O$: replace the recorded speed distribution with one observed mean speed, keeping observed vehicle-hours.
+\item $E_{S,pred}-E_S$: change to fitted mean delay and its implied mean speed, using the same one-speed rule.
+This combines the exposure change and the induced lookup-rate change.
+\item $E_R-E_{S,pred}$: introduce reconstructed variation among whole-link trip speeds at the same fitted vehicle-hours.
+\item $E_M-E_R$: replace each group's whole-trip speed with free/queue operating speeds, preserving time and distance.
+\item $E_A-E_M$: replace the two lookup rates with cubic rates; time allocation is unchanged.
+\end{enumerate}
+
+\notebox{\textbf{Which terms belong to each result?}
+S uses step 1. R uses steps 1--3. M uses steps 1--4. A uses steps 1--5.
+Their signed sums equal $E_m-E_O$ exactly. For example,
+\[
+E_M-E_O=(E_S-E_O)+(E_{S,pred}-E_S)+(E_R-E_{S,pred})+(E_M-E_R).
+\]
+Positive and negative components can cancel. Absolute errors or WAPE values do not add this way.
+This decomposition is order-dependent accounting, not proof of independent causal effects.}
+
+\vspace{9pt}\textbf{Components for all pollutants (percentage points relative to O)}\par
+\renewcommand{\arraystretch}{1.4}
+\begin{tabular*}{\linewidth}{@{\extracolsep{\fill}}lrrrrr@{}}\toprule
+Pollutant & Step 1 & Step 2 & Step 3 & Step 4 & Step 5\\\midrule
+CO$_2$ & -15.95 & +4.70 & +6.31 & +18.95 & -8.56 \\
+NO$_x$ & -38.48 & +23.90 & +11.73 & +45.46 & -20.39 \\
+CO & -14.56 & +3.92 & +1.18 & +10.32 & -4.42 \\
+HC & -11.68 & +3.30 & +0.87 & +8.59 & -3.69 \\
+\bottomrule\end{tabular*}
+\par\smallskip
+\textbf{Interpretation.} A lower total error can result from cancellation between calibration and emission-representation errors.
+The current reference itself assumes constant-speed whole-link trips; these components explain discrepancies relative to that reference,
+not discrepancies from measured tailpipe emissions. The 137-episode analysis will assess these patterns across episodes separately.

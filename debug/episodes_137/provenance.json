@@ -1,0 +1,45 @@
+{
+  "description": "Current retained-episode diagnostics packaged for repository navigation and portable reproduction. Scientific equations and reference results unchanged.",
+  "sample": {
+    "selection": "matched_ladder_pass == True",
+    "episodes": 137,
+    "five_minute_bins": 4800,
+    "detector_date_profiles": 118
+  },
+  "input_sha256": {
+    "data/frozen/calibration/average_weekday/episode_results_v2.csv": "8bd71e71cc4fe201a073c7e65aa61b7366a92ee7689445106fb7762e7955a201",
+    "data/frozen/calibration/average_weekday/traffic_panel.csv.gz": "e4653f592461f223dada3d1f0e78d45b981df5570f16c91f8216d896ccce02f0",
+    "data/frozen/calibration/average_weekday/cubic_rate_coefficients.csv": "c8b0802937793c93c832c63da3894ab91b13d4777a9ce86a275cad94d5fdc089",
+    "data/inputs/detector78/calculation_inputs.json": "9e737201772ecfdb126b4b0d3ae910a2aedbfb600b69d1ae85132185d97733ee",
+    "data/frozen/calibration/emission_input/input_vehicle_type.csv": "175a4acc0a774c89b1da9a287b725ec3818e1bc72b634bee52db6c99333aa378",
+    "data/frozen/calibration/emission_input/input_vehicle_emission_rate.csv": "60516669d4d02ed1c3867c2fa20ef3a372cb1e22cb4c597f2392387108fe12cc"
+  },
+  "shared_implementation_sha256": {
+    "reproduce/episode_error_audit.py": "9b95545823588f08803e5adc6e4db5663699f085371f0616b9fb41145cd769ca",
+    "src/qvdfe/pipeline/_engine/emissions.py": "6a0e108bf2de8d91289a5e78965eca0ab8db4411ce6b27c8756919767e1ace7d",
+    "src/qvdfe/pipeline/_engine/two_regime_emissions.py": "041d9095ca1668e40c3eab118802f311c5b141dd30844860452e5acfab25ed65"
+  },
+  "reference_pdf_sha256": "e52349b31fc247ec793174a78cef6814d51d3ac58efc8bae220e5d235cd0d6c7",
+  "original_analysis_script_sha256": {
+    "analyze_episodes.py": "c93c1a4028255293f3d21edbe8bdb73854ef960cab5b06184c395a65c0041b06",
+    "attribution_review.py": "d4ec79caaa5da3f7517154c94ddb1d4ab1ce175d4933bc203c31268b37feecd2",
+    "review_calibration.py": "5ec429286dfb17491f5b4effe89891f53011dafd585729b9661a39f9b202eb03",
+    "check_speed_identity.py": "f2381999c08b8fa9652ee7440bc319b0bf741f079bd959bb2ccd0b5ddef92dd3",
+    "build_analysis_report.py": "0add07ca0ce0173b6fed17e0527c913ca384924983c63001f4ae11de780ad1d3"
+  },
+  "packaging_changes": [
+    "Repository-relative data references replace machine-specific paths.",
+    "Emission attribution imports the maintained QVDF-E rate loader.",
+    "Main table regeneration delegates to reproduce/episode_error_audit.py.",
+    "All generated output is separate from checked-in reference files.",
+    "LaTeX executable is configurable and defaults to pdflatex on PATH.",
+    "Source-code locations in the calibration audit point to maintained repository modules."
+  ],
+  "excluded": [
+    "superseded backups",
+    "withdrawn average-error table",
+    "temporary caches/build logs",
+    "ZIP duplicates"
+  ],
+  "verification": "audits/bundle_reproduction_check.json"
+}

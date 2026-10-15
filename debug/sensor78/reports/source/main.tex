@@ -1,0 +1,181 @@
+\documentclass[10pt,a4paper]{article}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern,amsmath,amssymb,booktabs,array,xcolor,microtype}
+\usepackage[margin=16mm,top=14mm,bottom=16mm]{geometry}
+\usepackage{fancyhdr,tikz,graphicx}
+\usepackage[hidelinks]{hyperref}
+\definecolor{navy}{HTML}{17394D}
+\definecolor{teal}{HTML}{176E78}
+\definecolor{pale}{HTML}{EEF5F7}
+\definecolor{muted}{HTML}{4B5963}
+\definecolor{rulegray}{HTML}{CAD5DB}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{3pt}
+\setlength{\abovedisplayskip}{4pt}
+\setlength{\belowdisplayskip}{4pt}
+\setlength{\abovedisplayshortskip}{3pt}
+\setlength{\belowdisplayshortskip}{3pt}
+\pagestyle{fancy}\fancyhf{}
+\renewcommand{\headrulewidth}{0pt}
+\fancyfoot[L]{\scriptsize\color{muted}QVDF-E \quad | \quad Emission calculation reference}
+\fancyfoot[R]{\scriptsize\color{muted}\thepage\ / 6}
+\newcommand{\method}[2]{\par\vspace{4pt}{\color{teal}\bfseries #1\quad #2}\par\vspace{1pt}}
+\newcommand{\notebox}[1]{\par\vspace{4pt}\begingroup\setlength{\fboxsep}{7pt}\colorbox{pale}{\parbox{\dimexpr\linewidth-14pt\relax}{#1}}\endgroup\par}
+\hypersetup{pdftitle={QVDF-E: Five emission calculations and evaluation results},pdfauthor={Mohammad Abbasi},pdfsubject={Equations and verified average-weekday results}}
+\definecolor{methodO}{HTML}{242B33}
+\definecolor{methodS}{HTML}{0072B2}
+\definecolor{methodR}{HTML}{7B3294}
+\definecolor{methodM}{HTML}{009E73}
+\definecolor{methodA}{HTML}{D55E00}\newcommand{\legendkey}[2]{{\scriptsize\textcolor{#1}{\rule[2pt]{10pt}{1.3pt}}\ #2}}
+\begin{document}
+\fontsize{9.3}{11.1}\selectfont
+{\fontsize{19}{22}\selectfont\bfseries\color{navy}Five emission calculations}\par
+{\color{muted}One whole episode, one pollutant. O, S, R, M and A identify the existing calculations.}
+
+\textbf{Notation and units.} Bin $i$ has speed $v_i$ and count $d_i=q_i\Delta t$, with $\Delta t=1/12$ h.
+$D=\sum_i d_i$; $L$ is link length; $C$ is hourly capacity; $T_f=L/v_f$.
+$H$ denotes vehicle-hours, $P$ episode duration and $T$ per-vehicle travel time.
+$r_0(v)$ is the zero-acceleration lookup rate in g/(veh\,h); $E$ is in grams. Counts and capacity use the same lane basis.
+
+\textbf{Shared fitted quantities for R, M and A.}
+\[
+x=\frac{D}{C},\qquad \widehat P=\max(f_dx^n,x),\qquad
+\widehat w_{\max}=T_f f_p\widehat P^{s},\qquad
+\widehat{\bar w}=\theta\widehat w_{\max},\qquad
+H_{\rm pred}=D(T_f+\widehat{\bar w}).
+\]
+$f_d,n,f_p,s,\theta$ are calibrated by directional corridor and period, with the existing sparse-period fallback.
+
+\method{O}{Recorded-speed reference}
+Assign each bin's counted vehicles the complete-link travel time $L/v_i$, then sum:
+\[
+H_i=d_i\frac{L}{v_i},\qquad H_{\rm obs}=\sum_i H_i,\qquad
+\boxed{E_O=\sum_i H_i r_0(v_i).}
+\]
+The five-minute interval supplies the count; emission exposure is $L/v_i$, not five minutes.
+
+\method{S}{Episode mean-speed estimate}
+Use the count-weighted harmonic mean, preserving the reference's total vehicle-hours:
+\[
+\bar v_{\rm obs}=\frac{D}{\sum_i d_i/v_i}=\frac{DL}{H_{\rm obs}},\qquad
+\boxed{E_S=H_{\rm obs}\,r_0(\bar v_{\rm obs}).}
+\]
+
+\method{R}{Reconstructed whole-link speeds}
+For normalized entry time $u\in[0,1]$, define $w(u)=\widehat w_{\max}h(u)$ and
+$v_R(u)=L/[T_f+w(u)]$. The symmetric profile is
+\[
+h(u)=\begin{cases}
+[4u(1-u)]^a,&\theta\le 2/3,\quad \int_0^1h(u)\,du=\theta\ \text{determines }a,\\
+1-|2u-1|^b,&\theta>2/3,\quad b=\theta/(1-\theta).
+\end{cases}
+\]
+The entering-vehicle weight is $dN=D[1+(\widehat w_{\max}/\widehat P)h'(u)]\,du$. Thus
+\[
+\boxed{E_R=\int_0^1[T_f+w(u)]\,r_0\!\left(\frac{L}{T_f+w(u)}\right)\,dN.}
+\]
+The integral uses 384 quadrature points; $\int dN=D$ and $\int[T_f+w(u)]dN=H_{\rm pred}$.
+These are trip-average speeds by entry time, not individual operating-speed trajectories.
+
+\method{M}{Two-speed lookup}
+Infer the queue speed from discharge and the triangular fundamental diagram:
+\[
+\widehat\mu=\frac{D}{\widehat P},\qquad
+\omega=\frac{C}{k_j-C/v_f},\qquad
+\widehat v_q=\frac{\widehat\mu}{k_j-\widehat\mu/\omega},\qquad k_j=220\ \text{veh/mi/lane}.
+\]
+Allocate mean travel time between two operating speeds while preserving distance:
+\[
+\bar T_q=\frac{v_f\widehat{\bar w}}{v_f-\widehat v_q},\qquad
+\bar T_{\rm free}=T_f-\frac{\widehat v_q\widehat{\bar w}}{v_f-\widehat v_q},\qquad
+\boxed{E_M=D[\bar T_{\rm free}r_0(v_f)+\bar T_qr_0(\widehat v_q)].}
+\]
+Here $\bar T_{\rm free}+\bar T_q=T_f+\widehat{\bar w}$ and $v_f\bar T_{\rm free}+\widehat v_q\bar T_q=L$.
+
+\method{A}{Two-speed cubic}
+Keep M's speeds and times; replace the lookup rate by its fitted cubic:
+\[
+r_c(v)=c_0+c_1v+c_2v^2+c_3v^3,\qquad
+\boxed{E_A=D[\bar T_{\rm free}r_c(v_f)+\bar T_qr_c(\widehat v_q)].}
+\]
+
+\notebox{\textbf{Evaluation: episode-total WAPE.} For method $m\in\{S,R,M,A\}$ and the same $N=137$ episodes,
+\[
+\boxed{\operatorname{WAPE}_m=100\frac{\sum_{k=1}^{N}|E_{m,k}-E_{O,k}|}{\sum_{k=1}^{N}E_{O,k}}.}
+\]
+Absolute errors are calculated before pooling episodes. O is a detector-speed-based calculation,
+not measured emissions or observed vehicle trajectories. All five calculations omit acceleration effects.}
+
+\newpage
+\fontsize{10}{12.4}\selectfont
+{\fontsize{19}{22}\selectfont\bfseries\color{navy}Results on the common episode sample}\par
+{\color{muted}137 average-weekday episodes: 20 Arizona I-10 and 117 California PeMS.}\par
+\vspace{8pt}
+\textbf{Table 1. CO$_2$ totals, travel-time exposure and episode-total error.}
+
+\renewcommand{\arraystretch}{1.65}
+\setlength{\tabcolsep}{5pt}
+\begin{tabular*}{\linewidth}{@{\extracolsep{\fill}}lrrrr@{}}
+\toprule
+\textbf{Calculation} & \shortstack{\textbf{Vehicle-hours}\\\textbf{(veh\,h)}} &
+\shortstack{\textbf{Effective rate}\!$^{*}$\\\textbf{kg/(veh\,h)}} &
+\shortstack{\textbf{Total CO$_2$}\\\textbf{(kg)}} & \shortstack{\textbf{WAPE}\\\textbf{(\%)}}\\
+\midrule
+O: recorded speeds & 4,537.48 & 9.063 & 41,123.55 & Reference\\\midrule[0.3pt]
+S: episode mean speed & 4,537.48 & 8.646 & 39,231.21 & 5.94\\\midrule[0.3pt]
+R: reconstructed speeds & 4,453.44 & 9.623 & 42,856.84 & 10.13\\\midrule[0.3pt]
+M: two-speed lookup & 4,453.44 & 11.150 & 49,655.91 & 22.38\\\midrule[0.3pt]
+A: two-speed cubic & 4,453.44 & 10.967 & 48,838.84 & 20.32\\
+\bottomrule
+\end{tabular*}
+\par\vspace{3pt}
+{\small $^{*}$Effective rate is summed emissions divided by summed vehicle-hours. It is not a lookup rate at a pooled speed. WAPE is based on individual episode errors, not the error of the summed totals.}
+
+\vspace{15pt}
+\textbf{Table 2. Episode-total WAPE against O for all four pollutants (\%).}
+
+\begin{tabular*}{\linewidth}{@{\extracolsep{\fill}}lrrrr@{}}
+\toprule
+\textbf{Calculation} & \textbf{CO$_2$} & \textbf{NO$_x$} & \textbf{CO} & \textbf{HC}\\
+\midrule
+S: episode mean speed & 5.94 & 12.43 & 6.12 & 4.24\\\midrule[0.3pt]
+R: reconstructed speeds & 10.13 & 13.05 & 8.27 & 9.52\\\midrule[0.3pt]
+M: two-speed lookup & 22.38 & 47.73 & 11.19 & 12.61\\\midrule[0.3pt]
+A: two-speed cubic & 20.32 & 42.71 & 9.82 & 11.65\\
+\bottomrule
+\end{tabular*}
+
+\vspace{13pt}
+\textbf{Reading the comparison}
+
+\textbf{S preserves observed exposure.} It retains O's vehicle-hours and total distance exactly,
+changing only how emission rates are averaged. R, M and A use fitted vehicle-hours instead.
+The fitted vehicle-hours have an episode WAPE of 14.77\%, although their summed bias is only $-1.85$\%.
+
+\textbf{M versus R isolates a speed-representation difference.} They share the same fitted
+vehicle-hours and total distance, but M produces 15.9\% more CO$_2$ and 32.1\% more NO$_x$ in total.
+R applies rates to whole-link trip-average speeds; M applies rates to free-flow and queue operating speeds.
+
+\notebox{\textbf{Why one mean speed can be close to the reference}\par
+Let $a_i=H_i/H_{\rm obs}$ within an episode. Then $\sum_i a_i=1$ and
+$\bar v_{\rm obs}=\sum_i a_iv_i$, giving
+\[
+E_O-E_S=H_{\rm obs}\left[\sum_i a_i r_0(v_i)-r_0\!\left(\sum_i a_iv_i\right)\right].
+\]
+If $r_0(v)=a+bv$ over the occupied speed range, S equals O exactly despite speed variability.
+The actual stepped lookup is nonlinear, so the discrepancy depends on its rate changes and the speed distribution.}
+
+\vspace{8pt}
+\textbf{Interpretation limit.} Lower WAPE means closer agreement with O. It does not establish
+greater accuracy against actual vehicle trajectories or measured emissions. A single-speed comparator
+using the same fitted exposure, $E_{S,\rm pred}=H_{\rm pred}r_0(DL/H_{\rm pred})$, is not included in these reported results.
+
+\vfill
+{\fontsize{8}{10}\selectfont\color{muted}
+Source: archived average-weekday episode results and emission metrics (22 September 2026),
+filtered to the common five-method sample. Existing outputs were checked and summarized; no experiments were rerun.
+Formulas follow the retained implementation. Totals are passenger-car-equivalent estimates on the source per-lane basis.}
+% DETECTOR78_APPENDIX
+\input{detector78/worked_calculations.tex}
+\input{detector78/common_time_pages.tex}
+\end{document}

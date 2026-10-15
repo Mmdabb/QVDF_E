@@ -1,0 +1,334 @@
+column,definition
+episode_id,Stable episode identifier from the retained paper experiment.
+sensor_uid,sensor uid. Units/operation follow the column name; original traffic fields retain their archived meaning.
+date,date. Units/operation follow the column name; original traffic fields retain their archived meaning.
+paper_corridor,paper corridor. Units/operation follow the column name; original traffic fields retain their archived meaning.
+corridor,corridor. Units/operation follow the column name; original traffic fields retain their archived meaning.
+direction,direction. Units/operation follow the column name; original traffic fields retain their archived meaning.
+period,period. Units/operation follow the column name; original traffic fields retain their archived meaning.
+dataset,dataset. Units/operation follow the column name; original traffic fields retain their archived meaning.
+calibration_scope,calibration scope. Units/operation follow the column name; original traffic fields retain their archived meaning.
+calibration_split,calibration split. Units/operation follow the column name; original traffic fields retain their archived meaning.
+t0,t0. Units/operation follow the column name; original traffic fields retain their archived meaning.
+t2,t2. Units/operation follow the column name; original traffic fields retain their archived meaning.
+t3,t3. Units/operation follow the column name; original traffic fields retain their archived meaning.
+D_veh,D veh. Units/operation follow the column name; original traffic fields retain their archived meaning.
+L_mi,L mi. Units/operation follow the column name; original traffic fields retain their archived meaning.
+C_vphpl,C vphpl. Units/operation follow the column name; original traffic fields retain their archived meaning.
+vf_mph,vf mph. Units/operation follow the column name; original traffic fields retain their archived meaning.
+kj,kj. Units/operation follow the column name; original traffic fields retain their archived meaning.
+x_h,x h. Units/operation follow the column name; original traffic fields retain their archived meaning.
+P_h,P h. Units/operation follow the column name; original traffic fields retain their archived meaning.
+P_hat_h,"Predicted episode duration = max(fd * (D/C)^n, D/C) (h)."
+Tf_h,Tf h. Units/operation follow the column name; original traffic fields retain their archived meaning.
+wt2_h,Observed peak link delay: L/min(recorded speed) - L/vf (h).
+wt2_hat_h,Predicted peak delay = Tf * fp * P_hat^s (h).
+wbar_h,Observed count-weighted mean link delay: sum[d*(L/v - L/vf)] / D (h).
+wbar_hat_h,Predicted mean delay = theta * predicted peak delay (h).
+vq_mph,vq mph. Units/operation follow the column name; original traffic fields retain their archived meaning.
+vq_hat_mph,Predicted queued operating speed from mu=D/P_hat and the calibrated triangular flow-density relation.
+fd,fd. Units/operation follow the column name; original traffic fields retain their archived meaning.
+n,n. Units/operation follow the column name; original traffic fields retain their archived meaning.
+fp,fp. Units/operation follow the column name; original traffic fields retain their archived meaning.
+s,s. Units/operation follow the column name; original traffic fields retain their archived meaning.
+theta,theta. Units/operation follow the column name; original traffic fields retain their archived meaning.
+theta_observed,theta observed. Units/operation follow the column name; original traffic fields retain their archived meaning.
+physical_observed_pass,physical observed pass. Units/operation follow the column name; original traffic fields retain their archived meaning.
+profile_family,profile family. Units/operation follow the column name; original traffic fields retain their archived meaning.
+profile_shape_a,profile shape a. Units/operation follow the column name; original traffic fields retain their archived meaning.
+bin_count,bin count. Units/operation follow the column name; original traffic fields retain their archived meaning.
+H_observed_veh_h,H observed veh h. Units/operation follow the column name; original traffic fields retain their archived meaning.
+H_predicted_veh_h,H predicted veh h. Units/operation follow the column name; original traffic fields retain their archived meaning.
+H_reconstructed_quadrature_veh_h,H reconstructed quadrature veh h. Units/operation follow the column name; original traffic fields retain their archived meaning.
+H_quadrature_minus_analytical_veh_h,H quadrature minus analytical veh h. Units/operation follow the column name; original traffic fields retain their archived meaning.
+mean_trip_observed_min,mean trip observed min. Units/operation follow the column name; original traffic fields retain their archived meaning.
+mean_trip_predicted_min,mean trip predicted min. Units/operation follow the column name; original traffic fields retain their archived meaning.
+mean_delay_observed_min,mean delay observed min. Units/operation follow the column name; original traffic fields retain their archived meaning.
+mean_delay_predicted_min,mean delay predicted min. Units/operation follow the column name; original traffic fields retain their archived meaning.
+mean_delay_error_pct,mean delay error pct. Units/operation follow the column name; original traffic fields retain their archived meaning.
+mean_delay_abs_error_min,mean delay abs error min. Units/operation follow the column name; original traffic fields retain their archived meaning.
+trip_time_error_pct,trip time error pct. Units/operation follow the column name; original traffic fields retain their archived meaning.
+trip_time_abs_error_pct,trip time abs error pct. Units/operation follow the column name; original traffic fields retain their archived meaning.
+peak_delay_error_pct,peak delay error pct. Units/operation follow the column name; original traffic fields retain their archived meaning.
+duration_error_pct,duration error pct. Units/operation follow the column name; original traffic fields retain their archived meaning.
+mean_speed_observed_mph,mean speed observed mph. Units/operation follow the column name; original traffic fields retain their archived meaning.
+mean_speed_predicted_mph,mean speed predicted mph. Units/operation follow the column name; original traffic fields retain their archived meaning.
+observed_speed_count_mean_mph,observed speed count mean mph. Units/operation follow the column name; original traffic fields retain their archived meaning.
+observed_speed_count_sd_mph,observed speed count sd mph. Units/operation follow the column name; original traffic fields retain their archived meaning.
+observed_speed_count_cv,Count-weighted SD of recorded 5-min speeds / count-weighted arithmetic mean speed.
+observed_speed_min_mph,observed speed min mph. Units/operation follow the column name; original traffic fields retain their archived meaning.
+observed_speed_max_mph,observed speed max mph. Units/operation follow the column name; original traffic fields retain their archived meaning.
+observed_speed_range_mph,observed speed range mph. Units/operation follow the column name; original traffic fields retain their archived meaning.
+mean_delay_over_free_time,Observed mean delay / free-flow link time. Descriptive congestion severity.
+peak_delay_over_free_time,peak delay over free time. Units/operation follow the column name; original traffic fields retain their archived meaning.
+min_speed_over_free_speed,min speed over free speed. Units/operation follow the column name; original traffic fields retain their archived meaning.
+predicted_free_time_min,predicted free time min. Units/operation follow the column name; original traffic fields retain their archived meaning.
+predicted_queue_time_min,predicted queue time min. Units/operation follow the column name; original traffic fields retain their archived meaning.
+predicted_free_VHT_share,Predicted free-flow state time / predicted total link time.
+observed_delay_counterfactual_free_time_min,observed delay counterfactual free time min. Units/operation follow the column name; original traffic fields retain their archived meaning.
+observed_delay_counterfactual_queue_time_min,observed delay counterfactual queue time min. Units/operation follow the column name; original traffic fields retain their archived meaning.
+observed_delay_counterfactual_mean_admissible,Replacing predicted mean delay by observed mean delay keeps mean free/queue times nonnegative. Not a full-trajectory guarantee.
+observed_delay_counterfactual_full_profile_admissible,"Same fitted shape and duration, with peak rescaled to observed mean delay, meets finite-link and nonnegative-arrival constraints."
+lookup_band_mean_observed,lookup band mean observed. Units/operation follow the column name; original traffic fields retain their archived meaning.
+lookup_band_mean_predicted,lookup band mean predicted. Units/operation follow the column name; original traffic fields retain their archived meaning.
+mean_speed_crosses_rate_band,Observed and predicted episode mean speeds fall in different lookup-rate bands.
+flag_flat_profile_cv_le_010,Descriptive threshold stated in the column name; not an exclusion rule or proof of causality.
+flag_shallow_mean_delay_ratio_le_025,Descriptive threshold stated in the column name; not an exclusion rule or proof of causality.
+flag_short_duration_le_1h,Descriptive threshold stated in the column name; not an exclusion rule or proof of causality.
+flag_large_trip_time_error_gt_10pct,Descriptive threshold stated in the column name; not an exclusion rule or proof of causality.
+flag_small_mean_delay_le_10s,Descriptive threshold stated in the column name; not an exclusion rule or proof of causality.
+conditional_peak_delay_h,Tf*fp*P_observed^s: peak-delay prediction substituting observed duration only.
+mean_delay_component_theta_h,(fitted theta - observed theta) * observed peak delay; signed path component in hours/vehicle.
+mean_delay_component_severity_h,fitted theta * (conditional peak delay - observed peak delay); signed path component in hours/vehicle.
+mean_delay_component_duration_h,fitted theta * (predicted peak delay - conditional peak delay); signed path component in hours/vehicle.
+total_vehicle_delay_observed_veh_h,total vehicle delay observed veh h. Units/operation follow the column name; original traffic fields retain their archived meaning.
+total_vehicle_delay_predicted_veh_h,total vehicle delay predicted veh h. Units/operation follow the column name; original traffic fields retain their archived meaning.
+CO2_O_g,"CO2: Reference: sum over recorded bins of d * L/v * lookup(v), grams."
+CO2_S_g,"CO2: Observed mean-speed method: H_obs * lookup(D*L/H_obs), grams."
+CO2_S_pred_g,"CO2: Predicted-mean diagnostic: H_pred * lookup(D*L/H_pred), grams; same fitted travel time as two-speed."
+CO2_R_g,"CO2: Reconstructed whole-trip speed integration using 384-node quadrature, grams."
+CO2_M_g,"CO2: Two operating speeds with lookup rates, grams."
+CO2_A_g,"CO2: Two operating speeds with cubic rates, grams."
+CO2_M_free_g,CO2 M free g. Units/operation follow the column name; original traffic fields retain their archived meaning.
+CO2_M_queue_g,CO2 M queue g. Units/operation follow the column name; original traffic fields retain their archived meaning.
+CO2_M_free_emission_share,CO2 M free emission share. Units/operation follow the column name; original traffic fields retain their archived meaning.
+CO2_lookup_rate_observed_mean,CO2 lookup rate observed mean. Units/operation follow the column name; original traffic fields retain their archived meaning.
+CO2_lookup_rate_predicted_mean,CO2 lookup rate predicted mean. Units/operation follow the column name; original traffic fields retain their archived meaning.
+CO2_lookup_rate_free,CO2 lookup rate free. Units/operation follow the column name; original traffic fields retain their archived meaning.
+CO2_lookup_rate_queue,CO2 lookup rate queue. Units/operation follow the column name; original traffic fields retain their archived meaning.
+CO2_lookup_rate_free_queue_ratio,CO2 lookup rate free queue ratio. Units/operation follow the column name; original traffic fields retain their archived meaning.
+CO2_observed_effective_rate,CO2 observed effective rate. Units/operation follow the column name; original traffic fields retain their archived meaning.
+CO2_predicted_M_effective_rate,CO2 predicted M effective rate. Units/operation follow the column name; original traffic fields retain their archived meaning.
+CO2_rate_M_over_observed,CO2 rate M over observed. Units/operation follow the column name; original traffic fields retain their archived meaning.
+CO2_observed_bin_rate_time_cv,CO2 observed bin rate time cv. Units/operation follow the column name; original traffic fields retain their archived meaning.
+CO2_gamma_lookup,CO2 gamma lookup. Units/operation follow the column name; original traffic fields retain their archived meaning.
+CO2_M_observed_delay_g,CO2: Algebraic counterfactual holding predicted vf/vq rates fixed and replacing only mean delay by observed mean delay. Read admissibility flags.
+CO2_M_observed_delay_mean_admissible,CO2 M observed delay mean admissible. Units/operation follow the column name; original traffic fields retain their archived meaning.
+CO2_M_observed_delay_full_profile_admissible,CO2 M observed delay full profile admissible. Units/operation follow the column name; original traffic fields retain their archived meaning.
+CO2_predicted_chord_rate,"CO2: Linear interpolation of rates at fitted queue speed and free-flow speed, evaluated at predicted mean speed (g/veh h); exactly M/H_pred."
+CO2_M_minus_S_pred_g,"CO2: Difference at identical fitted vehicle-hours, count and distance; equals H_pred*(predicted_chord_rate-lookup_rate_predicted_mean)."
+CO2_M_fixed_state_delay_component_g,CO2: M - M_observed_delay = D*(w_pred-w_obs)*Gamma; conditional on fixed queue speed and rates.
+CO2_M_observed_delay_representation_residual_g,CO2: M_observed_delay - O; not a uniquely identified physical approximation error.
+CO2_fitted_mean_vehicle_hours_component_g,CO2 fitted mean vehicle hours component g. Units/operation follow the column name; original traffic fields retain their archived meaning.
+CO2_fitted_mean_speed_rate_component_g,CO2 fitted mean speed rate component g. Units/operation follow the column name; original traffic fields retain their archived meaning.
+CO2_M_vs_O_vehicle_hours_component_g,CO2: Exact symmetric product split: (H_pred-H_obs)*(r_M_eff+r_O_eff)/2.
+CO2_M_vs_O_effective_rate_component_g,CO2: Exact symmetric product split: (r_M_eff-r_O_eff)*(H_pred+H_obs)/2; includes speed/rate representation and interacting calibration effects.
+CO2_S_signed_error_pct,CO2: 100 * (method emission / O - 1).
+CO2_S_absolute_error_pct,"CO2: 100 * abs(method emission / O - 1); episode APE, not pooled WAPE."
+CO2_S_pred_signed_error_pct,CO2: 100 * (method emission / O - 1).
+CO2_S_pred_absolute_error_pct,"CO2: 100 * abs(method emission / O - 1); episode APE, not pooled WAPE."
+CO2_R_signed_error_pct,CO2: 100 * (method emission / O - 1).
+CO2_R_absolute_error_pct,"CO2: 100 * abs(method emission / O - 1); episode APE, not pooled WAPE."
+CO2_M_signed_error_pct,CO2: 100 * (method emission / O - 1).
+CO2_M_absolute_error_pct,"CO2: 100 * abs(method emission / O - 1); episode APE, not pooled WAPE."
+CO2_A_signed_error_pct,CO2: 100 * (method emission / O - 1).
+CO2_A_absolute_error_pct,"CO2: 100 * abs(method emission / O - 1); episode APE, not pooled WAPE."
+CO2_M_observed_delay_signed_error_pct,CO2: 100 * (method emission / O - 1).
+CO2_M_observed_delay_absolute_error_pct,"CO2: 100 * abs(method emission / O - 1); episode APE, not pooled WAPE."
+CO2_M_minus_S_APE_pp,"CO2: First method APE minus comparison method APE, percentage points; positive means first method is worse."
+CO2_M_worse_than_S,CO2: True if this method has larger episode absolute error than observed single-speed S; strict tolerance 1e-9 percentage points.
+CO2_M_minus_S_pred_APE_pp,"CO2: First method APE minus comparison method APE, percentage points; positive means first method is worse."
+CO2_M_worse_than_S_pred,CO2: True if this method has larger episode absolute error than predicted single-speed S_pred.
+CO2_A_minus_S_APE_pp,"CO2: First method APE minus comparison method APE, percentage points; positive means first method is worse."
+CO2_A_worse_than_S,CO2: True if this method has larger episode absolute error than observed single-speed S; strict tolerance 1e-9 percentage points.
+CO2_A_minus_S_pred_APE_pp,"CO2: First method APE minus comparison method APE, percentage points; positive means first method is worse."
+CO2_A_worse_than_S_pred,CO2: True if this method has larger episode absolute error than predicted single-speed S_pred.
+CO2_observed_mean_rate_component_g,CO2: S-O.
+CO2_observed_mean_rate_component_pct_O,"CO2: Corresponding signed component in grams / O *100. Components add with signs, not after taking absolute values."
+CO2_fitted_mean_delay_speed_component_g,CO2: S_pred-S.
+CO2_fitted_mean_delay_speed_component_pct_O,"CO2: Corresponding signed component in grams / O *100. Components add with signs, not after taking absolute values."
+CO2_reconstructed_speed_distribution_component_g,CO2: R-S_pred.
+CO2_reconstructed_speed_distribution_component_pct_O,"CO2: Corresponding signed component in grams / O *100. Components add with signs, not after taking absolute values."
+CO2_two_speed_allocation_component_g,CO2: M-R; travel times held equal up to quadrature precision.
+CO2_two_speed_allocation_component_pct_O,"CO2: Corresponding signed component in grams / O *100. Components add with signs, not after taking absolute values."
+CO2_cubic_rates_component_g,CO2: A-M.
+CO2_cubic_rates_component_pct_O,"CO2: Corresponding signed component in grams / O *100. Components add with signs, not after taking absolute values."
+CO2_largest_M_accounting_component,"CO2: Largest absolute signed contribution among S-O, S_pred-S, R-S_pred, M-R. Ordered accounting, not causal label."
+CO2_largest_A_accounting_component,"CO2: Largest absolute signed contribution among the five successive differences. Ordered accounting, not causal label."
+NOx_O_g,"NOx: Reference: sum over recorded bins of d * L/v * lookup(v), grams."
+NOx_S_g,"NOx: Observed mean-speed method: H_obs * lookup(D*L/H_obs), grams."
+NOx_S_pred_g,"NOx: Predicted-mean diagnostic: H_pred * lookup(D*L/H_pred), grams; same fitted travel time as two-speed."
+NOx_R_g,"NOx: Reconstructed whole-trip speed integration using 384-node quadrature, grams."
+NOx_M_g,"NOx: Two operating speeds with lookup rates, grams."
+NOx_A_g,"NOx: Two operating speeds with cubic rates, grams."
+NOx_M_free_g,NOx M free g. Units/operation follow the column name; original traffic fields retain their archived meaning.
+NOx_M_queue_g,NOx M queue g. Units/operation follow the column name; original traffic fields retain their archived meaning.
+NOx_M_free_emission_share,NOx M free emission share. Units/operation follow the column name; original traffic fields retain their archived meaning.
+NOx_lookup_rate_observed_mean,NOx lookup rate observed mean. Units/operation follow the column name; original traffic fields retain their archived meaning.
+NOx_lookup_rate_predicted_mean,NOx lookup rate predicted mean. Units/operation follow the column name; original traffic fields retain their archived meaning.
+NOx_lookup_rate_free,NOx lookup rate free. Units/operation follow the column name; original traffic fields retain their archived meaning.
+NOx_lookup_rate_queue,NOx lookup rate queue. Units/operation follow the column name; original traffic fields retain their archived meaning.
+NOx_lookup_rate_free_queue_ratio,NOx lookup rate free queue ratio. Units/operation follow the column name; original traffic fields retain their archived meaning.
+NOx_observed_effective_rate,NOx observed effective rate. Units/operation follow the column name; original traffic fields retain their archived meaning.
+NOx_predicted_M_effective_rate,NOx predicted M effective rate. Units/operation follow the column name; original traffic fields retain their archived meaning.
+NOx_rate_M_over_observed,NOx rate M over observed. Units/operation follow the column name; original traffic fields retain their archived meaning.
+NOx_observed_bin_rate_time_cv,NOx observed bin rate time cv. Units/operation follow the column name; original traffic fields retain their archived meaning.
+NOx_gamma_lookup,NOx gamma lookup. Units/operation follow the column name; original traffic fields retain their archived meaning.
+NOx_M_observed_delay_g,NOx: Algebraic counterfactual holding predicted vf/vq rates fixed and replacing only mean delay by observed mean delay. Read admissibility flags.
+NOx_M_observed_delay_mean_admissible,NOx M observed delay mean admissible. Units/operation follow the column name; original traffic fields retain their archived meaning.
+NOx_M_observed_delay_full_profile_admissible,NOx M observed delay full profile admissible. Units/operation follow the column name; original traffic fields retain their archived meaning.
+NOx_predicted_chord_rate,"NOx: Linear interpolation of rates at fitted queue speed and free-flow speed, evaluated at predicted mean speed (g/veh h); exactly M/H_pred."
+NOx_M_minus_S_pred_g,"NOx: Difference at identical fitted vehicle-hours, count and distance; equals H_pred*(predicted_chord_rate-lookup_rate_predicted_mean)."
+NOx_M_fixed_state_delay_component_g,NOx: M - M_observed_delay = D*(w_pred-w_obs)*Gamma; conditional on fixed queue speed and rates.
+NOx_M_observed_delay_representation_residual_g,NOx: M_observed_delay - O; not a uniquely identified physical approximation error.
+NOx_fitted_mean_vehicle_hours_component_g,NOx fitted mean vehicle hours component g. Units/operation follow the column name; original traffic fields retain their archived meaning.
+NOx_fitted_mean_speed_rate_component_g,NOx fitted mean speed rate component g. Units/operation follow the column name; original traffic fields retain their archived meaning.
+NOx_M_vs_O_vehicle_hours_component_g,NOx: Exact symmetric product split: (H_pred-H_obs)*(r_M_eff+r_O_eff)/2.
+NOx_M_vs_O_effective_rate_component_g,NOx: Exact symmetric product split: (r_M_eff-r_O_eff)*(H_pred+H_obs)/2; includes speed/rate representation and interacting calibration effects.
+NOx_S_signed_error_pct,NOx: 100 * (method emission / O - 1).
+NOx_S_absolute_error_pct,"NOx: 100 * abs(method emission / O - 1); episode APE, not pooled WAPE."
+NOx_S_pred_signed_error_pct,NOx: 100 * (method emission / O - 1).
+NOx_S_pred_absolute_error_pct,"NOx: 100 * abs(method emission / O - 1); episode APE, not pooled WAPE."
+NOx_R_signed_error_pct,NOx: 100 * (method emission / O - 1).
+NOx_R_absolute_error_pct,"NOx: 100 * abs(method emission / O - 1); episode APE, not pooled WAPE."
+NOx_M_signed_error_pct,NOx: 100 * (method emission / O - 1).
+NOx_M_absolute_error_pct,"NOx: 100 * abs(method emission / O - 1); episode APE, not pooled WAPE."
+NOx_A_signed_error_pct,NOx: 100 * (method emission / O - 1).
+NOx_A_absolute_error_pct,"NOx: 100 * abs(method emission / O - 1); episode APE, not pooled WAPE."
+NOx_M_observed_delay_signed_error_pct,NOx: 100 * (method emission / O - 1).
+NOx_M_observed_delay_absolute_error_pct,"NOx: 100 * abs(method emission / O - 1); episode APE, not pooled WAPE."
+NOx_M_minus_S_APE_pp,"NOx: First method APE minus comparison method APE, percentage points; positive means first method is worse."
+NOx_M_worse_than_S,NOx: True if this method has larger episode absolute error than observed single-speed S; strict tolerance 1e-9 percentage points.
+NOx_M_minus_S_pred_APE_pp,"NOx: First method APE minus comparison method APE, percentage points; positive means first method is worse."
+NOx_M_worse_than_S_pred,NOx: True if this method has larger episode absolute error than predicted single-speed S_pred.
+NOx_A_minus_S_APE_pp,"NOx: First method APE minus comparison method APE, percentage points; positive means first method is worse."
+NOx_A_worse_than_S,NOx: True if this method has larger episode absolute error than observed single-speed S; strict tolerance 1e-9 percentage points.
+NOx_A_minus_S_pred_APE_pp,"NOx: First method APE minus comparison method APE, percentage points; positive means first method is worse."
+NOx_A_worse_than_S_pred,NOx: True if this method has larger episode absolute error than predicted single-speed S_pred.
+NOx_observed_mean_rate_component_g,NOx: S-O.
+NOx_observed_mean_rate_component_pct_O,"NOx: Corresponding signed component in grams / O *100. Components add with signs, not after taking absolute values."
+NOx_fitted_mean_delay_speed_component_g,NOx: S_pred-S.
+NOx_fitted_mean_delay_speed_component_pct_O,"NOx: Corresponding signed component in grams / O *100. Components add with signs, not after taking absolute values."
+NOx_reconstructed_speed_distribution_component_g,NOx: R-S_pred.
+NOx_reconstructed_speed_distribution_component_pct_O,"NOx: Corresponding signed component in grams / O *100. Components add with signs, not after taking absolute values."
+NOx_two_speed_allocation_component_g,NOx: M-R; travel times held equal up to quadrature precision.
+NOx_two_speed_allocation_component_pct_O,"NOx: Corresponding signed component in grams / O *100. Components add with signs, not after taking absolute values."
+NOx_cubic_rates_component_g,NOx: A-M.
+NOx_cubic_rates_component_pct_O,"NOx: Corresponding signed component in grams / O *100. Components add with signs, not after taking absolute values."
+NOx_largest_M_accounting_component,"NOx: Largest absolute signed contribution among S-O, S_pred-S, R-S_pred, M-R. Ordered accounting, not causal label."
+NOx_largest_A_accounting_component,"NOx: Largest absolute signed contribution among the five successive differences. Ordered accounting, not causal label."
+CO_O_g,"CO: Reference: sum over recorded bins of d * L/v * lookup(v), grams."
+CO_S_g,"CO: Observed mean-speed method: H_obs * lookup(D*L/H_obs), grams."
+CO_S_pred_g,"CO: Predicted-mean diagnostic: H_pred * lookup(D*L/H_pred), grams; same fitted travel time as two-speed."
+CO_R_g,"CO: Reconstructed whole-trip speed integration using 384-node quadrature, grams."
+CO_M_g,"CO: Two operating speeds with lookup rates, grams."
+CO_A_g,"CO: Two operating speeds with cubic rates, grams."
+CO_M_free_g,CO M free g. Units/operation follow the column name; original traffic fields retain their archived meaning.
+CO_M_queue_g,CO M queue g. Units/operation follow the column name; original traffic fields retain their archived meaning.
+CO_M_free_emission_share,CO M free emission share. Units/operation follow the column name; original traffic fields retain their archived meaning.
+CO_lookup_rate_observed_mean,CO lookup rate observed mean. Units/operation follow the column name; original traffic fields retain their archived meaning.
+CO_lookup_rate_predicted_mean,CO lookup rate predicted mean. Units/operation follow the column name; original traffic fields retain their archived meaning.
+CO_lookup_rate_free,CO lookup rate free. Units/operation follow the column name; original traffic fields retain their archived meaning.
+CO_lookup_rate_queue,CO lookup rate queue. Units/operation follow the column name; original traffic fields retain their archived meaning.
+CO_lookup_rate_free_queue_ratio,CO lookup rate free queue ratio. Units/operation follow the column name; original traffic fields retain their archived meaning.
+CO_observed_effective_rate,CO observed effective rate. Units/operation follow the column name; original traffic fields retain their archived meaning.
+CO_predicted_M_effective_rate,CO predicted M effective rate. Units/operation follow the column name; original traffic fields retain their archived meaning.
+CO_rate_M_over_observed,CO rate M over observed. Units/operation follow the column name; original traffic fields retain their archived meaning.
+CO_observed_bin_rate_time_cv,CO observed bin rate time cv. Units/operation follow the column name; original traffic fields retain their archived meaning.
+CO_gamma_lookup,CO gamma lookup. Units/operation follow the column name; original traffic fields retain their archived meaning.
+CO_M_observed_delay_g,CO: Algebraic counterfactual holding predicted vf/vq rates fixed and replacing only mean delay by observed mean delay. Read admissibility flags.
+CO_M_observed_delay_mean_admissible,CO M observed delay mean admissible. Units/operation follow the column name; original traffic fields retain their archived meaning.
+CO_M_observed_delay_full_profile_admissible,CO M observed delay full profile admissible. Units/operation follow the column name; original traffic fields retain their archived meaning.
+CO_predicted_chord_rate,"CO: Linear interpolation of rates at fitted queue speed and free-flow speed, evaluated at predicted mean speed (g/veh h); exactly M/H_pred."
+CO_M_minus_S_pred_g,"CO: Difference at identical fitted vehicle-hours, count and distance; equals H_pred*(predicted_chord_rate-lookup_rate_predicted_mean)."
+CO_M_fixed_state_delay_component_g,CO: M - M_observed_delay = D*(w_pred-w_obs)*Gamma; conditional on fixed queue speed and rates.
+CO_M_observed_delay_representation_residual_g,CO: M_observed_delay - O; not a uniquely identified physical approximation error.
+CO_fitted_mean_vehicle_hours_component_g,CO fitted mean vehicle hours component g. Units/operation follow the column name; original traffic fields retain their archived meaning.
+CO_fitted_mean_speed_rate_component_g,CO fitted mean speed rate component g. Units/operation follow the column name; original traffic fields retain their archived meaning.
+CO_M_vs_O_vehicle_hours_component_g,CO: Exact symmetric product split: (H_pred-H_obs)*(r_M_eff+r_O_eff)/2.
+CO_M_vs_O_effective_rate_component_g,CO: Exact symmetric product split: (r_M_eff-r_O_eff)*(H_pred+H_obs)/2; includes speed/rate representation and interacting calibration effects.
+CO_S_signed_error_pct,CO: 100 * (method emission / O - 1).
+CO_S_absolute_error_pct,"CO: 100 * abs(method emission / O - 1); episode APE, not pooled WAPE."
+CO_S_pred_signed_error_pct,CO: 100 * (method emission / O - 1).
+CO_S_pred_absolute_error_pct,"CO: 100 * abs(method emission / O - 1); episode APE, not pooled WAPE."
+CO_R_signed_error_pct,CO: 100 * (method emission / O - 1).
+CO_R_absolute_error_pct,"CO: 100 * abs(method emission / O - 1); episode APE, not pooled WAPE."
+CO_M_signed_error_pct,CO: 100 * (method emission / O - 1).
+CO_M_absolute_error_pct,"CO: 100 * abs(method emission / O - 1); episode APE, not pooled WAPE."
+CO_A_signed_error_pct,CO: 100 * (method emission / O - 1).
+CO_A_absolute_error_pct,"CO: 100 * abs(method emission / O - 1); episode APE, not pooled WAPE."
+CO_M_observed_delay_signed_error_pct,CO: 100 * (method emission / O - 1).
+CO_M_observed_delay_absolute_error_pct,"CO: 100 * abs(method emission / O - 1); episode APE, not pooled WAPE."
+CO_M_minus_S_APE_pp,"CO: First method APE minus comparison method APE, percentage points; positive means first method is worse."
+CO_M_worse_than_S,CO: True if this method has larger episode absolute error than observed single-speed S; strict tolerance 1e-9 percentage points.
+CO_M_minus_S_pred_APE_pp,"CO: First method APE minus comparison method APE, percentage points; positive means first method is worse."
+CO_M_worse_than_S_pred,CO: True if this method has larger episode absolute error than predicted single-speed S_pred.
+CO_A_minus_S_APE_pp,"CO: First method APE minus comparison method APE, percentage points; positive means first method is worse."
+CO_A_worse_than_S,CO: True if this method has larger episode absolute error than observed single-speed S; strict tolerance 1e-9 percentage points.
+CO_A_minus_S_pred_APE_pp,"CO: First method APE minus comparison method APE, percentage points; positive means first method is worse."
+CO_A_worse_than_S_pred,CO: True if this method has larger episode absolute error than predicted single-speed S_pred.
+CO_observed_mean_rate_component_g,CO: S-O.
+CO_observed_mean_rate_component_pct_O,"CO: Corresponding signed component in grams / O *100. Components add with signs, not after taking absolute values."
+CO_fitted_mean_delay_speed_component_g,CO: S_pred-S.
+CO_fitted_mean_delay_speed_component_pct_O,"CO: Corresponding signed component in grams / O *100. Components add with signs, not after taking absolute values."
+CO_reconstructed_speed_distribution_component_g,CO: R-S_pred.
+CO_reconstructed_speed_distribution_component_pct_O,"CO: Corresponding signed component in grams / O *100. Components add with signs, not after taking absolute values."
+CO_two_speed_allocation_component_g,CO: M-R; travel times held equal up to quadrature precision.
+CO_two_speed_allocation_component_pct_O,"CO: Corresponding signed component in grams / O *100. Components add with signs, not after taking absolute values."
+CO_cubic_rates_component_g,CO: A-M.
+CO_cubic_rates_component_pct_O,"CO: Corresponding signed component in grams / O *100. Components add with signs, not after taking absolute values."
+CO_largest_M_accounting_component,"CO: Largest absolute signed contribution among S-O, S_pred-S, R-S_pred, M-R. Ordered accounting, not causal label."
+CO_largest_A_accounting_component,"CO: Largest absolute signed contribution among the five successive differences. Ordered accounting, not causal label."
+HC_O_g,"HC: Reference: sum over recorded bins of d * L/v * lookup(v), grams."
+HC_S_g,"HC: Observed mean-speed method: H_obs * lookup(D*L/H_obs), grams."
+HC_S_pred_g,"HC: Predicted-mean diagnostic: H_pred * lookup(D*L/H_pred), grams; same fitted travel time as two-speed."
+HC_R_g,"HC: Reconstructed whole-trip speed integration using 384-node quadrature, grams."
+HC_M_g,"HC: Two operating speeds with lookup rates, grams."
+HC_A_g,"HC: Two operating speeds with cubic rates, grams."
+HC_M_free_g,HC M free g. Units/operation follow the column name; original traffic fields retain their archived meaning.
+HC_M_queue_g,HC M queue g. Units/operation follow the column name; original traffic fields retain their archived meaning.
+HC_M_free_emission_share,HC M free emission share. Units/operation follow the column name; original traffic fields retain their archived meaning.
+HC_lookup_rate_observed_mean,HC lookup rate observed mean. Units/operation follow the column name; original traffic fields retain their archived meaning.
+HC_lookup_rate_predicted_mean,HC lookup rate predicted mean. Units/operation follow the column name; original traffic fields retain their archived meaning.
+HC_lookup_rate_free,HC lookup rate free. Units/operation follow the column name; original traffic fields retain their archived meaning.
+HC_lookup_rate_queue,HC lookup rate queue. Units/operation follow the column name; original traffic fields retain their archived meaning.
+HC_lookup_rate_free_queue_ratio,HC lookup rate free queue ratio. Units/operation follow the column name; original traffic fields retain their archived meaning.
+HC_observed_effective_rate,HC observed effective rate. Units/operation follow the column name; original traffic fields retain their archived meaning.
+HC_predicted_M_effective_rate,HC predicted M effective rate. Units/operation follow the column name; original traffic fields retain their archived meaning.
+HC_rate_M_over_observed,HC rate M over observed. Units/operation follow the column name; original traffic fields retain their archived meaning.
+HC_observed_bin_rate_time_cv,HC observed bin rate time cv. Units/operation follow the column name; original traffic fields retain their archived meaning.
+HC_gamma_lookup,HC gamma lookup. Units/operation follow the column name; original traffic fields retain their archived meaning.
+HC_M_observed_delay_g,HC: Algebraic counterfactual holding predicted vf/vq rates fixed and replacing only mean delay by observed mean delay. Read admissibility flags.
+HC_M_observed_delay_mean_admissible,HC M observed delay mean admissible. Units/operation follow the column name; original traffic fields retain their archived meaning.
+HC_M_observed_delay_full_profile_admissible,HC M observed delay full profile admissible. Units/operation follow the column name; original traffic fields retain their archived meaning.
+HC_predicted_chord_rate,"HC: Linear interpolation of rates at fitted queue speed and free-flow speed, evaluated at predicted mean speed (g/veh h); exactly M/H_pred."
+HC_M_minus_S_pred_g,"HC: Difference at identical fitted vehicle-hours, count and distance; equals H_pred*(predicted_chord_rate-lookup_rate_predicted_mean)."
+HC_M_fixed_state_delay_component_g,HC: M - M_observed_delay = D*(w_pred-w_obs)*Gamma; conditional on fixed queue speed and rates.
+HC_M_observed_delay_representation_residual_g,HC: M_observed_delay - O; not a uniquely identified physical approximation error.
+HC_fitted_mean_vehicle_hours_component_g,HC fitted mean vehicle hours component g. Units/operation follow the column name; original traffic fields retain their archived meaning.
+HC_fitted_mean_speed_rate_component_g,HC fitted mean speed rate component g. Units/operation follow the column name; original traffic fields retain their archived meaning.
+HC_M_vs_O_vehicle_hours_component_g,HC: Exact symmetric product split: (H_pred-H_obs)*(r_M_eff+r_O_eff)/2.
+HC_M_vs_O_effective_rate_component_g,HC: Exact symmetric product split: (r_M_eff-r_O_eff)*(H_pred+H_obs)/2; includes speed/rate representation and interacting calibration effects.
+HC_S_signed_error_pct,HC: 100 * (method emission / O - 1).
+HC_S_absolute_error_pct,"HC: 100 * abs(method emission / O - 1); episode APE, not pooled WAPE."
+HC_S_pred_signed_error_pct,HC: 100 * (method emission / O - 1).
+HC_S_pred_absolute_error_pct,"HC: 100 * abs(method emission / O - 1); episode APE, not pooled WAPE."
+HC_R_signed_error_pct,HC: 100 * (method emission / O - 1).
+HC_R_absolute_error_pct,"HC: 100 * abs(method emission / O - 1); episode APE, not pooled WAPE."
+HC_M_signed_error_pct,HC: 100 * (method emission / O - 1).
+HC_M_absolute_error_pct,"HC: 100 * abs(method emission / O - 1); episode APE, not pooled WAPE."
+HC_A_signed_error_pct,HC: 100 * (method emission / O - 1).
+HC_A_absolute_error_pct,"HC: 100 * abs(method emission / O - 1); episode APE, not pooled WAPE."
+HC_M_observed_delay_signed_error_pct,HC: 100 * (method emission / O - 1).
+HC_M_observed_delay_absolute_error_pct,"HC: 100 * abs(method emission / O - 1); episode APE, not pooled WAPE."
+HC_M_minus_S_APE_pp,"HC: First method APE minus comparison method APE, percentage points; positive means first method is worse."
+HC_M_worse_than_S,HC: True if this method has larger episode absolute error than observed single-speed S; strict tolerance 1e-9 percentage points.
+HC_M_minus_S_pred_APE_pp,"HC: First method APE minus comparison method APE, percentage points; positive means first method is worse."
+HC_M_worse_than_S_pred,HC: True if this method has larger episode absolute error than predicted single-speed S_pred.
+HC_A_minus_S_APE_pp,"HC: First method APE minus comparison method APE, percentage points; positive means first method is worse."
+HC_A_worse_than_S,HC: True if this method has larger episode absolute error than observed single-speed S; strict tolerance 1e-9 percentage points.
+HC_A_minus_S_pred_APE_pp,"HC: First method APE minus comparison method APE, percentage points; positive means first method is worse."
+HC_A_worse_than_S_pred,HC: True if this method has larger episode absolute error than predicted single-speed S_pred.
+HC_observed_mean_rate_component_g,HC: S-O.
+HC_observed_mean_rate_component_pct_O,"HC: Corresponding signed component in grams / O *100. Components add with signs, not after taking absolute values."
+HC_fitted_mean_delay_speed_component_g,HC: S_pred-S.
+HC_fitted_mean_delay_speed_component_pct_O,"HC: Corresponding signed component in grams / O *100. Components add with signs, not after taking absolute values."
+HC_reconstructed_speed_distribution_component_g,HC: R-S_pred.
+HC_reconstructed_speed_distribution_component_pct_O,"HC: Corresponding signed component in grams / O *100. Components add with signs, not after taking absolute values."
+HC_two_speed_allocation_component_g,HC: M-R; travel times held equal up to quadrature precision.
+HC_two_speed_allocation_component_pct_O,"HC: Corresponding signed component in grams / O *100. Components add with signs, not after taking absolute values."
+HC_cubic_rates_component_g,HC: A-M.
+HC_cubic_rates_component_pct_O,"HC: Corresponding signed component in grams / O *100. Components add with signs, not after taking absolute values."
+HC_largest_M_accounting_component,"HC: Largest absolute signed contribution among S-O, S_pred-S, R-S_pred, M-R. Ordered accounting, not causal label."
+HC_largest_A_accounting_component,"HC: Largest absolute signed contribution among the five successive differences. Ordered accounting, not causal label."
+maximum_emission_reproduction_relative_error,maximum emission reproduction relative error. Units/operation follow the column name; original traffic fields retain their archived meaning.

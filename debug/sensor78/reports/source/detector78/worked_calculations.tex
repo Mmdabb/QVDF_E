@@ -1,0 +1,65 @@
+
+\newpage
+\fontsize{10}{12}\selectfont
+{\fontsize{19}{22}\selectfont\bfseries\color{navy}Detector 78: worked link example}\par
+{\color{muted}Arizona I-10 westbound, January 2016 average weekday.}
+
+\notebox{\textbf{Scope.} This is the standalone workbook example from the supplied sensor-78 data:
+16 complete weekdays, 57 bins from 14:45 inclusive to 19:30 exclusive. The window is fixed for explanation,
+not newly detected. These inputs differ from the archived paper sample; the case is not one of the
+137 observations summarized on page 2. Supplied counts are assumed already per lane (multiplier 1).}
+
+\vspace{7pt}\textbf{Inputs and fitted traffic quantities}\par
+\renewcommand{\arraystretch}{1.35}\setlength{\tabcolsep}{6pt}
+\begin{tabular*}{\linewidth}{@{\extracolsep{\fill}}lrlr@{}}\toprule
+Input & Value & Calculated quantity & Value\\\midrule
+Link length $L$ & 1.040 mi & Demand $D$ & 4,789.25 veh/lane\\
+Free-flow speed $v_f$ & 64.161 mph & $D/C$ & 3.189 h\\
+Capacity $C$ & 1,501.616 veh/h/lane & Predicted duration $\widehat P$ & 4.449 h\\
+Jam density $k_j$ & 220 veh/mi/lane & Queue speed $\widehat v_q$ & 13.611 mph\\
+Observed duration & 4.750 h & Predicted mean delay & 1.496 min\\
+Observed vehicle-hours & 211.434 veh h/lane & Predicted vehicle-hours & 197.040 veh h/lane\\
+Observed mean speed & 23.557 mph & Predicted mean trip speed & 25.278 mph\\\bottomrule
+\end{tabular*}
+\par\smallskip
+{\small Calibration: $f_d=1.693177$, $n=0.833031$, $f_p=0.308070$, $s=1.635098$, $\theta=0.434829$ (PM).
+The reconstructed shape exponent is $a=3.396386$.}
+
+\vspace{9pt}\textbf{How the CO$_2$ totals are obtained}
+\begin{align*}
+E_O &= \sum_{i=1}^{57}d_i(L/v_i)r_0(v_i)/1000 = 1,743.79\ \text{kg/lane},\\
+E_S &= 211.434\times 6,931.846 /1000 = 1,465.63\ \text{kg/lane},\\
+E_R &= \sum_{j=1}^{384}N_j[T_f+w(u_j)]r_0(v_R(u_j))/1000
+      = 1,657.64\ \text{kg/lane},\\
+E_M &= 4,789.25[0.00949555\times 20,615.635+0.03164658\times 6,931.846]/1000
+      = 1,988.14\ \text{kg/lane},\\
+E_A &= 4,789.25[0.00949555\times 18,172.460+0.03164658\times 6,680.499]/1000
+      = 1,838.94\ \text{kg/lane}.
+\end{align*}
+The numerical rates are in g/(veh h), times in hours; dividing by 1,000 converts grams to kg.
+For O the displayed result is converted to kg after summation. For R, $N_j$ are quadrature vehicle weights.
+Unrounded values are used in the calculations; the substitutions above are rounded.
+
+\notebox{\textbf{The speed/rate distinction in this case.}
+The observed mean speed is 23.557 mph and the inferred queue speed is 13.611 mph;
+both select the same CO$_2$ lookup rate, 6,931.846 g/(veh h).
+Free-flow speed selects 20,615.635 g/(veh h).
+M assigns 23.1\% of its vehicle-hours to free flow, which contributes 47.2\% of its CO$_2$ total.
+Its mean trip consists of 0.570 min at free flow and 1.899 min at queue speed.}
+
+\vspace{8pt}\textbf{Episode emission totals and CO$_2$ discrepancy}\par
+\renewcommand{\arraystretch}{1.4}\setlength{\tabcolsep}{4pt}
+\begin{tabular*}{\linewidth}{@{\extracolsep{\fill}}lrrrrr@{}}\toprule
+Calculation & CO$_2$ (kg) & NO$_x$ (g) & CO (g) & HC (g) & CO$_2$ error (\%)\\\midrule
+O: Recorded speeds & 1,743.79 & 1,400.82 & 15,511.48 & 658.66 & Reference \\
+S: Episode mean speed & 1,465.63 & 861.78 & 13,252.81 & 581.74 & -15.95 \\
+R: Reconstructed speeds & 1,657.64 & 1,360.90 & 14,045.02 & 609.22 & -4.94 \\
+M: Two-speed lookup & 1,988.14 & 1,997.71 & 15,645.69 & 665.78 & +14.01 \\
+A: Two-speed cubic & 1,838.94 & 1,712.13 & 14,960.73 & 641.44 & +5.46 \\
+\bottomrule\end{tabular*}
+\par\smallskip{\small Totals are per lane. Signed error is $100(E_m/E_O-1)$;
+its absolute value is the one-episode WAPE. R has the smallest CO$_2$ discrepancy here.
+M's absolute discrepancy (14.01\%) is smaller than S's (15.95\%), unlike the pooled ordering on page 2.}
+\vfill
+{\small\color{muted}Source: Sensor78\_Emission\_Calculations.xlsx and its embedded January input profile and calibrated parameters.
+Recorded source travel times are not used: link times are recalculated as $L/v$. All emissions use passenger-car rates with zero acceleration and level road.}

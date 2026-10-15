@@ -123,6 +123,7 @@ Here ω is the backward-wave speed and k_q the queued density. The script also w
 | find where an equation is implemented | [`FORMULA_CODE_MAP.md`](FORMULA_CODE_MAP.md) |
 | explore interactively | [`docs/index.html`](docs/index.html) (optional dashboard; open locally or via GitHub Pages) |
 | check the data and their sources | [`data/DATA_DICTIONARY.md`](data/DATA_DICTIONARY.md) |
+| inspect the 137-episode error analysis or the detector-78 worked example | [`debug/`](debug/): reports, episode tables, profiles, formula-based Excel workbook, editable sources and calculation scripts |
 
 ## Checks
 
