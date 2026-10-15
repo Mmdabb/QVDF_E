@@ -1,0 +1,254 @@
+{
+  "fixed_traffic_feasibility": [
+    {
+      "bounds_profile": "expanded_omega_3_20",
+      "strategy": "balanced_four_pollutants",
+      "capacity_policy": "free_capacity",
+      "N": 137,
+      "feasible": 137
+    },
+    {
+      "bounds_profile": "expanded_omega_3_20",
+      "strategy": "balanced_four_pollutants",
+      "capacity_policy": "strict_baseline_capacity",
+      "N": 137,
+      "feasible": 137
+    },
+    {
+      "bounds_profile": "expanded_omega_3_20",
+      "strategy": "co2_target",
+      "capacity_policy": "free_capacity",
+      "N": 137,
+      "feasible": 137
+    },
+    {
+      "bounds_profile": "expanded_omega_3_20",
+      "strategy": "co2_target",
+      "capacity_policy": "strict_baseline_capacity",
+      "N": 137,
+      "feasible": 137
+    },
+    {
+      "bounds_profile": "primary_omega_5_20",
+      "strategy": "balanced_four_pollutants",
+      "capacity_policy": "free_capacity",
+      "N": 137,
+      "feasible": 137
+    },
+    {
+      "bounds_profile": "primary_omega_5_20",
+      "strategy": "balanced_four_pollutants",
+      "capacity_policy": "strict_baseline_capacity",
+      "N": 137,
+      "feasible": 136
+    },
+    {
+      "bounds_profile": "primary_omega_5_20",
+      "strategy": "co2_target",
+      "capacity_policy": "free_capacity",
+      "N": 137,
+      "feasible": 137
+    },
+    {
+      "bounds_profile": "primary_omega_5_20",
+      "strategy": "co2_target",
+      "capacity_policy": "strict_baseline_capacity",
+      "N": 137,
+      "feasible": 136
+    }
+  ],
+  "capacity_audit": [
+    {
+      "cohort": "all_352_detectors",
+      "corridor": "ALL",
+      "N": 352,
+      "accepted_S3": 163,
+      "metadata_available": 347,
+      "C_min": 567.0547826086956,
+      "C_median": 1292.4497254004577,
+      "C_max": 7857.027692307693,
+      "median_C_over_profile_q995": 0.9999999999999999,
+      "median_C_over_metadata": 0.645841304347826,
+      "median_profile_share_above_C": 0.006944444444444444,
+      "median_flow_R2": 0.984836249879936,
+      "median_speed_R2": 0.8763983044564686,
+      "capacities_below_1000": 25,
+      "capacities_outside_500_3500": 23
+    },
+    {
+      "cohort": "104_detectors_in_137",
+      "corridor": "ALL",
+      "N": 104,
+      "accepted_S3": 74,
+      "metadata_available": 100,
+      "C_min": 792.8699340496762,
+      "C_median": 1219.4230754431496,
+      "C_max": 1982.51895652174,
+      "median_C_over_profile_q995": 0.9468515148158911,
+      "median_C_over_metadata": 0.6097115377215748,
+      "median_profile_share_above_C": 0.08159722222222221,
+      "median_flow_R2": 0.9776562212705533,
+      "median_speed_R2": 0.9222755362901598,
+      "capacities_below_1000": 10,
+      "capacities_outside_500_3500": 0
+    }
+  ],
+  "sweep_invalid": [
+    {
+      "coefficient_policy": "fd_rescaled",
+      "scenario": "metadata_capacity",
+      "invalid_reason": "",
+      "N": 117
+    },
+    {
+      "coefficient_policy": "fd_rescaled",
+      "scenario": "metadata_capacity",
+      "invalid_reason": "metadata_capacity_unavailable",
+      "N": 20
+    },
+    {
+      "coefficient_policy": "fd_rescaled",
+      "scenario": "multiplier_0.8",
+      "invalid_reason": "",
+      "N": 6
+    },
+    {
+      "coefficient_policy": "fd_rescaled",
+      "scenario": "multiplier_0.8",
+      "invalid_reason": "negative_peak_free_time_or_invalid_fd",
+      "N": 19
+    },
+    {
+      "coefficient_policy": "fd_rescaled",
+      "scenario": "multiplier_0.8",
+      "invalid_reason": "not_strictly_congested_fd_state;negative_peak_free_time_or_invalid_fd",
+      "N": 112
+    },
+    {
+      "coefficient_policy": "fd_rescaled",
+      "scenario": "multiplier_1",
+      "invalid_reason": "",
+      "N": 137
+    },
+    {
+      "coefficient_policy": "fd_rescaled",
+      "scenario": "multiplier_1.1",
+      "invalid_reason": "",
+      "N": 137
+    },
+    {
+      "coefficient_policy": "fd_rescaled",
+      "scenario": "multiplier_1.25",
+      "invalid_reason": "",
+      "N": 137
+    },
+    {
+      "coefficient_policy": "fd_rescaled",
+      "scenario": "multiplier_1.5",
+      "invalid_reason": "",
+      "N": 137
+    },
+    {
+      "coefficient_policy": "fd_rescaled",
+      "scenario": "multiplier_2",
+      "invalid_reason": "",
+      "N": 137
+    },
+    {
+      "coefficient_policy": "frozen_coefficients",
+      "scenario": "metadata_capacity",
+      "invalid_reason": "",
+      "N": 95
+    },
+    {
+      "coefficient_policy": "frozen_coefficients",
+      "scenario": "metadata_capacity",
+      "invalid_reason": "metadata_capacity_unavailable",
+      "N": 20
+    },
+    {
+      "coefficient_policy": "frozen_coefficients",
+      "scenario": "metadata_capacity",
+      "invalid_reason": "negative_peak_free_time_or_invalid_fd",
+      "N": 22
+    },
+    {
+      "coefficient_policy": "frozen_coefficients",
+      "scenario": "multiplier_0.8",
+      "invalid_reason": "",
+      "N": 131
+    },
+    {
+      "coefficient_policy": "frozen_coefficients",
+      "scenario": "multiplier_0.8",
+      "invalid_reason": "negative_peak_free_time_or_invalid_fd",
+      "N": 6
+    },
+    {
+      "coefficient_policy": "frozen_coefficients",
+      "scenario": "multiplier_1",
+      "invalid_reason": "",
+      "N": 137
+    },
+    {
+      "coefficient_policy": "frozen_coefficients",
+      "scenario": "multiplier_1.1",
+      "invalid_reason": "",
+      "N": 133
+    },
+    {
+      "coefficient_policy": "frozen_coefficients",
+      "scenario": "multiplier_1.1",
+      "invalid_reason": "negative_peak_free_time_or_invalid_fd",
+      "N": 4
+    },
+    {
+      "coefficient_policy": "frozen_coefficients",
+      "scenario": "multiplier_1.25",
+      "invalid_reason": "",
+      "N": 125
+    },
+    {
+      "coefficient_policy": "frozen_coefficients",
+      "scenario": "multiplier_1.25",
+      "invalid_reason": "negative_peak_free_time_or_invalid_fd",
+      "N": 12
+    },
+    {
+      "coefficient_policy": "frozen_coefficients",
+      "scenario": "multiplier_1.5",
+      "invalid_reason": "",
+      "N": 118
+    },
+    {
+      "coefficient_policy": "frozen_coefficients",
+      "scenario": "multiplier_1.5",
+      "invalid_reason": "negative_peak_free_time_or_invalid_fd",
+      "N": 19
+    },
+    {
+      "coefficient_policy": "frozen_coefficients",
+      "scenario": "multiplier_2",
+      "invalid_reason": "",
+      "N": 104
+    },
+    {
+      "coefficient_policy": "frozen_coefficients",
+      "scenario": "multiplier_2",
+      "invalid_reason": "negative_peak_free_time_or_invalid_fd",
+      "N": 33
+    }
+  ],
+  "common_all_multiplier_episodes": 6,
+  "common_capacity_increase_episodes": 104,
+  "common_including_metadata_episodes": 0,
+  "assumptions": {
+    "FD_box": "exploratory kj 150\u2013300 veh/mi/lane; omega 5\u201320 mph primary, 3\u201320 mph secondary",
+    "fixed_traffic": "same D, vf, P, delay, mu; only FD queue speed and its two-state allocation change",
+    "sweep": "same 137 selected episodes; no episode detection or calibration rerun; vf and kj=220 fixed",
+    "fd_rescaling": "fd_new=fd*(C_new/C_old)^n, only a valid common card for a common multiplier within a fit group",
+    "metadata_rescaling": "row-level algebraic control; detector-varying ratios are not a common calibrated parameter card",
+    "emission_reference": "O is the observed point-speed emission proxy, not measured trajectory emissions",
+    "optimization": "conditional in-sample error minimization, not independent predictive validation"
+  }
+}

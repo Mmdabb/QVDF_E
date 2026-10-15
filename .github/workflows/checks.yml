@@ -23,11 +23,15 @@ jobs:
       - run: python debug/verify_calculation_steps.py
       - run: python debug/verify_dashboard_metrics.py
       - run: python debug/verify_parameter_diagnostics.py
+      - run: python debug/capacity_sensitivity/verify_analysis.py
       - run: node debug/verify_parameter_page.js
       - run: python debug/full_experiment/scripts/build_precalibration_trace.py
       - run: python debug/full_experiment/scripts/build_emission_steps.py
       - run: python debug/full_experiment/scripts/build_other_experiment_trace.py
-      - run: python debug/full_experiment/scripts/build_episode_time_series.py --skip-figures
+      - run: python debug/capacity_sensitivity/scripts/build_capacity_sensitivity.py
+      - run: python debug/capacity_sensitivity/scripts/build_capacity_report.py
+      - run: python debug/capacity_sensitivity/verify_analysis.py --directory debug/output/capacity_sensitivity
+      - run: python debug/full_experiment/scripts/build_episode_time_series.py --skip-figures --capacity-source debug/output/capacity_sensitivity
       - run: python debug/verify_dashboard_metrics.py --directory debug/output/episode_time_series
       - run: python debug/verify_parameter_diagnostics.py --directory debug/output/episode_time_series
       - run: node debug/verify_parameter_page.js debug/output/episode_time_series/traffic_parameters.html

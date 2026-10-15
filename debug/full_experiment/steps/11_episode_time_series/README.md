@@ -1,12 +1,25 @@
 # 11. Five-minute comparisons for every retained episode
 
-Open **[the case list](EPISODES.md)** to view all 137 cases directly in GitHub, or open **[the episode browser](index.html)** locally for filtering. Each case contains a traffic dashboard, a dashboard for each of the four pollutants, and the corresponding calculation CSVs. [episode_index.csv](episode_index.csv) maps the compact `ep001`–`ep137` labels to full original episode IDs, detector, date, direction and period.
+Open **[the case list](EPISODES.md)** to view all 137 cases directly in GitHub, or open **[the episode browser](index.html)** locally for filtering. Each case has five separate pages: traffic, CO₂, NOₓ, CO and HC. Each page pairs one figure with one error table. [episode_index.csv](episode_index.csv) maps the compact `ep001`–`ep137` labels to full original episode IDs, detector, date, direction and period.
 
 Browse the [episode folders](episodes/), or go directly to [Arizona detector 141, November 2016, episode ep014](episodes/ep014_AZ_I10_W_141_20161101/README.md), the case used in the separate worked-example PDF.
 
-Open the linked **[traffic, QVDF and FD parameter page](traffic_parameters.html)** for observed/fitted comparisons, parameter provenance, metadata capacities, inverse-emission queue speeds and conditional FD sensitivity. Its column groups can be hidden or shown; thick vertical borders distinguish the QVDF and FD groups. The inverse sections compare a CO₂ target with an equally weighted four-pollutant target.
+The **collapsible left sidebar** links the overview, traffic inputs and separate inverse/FD pages. Nested sections can be expanded, and the whole sidebar can be hidden for more table space. The active page is highlighted. Each page contains one main data table; wide tables scroll horizontally. The traffic-parameter table also has optional column groups and thick borders between groups.
 
-These are the same 137 retained average-profile episodes used in the reported comparison. No parameter, model total or sample decision is changed.
+Equations are typeset with **native MathML**, including fractions, subscripts and superscripts. No external math service, font download or internet connection is required. The CSVs retain full-precision values; displayed rounding is only for reading.
+
+| Dashboard page | What to inspect |
+|---|---|
+| [Episode overview](index.html) | Sort or filter all 137 episodes using six traffic-error measures. |
+| [Traffic parameters](traffic_parameters.html) | Observed/fitted traffic, QVDF coefficients, FD inputs and capacity provenance. |
+| [Emission-target queue speed](inverse_emissions.html) | One shared queue speed per episode under a CO₂ target or equal-weight four-pollutant target. |
+| [Three backward FD calculations](inverse_fd.html) | Recover discharge, wave speed or jam density while holding the other two fixed. |
+| [Bounded FD pairs](fd_sensitivity.html) | Episode-level density/wave-speed candidates under primary or expanded bounds. |
+| [FD sensitivity summary](fd_summary.html) | Four rows comparing target reachability, capacity preservation and reoptimization. |
+| [Fixed versus freely varying capacity](fd_capacity_comparison.html) | Side-by-side emission-target solutions with fitted traffic held fixed. |
+| [Separate capacity sensitivity report](../../../capacity_sensitivity/report.html) | Capacity provenance and the effect of propagating capacity changes through traffic predictions and emissions. |
+
+These are the same 137 retained average-profile episodes used in the reported comparison. The archived parameters, model totals and sample decisions are preserved. Newly calculated diagnostic alternatives are identified separately.
 
 Dates in the index identify the source average profiles; Arizona dates are monthly profile labels, not individual observed days. The full episode ID and source-profile label are retained in the index for joining back to the earlier calculation steps.
 
@@ -14,6 +27,8 @@ Dates in the index identify the source average profiles; Arizona dates are month
 
 | File | Contents |
 |---|---|
+| `episodes/<case>/index.html` | Traffic figure and its single consolidated error table; local navigation to the four pollutant pages. |
+| `episodes/<case>/emissions_CO2.html`, `emissions_NOx.html`, `emissions_CO.html`, `emissions_HC.html` | One pollutant figure and one corresponding error table per page. |
 | `episodes/<case>/traffic_timeseries.csv` | Every observed five-minute bin × O/S/R/M/A: count, travel time, delay, equivalent speed, exposure-weighted VSP, VSP at equivalent speed, and M/A free/queue times and distances. |
 | `episodes/<case>/emissions_timeseries.csv` | Every bin × five methods × four pollutants: vehicle-hours, effective rate, assigned bin emission, cumulative emission and cumulative count. |
 | `episodes/<case>/node_to_bin_allocation.csv` | Positive overlaps between each observed count interval and modeled integration-node count interval; the explicit allocation weights. |
@@ -85,7 +100,7 @@ It is an exposure-weighted effective rate, not generally the lookup rate evaluat
 
 ### Error columns and tables
 
-The HTML index can be filtered and sorted. Its six error columns compare the fitted traffic quantities shared by R/M/A with O: duration $P$, calibrated minimum speed $v_{t_2}$, five-minute equivalent speed, episode average speed, five-minute travel time and five-minute delay. Every episode page places a traffic error table and four pollutant error tables beside the corresponding figures (stacked below on narrow screens).
+The HTML index can be filtered and sorted. Its six error columns compare the fitted traffic quantities shared by R/M/A with O: duration $P$, calibrated minimum speed $v_{t_2}$, five-minute equivalent speed, episode average speed, five-minute travel time and five-minute delay. Each case's traffic page has one consolidated traffic error table; its four pollutant pages each have one pollutant error table. Each table sits beside its figure and moves below it on narrow screens.
 
 For equal five-minute bins, with reference $y_{Oi}$ and estimate $y_{mi}$:
 
@@ -137,7 +152,11 @@ k_j^*=\frac{\mu_0}{q}+\frac{\mu_0}{\omega_0}.$$
 
 Each holds the other two quantities fixed. A positive finite $\omega^*$ requires $k_{j0}q>\mu_0$. The discharge alternative implies a new duration $D/\mu^*$. A changed wave/density pair implies $C^*=v_f\omega^*k_j^*/(v_f+\omega^*)$; a changed capacity would require revisiting D/C and the QVDF predictions before adoption.
 
-The bounded joint analysis holds $\mu_0=D/\widehat P$ fixed. Exact pairs satisfy $k_j(\omega)=\mu_0/q+\mu_0/\omega$. It first preserves the original capacity when feasible, otherwise selects the closest implied capacity. Unreachable targets are reoptimized over physically attainable speeds inside the parameter box. The primary exploratory bounds are $k_j\in[150,300]$ veh/mi/lane and $\omega\in[5,20]$ mph; the secondary run lowers the wave bound to 3 mph. The page and [FD verification record](fd_sensitivity_verification.json) document the source context and distinguish these assumptions from validated site-specific limits.
+The bounded joint analysis holds $\mu_0=D/\widehat P$ fixed. Exact pairs satisfy $k_j(\omega)=\mu_0/q+\mu_0/\omega$. It preserves the original capacity when that is compatible with the selected emission optimum; otherwise it selects the closest implied capacity among pairs attaining that optimum. Unreachable targets are reoptimized over physically attainable speeds inside the parameter box. Thus this existing analysis **already allows capacity to change**; it does not impose fixed capacity as a constraint. The primary exploratory bounds are $k_j\in[150,300]$ veh/mi/lane and $\omega\in[5,20]$ mph; the secondary run lowers the wave bound to 3 mph. The [bounded-pair page](fd_sensitivity.html), [summary page](fd_summary.html) and [FD verification record](fd_sensitivity_verification.json) document these assumptions.
+
+The new [capacity comparison](fd_capacity_comparison.html) adds a **strictly fixed-capacity alternative**. Both alternatives retain demand, free-flow speed, fitted duration, delay and discharge, and optimize the same emission objective inside the same FD bounds. The free-capacity alternative reproduces the existing bounded emission optimum. The strict alternative additionally requires the original capacity to remain unchanged. Its capacity constraint can make some cases infeasible, so pooled comparisons use the same feasible cases.
+
+The [separate capacity report](../../../capacity_sensitivity/report.html) goes further: it propagates capacity changes through the demand-to-capacity ratio and subsequent traffic predictions. It distinguishes unchanged coefficients from the stated duration-coefficient rescaling and reports physical feasibility and common-cohort errors. Neither analysis replaces the archived calibration.
 
 | File | Use |
 |---|---|
@@ -147,6 +166,8 @@ The bounded joint analysis holds $\mu_0=D/\widehat P$ fixed. Exact pairs satisfy
 | [fd_parameter_sensitivity.csv](fd_parameter_sensitivity.csv) | Primary bounded joint pairs, capacity consequences and residual emission errors. |
 | [fd_parameter_sensitivity_expanded.csv](fd_parameter_sensitivity_expanded.csv) | Corresponding results allowing backward-wave magnitudes down to 3 mph. |
 | [fd_bound_sensitivity_summary.csv](fd_bound_sensitivity_summary.csv) | Feasibility and capacity-preservation counts under both explicit boxes. |
+| [fd_capacity_comparison.csv](fd_capacity_comparison.csv) | Side-by-side strict/free capacity results, 137 cases × two targets × two FD boxes. |
+| [Separate full capacity comparison](../../../capacity_sensitivity/fixed_traffic_comparison.csv) | Both capacity policies in long form, including feasibility and pollutant totals. |
 
 Candidate pairs are episode-level diagnostics. Repeated episodes at a detector require a consistent detector FD before any revised parameters can be adopted.
 

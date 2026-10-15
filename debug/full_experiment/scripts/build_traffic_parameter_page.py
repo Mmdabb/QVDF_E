@@ -14,6 +14,8 @@ from pathlib import Path
 import numpy as np
 import pandas as pd
 
+from dashboard_layout import mathml, wrap_document
+
 ROOT = Path(__file__).resolve().parents[3]
 STEP = ROOT / "debug/full_experiment/steps/11_episode_time_series"
 FROZEN = ROOT / "data/frozen/calibration/average_weekday"
@@ -128,7 +130,7 @@ def build_html(frame):
     text += '<p class="note">The same 137 retained average-profile episodes, with the preserved calibration and inputs. Observed means <strong>calculated from the recorded traffic profile</strong>; fitted means the QVDF prediction. Queue speeds in this table are inferred through the triangular FD, not directly measured queue speeds.</p>'
     invalid = int((~frame.observed_fd_domain_valid).sum())
     text += f'<p class="note warning">{invalid} observed episode-mean flows lie outside the strictly congested FD domain (0 &lt; D/P &lt; C). Their algebraic queue-speed values are retained and flagged. A queue-speed percentage error is not reported for those states. The fitted states pass this domain check. Network metadata capacity is available for 117 PeMS cases; it is unavailable for 20 Arizona cases.</p>'
-    text += '<nav><a href="traffic_parameters.csv">Download all inputs and comparisons (CSV)</a><a href="traffic_parameter_sources.csv">Source-file inventory</a><a href="traffic_parameter_verification.json">Verification and provenance</a><a href="#equations">Equations and interpretation</a><a href="#inverse-emissions">Inverse-emission analysis</a><a href="#fd-sensitivity">FD sensitivity</a></nav>'
+    text += '<nav class="downloads"><a href="traffic_parameters.csv">Download all inputs and comparisons (CSV)</a><a href="traffic_parameter_sources.csv">Source-file inventory</a><a href="traffic_parameter_verification.json">Verification and provenance</a><a href="#equations">Equations and interpretation</a></nav>'
     text += '<div class="controls"><label for="search"><strong>Find an episode</strong></label><br><input id="search" type="search" placeholder="Corridor, detector, profile date, period or case"><span id="count" class="count" aria-live="polite">137 episodes</span><div class="checks" aria-label="Visible column groups">'
     for key,label,default in GROUPS:
         if key != 'id':
@@ -160,12 +162,11 @@ def build_html(frame):
         text += '</tr>'
     text += '</tbody></table></div>'
     text += '<section id="equations"><h2>Equations and interpretation</h2><div class="equations">'
-    text += '<div><h3>Observed traffic</h3><p>D = Σq<sub>i</sub>Δt; Δt = 1/12 h; x = D/C (hours).</p><p>T<sub>f</sub> = L/v<sub>f</sub>; P = t<sub>3</sub> − t<sub>0</sub>.</p><p>w<sub>peak</sub> = L/min(v<sub>i</sub>) − T<sub>f</sub>.</p><p>w̄ = Σq<sub>i</sub>(L/v<sub>i</sub> − T<sub>f</sub>)/Σq<sub>i</sub>.</p><p>Average speed = D L / Σq<sub>i</sub>Δt(L/v<sub>i</sub>).</p><p>Recorded point speeds are treated as whole-link speed proxies. Delay is not clipped at zero.</p></div>'
-    text += '<div><h3>QVDF predictions</h3><p>P̂ = max(f<sub>d</sub>x<sup>n</sup>, x).</p><p>ŵ<sub>peak</sub> = T<sub>f</sub> f<sub>p</sub>P̂<sup>s</sup>; w̄̂ = θ ŵ<sub>peak</sub>.</p><p>v̂<sub>t2</sub> = L/(T<sub>f</sub> + ŵ<sub>peak</sub>).</p><p>Fitted average speed = L/(T<sub>f</sub> + w̄̂).</p><p>α = θ f<sub>p</sub> f<sub>d</sub><sup>s</sup>; β = ns. The reduced power law w̄̂ = T<sub>f</sub>αx<sup>β</sup> applies on the power branch.</p></div>'
-    text += '<div><h3>Triangular FD and queue state</h3><p>k<sub>c</sub> = C/v<sub>f</sub>; ω = C/(k<sub>j</sub> − k<sub>c</sub>).</p><p>ω is the positive magnitude of the backward wave; its signed propagation speed is −ω.</p><p>μ = D/P; μ̂ = D/P̂.</p><p>k<sub>q</sub> = k<sub>j</sub> − μ/ω; v<sub>q</sub> = μ/k<sub>q</sub>. Use μ̂ for the fitted state.</p><p>k<sub>j</sub> = 220 veh/mi/lane is an assumed closure constant. Observed and fitted state speeds share this FD; neither is an independent measured queue-speed target.</p></div>'
-    text += '<div><h3>Capacity, S3 and comparison limits</h3><p>C is the accepted detector S3 capacity, or the preserved profile 99.5th-percentile fallback. PeMS network metadata capacity divided by its lane count is shown only as a separate comparator.</p><p>S3 k<sub>c</sub> and v<sub>c</sub> describe the empirical S3 fit and differ from triangular k<sub>c</sub> = C/v<sub>f</sub>. Pre-S3 capacity is a profile estimate, not network metadata.</p><p>APE = 100 |fitted − observed| / |observed|. Zero reference denominators are undefined (—).</p><p>The separate CBI recovery-window flow is not the μ = D/P used in this queue-state calculation. Its QC flag is included only for provenance.</p></div></div>'
+    text += '<div class="equation-card"><h3>Observed traffic</h3>'+''.join(mathml(k) for k in ['demand','interval','demand_capacity','free_time','duration','observed_peak','observed_mean','average_speed'])+'<p>Flow q<sub>i</sub> is in vehicles/h/lane. D is in vehicles/lane; x and all times in the equations are hours. H<sub>i</sub> is five-minute vehicle-hours per lane: bin count multiplied by the whole-link travel time L/v<sub>i</sub>. Recorded point speeds are whole-link speed proxies. Delay is not clipped at zero.</p></div>'
+    text += '<div class="equation-card"><h3>QVDF predictions</h3>'+''.join(mathml(k) for k in ['predicted_duration','predicted_peak','predicted_mean','predicted_min_speed','predicted_average_speed','alpha','beta','power_delay'])+'<p>A hat denotes a fitted quantity. The final reduced delay equation applies on the power branch. The calibration coefficients are shown in the optional QVDF-coefficients column group.</p></div>'
+    text += '<div class="equation-card"><h3>Triangular FD and queue state</h3>'+''.join(mathml(k) for k in ['critical_density','wave','mu_observed','mu_fitted','queue_density','queue_speed'])+'<p>ω is the positive magnitude of the backward wave; its signed propagation speed is −ω. Use fitted μ for the fitted queue state. Jam density k<sub>j</sub> = 220 veh/mi/lane is an assumed closure constant. Neither queue-state speed is an independently measured target.</p></div>'
+    text += '<div class="equation-card"><h3>Capacity, S3 and comparison limits</h3><p>C is the accepted detector S3 capacity, or the preserved profile 99.5th-percentile fallback. PeMS network metadata capacity divided by its lane count is a separate comparator.</p><p>S3 k<sub>c</sub> and v<sub>c</sub> describe the empirical S3 fit and differ from the triangular critical density. Pre-S3 capacity is a profile estimate, not network metadata.</p>'+mathml('ape')+'<p>Here y<sub>m</sub> is fitted and y<sub>O</sub> is observed. A zero reference denominator is undefined (—). The separate CBI recovery-window flow is not the episode mean flow used in the queue-state calculation; its QC flag is included only for provenance.</p></div></div>'
     text += '<p class="muted">Parameter fits are by corridor, direction and period, with the saved corridor-wide fallback when period support is insufficient. Fit-source counts refer to the calibration cohort, not just these 137 retained emission cases. Profile dates identify average profiles; Arizona dates label months. These comparisons use fitted sample results, not an out-of-sample validation set.</p></section>'
-    text += '<!-- INVERSE_DIAGNOSTICS -->'
     text += '''<script>
 const parameterTable=document.getElementById("traffic-parameter-table"),tableBody=parameterTable.querySelector("tbody"),rows=Array.from(tableBody.rows),toggles=Array.from(document.querySelectorAll(".group-toggle"));
 function applyGroups(){toggles.forEach(t=>parameterTable.querySelectorAll('[data-group="'+t.dataset.group+'"]').forEach(e=>e.hidden=!t.checked))}
@@ -182,7 +183,9 @@ parameterTable.querySelectorAll("button.sort").forEach(button=>button.addEventLi
  }).forEach(r=>tableBody.appendChild(r));
 }));
 </script></body></html>\n'''
-    return text
+    # Apply the shared offline shell after the page-specific CSS and controls.
+    text = text.replace('.equations div{', '.equations>.equation-card{')
+    return wrap_document(text, 'traffic_parameters')
 
 
 def build(out: Path):

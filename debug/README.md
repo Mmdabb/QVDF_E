@@ -7,7 +7,11 @@ Start with the reports below. The supporting tables, editable figures, calculati
 | Follow the whole experiment from inputs through calibration, VSP, lookup and emissions | [Step-by-step experiment results](full_experiment/README.md) |
 | Inspect five-minute speed, travel time, delay, VSP and emissions for each of the 137 episodes | [Individual episode time series](full_experiment/steps/11_episode_time_series/README.md) |
 | Sort episodes by traffic error and compare method errors beside each figure | [Local HTML dashboard](full_experiment/steps/11_episode_time_series/index.html) · [All error metrics CSV](full_experiment/steps/11_episode_time_series/all_error_metrics.csv) |
-| Compare traffic/QVDF/FD inputs and test queue speeds that improve the emission totals | [Traffic parameters and inverse analysis](full_experiment/steps/11_episode_time_series/traffic_parameters.html) |
+| Compare observed/fitted traffic, QVDF coefficients and FD inputs | [Traffic parameters](full_experiment/steps/11_episode_time_series/traffic_parameters.html) |
+| Find emission-target queue speeds and inspect their FD consequences | [Inverse emissions](full_experiment/steps/11_episode_time_series/inverse_emissions.html) · [Three backward FD calculations](full_experiment/steps/11_episode_time_series/inverse_fd.html) |
+| Inspect bounded density/wave-speed pairs and compare their feasibility | [Episode-level pairs](full_experiment/steps/11_episode_time_series/fd_sensitivity.html) · [Sensitivity summary](full_experiment/steps/11_episode_time_series/fd_summary.html) |
+| Compare strictly fixed capacity with capacity allowed to vary | [Side-by-side dashboard](full_experiment/steps/11_episode_time_series/fd_capacity_comparison.html) |
+| Follow capacity changes through traffic predictions and emissions | [Separate capacity sensitivity report](capacity_sensitivity/report.html) |
 | Follow every calculation for detector 78, including separate VSP and lookup tables | [Detector 78 calculation steps](sensor78/step_by_step/README.md) |
 | Inspect a case with close traffic estimates but much larger two-speed emission error | [Detector 141 November case](case_studies/az_i10_detector141_november/README.md) |
 | Why the emission methods differ across 137 episodes | [137-episode analysis guide](episodes_137/README.md) |
@@ -18,11 +22,14 @@ Start with the reports below. The supporting tables, editable figures, calculati
 | Change detector 78 inputs and inspect cell formulas | [Excel workbook and source guide](sensor78/workbook/README.md) |
 | Locate the original traffic, calibration and emission inputs | [Shared input inventory](../data/inputs/README.md) |
 
+The local dashboard has **one main results table per page**. Its left sidebar contains collapsible sections for the episode overview, parameter comparisons and FD diagnostics. Within a case, traffic and each of the four pollutants have separate pages, each pairing its figure with one error table. The navigation can be hidden to give wide tables more space. Equations use native MathML: the pages work offline without a math-rendering service or external scripts. Open the HTML files locally; the Markdown case list remains available for browsing directly on GitHub.
+
 ## Folder layout
 
 ```text
 debug/
   full_experiment/   Eleven calculation stages, including all 137 individual time series
+  capacity_sensitivity/  Separate capacity analysis, numerical results and HTML report
   case_studies/     Additional worked examples, reports, plots and calculation sources
   episodes_137/
     README.md       Reading order, file descriptions and rerun commands
@@ -52,7 +59,8 @@ The committed reports and results are reference copies. Rerun commands write und
 - **O** combines recorded five-minute point speeds with emission lookup rates. It is a calculation reference, not measured exhaust or observed whole-link trajectories. **S** uses observed mean trip speed; **R** uses reconstructed trip speeds; **M** uses two operating speeds with lookup rates; **A** uses the corresponding cubic rates. `S_pred` is an additional diagnostic using predicted vehicle-hours.
 - The common-clock plots align modeled groups to observed vehicle-count bins. They preserve totals; their timing is illustrative rather than independently measured. Signed error components add to total bias, not to WAPE, and are not separately identified causal effects.
 - The average-speed identity check verifies distance/time consistency and nonnegative state times within the fitted model. It does not validate that model against measured vehicle trajectories.
-- The inverse analysis uses one common queue speed per episode, selected either for CO₂ or for equal-weight relative errors across four pollutants. Conditional discharge, wave-speed and jam-density calculations show the consequences; bounded pairs prioritize preserving capacity. These diagnostics do not change the calibration or establish independently observed FD parameters.
+- The inverse analysis uses one common queue speed per episode, selected either for CO₂ or for equal-weight relative errors across four pollutants. Conditional discharge, wave-speed and jam-density calculations show the consequences. The existing bounded analysis already permits capacity changes when needed to reach the best emission objective; preserving capacity is a secondary choice among equally good emission solutions.
+- The new capacity comparison adds a **strictly fixed-capacity alternative**, holding the fitted traffic quantities fixed in both alternatives. The separate capacity report then propagates capacity changes through the traffic equations and reports feasibility and errors on common cohorts. These diagnostics preserve the archived calibration and do not establish independently observed FD parameters.
 
 ## Verify the package
 

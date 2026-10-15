@@ -5,6 +5,7 @@ import html
 
 import numpy as np
 import pandas as pd
+from dashboard_layout import mathml, wrap_document
 
 METHODS = ["S", "R", "M", "A"]
 POLS = ["CO2", "NOx", "CO", "HC"]
@@ -134,16 +135,22 @@ def matrix(metrics, entries):
 
 def traffic_tables(metrics):
     metrics = metrics[metrics.group.eq("traffic")]
-    targets = metrics[metrics.method.eq("R")].set_index("quantity")
     rows = []
     for quantity, label in [("duration", "Duration P (h)"), ("minimum_speed", "Minimum speed vₜ₂ (mph)"), ("average_speed", "Average speed (mph)")]:
-        z = targets.loc[quantity]
-        rows.append(f'<tr><th scope="row">{label}</th><td>{fmt(z.reference_value)}</td><td>{fmt(z.model_value)}</td><td>{fmt(z.ape_pct)}</td></tr>')
-    result = '<aside class="metrics" aria-label="Traffic error measures"><h3>Traffic errors against O</h3><p>Fitted episode quantities: R = M = A.</p><table><thead><tr><th scope="col">Episode quantity</th><th scope="col">Observed</th><th scope="col">Fitted</th><th scope="col">APE %</th></tr></thead><tbody>'+''.join(rows)+'</tbody></table>'
-    result += '<h3 class="subhead">Five-minute profile WAPE (%)</h3>'
-    result += matrix(metrics, [("speed_5min", "Speed", "wape_pct"), ("travel_time_5min", "Travel time", "wape_pct"), ("delay_5min", "Delay", "wape_pct"), ("vsp_5min", "Operating VSP", "wape_pct")])
+        group = metrics[metrics.quantity.eq(quantity)].set_index('method')
+        reference = float(group.iloc[0].reference_value)
+        for field, measure in [('model_value', 'Value'), ('ape_pct', 'APE %')]:
+            cells = [fmt(reference) if field == 'model_value' else '—']
+            cells += [fmt(float(group.loc[m, field])) if m in group.index else '—' for m in METHODS]
+            rows.append('<tr><th scope="row">'+label+'</th><td>'+measure+'</td>'+''.join('<td>'+v+'</td>' for v in cells)+'</tr>')
+    for quantity, label in [("speed_5min", "5-min speed"), ("travel_time_5min", "5-min travel time"), ("delay_5min", "5-min delay"), ("vsp_5min", "5-min operating VSP")]:
+        group = metrics[metrics.quantity.eq(quantity)].set_index('method')
+        cells = ['—']+[fmt(float(group.loc[m, 'wape_pct'])) for m in METHODS]
+        rows.append('<tr><th scope="row">'+label+'</th><td>WAPE %</td>'+''.join('<td>'+v+'</td>' for v in cells)+'</tr>')
+    heads = '<th scope="col">O</th>'+''.join(f'<th scope="col" style="color:{COLORS[m]}">{m}</th>' for m in METHODS)
+    result = '<aside class="metrics" aria-label="Traffic error measures"><h3>Traffic values and errors</h3><p>Fitted episode quantities: R = M = A. Values use the units shown; APE and WAPE are percentages.</p><div class="metric-scroll"><table><thead><tr><th scope="col">Quantity</th><th scope="col">Measure</th>'+heads+'</tr></thead><tbody>'+''.join(rows)+'</tbody></table></div>'
     result += '<p>R/M/A share speed, travel time and delay; M/A share VSP. VSP compares operating-state exposure averages, not VSP evaluated at equivalent speed.</p><p>Average speed = total distance / total vehicle-hours. S matches the observed episode average by construction. The fitted minimum speed is the calibrated peak target, before five-minute averaging.</p><p>Free/queue times and distances have no independent observed-state reference, so no error is assigned to those panels.</p>'
-    result += '<details><summary>Metric definitions</summary><p>WAPE = 100 × Σ|estimate − O| / Σ|O| over the same five-minute bins. APE = 100 × |estimate − O| / |O| for one episode value. No additional count weighting is applied to WAPE.</p><p>Delay = travel time − L/v<sub>f</sub>; signed observed delays are retained. A zero reference denominator is undefined (—). Full MAE, RMSE and signed bias are in the CSV.</p></details></aside>'
+    result += '<details><summary>Metric definitions</summary>'+mathml('wape')+mathml('ape')+mathml('delay')+'<p>Here y<sub>m,i</sub> is the method estimate and y<sub>O,i</sub> the reference in bin i. No additional count weighting is applied. Signed observed delays are retained; a zero denominator is undefined (—). Full MAE, RMSE and signed bias are in the CSV.</p></details></aside>'
     return result
 
 
@@ -158,17 +165,22 @@ def emission_tables(metrics, pollutant):
             + '<p>Positive bias means overestimation. Rate and bin-emission WAPE use equal five-minute bins.</p><p>Cumulative-path WAPE uses bin-end cumulative values. It is identical for the time and vehicle axes, which display the same cumulative series; it is not a set of independent emission errors.</p><p>Episode-total APE compares the final sums. It can be smaller than bin-emission WAPE because positive and negative errors can cancel.</p><p>O is the observed-speed calculation reference, not measured tailpipe emissions.</p></aside>')
 
 
-def page_html(meta, metrics):
+def page_html(meta, metrics, pollutant=None):
     title = f"{meta['case_id']} · {meta['corridor']} · {meta['date']} · {meta['period']}"
     text = doc_start(title)+'<p><a href="../../index.html">← All episodes</a></p><h1>'+html.escape(title)+'</h1><p><code>'+html.escape(meta['episode_id'])+'</code></p>'
     text += '<p class="note">Common-clock diagnostic: model vehicle groups are assigned to recorded five-minute bins by cumulative-count overlap. The fitted duration may differ from the observed duration. These are comparisons with the observed-speed calculation O, not measured vehicle trajectories. Counts, vehicle-hours and emissions are per lane.</p>'
-    text += f'<table class="summary"><tr><th>Observed duration</th><th>Fitted duration</th><th>Volume</th><th>Length</th></tr><tr><td>{meta["observed_duration_h"]:.3f} h</td><td>{meta["predicted_duration_h"]:.3f} h</td><td>{meta["D_veh_per_lane"]:.1f} veh/lane</td><td>{meta["L_mi"]:.3f} mi</td></tr></table>'
+    text += '<dl class="episode-cards">'+''.join(f'<div><dt>{label}</dt><dd>{value}</dd></div>' for label,value in [('Observed duration',f'{meta["observed_duration_h"]:.3f} h'),('Fitted duration',f'{meta["predicted_duration_h"]:.3f} h'),('Volume',f'{meta["D_veh_per_lane"]:.1f} veh/lane'),('Length',f'{meta["L_mi"]:.3f} mi')])+'</dl>'
     text += '<nav><a href="traffic_timeseries.csv">Traffic CSV</a><a href="emissions_timeseries.csv">Emissions CSV</a><a href="error_metrics.csv">Error metrics CSV</a><a href="node_to_bin_allocation.csv">Count allocation CSV</a></nav>'
     text += '<p class="muted">O: recorded-speed lookup reference · S: single observed average speed · R: reconstructed speed + lookup · M: two speeds + lookup · A: two speeds + cubic rates.</p>'
-    text += '<section><h2>Traffic and operating conditions</h2><div class="comparison"><div class="chart"><a href="traffic_profiles.svg">Editable SVG / full-size figure</a><img src="traffic_profiles.png" alt="Traffic, time-dependent VSP, and two-speed time and distance allocation"></div>'+traffic_tables(metrics)+'</div></section>'
-    for p in POLS:
+    if pollutant is None:
+        text += '<section><h2>Traffic and operating conditions</h2><div class="comparison"><div class="chart"><a href="traffic_profiles.svg">Editable SVG / full-size figure</a><img src="traffic_profiles.png" alt="Traffic, time-dependent VSP, and two-speed time and distance allocation"></div>'+traffic_tables(metrics)+'</div></section>'
+    else:
+        assert pollutant in POLS
+        p = pollutant
         text += f'<section><h2>{p}: rates, emissions and accumulation</h2><div class="comparison"><div class="chart"><a href="emissions_{p}.svg">Editable SVG / full-size figure</a><img loading="lazy" src="emissions_{p}.png" alt="{p} rate, five-minute emission and cumulative comparisons"></div>'+emission_tables(metrics, p)+'</div></section>'
-    return text+'</body></html>\n'
+        text += '<details><summary>Evaluation equations</summary>'+mathml('wape')+mathml('ape')+'<p>Use the same five-minute bins for profile WAPE, and the final episode sum for total APE.</p></details>'
+    text += '<style>.episode-cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:12px}.episode-cards div{border:1px solid #cbd5e1;border-radius:6px;padding:12px 16px;background:#f8fafc}.episode-cards dt{font-size:13px;color:#52657a}.episode-cards dd{margin:4px 0 0;font-size:20px;font-weight:650}.comparison{grid-template-columns:minmax(0,1fr) 500px}.metric-scroll{overflow:auto}.metrics th,.metrics td{min-width:48px}.metrics th:first-child{min-width:125px}.metrics .math-display{font-size:16px}@media(max-width:1500px){.comparison{grid-template-columns:minmax(0,1fr)}.metrics{max-width:850px}}</style>'
+    return wrap_document(text+'</body></html>\n', 'episode_'+(pollutant or 'traffic'), prefix='../../', episode={'case_id':meta['case_id'],'title':title})
 
 
 def index_html(records):
@@ -195,7 +207,7 @@ def index_html(records):
     text = doc_start("137 episode time-series comparisons")+'<h1>137 episode time-series comparisons</h1>'
     text += '<p class="note">The six error columns compare the common fitted traffic quantities (R = M = A) with the observed reference. P is episode duration; vₜ₂ is minimum whole-link speed, not the FD queue speed. Open a case for five-method figures and error tables beside each figure group.</p>'
     text += '<p>Scalar duration, minimum speed and episode average speed use <strong>APE</strong>. Five-minute speed, travel time and delay use <strong>WAPE</strong> over matching bins, without additional vehicle-count weighting. Average speed = total distance / total vehicle-hours. Click any column heading to sort.</p>'
-    text += '<details><summary>Definitions and interpretation</summary><p>WAPE = 100 × Σ|estimate − observed| / Σ|observed|. APE = 100 × |estimate − observed| / |observed|. Delay uses L/v<sub>f</sub>; observed negative bin delays are retained and the denominator sums absolute values. Undefined percentages display —.</p><p>Model groups are aligned to the observed clock by cumulative vehicle count. Fitted duration remains separate. O uses recorded point speed as a link-speed proxy; these are not measured trajectory errors. Profile dates identify average profiles; Arizona dates label months. Detailed CSVs include signed bias, MAE and RMSE.</p></details>'
+    text += '<details><summary>Definitions and interpretation</summary>'+mathml('wape')+mathml('ape')+mathml('average_speed')+mathml('delay')+'<p>Here y<sub>m,i</sub> is the method estimate and y<sub>O,i</sub> the reference in bin i. Observed negative bin delays are retained and the denominator sums absolute values. Undefined percentages display —.</p><p>Model groups are aligned to the observed clock by cumulative vehicle count. Fitted duration remains separate. O uses recorded point speed as a link-speed proxy; these are not measured trajectory errors. Profile dates identify average profiles; Arizona dates label months. Detailed CSVs include signed bias, MAE and RMSE.</p></details>'
     text += '<nav><a href="traffic_parameters.html">Traffic, QVDF and FD parameters / inverse analysis →</a><a href="README.md">Equations and interpretation</a><a href="episode_index.csv">Episode index CSV</a><a href="all_error_metrics.csv">All error metrics CSV</a><a href="all_traffic_timeseries.csv.gz">All traffic CSV (gzip)</a><a href="all_emissions_timeseries.csv.gz">All emissions CSV (gzip)</a></nav>'
     text += '<label for="search">Find an episode</label><br><input id="search" type="search" placeholder="Corridor, detector, date, period or case ID"><span class="count" id="count">137 episodes</span><div class="table-wrap"><table class="catalog"><thead><tr>'+header+'</tr></thead><tbody>'+''.join(rows)+'</tbody></table></div>'
     text += '''<script>
@@ -216,4 +228,4 @@ document.querySelectorAll("button.sort").forEach(button=>button.addEventListener
  }).forEach(r=>body.appendChild(r));
 }));
 </script></body></html>\n'''
-    return text
+    return wrap_document(text, 'index')

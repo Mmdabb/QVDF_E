@@ -16,7 +16,9 @@ Every numbered folder contains numerical results, a short explanation of the equ
 | 8 | [Reconstructed and two-speed calculations](steps/08_reconstruction_and_two_speed/README.md) | 52,608 modeled groups, separate VSP/rate tables, free/queue contributions and VSP differences |
 | 9 | [Episode totals and comparison](steps/09_totals_and_comparison/README.md) | 548 episode–pollutant calculations, all 2,740 method totals, and pooled error numerators/denominators |
 | 10 | [Other experiment branches](steps/10_other_experiments/README.md) | Daily validation, period/day totals, CBI, Gamma/power approximation, Pigou and transitions |
-| 11 | [Every episode at five-minute resolution](steps/11_episode_time_series/README.md) | Traffic, VSP, rate, emission and cumulative plots; sortable traffic errors and per-figure error tables for all 137 episodes |
+| 11 | [Every episode at five-minute resolution](steps/11_episode_time_series/README.md) | Separate traffic/four-pollutant pages for all 137 episodes; one table per page, collapsible navigation and offline equations |
+
+The [local dashboard](steps/11_episode_time_series/index.html) also links separate pages for traffic parameters, inverse-emission queue speeds, backward FD calculations, bounded pairs and their summary. The [capacity comparison](steps/11_episode_time_series/fd_capacity_comparison.html) adds a strict fixed-capacity alternative to the existing bounded analysis, which already permitted capacity changes. The [separate capacity sensitivity report](../capacity_sensitivity/report.html) propagates those changes through the traffic equations. These diagnostic alternatives preserve the original experiment results.
 
 ## How the emission sample is formed
 

@@ -1,0 +1,31 @@
+{
+  "status": "pass",
+  "episodes": 137,
+  "fixed_traffic_rows": 1096,
+  "sweep_rows": 1918,
+  "detector_rows": 352,
+  "baseline_emissions_reproduced": true,
+  "free_objective_no_worse_than_strict_on_common_rows": true,
+  "previous_free_capacity_result_comparison": [
+    {
+      "bounds_profile": "primary_omega_5_20",
+      "rows": 274,
+      "max_free_objective_difference_from_previous": 1.0687284390797913e-13
+    },
+    {
+      "bounds_profile": "expanded_omega_3_20",
+      "rows": 274,
+      "max_free_objective_difference_from_previous": 1.0687284390797913e-13
+    }
+  ],
+  "gauge_rows_checked": 818,
+  "maximum_gauge_P_change_pct": 4.440892098500626e-14,
+  "maximum_duration_closure_error_veh": 9.094947017729282e-13,
+  "input_sha256": {
+    "data/frozen/calibration/average_weekday/episode_results_v2.csv": "8bd71e71cc4fe201a073c7e65aa61b7366a92ee7689445106fb7762e7955a201",
+    "data/frozen/calibration/average_weekday/sensor_parameters.csv": "65369db0761c6bb8c841a0b34065fb6ac1cbb52b1b57a4e1acde84041496fc28",
+    "data/frozen/calibration/average_weekday/detector_fd_calibration.csv": "2d82fad87ae904d13ada56ee3540f18c04ea0776a30590d46e24255019634afc",
+    "data/frozen/calibration/average_weekday/traffic_panel.csv.gz": "e4653f592461f223dada3d1f0e78d45b981df5570f16c91f8216d896ccce02f0",
+    "debug/full_experiment/steps/11_episode_time_series/traffic_parameters.csv": "b1380546a618a2d7b094e2b0e2973fed40a36c5285636be2f949554000f29260"
+  }
+}

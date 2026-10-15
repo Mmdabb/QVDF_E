@@ -8,7 +8,7 @@ Model vehicle groups are aligned to recorded five-minute bins by cumulative coun
 
 [Traffic CSV](traffic_timeseries.csv) · [All-pollutant emission CSV](emissions_timeseries.csv) · [Error metrics CSV](error_metrics.csv) · [Allocation CSV](node_to_bin_allocation.csv)
 
-The HTML page places error tables beside each figure group. Scalar episode targets use APE; five-minute profiles use WAPE against O. Full bias, MAE and RMSE are in the error metrics CSV.
+The local HTML dashboard has a separate traffic page and one page per pollutant, each with one results table beside its figure. Use the collapsible sidebar to navigate. Scalar episode targets use APE; five-minute profiles use WAPE against O. Full bias, MAE and RMSE are in the error metrics CSV.
 
 ## Traffic
 

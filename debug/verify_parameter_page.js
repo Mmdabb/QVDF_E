@@ -1,14 +1,14 @@
 // Read-only static DOM substitute: executes only the inline dashboard handlers.
 // No browser, URL, server, layout engine or network is used.
 const fs=require('fs'),vm=require('vm'),assert=require('assert');
-const filename=process.argv[2]||'debug/full_experiment/steps/11_episode_time_series/traffic_parameters.html';
-const html=fs.readFileSync(filename,'utf8');
-const scripts=[...html.matchAll(/<script>([\s\S]*?)<\/script>/g)].map(m=>m[1]);
+const path=require('path');
+const supplied=process.argv[2]||'debug/full_experiment/steps/11_episode_time_series';
+const directory=supplied.endsWith('.html')?path.dirname(supplied):supplied;
 const decode=s=>s.replace(/&quot;/g,'"').replace(/&#x27;/g,"'").replace(/&lt;/g,'<').replace(/&gt;/g,'>').replace(/&amp;/g,'&');
 class Element{
- constructor(tag,attrs={}){this.tag=tag;this.attrs=attrs;this.children=[];this.parentElement=null;this.handlers={};this.hidden='hidden'in attrs;this.checked='checked'in attrs;this.dataset={};for(const[k,v]of Object.entries(attrs))if(k.startsWith('data-'))this.dataset[k.slice(5).replace(/-([a-z])/g,(_,l)=>l.toUpperCase())]=v;}
+ constructor(tag,attrs={}){this.tag=tag;this.attrs=attrs;this.children=[];this.parentElement=null;this.handlers={};this.hidden='hidden'in attrs;this.checked='checked'in attrs;this.dataset={};this.classList={toggle:(c)=>{const set=new Set((this.attrs.class||'').split(/\s+/).filter(Boolean));const added=!set.has(c);if(added)set.add(c);else set.delete(c);this.attrs.class=[...set].join(' ');return added;},contains:(c)=>(this.attrs.class||'').split(/\s+/).includes(c)};for(const[k,v]of Object.entries(attrs))if(k.startsWith('data-'))this.dataset[k.slice(5).replace(/-([a-z])/g,(_,l)=>l.toUpperCase())]=v;}
  appendChild(child){if(child.parentElement){const c=child.parentElement.children,i=c.indexOf(child);if(i>=0)c.splice(i,1);}this.children.push(child);child.parentElement=this;return child;}
- get rows(){return this.children.filter(e=>e.tag==='tr');}get tBodies(){return this.children.filter(e=>e.tag==='tbody');}
+ get rows(){return this.children.filter(e=>e.tag==='tr');}get cells(){return this.children.filter(e=>['td','th'].includes(e.tag));}get tBodies(){return this.children.filter(e=>e.tag==='tbody');}
  get value(){if(this._value!==undefined)return this._value;if(this.tag==='select')return this.querySelector('option')?.attrs.value||'';return this.attrs.value||'';}set value(v){this._value=v;}
  get textContent(){return this._text!==undefined?this._text:this.children.map(e=>e.textContent).join('');}set textContent(s){this._text=s;}
  getAttribute(k){return this.attrs[k]??null;}setAttribute(k,v){this.attrs[k]=v;}
@@ -18,6 +18,9 @@ class Element{
  querySelector(selector){return this.querySelectorAll(selector)[0]||null;}
 }
 function matches(e,s){const attr=s.match(/^\[([^=]+)="([^"]*)"\]$/);if(attr)return e.attrs[attr[1]]===attr[2];const m=s.match(/^([\w-]+)?(?:\.([\w-]+))?$/);if(!m)throw Error('Unsupported selector '+s);return (!m[1]||e.tag===m[1])&&(!m[2]||(e.attrs.class||'').split(/\s+/).includes(m[2]));}
+function loadPage(filename){
+const html=fs.readFileSync(filename,'utf8');
+const scripts=[...html.matchAll(/<script(?:\s[^>]*)?>([\s\S]*?)<\/script>/g)].map(m=>m[1]);
 const document=new Element('document'),stack=[document],voids=new Set(['meta','input','br','img','link','hr']);
 for(const token of html.replace(/<script>[\s\S]*?<\/script>/g,'').replace(/<style>[\s\S]*?<\/style>/g,'').match(/<[^>]*>|[^<]+/g)||[]){
  if(token.startsWith('<!'))continue;
@@ -26,36 +29,52 @@ for(const token of html.replace(/<script>[\s\S]*?<\/script>/g,'').replace(/<styl
  else{const e=new Element('#text');e.textContent=decode(token);stack.at(-1).appendChild(e);}
 }
 document.getElementById=id=>document.descendants().find(e=>e.attrs.id===id)||null;
+document.body=document.querySelector('body');
 const context=vm.createContext({document,console});for(const s of scripts)vm.runInContext(s,context);
+return {document,html,scripts};
+}
 let checks=0;function ok(value,label){checks++;assert(value,label);}
-const traffic=document.getElementById('traffic-parameter-table'),inv=document.getElementById('inverse-emission-table'),fd=document.getElementById('inverse-fd-table'),bounded=document.getElementById('bounded-fd-table');
-const visible=t=>t.tBodies[0].rows.filter(r=>!r.hidden);
-ok(visible(traffic).length===137,'137 traffic rows');ok(visible(inv).length===274,'274 inverse rows initially');ok(visible(fd).length===274,'274 backward FD rows initially');ok(visible(bounded).length===274,'274 primary bounded rows initially');
-ok(visible(bounded).every(r=>r.dataset.bounds==='primary'),'initial primary bounds filter');
-let sortTests=0;
-for(const table of [traffic,inv,fd,bounded]){
- const cls=table===traffic?'button.sort':'.inverse-sort';
- for(const button of table.querySelectorAll(cls))for(const direction of [1,-1]){
+
+let sortTests=0,pages=0;
+const configs=[
+ ['index.html',137],['traffic_parameters.html',137],['inverse_emissions.html',274],
+ ['inverse_fd.html',274],['fd_sensitivity.html',274],['fd_summary.html',4],
+ ['fd_capacity_comparison.html',274]
+];
+for(const [filename,expectedRows] of configs){
+ const {document,html,scripts}=loadPage(path.join(directory,filename));pages++;
+ const tables=document.querySelectorAll('table');ok(tables.length===1,filename+': exactly one data table');
+ const table=tables[0],visible=()=>table.tBodies[0].rows.filter(r=>!r.hidden);
+ ok(visible().length===expectedRows,filename+': initial visible rows');
+ ok(document.querySelectorAll('math').length>0,filename+': native typeset math');
+ ok(document.querySelectorAll('details').length>0,filename+': collapsible navigation');
+ ok(document.querySelectorAll('[aria-current="page"]').length===1,filename+': active page indicator');
+ const menu=document.getElementById('dashboard-menu-toggle');menu.emit('click');ok(document.body.classList.contains('dashboard-nav-hidden')&&menu.getAttribute('aria-expanded')==='false',filename+': hide navigation');menu.emit('click');ok(!document.body.classList.contains('dashboard-nav-hidden')&&menu.getAttribute('aria-expanded')==='true',filename+': show navigation');
+ const ids=document.descendants().filter(e=>e.attrs.id).map(e=>e.attrs.id);ok(new Set(ids).size===ids.length,filename+': unique IDs');
+ const buttons=table.querySelectorAll('button').filter(b=>b.dataset.key!==undefined||b.dataset.index!==undefined);
+ for(const button of buttons)for(const direction of [1,-1]){
   button.emit('click');const key=button.dataset.key,numeric=button.dataset.numeric==='true';
-  const values=table.tBodies[0].rows.map(r=>r.querySelector('[data-key="'+key+'"]').dataset.value);
+  const values=table.tBodies[0].rows.map(r=>(key!==undefined?r.querySelector('[data-key="'+key+'"]'):r.cells[Number(button.dataset.index)]).dataset.value);
   const valid=numeric?values.filter(v=>v!==''&&Number.isFinite(Number(v))).map(Number):values.filter(v=>v!=='');
-  ok(valid.every((v,i)=>!i||(numeric?direction*(v-valid[i-1])>=-1e-12:direction*valid[i-1].localeCompare(v,undefined,{numeric:true})<=0)),'sort '+table.attrs.id+' '+key+' '+direction);
-  if(numeric){const firstMissing=values.findIndex(v=>v===''||!Number.isFinite(Number(v)));ok(firstMissing<0||values.slice(firstMissing).every(v=>v===''||!Number.isFinite(Number(v))),'numeric missing values last');}
+  ok(valid.every((v,i)=>!i||(numeric?direction*(v-valid[i-1])>=-1e-12:direction*valid[i-1].localeCompare(v,undefined,{numeric:true})<=0)),filename+': sort '+(key||button.dataset.index)+' '+direction);
+  if(numeric){const firstMissing=values.findIndex(v=>v===''||!Number.isFinite(Number(v)));ok(firstMissing<0||values.slice(firstMissing).every(v=>v===''||!Number.isFinite(Number(v))),filename+': numeric missing values last');}
   sortTests++;
  }
+ const strategy=document.getElementById('inverse-strategy'),bounds=document.getElementById('inverse-bounds');
+ if(strategy){for(const value of ['co2_target','balanced_four_pollutants','']){strategy.value=value;strategy.emit('change');ok(visible().length===(value?137:274),filename+': strategy row count');ok(visible().every(r=>!value||r.dataset.strategy===value),filename+': strategy membership');}}
+ if(bounds){for(const value of ['expanded_lower_wave','primary']){bounds.value=value;bounds.emit('change');ok(visible().length===274,filename+': bound row count');ok(visible().every(r=>r.dataset.bounds===value),filename+': bound membership');}}
+ const search=document.getElementById('inverse-search')||document.getElementById('search');
+ if(search){for(const [term,n]of [['ep014',strategy?2:1],['no-such-case',0],['',expectedRows]]){search.value=term;search.emit('input');ok(visible().length===n,filename+': search '+term);}}
+ const all=document.getElementById('all-view'),summary=document.getElementById('summary-view');
+ if(all){all.emit('click');ok(table.querySelectorAll('[data-group="inputs"]').every(e=>!e.hidden),'show all inputs');ok(table.querySelectorAll('[data-group="coefficients"]').every(e=>!e.hidden),'show all coefficients');summary.emit('click');for(const g of ['inputs','delay','coefficients','fd_support'])ok(table.querySelectorAll('[data-group="'+g+'"]').every(e=>e.hidden),'hide detail '+g);}
 }
-const boundSelect=document.getElementById('inverse-bounds'),strategy=document.getElementById('inverse-strategy'),search=document.getElementById('inverse-search'),topSearch=document.getElementById('search');
-for(const bound of ['primary','expanded_lower_wave'])for(const strat of ['','co2_target','balanced_four_pollutants']){
- boundSelect.value=bound;boundSelect.emit('change');strategy.value=strat;strategy.emit('change');
- ok(visible(inv).length===(strat?137:274),'inverse strategy filter '+strat);
- ok(visible(bounded).length===(strat?137:274),'bounded strategy count '+strat);
- ok(visible(bounded).every(r=>r.dataset.bounds===bound&&(!strat||r.dataset.strategy===strat)),'bound/strategy conjunction');
+// All five views per episode contain one table and link through nested navigation.
+const episodeRoot=path.join(directory,'episodes');let episodePages=0;
+for(const folder of fs.readdirSync(episodeRoot))for(const filename of ['index.html','emissions_CO2.html','emissions_NOx.html','emissions_CO.html','emissions_HC.html']){
+ const {document}=loadPage(path.join(episodeRoot,folder,filename));episodePages++;
+ ok(document.querySelectorAll('table').length===1,folder+'/'+filename+': one table');
+ ok(document.querySelectorAll('math').length>0,folder+'/'+filename+': math');
+ ok(document.querySelectorAll('[aria-current="page"]').length===1,folder+'/'+filename+': active page');
 }
-strategy.value='';strategy.emit('change');search.value='ep014';search.emit('input');ok(visible(inv).length===2&&visible(fd).length===2&&visible(bounded).length===2,'inverse case filter');
-topSearch.value='ep020';topSearch.emit('input');ok(visible(traffic).length===1,'top traffic filter');ok(visible(inv).length===2&&visible(bounded).length===2,'top search synchronizes inverse');
-topSearch.value='no-such-case';topSearch.emit('input');ok([traffic,inv,fd,bounded].every(t=>visible(t).length===0),'empty results');
-topSearch.value='';topSearch.emit('input');ok(visible(traffic).length===137&&visible(inv).length===274&&visible(bounded).length===274,'clear filter restores rows');
-document.getElementById('all-view').emit('click');ok(traffic.querySelectorAll('[data-group="inputs"]').every(e=>!e.hidden),'show all inputs');ok(traffic.querySelectorAll('[data-group="coefficients"]').every(e=>!e.hidden),'show all coefficients');
-document.getElementById('summary-view').emit('click');for(const g of ['inputs','delay','coefficients','fd_support'])ok(traffic.querySelectorAll('[data-group="'+g+'"]').every(e=>e.hidden),'hide detail group '+g);for(const g of ['id','qvdf','fd'])ok(traffic.querySelectorAll('[data-group="'+g+'"]').every(e=>!e.hidden),'show summary group '+g);
-ok(visible(inv).length===274&&visible(bounded).length===274,'traffic group toggle does not hide inverse rows');
-console.log(JSON.stringify({checks,sort_direction_checks:sortTests,scripts_executed:scripts.length,all_passed:true},null,2));
+ok(episodePages===685,'five views for all 137 episodes');
+console.log(JSON.stringify({checks,pages,episode_pages:episodePages,sort_direction_checks:sortTests,all_passed:true},null,2));

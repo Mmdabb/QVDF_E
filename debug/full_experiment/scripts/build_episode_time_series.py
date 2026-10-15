@@ -64,7 +64,7 @@ def page_markdown(meta):
     text+=f"Original ID: `{meta['episode_id']}`. Observed duration {meta['observed_duration_h']:.3f} h; predicted duration {meta['predicted_duration_h']:.3f} h; {meta['D_veh_per_lane']:.1f} vehicles/lane.\n\n"
     text+="Model vehicle groups are aligned to recorded five-minute bins by cumulative count. This preserves totals and is a diagnostic comparison, not measured trajectories. R/M/A share travel time, delay and equivalent speed; M/A share operating-state VSP.\n\n"
     text+="[Traffic CSV](traffic_timeseries.csv) · [All-pollutant emission CSV](emissions_timeseries.csv) · [Error metrics CSV](error_metrics.csv) · [Allocation CSV](node_to_bin_allocation.csv)\n\n"
-    text+="The HTML page places error tables beside each figure group. Scalar episode targets use APE; five-minute profiles use WAPE against O. Full bias, MAE and RMSE are in the error metrics CSV.\n\n"
+    text+="The local HTML dashboard has a separate traffic page and one page per pollutant, each with one results table beside its figure. Use the collapsible sidebar to navigate. Scalar episode targets use APE; five-minute profiles use WAPE against O. Full bias, MAE and RMSE are in the error metrics CSV.\n\n"
     text+="## Traffic\n\n![Traffic and operating-state profiles](traffic_profiles.png)\n\n[Editable SVG](traffic_profiles.svg)\n\n"
     for p in POLS:text+=f"## {p}\n\n![{p} rate, bin emissions and cumulative emissions](emissions_{p}.png)\n\n[Editable SVG](emissions_{p}.svg)\n\n"
     return text.rstrip()+"\n"
@@ -192,6 +192,7 @@ def render_plots(out, workers, start=1, end=None):
 def main():
     parser=argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--output",type=Path,default=ROOT/"debug/output/episode_time_series")
+    parser.add_argument("--capacity-source",type=Path,default=None,help="Reviewed or regenerated capacity sensitivity directory for its comparison page")
     parser.add_argument("--skip-figures",action="store_true",help="Reproduce all CSVs and numerical checks, without plotting (for CI)")
     parser.add_argument("--plots-only",action="store_true",help="Regenerate figures from an already verified output folder, leaving calculation CSVs unchanged")
     parser.add_argument("--plot-start",type=int,default=1,help="First case to plot, inclusive one-based index; use with --plots-only for disjoint parallel batches")
@@ -287,6 +288,8 @@ def main():
         metrics=calculate_metrics(record,traffic,emission,r)
         save_csv(metrics,folder/"error_metrics.csv");all_metrics.append(metrics)
         index.append(record);(folder/"index.html").write_text(page_html(record,metrics),encoding="utf-8")
+        for pollutant in POLS:
+            (folder/f"emissions_{pollutant}.html").write_text(page_html(record,metrics,pollutant),encoding="utf-8")
         (folder/"README.md").write_text(page_markdown(record),encoding="utf-8")
         all_traffic.append(traffic);all_emissions.append(emission);jobs.append((str(folder),record))
     save_csv(pd.concat(all_traffic,ignore_index=True),out/"all_traffic_timeseries.csv.gz")
@@ -304,7 +307,7 @@ def main():
     for r in index:md+=f"| [{r['case_id']}]({r['folder']}/README.md) | {r['corridor']} | {r['sensor_uid']} | {r['date']} | {r['period']} | {r['observed_duration_h']:.2f} | {r['predicted_duration_h']:.2f} | {r['D_veh_per_lane']:.1f} |\n"
     (out/"EPISODES.md").write_text(md,encoding="utf-8")
     from build_parameter_diagnostics import build as build_parameter_diagnostics
-    build_parameter_diagnostics(out)
+    build_parameter_diagnostics(out,args.capacity_source)
     print(json.dumps(audit,indent=2),flush=True)
     if not args.skip_figures:render_plots(out,args.workers,args.plot_start,args.plot_end)
 
