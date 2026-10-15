@@ -1,0 +1,171 @@
+{
+  "purpose": "Inputs for the retained QVDF-E empirical workflow; all numerical source bytes are preserved. Only the copied source manifest uses portable relative paths.",
+  "prepared_date": "2026-10-14",
+  "source_manifest_original": [
+    {
+      "path": "qvdfe-experiments\\datasets\\new_set_I10\\I10-mph.csv",
+      "sha256": "bd406ab9813878f0454d7776cac38f23ea2199acddba58dd76ebde639888371b",
+      "bytes": 9476024
+    },
+    {
+      "path": "qvdfe-experiments\\datasets\\new_set_I10\\I10-vol.csv",
+      "sha256": "4e0f70446c7fdda4b7b4fb8a3f2fe7f44344d9bab772bf769464e638c7be1c4f",
+      "bytes": 11264837
+    },
+    {
+      "path": "qvdfe-experiments\\cbi_package_test\\repo\\data\\pems_average_weekday_5min.csv.gz",
+      "sha256": "6454eb974d4b60e0ba6ab883305d08520ae33b78d3bfb170f1cb31ba40cbf676",
+      "bytes": 1057933
+    },
+    {
+      "path": "qvdfe-experiments\\cbi_package_test\\repo\\data\\pems_link_meta.csv",
+      "sha256": "135e1b36699c409ae1b020230dcf85dccf3a23033e194c7b082f7a19836bf769",
+      "bytes": 27739
+    }
+  ],
+  "source_manifest_original_sha256": "bade6fccf1a09045ca956d0a731c8cc5eeaa8f698472042a34cf86876a7e1b49",
+  "files": [
+    {
+      "path": "data/inputs/empirical/baseline/traffic_panel.csv.gz",
+      "source_path": "qvdfe-experiments/output/qvdfe_v16_20260917/traffic_panel.csv.gz",
+      "sha256": "0162edc119b29ce113fc0f61d9443e619f3e07fdff88b2c904d45e49e9e38e65",
+      "bytes": 19387061,
+      "change": "none"
+    },
+    {
+      "path": "data/inputs/empirical/baseline/sensor_parameters.csv",
+      "source_path": "qvdfe-experiments/output/qvdfe_v16_20260917/sensor_parameters.csv",
+      "sha256": "283c18cb675fba77a33658ce4d220db5ee17582006c8d46f8bcebf511a248e86",
+      "bytes": 114226,
+      "change": "none"
+    },
+    {
+      "path": "data/inputs/empirical/baseline/episodes_detected.csv",
+      "source_path": "qvdfe-experiments/output/qvdfe_v16_20260917/episodes_detected.csv",
+      "sha256": "5bd7d9cdc18a1b1b419b75c64821feb02029a8ce0c409b98cefd3d3a8ae80197",
+      "bytes": 1428358,
+      "change": "none"
+    },
+    {
+      "path": "data/inputs/empirical/baseline/detector_fd_calibration.csv",
+      "source_path": "qvdfe-experiments/output/qvdfe_v16_20260917/detector_fd_calibration.csv",
+      "sha256": "a62291b13781ac807a60059841408bc4953192d67169c1464960c133e5b7de17",
+      "bytes": 179036,
+      "change": "none"
+    },
+    {
+      "path": "data/inputs/empirical/baseline/cubic_rate_coefficients.csv",
+      "source_path": "qvdfe-experiments/output/qvdfe_v16_20260917/cubic_rate_coefficients.csv",
+      "sha256": "c8b0802937793c93c832c63da3894ab91b13d4777a9ce86a275cad94d5fdc089",
+      "bytes": 637,
+      "change": "none"
+    },
+    {
+      "path": "data/inputs/empirical/baseline/fd_estimation_protocol.json",
+      "source_path": "qvdfe-experiments/output/qvdfe_v16_20260917/fd_estimation_protocol.json",
+      "sha256": "efc0d7e7d9927343bd95b3a582e1315cc6d7fb6cd9aa91d664d7512d10abd159",
+      "bytes": 1262,
+      "change": "none"
+    },
+    {
+      "path": "data/inputs/empirical/baseline/episode_results_v2.csv",
+      "source_path": "qvdfe-experiments/output/qvdfe_v16_20260917/episode_results_v2.csv",
+      "sha256": "04004a7dfdbc18352533bec529dd62b446dba9b1682b731accc0a61d83214519",
+      "bytes": 3070760,
+      "change": "none"
+    },
+    {
+      "path": "data/inputs/empirical/baseline/cbi_comparison_metrics.csv",
+      "source_path": "qvdfe-experiments/output/qvdfe_v16_20260917/cbi_comparison_metrics.csv",
+      "sha256": "7ec1f20882fd2c8de035f85ebb2fb75af126d8af93f4d0afb263922e8452311e",
+      "bytes": 609,
+      "change": "none"
+    },
+    {
+      "path": "data/inputs/empirical/baseline/cbi_comparison_summary.csv",
+      "source_path": "qvdfe-experiments/output/qvdfe_v16_20260917/cbi_comparison_summary.csv",
+      "sha256": "534b5dcfe3a88f9bfe2501e34d89cd78296342c5d64eebd655f191552d5fb503",
+      "bytes": 681,
+      "change": "none"
+    },
+    {
+      "path": "data/inputs/empirical/baseline/cbi_episode_matches.csv",
+      "source_path": "qvdfe-experiments/output/qvdfe_v16_20260917/cbi_episode_matches.csv",
+      "sha256": "0d7af022e392eeff1091f723683c9074e284ecb5c59c5e7826d31d0ddbc77a3c",
+      "bytes": 45574,
+      "change": "none"
+    },
+    {
+      "path": "data/inputs/empirical/baseline/cbi_link_comparison.csv",
+      "source_path": "qvdfe-experiments/output/qvdfe_v16_20260917/cbi_link_comparison.csv",
+      "sha256": "a75bb8b5b973e6e3ea254780a4b0f7b2a47b56ff29f9caec921ba7b8c48a69fa",
+      "bytes": 12842,
+      "change": "none"
+    },
+    {
+      "path": "data/inputs/empirical/baseline/cbi_period_comparison.csv",
+      "source_path": "qvdfe-experiments/output/qvdfe_v16_20260917/cbi_period_comparison.csv",
+      "sha256": "3085b836355f32d4fac58d26aef0bc2cd2e80d10a5c047d3be55cc90e9b24466",
+      "bytes": 118627,
+      "change": "none"
+    },
+    {
+      "path": "data/inputs/empirical/baseline/repository_reference/episodes.csv",
+      "source_path": "qvdfe-experiments/output/qvdfe_v16_20260917/repository_reference/episodes.csv",
+      "sha256": "41d85bf4974d93b8d75f2e710d2098219b043cbb51c529b7a220b273c3e02985",
+      "bytes": 38731,
+      "change": "none"
+    },
+    {
+      "path": "data/inputs/empirical/baseline/repository_reference/link_period.csv",
+      "source_path": "qvdfe-experiments/output/qvdfe_v16_20260917/repository_reference/link_period.csv",
+      "sha256": "44fe21061542748b7ca10c285f9d6ef3052672182d1e77aa4772db1ca4c7c335",
+      "bytes": 541981,
+      "change": "none"
+    },
+    {
+      "path": "data/inputs/empirical/baseline/repository_reference/reproduction.json",
+      "source_path": "qvdfe-experiments/output/qvdfe_v16_20260917/repository_reference/reproduction.json",
+      "sha256": "984188a4144ee90324a25bbeacf595e7c3f295f8cfdb055184a72e146b717acb",
+      "bytes": 199,
+      "change": "none"
+    },
+    {
+      "path": "data/inputs/empirical/source_files/arizona_i10/I10-mph.csv",
+      "source_path": "qvdfe-experiments/datasets/new_set_I10/I10-mph.csv",
+      "sha256": "bd406ab9813878f0454d7776cac38f23ea2199acddba58dd76ebde639888371b",
+      "bytes": 9476024,
+      "change": "none"
+    },
+    {
+      "path": "data/inputs/empirical/source_files/arizona_i10/I10-vol.csv",
+      "source_path": "qvdfe-experiments/datasets/new_set_I10/I10-vol.csv",
+      "sha256": "4e0f70446c7fdda4b7b4fb8a3f2fe7f44344d9bab772bf769464e638c7be1c4f",
+      "bytes": 11264837,
+      "change": "none"
+    },
+    {
+      "path": "data/inputs/empirical/source_files/pems/pems_average_weekday_5min.csv.gz",
+      "source_path": "qvdfe-experiments/cbi_package_test/repo/data/pems_average_weekday_5min.csv.gz",
+      "sha256": "6454eb974d4b60e0ba6ab883305d08520ae33b78d3bfb170f1cb31ba40cbf676",
+      "bytes": 1057933,
+      "change": "none"
+    },
+    {
+      "path": "data/inputs/empirical/source_files/pems/pems_link_meta.csv",
+      "source_path": "qvdfe-experiments/cbi_package_test/repo/data/pems_link_meta.csv",
+      "sha256": "135e1b36699c409ae1b020230dcf85dccf3a23033e194c7b082f7a19836bf769",
+      "bytes": 27739,
+      "change": "none"
+    }
+  ],
+  "existing_rate_files": [
+    "data/frozen/calibration/emission_input/input_vehicle_type.csv",
+    "data/frozen/calibration/emission_input/input_vehicle_emission_rate.csv"
+  ],
+  "pems_source": {
+    "repository": "https://github.com/jacky850/pems-cbi-dv",
+    "commit": "29a3c7d9ac5af42778879172605dd4ceca4130f5"
+  },
+  "empirical_entry": "Verified preserved baseline, not raw-data reconstruction"
+}

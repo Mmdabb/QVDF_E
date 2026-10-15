@@ -1,0 +1,163 @@
+{
+  "scope": "Supplied detector-78 worked example. Separate from the frozen 137 matched episodes.",
+  "original_workbook": {
+    "filename": "QVDF_Source_Definitions_Audit.xlsx",
+    "sha256": "fe9252d72482685b84a241dff68c190571df70d2bb43f4838c9b42de7a2c72e2",
+    "sheet": "Raw5min",
+    "excel_rows_inclusive": [
+      6,
+      6004
+    ],
+    "availability": "The input rows are published here; the original multi-sheet workbook is not required."
+  },
+  "preparation_sources": [
+    {
+      "historical_workspace_path": "QVDFE_paper/current/v34/workbooks/support/sensor78_source_extract.json",
+      "sha256": "1aa90c295301a52048fdb1021203c65b1c6748168991c0731b46c1875f3f1b0d",
+      "bytes": 508121,
+      "role": "input or prepared profile source"
+    },
+    {
+      "historical_workspace_path": "QVDFE_paper/current/v34/workbooks/support/calibration_inputs.json",
+      "sha256": "cef1cd6cf1709b3a7a6340631a109b5741eacbab3408384300b93682ad97a440",
+      "bytes": 286932,
+      "role": "input or prepared profile source"
+    },
+    {
+      "historical_workspace_path": "output/pdf/source/detector78/simple_workbook_inputs.json",
+      "sha256": "b6c67ade3e32490422f5314bcc3c809794c2838274406f2fb8a8062db05c9c6c",
+      "bytes": 256201,
+      "role": "input or prepared profile source"
+    },
+    {
+      "historical_workspace_path": "output/pdf/source/detector78/average_weekday_profile.csv",
+      "sha256": "165979a8dde79cf4a82d88df19713f67aa70201462111d7e897a46e6268a2fe6",
+      "bytes": 14661,
+      "role": "input or prepared profile source"
+    },
+    {
+      "historical_workspace_path": "QVDFE_paper/current/v34/workbooks/support/expected_results.json",
+      "sha256": "8c72a6b2e19fdcd863ad257134f30f76690a080605ce560ceb70349a01601b1a",
+      "bytes": 61995,
+      "role": "verification only; not copied"
+    }
+  ],
+  "calibration_and_emission_sources": [
+    {
+      "path": "data/frozen/calibration/average_weekday/sensor_parameters.csv",
+      "sha256": "65369db0761c6bb8c841a0b34065fb6ac1cbb52b1b57a4e1acde84041496fc28",
+      "historical_workspace_path": "qvdfe-experiments/output/qvdfe_v19_20260922/average_weekday/sensor_parameters.csv"
+    },
+    {
+      "path": "data/frozen/calibration/average_weekday/parameter_card.csv",
+      "sha256": "eff10f4e51c2d3c56302b110bcbbd52afd7e3ba546a279ee651a3d1d61fd7724",
+      "historical_workspace_path": "qvdfe-experiments/output/qvdfe_v19_20260922/average_weekday/parameter_card.csv"
+    },
+    {
+      "path": "data/frozen/calibration/emission_input/input_vehicle_type.csv",
+      "sha256": "175a4acc0a774c89b1da9a287b725ec3818e1bc72b634bee52db6c99333aa378",
+      "historical_workspace_path": "qvdfe-experiments/emission_input/input_vehicle_type.csv"
+    },
+    {
+      "path": "data/frozen/calibration/emission_input/input_vehicle_emission_rate.csv",
+      "sha256": "60516669d4d02ed1c3867c2fa20ef3a372cb1e22cb4c597f2392387108fe12cc",
+      "historical_workspace_path": "qvdfe-experiments/emission_input/input_vehicle_emission_rate.csv"
+    },
+    {
+      "path": "data/frozen/calibration/average_weekday/cubic_rate_coefficients.csv",
+      "sha256": "c8b0802937793c93c832c63da3894ab91b13d4777a9ce86a275cad94d5fdc089",
+      "historical_workspace_path": "qvdfe-experiments/output/qvdfe_v19_20260922/average_weekday/cubic_rate_coefficients.csv"
+    }
+  ],
+  "publication_changes": [
+    "Removed absolute local paths.",
+    "Retained raw measurement rows and source caution text without numerical changes.",
+    "Retained only the average-weekday PM traffic calibration used by this example; excluded the unused daily track and other period cards.",
+    "Removed calculated archived-episode outputs, validation-only result arrays and workbook presentation metadata from input JSON files.",
+    "Exported inspectable CSV tables without rounding or re-estimating parameters.",
+    "Copied the existing 288-bin average-weekday CSV unchanged; recomputed its profile from raw records as a verification only."
+  ],
+  "raw_rows": 5999,
+  "source_weekdays": 21,
+  "retained_weekdays": [
+    "2016-01-01",
+    "2016-01-05",
+    "2016-01-06",
+    "2016-01-07",
+    "2016-01-08",
+    "2016-01-12",
+    "2016-01-13",
+    "2016-01-14",
+    "2016-01-18",
+    "2016-01-19",
+    "2016-01-20",
+    "2016-01-21",
+    "2016-01-22",
+    "2016-01-25",
+    "2016-01-27",
+    "2016-01-28"
+  ],
+  "retained_days": 16,
+  "average_profile_bins": 288,
+  "selected_profile_bins": 57,
+  "episode_window": {
+    "start_inclusive": "14:45:00",
+    "end_exclusive": "19:30:00"
+  },
+  "verification": {
+    "raw_csv_numeric_round_trip_exact": true,
+    "average_profile_relative_tolerance": 1e-14,
+    "selected_profile_relative_tolerance": 1e-14,
+    "PM_parameters_match_original_expected_result": true,
+    "quadrature_matches_original": true,
+    "rate_bands": 9,
+    "quadrature_nodes": 384
+  },
+  "published_files": [
+    {
+      "path": "average_weekday_profile.csv",
+      "bytes": 14661,
+      "sha256": "165979a8dde79cf4a82d88df19713f67aa70201462111d7e897a46e6268a2fe6"
+    },
+    {
+      "path": "calculation_inputs.json",
+      "bytes": 65915,
+      "sha256": "9e737201772ecfdb126b4b0d3ae910a2aedbfb600b69d1ae85132185d97733ee"
+    },
+    {
+      "path": "calibration_inputs.json",
+      "bytes": 273426,
+      "sha256": "35cca7f9c9406f5a85ea651224defd9f4b114b918e4fffcd242f2317125b29f8"
+    },
+    {
+      "path": "date_support.csv",
+      "bytes": 698,
+      "sha256": "8e39629952bf87c0159884deadc66ccfeee7b2de416192a29413afa50382d093"
+    },
+    {
+      "path": "emission_rate_bands.csv",
+      "bytes": 1349,
+      "sha256": "2e2dfe4fbb557678a709afb46efd315484840d2b2622b7c25a05afcbb43847a6"
+    },
+    {
+      "path": "episode_profile.csv",
+      "bytes": 4451,
+      "sha256": "92b6bc150a25f452a25b49453727e83b0cf4cc1bfedc3e5a9c3fcff4d04e6541"
+    },
+    {
+      "path": "quadrature_384.csv",
+      "bytes": 17199,
+      "sha256": "193ca757c8e767f224e1b6b063e884522a5b2b6db2fbb12582420f09c7ab701a"
+    },
+    {
+      "path": "raw_5min.csv",
+      "bytes": 466000,
+      "sha256": "ee7aedab2f48b796301920da68dbb13a3c9d1811ec5ae9a9fd51b43ce757d82b"
+    },
+    {
+      "path": "raw_source.json",
+      "bytes": 960813,
+      "sha256": "723167ea9e8a5d6da03f8656556bb141b366f3ca1ac209be2b1d2df4ff77b10f"
+    }
+  ]
+}

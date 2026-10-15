@@ -12,6 +12,7 @@ The software is **QVDF-E** and its executable experiment workflow is `qvdfe.pipe
 | `src/qvdfe/` | Reusable equations, exact lookup and cubic rate loaders, profile/episode screening and transitions |
 | `reproduce/` | Editable figures, historical calculation reproduction and current reporting |
 | `data/frozen/` | Original released results and derived inputs, plus separately documented figure inputs |
+| `data/inputs/` | Preserved empirical preprocessing baseline, Arizona/PeMS source files, detector-78 calculation inputs, and separate provenance/checksums |
 | `data/reporting/v33/` | Explicit current reporting support and expected aggregate metrics |
 | `tests/` | Identity, scientific regression, sample selection, reporting and output-protection checks |
 | `docs/validation/` | Integration's numerical comparison record; no raw observations |
@@ -58,7 +59,7 @@ Verified on 14 October 2026:
 
 The 61-table comparison is recorded in [`validation/numerical_regression.json`](validation/numerical_regression.json). One intentional schema relocation protects inputs: Pigou's selection flags now go to its own `selected_surrogate_curves.csv`, rather than modifying the input surrogate curve table. The comparison records those columns separately.
 
-The full empirical check used the authors' external baseline and source files locally. They are not added to the public repository. CI runs the public-data regression tests and downstream reproductions; it cannot perform the complete empirical rerun without those external inputs. Repository tests and notebook checks supplement the results above.
+The full empirical check originally used the authors' local baseline and source files. Those empirical inputs are now included in `data/inputs/empirical/`, with source hashes, the preserved original manifest and a path mapping in `data/inputs/provenance.json`. The copied baseline manifest uses portable paths; the original source data and frozen result files are unchanged. The complete empirical rerun can therefore use the clone's inputs. This remains a baseline-reuse calculation: the command does not rebuild the original preprocessing from raw files. CI's regression tests and downstream reproductions are separate from the full 400-bootstrap empirical run.
 
 ## Reproduce the checks
 
@@ -69,6 +70,8 @@ python tools/verify_frozen_inputs.py
 python reproduce/run_all.py
 python reproduce/verify_current_figures.py
 python tools/make_formula_code_map.py
+python -m qvdfe.pipeline check-inputs --data-root data/inputs/empirical/source_files --baseline data/inputs/empirical/baseline --emission-input data/frozen/calibration/emission_input
+python -m qvdfe.pipeline empirical --data-root data/inputs/empirical/source_files --baseline data/inputs/empirical/baseline --emission-input data/frozen/calibration/emission_input --output build/qvdfe_empirical --bootstrap 400
 python -m qvdfe.pipeline surrogate --data data/frozen/calibration/average_weekday --output build/surrogate
 python -m qvdfe.pipeline pigou --data data/frozen/calibration/average_weekday --surrogate build/surrogate --output build/pigou
 ```

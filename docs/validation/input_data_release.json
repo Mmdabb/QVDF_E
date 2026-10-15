@@ -1,0 +1,99 @@
+{
+  "prepared_date": "2026-10-14",
+  "bundled_source_files": 4,
+  "source_hashes_match_original": true,
+  "unchanged_empirical_payload_files": 19,
+  "new_data_bytes": 48607045,
+  "checksum_inventory_files": 43,
+  "episode_diagnostic_csv_comparisons": [
+    {
+      "file": "column_definitions.csv",
+      "rows": 333,
+      "columns": 2,
+      "all_values_match": true
+    },
+    {
+      "file": "comparison_metrics.csv",
+      "rows": 60,
+      "columns": 8,
+      "all_values_match": true
+    },
+    {
+      "file": "corridor_diagnostics.csv",
+      "rows": 6,
+      "columns": 8,
+      "all_values_match": true
+    },
+    {
+      "file": "counterfactual_metrics.csv",
+      "rows": 48,
+      "columns": 8,
+      "all_values_match": true
+    },
+    {
+      "file": "diagnostic_correlations.csv",
+      "rows": 36,
+      "columns": 4,
+      "all_values_match": true
+    },
+    {
+      "file": "diagnostic_groups.csv",
+      "rows": 44,
+      "columns": 9,
+      "all_values_match": true
+    },
+    {
+      "file": "episode_calculations_137.csv",
+      "rows": 137,
+      "columns": 333,
+      "all_values_match": true
+    },
+    {
+      "file": "episode_pollutant_calculations_548.csv",
+      "rows": 548,
+      "columns": 69,
+      "all_values_match": true
+    },
+    {
+      "file": "episode_review_137.csv",
+      "rows": 137,
+      "columns": 42,
+      "all_values_match": true
+    },
+    {
+      "file": "traffic_error_metrics.csv",
+      "rows": 7,
+      "columns": 8,
+      "all_values_match": true
+    }
+  ],
+  "episode_summary_unchanged": true,
+  "episode_count": 137,
+  "matched_profile_bins": 4800,
+  "max_relative_source_reproduction_error": 6.434947761079021e-13,
+  "note": "No recalibration of published results. Data-stage preparation is checked separately.",
+  "empirical_data_stage_completed": true,
+  "empirical_data_stage_summary": {
+    "i10_monthly_profiles": 50,
+    "i10_selected_complete_sensor_days": 782,
+    "pems_profiles": 347,
+    "detected_by_corridor": {
+      "AZ_I10_W": 44,
+      "D12_I405_N": 19,
+      "D12_I405_S": 11,
+      "D12_I5_N": 37,
+      "D12_I5_S": 61,
+      "D7_I10_E": 34,
+      "D7_I10_W": 35,
+      "D7_I210_E": 20,
+      "D7_I210_W": 33,
+      "D7_I405_N": 15,
+      "D7_I405_S": 16
+    },
+    "daily_validation_train_dates": 206,
+    "daily_validation_test_dates": 52,
+    "daily_data_values_changed": 0
+  },
+  "generated_average_episode_count": 325,
+  "generated_daily_episode_count": 1477
+}

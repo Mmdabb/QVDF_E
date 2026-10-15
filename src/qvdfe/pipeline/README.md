@@ -6,13 +6,13 @@ This package supplies the calibration and emission workflow that produced the ve
 
 | Command | Inputs | Work performed |
 |---|---|---|
-| `check-inputs` | External preprocessed baseline, original-source root, MOVES-derived rate files | Verify required files and original source hashes |
-| `empirical --stage all` | Same external inputs | Construct profile inputs, calibrate daily and average tracks, calculate emissions and confidence intervals, audit |
+| `check-inputs` | Included preprocessed baseline, original-source root, MOVES-derived rate files | Verify required files and original source hashes |
+| `empirical --stage all` | Same included inputs | Construct profile inputs, calibrate daily and average tracks, calculate emissions and confidence intervals, audit |
 | `empirical --stage data/daily/average/metrics/audit` | Same paths; prior stages where appropriate | Resume one named stage; metrics only resamples fixed predictions |
 | `surrogate` | Full average-profile parameter cards, detector cards, episode results, cubic coefficients | Compress admitted full-model curves into signed power functions |
 | `pigou` | Surrogate outputs plus average-profile episodes | Solve full and compressed two-route assignments, weight sensitivity and price of anarchy |
 
-The surrogate and Pigou commands work with the compact data already in this repository. The empirical command requires the external recorded baseline and original source files. **This is the verified baseline-reuse entry point, not an unattended raw-data bootstrap.** A new raw-data source requires explicit adaptation and reconstruction of that baseline; it must not be mislabeled as the paper replication.
+The surrogate and Pigou commands work with the frozen calibration data in this repository. The empirical command uses the preserved baseline and source files in `data/inputs/empirical/`, together with the existing emission tables. **This is the verified baseline-reuse entry point, not an unattended raw-data bootstrap.** It reads prepared observations and verifies the original source hashes; it does not reconstruct the baseline from those originals. A new raw-data source requires explicit adaptation and reconstruction of that baseline and constitutes a separate experiment.
 
 From the repository root, after installing its Python dependencies:
 
@@ -21,18 +21,18 @@ python -m qvdfe.pipeline surrogate --data data/frozen/calibration/average_weekda
 python -m qvdfe.pipeline pigou --data data/frozen/calibration/average_weekday --surrogate build/qvdfe_surrogate --output build/qvdfe_pigou
 ```
 
-For a complete empirical rerun, supply your own paths:
+For a complete empirical rerun with the bundled inputs, run from the repository root:
 
 ```bash
-python -m qvdfe.pipeline check-inputs --data-root /external/project --baseline /external/preprocessed-baseline --emission-input /external/emission_input
-python -m qvdfe.pipeline empirical --data-root /external/project --baseline /external/preprocessed-baseline --emission-input /external/emission_input --output build/qvdfe_empirical --bootstrap 400
+python -m qvdfe.pipeline check-inputs --data-root data/inputs/empirical/source_files --baseline data/inputs/empirical/baseline --emission-input data/frozen/calibration/emission_input
+python -m qvdfe.pipeline empirical --data-root data/inputs/empirical/source_files --baseline data/inputs/empirical/baseline --emission-input data/frozen/calibration/emission_input --output build/qvdfe_empirical --bootstrap 400
 ```
 
-Use the same output directory to resume an empirical stage. New output directories are initialized with a workflow marker; the command refuses to take ownership of an unrelated nonempty directory. Inputs and frozen data are protected against nested or ancestor output destinations. Original data and rate files are never uploaded or copied into the public repository by this workflow.
+Use the same output directory to resume an empirical stage. New output directories are initialized with a workflow marker; the command refuses to take ownership of an unrelated nonempty directory. Inputs and frozen data are protected against nested or ancestor output destinations. The workflow reads the bundled inputs without changing them. Input hashes and source mappings are recorded separately from the immutable release manifest in [`data/inputs/`](../../../data/inputs/).
 
-## External input contract
+## Input contract
 
-The baseline must contain:
+The included baseline is `data/inputs/empirical/baseline/`. An alternative baseline must satisfy the same contract:
 
 - `traffic_panel.csv.gz`: original prepared five-minute sensor observations, including raw speed, per-lane flow, sensor/date metadata and chronological holdout flags.
 - `sensor_parameters.csv`: detector-specific capacity, free-flow speed, link length, jam-density and metadata flags.
@@ -40,12 +40,12 @@ The baseline must contain:
 - `detector_fd_calibration.csv` and `fd_estimation_protocol.json`: accepted/fallback FD fits and declared selection rules.
 - `cubic_rate_coefficients.csv`: four-pollutant cubic approximation used alongside direct lookup.
 - `episode_results_v2.csv`: baseline targets required by the final preservation audit.
-- `input_sha256.json`: nonempty list of records with relative `path` and `sha256` fields. Paths resolve under `--data-root`; Windows separators are accepted. The original contract names the I10 lane-speed/volume files and the released PeMS profile/metadata files.
+- `input_sha256.json`: nonempty list of records with relative `path` and `sha256` fields. Paths resolve under `--data-root`; Windows separators are accepted. In the bundled copy, paths name `arizona_i10/I10-mph.csv`, `arizona_i10/I10-vol.csv`, `pems/pems_average_weekday_5min.csv.gz` and `pems/pems_link_meta.csv` under `data/inputs/empirical/source_files/`. The source bytes and hashes are unchanged; the original manifest and path mapping are recorded in `data/inputs/provenance.json`.
 - `repository_reference/`: saved PeMS CBI reference outputs. Optional `cbi_*.csv` comparisons are carried forward if supplied.
 
 The separate emission-input directory must contain `input_vehicle_type.csv` and `input_vehicle_emission_rate.csv`, following the original MOVES-derived table schema. Vehicle type 1 and normalized age shares are retained. The rerun records SHA-256 values for both rate files as well as the baseline and original source files.
 
-The public calibration folder has no full original traffic panel. Full calibration fields are read from `parameter_card.csv` or `parameter_card_full.csv`. A display-only parameter table without the full calibration fields is insufficient.
+The bundled preprocessing baseline and the frozen daily/average calibration folders contain traffic panels for their respective processing stages. Full calibration fields are read from `parameter_card.csv` or `parameter_card_full.csv`. A display-only parameter table without the full calibration fields is insufficient.
 
 ## Scientific conventions retained
 

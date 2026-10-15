@@ -10,9 +10,20 @@ python reproduce/verify_current_figures.py # export and layout checks after rend
 
 These entries read saved inputs through `qvdfe.paths` and write only to `reproduce/output/`. They do not detect new episodes or refit calibration parameters. The integrated upstream experiment workflow is separate; see the repository README for its commands. Archived calculations remain comparable with their original frozen files. `current_reporting.py` writes the current supported reporting scope separately to `output/current_reporting/`.
 
+The upstream empirical workflow now has its complete baseline-reuse inputs in [`data/inputs/`](../data/inputs/): the preserved preprocessing baseline and the exact Arizona/PeMS source files, with the emission tables already in `data/frozen/calibration/emission_input/`. To verify and run those inputs from the repository root:
+
+```bash
+python -m qvdfe.pipeline check-inputs --data-root data/inputs/empirical/source_files --baseline data/inputs/empirical/baseline --emission-input data/frozen/calibration/emission_input
+python -m qvdfe.pipeline empirical --data-root data/inputs/empirical/source_files --baseline data/inputs/empirical/baseline --emission-input data/frozen/calibration/emission_input --output build/qvdfe_empirical --bootstrap 400
+```
+
+This command constructs the analysis profiles from prepared baseline observations and refits the models; it verifies original source hashes but does not reconstruct the baseline from raw files. Full input and stage definitions are in the [pipeline README](../src/qvdfe/pipeline/README.md). Raw platoon trajectories and the original MOVES RunSpec remain unavailable in this repository.
+
 `run_all.py` compares each historical calculation/audit file with its frozen counterpart, value by value. To compare figures with a local manuscript asset folder, set `QVDFE_PAPER_FIGS` to that folder. Use `--strict` to count figure differences as failures. Font and renderer versions can change pixels; the queue and scheduling generators retain an earlier layout. A figure comparison is not a new empirical validation.
 
 ## Available entries
+
+The recent 137-episode error diagnostic can also be run with `python reproduce/episode_error_audit.py`. It uses the frozen average-weekday panel and calibrated episode records together with the exact lookup bands and quadrature nodes in `data/inputs/detector78/`. It writes separate CSV results under `reproduce/output/episode_error_audit/`; no frozen results are overwritten. See [the input inventory](../data/inputs/README.md).
 
 Figure numbers below follow the revised manuscript (v33). Historical script and asset names are retained so existing commands and manuscript references to asset filenames continue to work.
 
