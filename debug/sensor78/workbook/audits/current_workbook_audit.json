@@ -1,0 +1,291 @@
+{
+  "workbook": "Sensor78_Emission_Comparison_Simple.xlsx",
+  "sha256": "89a1c6b465fab286f19f82e024619f96a519ebcd0ed900285ca4a9868e5f8a94",
+  "read_only_hash_unchanged": true,
+  "passed": true,
+  "sheet_count": 8,
+  "sheet_order_matches": true,
+  "formula_count": 14446,
+  "formula_count_by_sheet": {
+    "01 Traffic inputs": 0,
+    "02 Emission rates": 0,
+    "03 Recorded O": 753,
+    "04 Mean speed S": 754,
+    "05 Reconstructed R": 10305,
+    "06 Two-speed M": 1283,
+    "07 Cubic A": 1283,
+    "08 Results": 68
+  },
+  "native_cached_values_present_for_all_formulas": true,
+  "formula_error_count": 0,
+  "formula_errors": [],
+  "missing_formula_caches": [],
+  "external_formulas": [],
+  "external_link_parts": [],
+  "connection_parts": [],
+  "external_dependency_relationships": [],
+  "external_hyperlinks": [],
+  "time_series_checks": [
+    {
+      "method": "O",
+      "sheet": "03 Recorded O",
+      "populated_time_rows": 57,
+      "expected_time_rows": 57,
+      "first_data_row": 11,
+      "last_data_row": 67,
+      "total_row": 69,
+      "minimum_formulas_per_time_row": 13,
+      "formulas_in_total_row": 12
+    },
+    {
+      "method": "S",
+      "sheet": "04 Mean speed S",
+      "populated_time_rows": 57,
+      "expected_time_rows": 57,
+      "first_data_row": 9,
+      "last_data_row": 65,
+      "total_row": 67,
+      "minimum_formulas_per_time_row": 13,
+      "formulas_in_total_row": 12
+    },
+    {
+      "method": "R",
+      "sheet": "05 Reconstructed R",
+      "populated_time_rows": 57,
+      "expected_time_rows": 57,
+      "first_data_row": 24,
+      "last_data_row": 80,
+      "total_row": 82,
+      "minimum_formulas_per_time_row": 21,
+      "formulas_in_total_row": 12
+    },
+    {
+      "method": "M",
+      "sheet": "06 Two-speed M",
+      "populated_time_rows": 57,
+      "expected_time_rows": 57,
+      "first_data_row": 24,
+      "last_data_row": 80,
+      "total_row": 82,
+      "minimum_formulas_per_time_row": 22,
+      "formulas_in_total_row": 21
+    },
+    {
+      "method": "A",
+      "sheet": "07 Cubic A",
+      "populated_time_rows": 57,
+      "expected_time_rows": 57,
+      "first_data_row": 24,
+      "last_data_row": 80,
+      "total_row": 82,
+      "minimum_formulas_per_time_row": 22,
+      "formulas_in_total_row": 21
+    }
+  ],
+  "emission_total_checks": [
+    {
+      "method": "O",
+      "pollutant": "CO2",
+      "cell": "08 Results!C7",
+      "expected_g": 1743787.411141995,
+      "actual_g": 1743787.4111419949,
+      "relative_error": 1.3352008516989484e-16,
+      "formula_preserved": true,
+      "matches": true
+    },
+    {
+      "method": "O",
+      "pollutant": "NOx",
+      "cell": "08 Results!D7",
+      "expected_g": 1400.818183614782,
+      "actual_g": 1400.8181836147826,
+      "relative_error": 4.869447258098101e-16,
+      "formula_preserved": true,
+      "matches": true
+    },
+    {
+      "method": "O",
+      "pollutant": "CO",
+      "cell": "08 Results!E7",
+      "expected_g": 15511.480291613496,
+      "actual_g": 15511.480291613496,
+      "relative_error": 0.0,
+      "formula_preserved": true,
+      "matches": true
+    },
+    {
+      "method": "O",
+      "pollutant": "HC",
+      "cell": "08 Results!F7",
+      "expected_g": 658.6611182430448,
+      "actual_g": 658.6611182430449,
+      "relative_error": 1.7260292823245986e-16,
+      "formula_preserved": true,
+      "matches": true
+    },
+    {
+      "method": "S",
+      "pollutant": "CO2",
+      "cell": "08 Results!C8",
+      "expected_g": 1465627.692956572,
+      "actual_g": 1465627.6929565712,
+      "relative_error": 4.765821049359129e-16,
+      "formula_preserved": true,
+      "matches": true
+    },
+    {
+      "method": "S",
+      "pollutant": "NOx",
+      "cell": "08 Results!D8",
+      "expected_g": 861.77919036535,
+      "actual_g": 861.7791903653497,
+      "relative_error": 3.9576322679624694e-16,
+      "formula_preserved": true,
+      "matches": true
+    },
+    {
+      "method": "S",
+      "pollutant": "CO",
+      "cell": "08 Results!E8",
+      "expected_g": 13252.813203522606,
+      "actual_g": 13252.813203522597,
+      "relative_error": 6.862653896994367e-16,
+      "formula_preserved": true,
+      "matches": true
+    },
+    {
+      "method": "S",
+      "pollutant": "HC",
+      "cell": "08 Results!F8",
+      "expected_g": 581.7408279233497,
+      "actual_g": 581.7408279233497,
+      "relative_error": 0.0,
+      "formula_preserved": true,
+      "matches": true
+    },
+    {
+      "method": "R",
+      "pollutant": "CO2",
+      "cell": "08 Results!C9",
+      "expected_g": 1657639.968333473,
+      "actual_g": 1657639.9683339763,
+      "relative_error": 3.036726075600993e-13,
+      "formula_preserved": true,
+      "matches": true
+    },
+    {
+      "method": "R",
+      "pollutant": "NOx",
+      "cell": "08 Results!D9",
+      "expected_g": 1360.902337097804,
+      "actual_g": 1360.9023370982427,
+      "relative_error": 3.2228897546413243e-13,
+      "formula_preserved": true,
+      "matches": true
+    },
+    {
+      "method": "R",
+      "pollutant": "CO",
+      "cell": "08 Results!E9",
+      "expected_g": 14045.024577781385,
+      "actual_g": 14045.024577785738,
+      "relative_error": 3.0992054293527114e-13,
+      "formula_preserved": true,
+      "matches": true
+    },
+    {
+      "method": "R",
+      "pollutant": "HC",
+      "cell": "08 Results!F9",
+      "expected_g": 609.2155125202432,
+      "actual_g": 609.2155125204287,
+      "relative_error": 3.043639377416451e-13,
+      "formula_preserved": true,
+      "matches": true
+    },
+    {
+      "method": "M",
+      "pollutant": "CO2",
+      "cell": "08 Results!C10",
+      "expected_g": 1988142.746032679,
+      "actual_g": 1988142.7460328708,
+      "relative_error": 9.649832777532117e-14,
+      "formula_preserved": true,
+      "matches": true
+    },
+    {
+      "method": "M",
+      "pollutant": "NOx",
+      "cell": "08 Results!D10",
+      "expected_g": 1997.71234876766,
+      "actual_g": 1997.7123487674826,
+      "relative_error": 8.877727914888488e-14,
+      "formula_preserved": true,
+      "matches": true
+    },
+    {
+      "method": "M",
+      "pollutant": "CO",
+      "cell": "08 Results!E10",
+      "expected_g": 15645.692113970385,
+      "actual_g": 15645.69211397293,
+      "relative_error": 1.6264963908425473e-13,
+      "formula_preserved": true,
+      "matches": true
+    },
+    {
+      "method": "M",
+      "pollutant": "HC",
+      "cell": "08 Results!F10",
+      "expected_g": 665.7799120581728,
+      "actual_g": 665.7799120582921,
+      "relative_error": 1.791244983665939e-13,
+      "formula_preserved": true,
+      "matches": true
+    },
+    {
+      "method": "A",
+      "pollutant": "CO2",
+      "cell": "08 Results!C11",
+      "expected_g": 1838940.473443572,
+      "actual_g": 1838940.4734437836,
+      "relative_error": 1.1508967154605495e-13,
+      "formula_preserved": true,
+      "matches": true
+    },
+    {
+      "method": "A",
+      "pollutant": "NOx",
+      "cell": "08 Results!D11",
+      "expected_g": 1712.1331645491932,
+      "actual_g": 1712.1331645490604,
+      "relative_error": 7.755601562324172e-14,
+      "formula_preserved": true,
+      "matches": true
+    },
+    {
+      "method": "A",
+      "pollutant": "CO",
+      "cell": "08 Results!E11",
+      "expected_g": 14960.727727909807,
+      "actual_g": 14960.727727912581,
+      "relative_error": 1.8541603662985627e-13,
+      "formula_preserved": true,
+      "matches": true
+    },
+    {
+      "method": "A",
+      "pollutant": "HC",
+      "cell": "08 Results!F11",
+      "expected_g": 641.4428676156656,
+      "actual_g": 641.4428676157887,
+      "relative_error": 1.919467055736005e-13,
+      "formula_preserved": true,
+      "matches": true
+    }
+  ],
+  "all_20_emission_totals_match": true,
+  "max_total_relative_error": 3.2228897546413243e-13,
+  "failures": [],
+  "scope": "Independent read-only cached-output and formula audit. Native recalculation and input-perturbation evidence must be supplied separately; this audit does not infer those actions from cached values."
+}

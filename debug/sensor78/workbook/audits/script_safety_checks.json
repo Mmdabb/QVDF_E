@@ -1,0 +1,49 @@
+{
+  "passed": true,
+  "guard_checks": [
+    {
+      "case": "audit_report_workbook",
+      "passed": true,
+      "exit_code": 1
+    },
+    {
+      "case": "audit_report_input_json",
+      "passed": true,
+      "exit_code": 1
+    },
+    {
+      "case": "audit_report_source_code",
+      "passed": true,
+      "exit_code": 1
+    },
+    {
+      "case": "prepare_output_source",
+      "passed": true,
+      "exit_code": 1
+    },
+    {
+      "case": "prepare_report_source",
+      "passed": true,
+      "exit_code": 1
+    },
+    {
+      "case": "prepare_report_output",
+      "passed": true,
+      "exit_code": 1
+    },
+    {
+      "case": "prepare_output_references",
+      "passed": true,
+      "exit_code": 1
+    },
+    {
+      "case": "prepare_report_other_debug",
+      "passed": true,
+      "exit_code": 1
+    }
+  ],
+  "protected_input_hashes_unchanged": true,
+  "probe_workbook_not_created": true,
+  "python_sources_parse": true,
+  "native_excel_rerun": false
+}

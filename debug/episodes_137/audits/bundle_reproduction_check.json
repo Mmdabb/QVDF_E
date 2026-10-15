@@ -1,0 +1,33 @@
+{
+  "status": "pass",
+  "comparison": "Reference tables and detailed JSON diagnostics reproduced",
+  "CSV_files": 12,
+  "JSON_files": 4,
+  "rtol": 1e-10,
+  "atol": 1e-10,
+  "checked": [
+    "average_speed_identity_check_137.csv",
+    "column_definitions.csv",
+    "comparison_metrics.csv",
+    "corridor_diagnostics.csv",
+    "counterfactual_metrics.csv",
+    "diagnostic_correlations.csv",
+    "diagnostic_groups.csv",
+    "episode_calculations_137.csv",
+    "episode_pollutant_calculations_548.csv",
+    "episode_review_137.csv",
+    "traffic_error_metrics.csv",
+    "attribution_review.json",
+    "calibration_review.json",
+    "average_speed_identity_summary.json",
+    "reproduction_checks.csv",
+    "summary.json"
+  ],
+  "report_compile": {
+    "pages": 7,
+    "layout_warnings": [],
+    "extracted_page_text_matches_current_reference": true,
+    "reference_pdf_sha256": "e52349b31fc247ec793174a78cef6814d51d3ac58efc8bae220e5d235cd0d6c7",
+    "reference_pdf_unchanged": true
+  }
+}

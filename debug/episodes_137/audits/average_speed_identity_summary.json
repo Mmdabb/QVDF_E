@@ -1,0 +1,26 @@
+{
+  "source": "data/frozen/calibration/average_weekday/episode_results_v2.csv",
+  "source_sha256": "8bd71e71cc4fe201a073c7e65aa61b7366a92ee7689445106fb7762e7955a201",
+  "episodes": 137,
+  "profile_points_per_episode": 387,
+  "profile_points_total": 53019,
+  "profile_points": "384 Gauss-Legendre locations plus both endpoints and the peak",
+  "recomputed_inputs": "x=D/C; P=max(fd*x**n,x); mu=D/P; omega=C/(kj-C/vf); vq=mu/(kj-mu/omega); peak=(L/vf)*fp*P**s; w(t)=peak*h(t/P)",
+  "time_split": "tq=vf*w/(vf-vq); tf=L/vf-vq*w/(vf-vq)",
+  "meaning": "Checks a model identity and finite-link compatibility, not agreement with measured vehicle trajectories. The speed on both sides is whole-link traversal speed.",
+  "pass_counts": {
+    "fd_state_pass": 137,
+    "continuous_finite_link_pass": 137,
+    "profile_identity_pass": 137,
+    "profile_nonnegative_times_pass": 137,
+    "profile_average_speed_between_states_pass": 137
+  },
+  "max_speed_identity_error_mph": 4.263256414560601e-14,
+  "max_distance_error_mi": 4.440892098500626e-16,
+  "max_total_time_error_h": 2.7755575615628914e-17,
+  "max_FD_speed_recomputation_error_mph": 1.2789769243681803e-13,
+  "max_QVDF_peak_recomputation_error_h": 9.75781955236954e-17,
+  "max_bound_identity_error_h": 6.938893903907228e-17,
+  "largest_peak_delay_allowance_ratio": 0.9927152895235901,
+  "smallest_peak_free_state_time_seconds": 0.04563901511872037
+}

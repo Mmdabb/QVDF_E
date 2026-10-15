@@ -21,6 +21,7 @@ examples/*/results.json
 examples/*/figure.png
 # Regenerated output and unreviewed local sources; reviewed inputs live in data/inputs/.
 pipeline/output/
+debug/output/
 data/original/*/
 !data/original/README.md
 .pytest_cache/

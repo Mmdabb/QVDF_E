@@ -1,0 +1,41 @@
+
+\newpage
+{\fontsize{19}{22}\selectfont\bfseries\color{navy}Speed and emission-rate profiles}\par
+{\color{muted}Detector 78 worked example. The three rows have different time meanings.}\par
+\vspace{5pt}
+\legendkey{methodO}{O: recorded}\quad\legendkey{methodS}{S: mean speed}\quad\legendkey{methodR}{R: reconstructed}\quad\legendkey{methodM}{M: two-speed}\quad\legendkey{methodA}{A: cubic}
+\par\vspace{8pt}\begin{center}\resizebox{\linewidth}{!}{\input{detector78/speed_rate_profiles.tex}}\end{center}
+\textbf{How to read the panels.}
+(a,b) O uses the recorded five-minute link-speed proxies; S holds their harmonic mean constant.
+(c,d) R assigns a whole-link average speed to each entering group over its fitted 4.449 h duration.
+This is not a vehicle's within-trip speed history. (e,f) M and A share a 2.469 min mean trip and identical speeds;
+only the rate function changes. Free-flow time is split equally before and after the queue for illustration.
+This ordering is not identified by the method and does not change its total; instantaneous transitions add no acceleration emissions.
+
+\notebox{\textbf{A rate curve is not an episode emission total.}
+O's rate must be weighted by $d_iL/v_i$; R's by each group's count and trip time;
+M and A by free/queue time and total demand. The area under (b) or (d) over the displayed horizontal axis
+alone is not the episode total. The cumulative contributions on the next page include the required weights.}
+
+\newpage
+{\fontsize{19}{22}\selectfont\bfseries\color{navy}From speed choice to emission totals}\par
+{\color{muted}Detector 78: lookup sensitivity and correctly weighted cumulative contributions.}\par
+\vspace{5pt}
+\legendkey{methodO}{O: recorded}\quad\legendkey{methodS}{S: mean speed}\quad\legendkey{methodR}{R: reconstructed}\quad\legendkey{methodM}{M: two-speed}\quad\legendkey{methodA}{A: cubic}
+\par\vspace{8pt}\begin{center}\resizebox{\linewidth}{!}{\input{detector78/rate_and_cumulative_profiles.tex}}\end{center}
+\textbf{Rate curves (a,b).} Black is the zero-acceleration lookup; orange dashed is its cubic approximation.
+Markers identify the queue speed (13.611 mph), observed mean speed (23.557 mph) and free-flow speed (64.161 mph).
+The queue and observed mean speeds select the same lookup rate for both pollutants. The free-flow rate is much higher.
+
+\textbf{Cumulative curves (c,d).} The horizontal coordinate is the cumulative share of counted vehicles,
+not clock time. O accumulates each bin's complete-link emission in chronological order;
+R accumulates reconstructed group emissions in entry order using its vehicle weights.
+M and A use the same group delays $w(u)$ to allocate each group's free/queue time; this illustrative
+extension preserves their analytical episode totals exactly. S assigns the same emission to every vehicle,
+so its cumulative curve is straight.
+For O, straight segments within a five-minute group distribute that group's total uniformly over its vehicle share.
+Every endpoint equals its episode total on page 3.
+
+\notebox{\textbf{What this example shows.} R is closest to O for CO$_2$ and NO$_x$ in this case.
+S does not win every episode. M's higher free-flow rate can offset its lower total vehicle-hours relative to O.
+These plots explain the calculations; none supplies independent vehicle trajectories or measured emissions.}

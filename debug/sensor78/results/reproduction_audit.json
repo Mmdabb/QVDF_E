@@ -1,0 +1,126 @@
+{
+  "scope": "Existing detector-78 worked example; no calibration or episode detection rerun.",
+  "csv_checks": [
+    {
+      "file": "average_weekday_profile.csv",
+      "rows": 288,
+      "columns": 3,
+      "maximum_absolute_numeric_difference": 0.0
+    },
+    {
+      "file": "common_time_series.csv",
+      "rows": 57,
+      "columns": 77,
+      "maximum_absolute_numeric_difference": 0.0
+    },
+    {
+      "file": "cumulative_A_CO2.csv",
+      "rows": 385,
+      "columns": 2,
+      "maximum_absolute_numeric_difference": 0.0
+    },
+    {
+      "file": "cumulative_A_NOx.csv",
+      "rows": 385,
+      "columns": 2,
+      "maximum_absolute_numeric_difference": 0.0
+    },
+    {
+      "file": "cumulative_M_CO2.csv",
+      "rows": 385,
+      "columns": 2,
+      "maximum_absolute_numeric_difference": 0.0
+    },
+    {
+      "file": "cumulative_M_NOx.csv",
+      "rows": 385,
+      "columns": 2,
+      "maximum_absolute_numeric_difference": 0.0
+    },
+    {
+      "file": "cumulative_O_CO2.csv",
+      "rows": 58,
+      "columns": 2,
+      "maximum_absolute_numeric_difference": 0.0
+    },
+    {
+      "file": "cumulative_O_NOx.csv",
+      "rows": 58,
+      "columns": 2,
+      "maximum_absolute_numeric_difference": 0.0
+    },
+    {
+      "file": "cumulative_R_CO2.csv",
+      "rows": 385,
+      "columns": 2,
+      "maximum_absolute_numeric_difference": 0.0
+    },
+    {
+      "file": "cumulative_R_NOx.csv",
+      "rows": 385,
+      "columns": 2,
+      "maximum_absolute_numeric_difference": 0.0
+    },
+    {
+      "file": "emission_totals.csv",
+      "rows": 20,
+      "columns": 5,
+      "maximum_absolute_numeric_difference": 0.0
+    },
+    {
+      "file": "error_decomposition.csv",
+      "rows": 20,
+      "columns": 7,
+      "maximum_absolute_numeric_difference": 0.0
+    },
+    {
+      "file": "method_diagnostics.csv",
+      "rows": 20,
+      "columns": 7,
+      "maximum_absolute_numeric_difference": 0.0
+    },
+    {
+      "file": "observed_episode_profile.csv",
+      "rows": 57,
+      "columns": 15,
+      "maximum_absolute_numeric_difference": 0.0
+    },
+    {
+      "file": "rate_curves.csv",
+      "rows": 1401,
+      "columns": 5,
+      "maximum_absolute_numeric_difference": 0.0
+    },
+    {
+      "file": "reconstructed_entry_profile.csv",
+      "rows": 1001,
+      "columns": 7,
+      "maximum_absolute_numeric_difference": 0.0
+    },
+    {
+      "file": "reconstructed_integration.csv",
+      "rows": 384,
+      "columns": 17,
+      "maximum_absolute_numeric_difference": 0.0
+    },
+    {
+      "file": "two_speed_trip_profile.csv",
+      "rows": 6,
+      "columns": 10,
+      "maximum_absolute_numeric_difference": 0.0
+    }
+  ],
+  "editable_tex_sources_identical": [
+    "common_clock_profiles.tex",
+    "common_cumulative.tex",
+    "common_time_pages.tex",
+    "figure_pages.tex",
+    "rate_and_cumulative_profiles.tex",
+    "speed_rate_profiles.tex",
+    "worked_calculations.tex"
+  ],
+  "published_pdf_sha256": "36ec6b9b2e235124c37dc792dd3f83472660b051b3a8baf6e331d34ea5d741ab",
+  "all_checks_passed": true,
+  "pdf_compiled": true,
+  "pdf_layout_warnings": []
+}
