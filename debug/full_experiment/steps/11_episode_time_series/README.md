@@ -4,6 +4,8 @@ Open **[the case list](EPISODES.md)** to view all 137 cases directly in GitHub, 
 
 Browse the [episode folders](episodes/), or go directly to [Arizona detector 141, November 2016, episode ep014](episodes/ep014_AZ_I10_W_141_20161101/README.md), the case used in the separate worked-example PDF.
 
+Open the linked **[traffic, QVDF and FD parameter page](traffic_parameters.html)** for observed/fitted comparisons, parameter provenance, metadata capacities, inverse-emission queue speeds and conditional FD sensitivity. Its column groups can be hidden or shown; thick vertical borders distinguish the QVDF and FD groups. The inverse sections compare a CO₂ target with an equally weighted four-pollutant target.
+
 These are the same 137 retained average-profile episodes used in the reported comparison. No parameter, model total or sample decision is changed.
 
 Dates in the index identify the source average profiles; Arizona dates are monthly profile labels, not individual observed days. The full episode ID and source-profile label are retained in the index for joining back to the earlier calculation steps.
@@ -112,6 +114,43 @@ The reference O uses five-minute point speed as a proxy for whole-link travel sp
 The audit checks allocation counts, travel-time/distance identities, VSP exposure conservation and all 2,740 episode-method-pollutant totals. Discrete M/A integration can differ slightly from the closed-form episode total because of quadrature; the reconciliation reports this explicitly, using a $10^{-9}$ relative and $10^{-8}$ g absolute comparison tolerance. Model duration remains visible in every case and is not forced to equal the observed window.
 
 ## Regeneration
+
+### Traffic parameters and conditional inverse diagnostics
+
+[traffic_parameters.csv](traffic_parameters.csv) joins the saved episode estimates, detector FD parameters, calibration support and PeMS network metadata. The metadata's total capacity is divided by its lane count; Arizona metadata capacity is left missing. Queue speeds labeled observed are **FD-inferred from $D/P$**, not directly measured; algebraic values outside the congested FD domain are flagged. S3 speed at capacity and the episode-detection threshold are distinct quantities.
+
+For a candidate queue speed $q$ (here a speed, not flow), retain $D,L,v_f,\widehat{\bar w},\widehat w_{max}$ and calculate
+
+$$\bar t_q(q)=\frac{v_f\widehat{\bar w}}{v_f-q},\qquad
+\bar t_f(q)=T_f-\frac{q\widehat{\bar w}}{v_f-q},\qquad
+M_p(q)=D[\bar t_f(q)r_p(v_f)+\bar t_q(q)r_p(q)].$$
+
+The physical range is $0<q\le L/(T_f+\widehat w_{max})$, which ensures nonnegative free-state time throughout the episode, not only on average. The CO₂ strategy minimizes $|M_{CO2}/O_{CO2}-1|$. The balanced strategy minimizes $\frac14\sum_p(M_p/O_p-1)^2$, with one common speed for all four pollutants. These are inverse diagnostics against the recorded-speed reference O, not independent FD calibration or measured emissions.
+
+The solver treats every lookup interval separately, retains all exact roots and checks one-sided limits at rate jumps. Among equal optima, it selects the speed nearest the original fitted speed. A theoretical boundary limit need not be attained; the CSV records both its limiting objective and the actual residual at a nearby in-band speed. [Numerical tolerances and assumptions](inverse_queue_speed_equations.json) are explicit.
+
+With positive backward-wave magnitude $\omega$, the three conditional FD inverses are
+
+$$\mu^*=\frac{k_{j0}q\omega_0}{\omega_0+q},\qquad
+\omega^*=\frac{\mu_0q}{k_{j0}q-\mu_0},\qquad
+k_j^*=\frac{\mu_0}{q}+\frac{\mu_0}{\omega_0}.$$
+
+Each holds the other two quantities fixed. A positive finite $\omega^*$ requires $k_{j0}q>\mu_0$. The discharge alternative implies a new duration $D/\mu^*$. A changed wave/density pair implies $C^*=v_f\omega^*k_j^*/(v_f+\omega^*)$; a changed capacity would require revisiting D/C and the QVDF predictions before adoption.
+
+The bounded joint analysis holds $\mu_0=D/\widehat P$ fixed. Exact pairs satisfy $k_j(\omega)=\mu_0/q+\mu_0/\omega$. It first preserves the original capacity when feasible, otherwise selects the closest implied capacity. Unreachable targets are reoptimized over physically attainable speeds inside the parameter box. The primary exploratory bounds are $k_j\in[150,300]$ veh/mi/lane and $\omega\in[5,20]$ mph; the secondary run lowers the wave bound to 3 mph. The page and [FD verification record](fd_sensitivity_verification.json) document the source context and distinguish these assumptions from validated site-specific limits.
+
+| File | Use |
+|---|---|
+| [inverse_queue_speed.csv](inverse_queue_speed.csv) | Two target strategies per episode, four pollutant outcomes and all three FD inverses. |
+| [inverse_queue_speed_candidates.csv](inverse_queue_speed_candidates.csv) | Interval roots, stationary points, endpoints and one-sided limits with actual and limiting objectives. |
+| [inverse_queue_speed_roots.csv](inverse_queue_speed_roots.csv) | Exact pollutant-specific roots for diagnosing uniqueness; these are not the primary common-speed strategies. |
+| [fd_parameter_sensitivity.csv](fd_parameter_sensitivity.csv) | Primary bounded joint pairs, capacity consequences and residual emission errors. |
+| [fd_parameter_sensitivity_expanded.csv](fd_parameter_sensitivity_expanded.csv) | Corresponding results allowing backward-wave magnitudes down to 3 mph. |
+| [fd_bound_sensitivity_summary.csv](fd_bound_sensitivity_summary.csv) | Feasibility and capacity-preservation counts under both explicit boxes. |
+
+Candidate pairs are episode-level diagnostics. Repeated episodes at a detector require a consistent detector FD before any revised parameters can be adopted.
+
+### Reproduce the pages
 
 From the repository root after installing the project dependencies:
 

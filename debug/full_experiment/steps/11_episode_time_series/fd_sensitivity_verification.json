@@ -1,0 +1,32 @@
+{
+  "all_checks_passed": true,
+  "analytic_tests": {
+    "analytic_capacity_preservation": true,
+    "capacity_boundaries": true,
+    "singleton_interval": true,
+    "infeasible_target_and_box": true,
+    "attainable_interval": true,
+    "dense_capacity_objective_check": true
+  },
+  "primary_rows": 274,
+  "expanded_rows": 274,
+  "episodes": 137,
+  "strategies": [
+    "balanced_four_pollutants",
+    "co2_target"
+  ],
+  "selected_pairs": 548,
+  "no_physical_pair": 0,
+  "maximum_duration_closure_residual_veh": 1.8189894035458565e-12,
+  "maximum_fd_target_rounding_residual_mph": 8.526512829121202e-14,
+  "floating_lookup_boundary_adjustments": 125,
+  "minimum_peak_free_time_h": -9.920449878242366e-17,
+  "capacity_minimization": "Analytic monotone objective; independent dense-grid synthetic tests pass.",
+  "calibration_modified": false,
+  "emission_reference": "Observed-speed lookup proxy, not measured trajectory or exhaust emissions.",
+  "input_sha256": {
+    "inverse_queue_speed.csv": "f5b5c675019df9f5801c6702a3975e917c2536d4336a540583d1ae6ab058d6dd",
+    "data/frozen/calibration/average_weekday/episode_results_v2.csv": "8bd71e71cc4fe201a073c7e65aa61b7366a92ee7689445106fb7762e7955a201",
+    "traffic_parameters.csv": "b1380546a618a2d7b094e2b0e2973fed40a36c5285636be2f949554000f29260"
+  }
+}

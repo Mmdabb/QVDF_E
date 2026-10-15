@@ -1,0 +1,39 @@
+{
+  "episodes": 137,
+  "summary_rows": 274,
+  "roots": 377,
+  "candidates": 1304,
+  "interval_pollutant_rows": 1452,
+  "source_sha256": {
+    "data/frozen/calibration/average_weekday/episode_results_v2.csv": "8bd71e71cc4fe201a073c7e65aa61b7366a92ee7689445106fb7762e7955a201",
+    "data/frozen/calibration/emission_input/input_vehicle_type.csv": "175a4acc0a774c89b1da9a287b725ec3818e1bc72b634bee52db6c99333aa378",
+    "data/frozen/calibration/emission_input/input_vehicle_emission_rate.csv": "60516669d4d02ed1c3867c2fa20ef3a372cb1e22cb4c597f2392387108fe12cc",
+    "src/qvdfe/rates.py": "a757f96f3a7dd30c7cd71af062a149494effc134b55206d51f5c91ac92389c67"
+  },
+  "status_counts": {
+    "balanced_four_pollutants": {
+      "attained_minimum": 101,
+      "boundary_limit_approximation": 36
+    },
+    "co2_target": {
+      "attained_closest": 57,
+      "exact_root": 48,
+      "boundary_limit_approximation": 32
+    }
+  },
+  "infeasible_positive_omega_by_strategy": {
+    "balanced_four_pollutants": 0,
+    "co2_target": 1
+  },
+  "max_original_M_relative_error": 2.473576898864849e-13,
+  "max_exact_root_relative_error": 8.881784197001252e-16,
+  "max_time_identity_error_h": 6.938893903907228e-18,
+  "max_distance_identity_error_mi": 2.220446049250313e-16,
+  "max_mu_inverse_speed_error_mph": 9.947598300641403e-14,
+  "all_original_totals_verified": true,
+  "all_root_memberships_verified": true,
+  "all_selected_speeds_within_physical_bound": true,
+  "both_objectives_no_worse_than_current": true,
+  "backward_FD_results_are_conditional_diagnostics": true,
+  "calibration_changed": false
+}

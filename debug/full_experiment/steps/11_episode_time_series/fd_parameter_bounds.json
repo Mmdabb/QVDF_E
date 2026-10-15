@@ -1,0 +1,36 @@
+{
+  "primary": {
+    "kj_min": 150.0,
+    "kj_max": 300.0,
+    "omega_min": 5.0,
+    "omega_max": 20.0
+  },
+  "expanded_lower_wave": {
+    "kj_min": 150.0,
+    "kj_max": 300.0,
+    "omega_min": 3.0,
+    "omega_max": 20.0
+  },
+  "density_unit": "veh/mi/lane",
+  "omega_unit": "mph, positive magnitude of a backward wave",
+  "interpretation": "Exploratory sensitivity bounds. Literature examples motivate scale only; they do not validate every pair in either box.",
+  "pair_policy": "Hold current D/P_hat fixed. Preserve an attainable inverse target q; choose the pair with minimum absolute capacity change. If q is outside the FD-attainable physical interval, reoptimize the same emission objective over that interval before choosing the capacity-closest pair.",
+  "capacity_warning": "A changed implied FD capacity is reported but never fed back into frozen QVDF loading, duration, or delay calibration.",
+  "inverse_warning": "Matching the inverse target speed does not imply exact emission matching: some inverse objectives have residual error or an unattained one-sided infimum.",
+  "numerical_tolerance": 1e-10,
+  "floating_boundary_policy": "At most four representable neighbors per direction in kj and omega preserve the correct lookup side; exported emissions always use the reconstructed FD speed.",
+  "sources": [
+    {
+      "title": "Laval and Daganzo (2006), Lane-changing in traffic streams",
+      "url": "https://www.sciencedirect.com/science/article/pii/S019126150500055X",
+      "example": "Section 3 numerical experiments use jam density 150 veh/mi/lane and congested wave speed -15 mph.",
+      "access_note": "Verified from the publisher-indexed section snippet; full open returned HTTP 403."
+    },
+    {
+      "title": "GDOT FHWA-GA-19-1414 (2019), Travel-time Optimization on I-285",
+      "url": "https://rosap.ntl.bts.gov/view/dot/40155/dot_40155_DS1.pdf",
+      "example": "Table 5 (printed p.54; PDF p.64) reports density 150 veh/km and wave speed 20 km/h, equivalent to 241.402 veh/mi and 12.427 mph.",
+      "access_note": "The table labels density veh/km without explicitly appending /lane; no universal bound or lane-basis validation is inferred."
+    }
+  ]
+}

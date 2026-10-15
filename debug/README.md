@@ -7,6 +7,7 @@ Start with the reports below. The supporting tables, editable figures, calculati
 | Follow the whole experiment from inputs through calibration, VSP, lookup and emissions | [Step-by-step experiment results](full_experiment/README.md) |
 | Inspect five-minute speed, travel time, delay, VSP and emissions for each of the 137 episodes | [Individual episode time series](full_experiment/steps/11_episode_time_series/README.md) |
 | Sort episodes by traffic error and compare method errors beside each figure | [Local HTML dashboard](full_experiment/steps/11_episode_time_series/index.html) · [All error metrics CSV](full_experiment/steps/11_episode_time_series/all_error_metrics.csv) |
+| Compare traffic/QVDF/FD inputs and test queue speeds that improve the emission totals | [Traffic parameters and inverse analysis](full_experiment/steps/11_episode_time_series/traffic_parameters.html) |
 | Follow every calculation for detector 78, including separate VSP and lookup tables | [Detector 78 calculation steps](sensor78/step_by_step/README.md) |
 | Inspect a case with close traffic estimates but much larger two-speed emission error | [Detector 141 November case](case_studies/az_i10_detector141_november/README.md) |
 | Why the emission methods differ across 137 episodes | [137-episode analysis guide](episodes_137/README.md) |
@@ -51,6 +52,7 @@ The committed reports and results are reference copies. Rerun commands write und
 - **O** combines recorded five-minute point speeds with emission lookup rates. It is a calculation reference, not measured exhaust or observed whole-link trajectories. **S** uses observed mean trip speed; **R** uses reconstructed trip speeds; **M** uses two operating speeds with lookup rates; **A** uses the corresponding cubic rates. `S_pred` is an additional diagnostic using predicted vehicle-hours.
 - The common-clock plots align modeled groups to observed vehicle-count bins. They preserve totals; their timing is illustrative rather than independently measured. Signed error components add to total bias, not to WAPE, and are not separately identified causal effects.
 - The average-speed identity check verifies distance/time consistency and nonnegative state times within the fitted model. It does not validate that model against measured vehicle trajectories.
+- The inverse analysis uses one common queue speed per episode, selected either for CO₂ or for equal-weight relative errors across four pollutants. Conditional discharge, wave-speed and jam-density calculations show the consequences; bounded pairs prioritize preserving capacity. These diagnostics do not change the calibration or establish independently observed FD parameters.
 
 ## Verify the package
 
@@ -60,8 +62,12 @@ From the repository root:
 python debug/verify_package.py
 python debug/verify_calculation_steps.py
 python debug/verify_dashboard_metrics.py
+python debug/verify_parameter_diagnostics.py
+node debug/verify_parameter_page.js
 python tools/verify_input_data.py
 python tools/verify_frozen_inputs.py
 ```
+
+The JavaScript check requires Node.js 22 and executes the page controls against a static DOM substitute; it does not open a browser or assess visual layout.
 
 The debug manifest covers the delivered reports, result tables, guides and code. The original frozen-data and input manifests are separate. Source records and portability changes are documented within each analysis folder. Data and derived analysis tables retain their original provider terms; see [the data notice](../data/NOTICE.md).

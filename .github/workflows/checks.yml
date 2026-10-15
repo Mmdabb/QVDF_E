@@ -9,6 +9,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
@@ -19,11 +22,15 @@ jobs:
       - run: python debug/verify_package.py
       - run: python debug/verify_calculation_steps.py
       - run: python debug/verify_dashboard_metrics.py
+      - run: python debug/verify_parameter_diagnostics.py
+      - run: node debug/verify_parameter_page.js
       - run: python debug/full_experiment/scripts/build_precalibration_trace.py
       - run: python debug/full_experiment/scripts/build_emission_steps.py
       - run: python debug/full_experiment/scripts/build_other_experiment_trace.py
       - run: python debug/full_experiment/scripts/build_episode_time_series.py --skip-figures
       - run: python debug/verify_dashboard_metrics.py --directory debug/output/episode_time_series
+      - run: python debug/verify_parameter_diagnostics.py --directory debug/output/episode_time_series
+      - run: node debug/verify_parameter_page.js debug/output/episode_time_series/traffic_parameters.html
       - run: python debug/sensor78/step_by_step/build_steps.py
       - run: python debug/case_studies/az_i10_detector141_november/scripts/build_case_study.py
       - run: python -m qvdfe.pipeline check-inputs --data-root data/inputs/empirical/source_files --baseline data/inputs/empirical/baseline --emission-input data/frozen/calibration/emission_input

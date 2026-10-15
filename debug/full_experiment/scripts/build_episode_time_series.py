@@ -303,6 +303,8 @@ def main():
     md="# All 137 episode comparisons\n\nSelect a case to view its figures and calculation CSVs directly in GitHub. For filtering, open [the HTML browser](index.html) locally. See the [calculation guide](README.md) for equations and alignment assumptions. Durations are hours; counts are vehicles per lane.\n\n| Case | Direction | Detector/link | Date | Period | Observed P | Predicted P | Vehicles |\n|---|---|---|---|---|---:|---:|---:|\n"
     for r in index:md+=f"| [{r['case_id']}]({r['folder']}/README.md) | {r['corridor']} | {r['sensor_uid']} | {r['date']} | {r['period']} | {r['observed_duration_h']:.2f} | {r['predicted_duration_h']:.2f} | {r['D_veh_per_lane']:.1f} |\n"
     (out/"EPISODES.md").write_text(md,encoding="utf-8")
+    from build_parameter_diagnostics import build as build_parameter_diagnostics
+    build_parameter_diagnostics(out)
     print(json.dumps(audit,indent=2),flush=True)
     if not args.skip_figures:render_plots(out,args.workers,args.plot_start,args.plot_end)
 

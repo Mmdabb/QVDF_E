@@ -1,5 +1,5 @@
 {
-  "description": "Reviewed QVDF-E diagnostic reports, original and step-by-step calculations, per-episode five-minute tables, editable figures, guides and reproduction code. Generated working outputs are excluded.",
+  "description": "Reviewed QVDF-E diagnostic reports, original and step-by-step calculations, per-episode five-minute tables, traffic/FD parameter comparisons, conditional inverse-emission diagnostics, editable figures, guides and reproduction code. Generated working outputs are excluded.",
   "files": {
     "debug/case_studies/az_i10_detector141_november/figures/cumulative_contributions.pdf": {
       "bytes": 23812,
@@ -306,20 +306,40 @@
       "sha256": "8b1a561800f24490b0c139fff0acb010427e8b90c4c6a370709e133baac037ed"
     },
     "debug/full_experiment/scripts/build_episode_time_series.py": {
-      "bytes": 25524,
-      "sha256": "6be22f8e252b53b4c44445e01bdbcb0999bd0401b25d4fdd5b4257b65fd811dc"
+      "bytes": 25642,
+      "sha256": "cdb0c5ad83835706796b052b35fe71cca4c086ddac3acb8a789af9c8f68de9d6"
+    },
+    "debug/full_experiment/scripts/build_fd_parameter_sensitivity.py": {
+      "bytes": 25876,
+      "sha256": "cab8343604c1a90f159a4c6f8515df7d40c4811a0984327f5765cbb3d94176a4"
+    },
+    "debug/full_experiment/scripts/build_inverse_queue_speed.py": {
+      "bytes": 32686,
+      "sha256": "27472927017af2f51565cabfe8383444cc710039155f4418c6c4d5791a9beb0b"
     },
     "debug/full_experiment/scripts/build_other_experiment_trace.py": {
       "bytes": 28189,
       "sha256": "dafea4d9aed84401ce1148670692ce3ad20c576c5f44e6fe819f01a0eb23a3c8"
     },
+    "debug/full_experiment/scripts/build_parameter_diagnostics.py": {
+      "bytes": 2123,
+      "sha256": "ed063c80133a0c47a6b9ed9a0828ddde8829bdcacb583005b58a31b30c44e154"
+    },
     "debug/full_experiment/scripts/build_precalibration_trace.py": {
       "bytes": 32793,
       "sha256": "ca781b03fcc8fd20b802237048270902de8b805806fee5d5587a7c45aa2952dd"
     },
+    "debug/full_experiment/scripts/build_traffic_parameter_page.py": {
+      "bytes": 28681,
+      "sha256": "0e5b9a1629c9de71b727255d7ba82f3acf445fe9071eef5ecddff406ff404f18"
+    },
     "debug/full_experiment/scripts/episode_dashboard.py": {
-      "bytes": 19471,
-      "sha256": "7921dc485b9d2ee8c0f026e61c24683a575918d1d5245fc1a816b6d728dd5369"
+      "bytes": 19563,
+      "sha256": "8794f85a1d071e045dc30f67b4d865414408e3a99a565b1959c54bcad6d56f2b"
+    },
+    "debug/full_experiment/scripts/parameter_diagnostic_views.py": {
+      "bytes": 20105,
+      "sha256": "3ad61b7f6012e3dc8caf4260a041e9e0ec0f7dc12c9b2b8eaead8dec80359cff"
     },
     "debug/full_experiment/steps/01_inputs/01_source_inventory.csv": {
       "bytes": 4181,
@@ -9529,25 +9549,93 @@
       "bytes": 19916,
       "sha256": "f4e5713d2b6643d0f8521906fedf9761c7591242ae277ed2058c002717089d58"
     },
+    "debug/full_experiment/steps/11_episode_time_series/fd_bound_sensitivity_summary.csv": {
+      "bytes": 867,
+      "sha256": "50eb2e36209251a94c347d61d4bedcd36a199bc72f2b78c35574acc8047b0072"
+    },
+    "debug/full_experiment/steps/11_episode_time_series/fd_parameter_bounds.json": {
+      "bytes": 2227,
+      "sha256": "0f87c2804d94289294330f13a2128f1ceef63224c3576670f3d65904601a85c4"
+    },
+    "debug/full_experiment/steps/11_episode_time_series/fd_parameter_sensitivity.csv": {
+      "bytes": 380842,
+      "sha256": "f67e02a4461d2a80371baf26118e0fe7738951ca7655409e31c1ffdfb830b7ac"
+    },
+    "debug/full_experiment/steps/11_episode_time_series/fd_parameter_sensitivity_expanded.csv": {
+      "bytes": 387926,
+      "sha256": "e9245b5af2d758161e5f0e958664bd76eb582017e81952767fc85ffc15a53b9f"
+    },
+    "debug/full_experiment/steps/11_episode_time_series/fd_sensitivity_recommendation.md": {
+      "bytes": 1881,
+      "sha256": "819122ec8cc6e5359f8d19f96a6f61eb7fce3c9018ee0ce976efa6410ccb60c0"
+    },
+    "debug/full_experiment/steps/11_episode_time_series/fd_sensitivity_summary.csv": {
+      "bytes": 4903,
+      "sha256": "d8ebdf69359bd690be5e7f0f9e1045595a38f1d25ddb83327cc226e8e475c02d"
+    },
+    "debug/full_experiment/steps/11_episode_time_series/fd_sensitivity_verification.json": {
+      "bytes": 1337,
+      "sha256": "19bc6007650a4bb970490da6e9b3272266b0518469993d5e907b02fd78365bea"
+    },
     "debug/full_experiment/steps/11_episode_time_series/index.html": {
-      "bytes": 112794,
-      "sha256": "3d821ba704c87821a9d2d8b6b3ac1c1c587f34ccdd4f5de76ec430a45149848b"
+      "bytes": 112886,
+      "sha256": "ca9c00bcad4cce0028de97c97da5a1edd9b332221ee650eb1878212c40af0bbe"
+    },
+    "debug/full_experiment/steps/11_episode_time_series/inverse_queue_speed.csv": {
+      "bytes": 359692,
+      "sha256": "f5b5c675019df9f5801c6702a3975e917c2536d4336a540583d1ae6ab058d6dd"
+    },
+    "debug/full_experiment/steps/11_episode_time_series/inverse_queue_speed_candidates.csv": {
+      "bytes": 697992,
+      "sha256": "f44aa9219e1b8636a60da986c57bb1388aed38cd3cd68dd760fd9376cf1bcd14"
+    },
+    "debug/full_experiment/steps/11_episode_time_series/inverse_queue_speed_equations.json": {
+      "bytes": 3272,
+      "sha256": "8a703d7f3af0f70ca19f32d75c701d58c67f134c642a895c75662d6c6cdcbd9d"
+    },
+    "debug/full_experiment/steps/11_episode_time_series/inverse_queue_speed_intervals.csv": {
+      "bytes": 439443,
+      "sha256": "864fda849935e53c596e42d10f5e4f728b2906f82a4807463bf55fdf1dfdf84a"
+    },
+    "debug/full_experiment/steps/11_episode_time_series/inverse_queue_speed_roots.csv": {
+      "bytes": 101205,
+      "sha256": "6a3a5d63073bfbd662943fd341b655e2938f33a36b6cd0c7e9c8b92f9af60631"
+    },
+    "debug/full_experiment/steps/11_episode_time_series/inverse_queue_speed_verification.json": {
+      "bytes": 1624,
+      "sha256": "7ed8de72300ad0db885b4cd49fc986dab36d11d4a62e6d6d5765c6618633ed0f"
     },
     "debug/full_experiment/steps/11_episode_time_series/README.md": {
-      "bytes": 12253,
-      "sha256": "5b5bf6f376be52bf2f4485abeafe25ed31ea4528c34d47fedaa6c9697bb7e681"
+      "bytes": 16713,
+      "sha256": "d0211f86a7c21b66fb428109b960d7f59e219e952d4baba5bcd411cce9a3eb8c"
     },
     "debug/full_experiment/steps/11_episode_time_series/total_reconciliation.csv": {
       "bytes": 473213,
       "sha256": "0216a541260dd5ad554cdfb30fefd878a73ecdffcd2fb9c1c82e323bfe4d7a15"
+    },
+    "debug/full_experiment/steps/11_episode_time_series/traffic_parameter_sources.csv": {
+      "bytes": 936,
+      "sha256": "9a285fabffdce1dcd12cb53b382550949427b9bd539a442db483a45f68bac275"
+    },
+    "debug/full_experiment/steps/11_episode_time_series/traffic_parameter_verification.json": {
+      "bytes": 1908,
+      "sha256": "eb8bf1c22be3e5ac756003f2f6ab48d4fc89b5cfcc16aa97b3f9837c9087e970"
+    },
+    "debug/full_experiment/steps/11_episode_time_series/traffic_parameters.csv": {
+      "bytes": 339695,
+      "sha256": "b1380546a618a2d7b094e2b0e2973fed40a36c5285636be2f949554000f29260"
+    },
+    "debug/full_experiment/steps/11_episode_time_series/traffic_parameters.html": {
+      "bytes": 3409140,
+      "sha256": "1f7a6a511eadd431a900224c57ed4b3dd6c1c1535bd56c8b01dde161780f90e5"
     },
     "debug/full_experiment/steps/11_episode_time_series/verification.json": {
       "bytes": 2494,
       "sha256": "cfd195241812465141affc62e7b5b90efd0a57cd2d2789afe5bbcedbee1bb140"
     },
     "debug/README.md": {
-      "bytes": 5754,
-      "sha256": "4355f6037623bb1e0380f824953c770a47491ad388e09b81bf76940770feb4ad"
+      "bytes": 6578,
+      "sha256": "1ff031bde066f79e56ea4b9c168f4d3e069dbc92d63751192004cc2dff90311f"
     },
     "debug/sensor78/README.md": {
       "bytes": 8819,
@@ -10010,8 +10098,16 @@
       "sha256": "8c65adf88c49e436f1e82350dbb6da118570e3e007ff6543a54455ea3f470ba3"
     },
     "debug/verify_package.py": {
-      "bytes": 6091,
-      "sha256": "d19a4378a0445886d11d8b88c3e96388e296b4278575a8fb0ea24ec6db8a86aa"
+      "bytes": 6825,
+      "sha256": "78d93be4d6fc78105e8b9481101653d2debbdc9962293d4c9ee84e8ddb98ebeb"
+    },
+    "debug/verify_parameter_diagnostics.py": {
+      "bytes": 18559,
+      "sha256": "a68cd923005449325d76dad3ac3b5e4e686304203ff78036ee104b9b2fef9e66"
+    },
+    "debug/verify_parameter_page.js": {
+      "bytes": 7357,
+      "sha256": "77b50b412af08897c3f2a1fa26f49513a0be41b62b5f3b27bcd41a07973641cd"
     }
   },
   "schema_version": 1
